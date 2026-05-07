@@ -4,64 +4,275 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIMD | Drug-Induced Mitochondrial Dysfunction</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; }
-    .hero-bg { 
-      background: linear-gradient(135deg, #3F4F24 0%, #556B2F 100%); 
+    :root {
+      --dark-green: #0A3D2A;
+      --mid-green: #1E5C45;
+      --accent: #4ADE80;
+      --soft-green: #E8F0EB;
+    }
+   
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background: #f8fbf9;
+    }
+    nav {
+      background: white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-container {
+      max-width: 1350px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.85rem;
+      color: var(--dark-green);
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+      margin-left: 1.8rem;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .btn {
+      padding: 11px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-primary { background: var(--dark-green); color: white; }
+    .btn-primary:hover { background: #0f5c42; transform: translateY(-2px); }
+    .btn-outline { border: 2px solid var(--dark-green); color: var(--dark-green); }
+    .btn-outline:hover { background: var(--dark-green); color: white; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--dark-green), var(--mid-green));
+      color: white;
+      text-align: center;
+      padding: 180px 20px 120px;
+    }
+    .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.8rem; }
+    .subtitle { font-size: 1.55rem; margin-bottom: 1rem; opacity: 0.95; }
+    
+    .cards {
+      max-width: 1350px;
+      margin: -60px auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover { transform: translateY(-8px); }
+    .card-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+    .section h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      color: var(--dark-green);
+      margin-bottom: 2.5rem;
+    }
+
+    .accordion {
+      border: 1px solid #c8d8d0;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .accordion-header {
+      padding: 1.4rem 1.8rem;
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--dark-green);
+      transition: background 0.3s;
+    }
+    .accordion-header:hover { background: var(--soft-green); }
+    .accordion-header .arrow {
+      transition: transform 0.4s ease;
+    }
+    .accordion-header.active .arrow {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      padding: 0 1.8rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      background: var(--soft-green);
+    }
+    .accordion-content.open {
+      padding: 1.8rem;
+      max-height: 600px;
+    }
+
+    footer {
+      background: var(--dark-green);
+      color: white;
+      text-align: center;
+      padding: 3rem 20px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.8rem; }
+      .nav-links a { margin: 0 0.8rem; font-size: 0.95rem; }
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-
-  <!-- TOP NAVIGATION -->
-  <nav class="bg-white border-b shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-[#556B2F] rounded-2xl flex items-center justify-center text-white text-2xl">🧬</div>
-        <h1 class="text-2xl font-semibold text-slate-900">DIMD</h1>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">🧬 <span>DIMD</span></div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Understanding DIMD</a>
+        <a href="#">FQAD</a>
+        <a href="#">Federal Conversation</a>
+        <a href="#">Evidence & References</a>
+        <a href="#">Registry</a>
+        <a href="#">About</a>
       </div>
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="#" class="hover:text-[#556B2F]">Home</a>
-        <a href="#" class="hover:text-[#556B2F]">Understanding DIMD</a>
-        <a href="#" class="hover:text-[#556B2F]">FQAD</a>
-        <a href="#" class="hover:text-[#556B2F]">Federal Conversation</a>
-        <a href="#" class="hover:text-[#556B2F]">Evidence & References</a>
-        <a href="#" class="hover:text-[#556B2F]">Registry</a>
-        <a href="#" class="hover:text-[#556B2F]">About</a>
-      </div>
-      <div class="flex gap-3">
-        <!-- Updated Petition button - now matches olive theme -->
-        <a href="https://doi.org/10.5281/zenodo.19895781" target="_blank"
-           class="bg-[#445626] hover:bg-[#3F4F24] text-white px-5 py-2.5 rounded-2xl text-sm font-medium flex items-center gap-2">
-          <i class="fas fa-file-alt"></i> Read Petition
-        </a>
-        <a href="#" 
-           class="bg-[#556B2F] hover:bg-[#445626] text-white px-6 py-2.5 rounded-2xl text-sm font-medium">
-          Join Registry
-        </a>
+      <div>
+        <a href="https://doi.org/10.5281/zenodo.19895781" target="_blank" class="btn btn-outline">📜 Read Petition</a>
+        <a href="#" class="btn btn-primary">Join Registry</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO - DARK OLIVE GREEN -->
-  <header class="hero-bg py-20 text-white">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-5xl md:text-5xl font-bold leading-tight mb-4">
-        Drug-Induced Mitochondrial Dysfunction
-      </h2>
-      <p class="text-4xl md:text-4xl font-semibold text-white mb-8">
-        is a public health issue
-      </p>
-      <p class="text-xl md:text-2xl max-w-2xl mx-auto opacity-90 mb-10">
-        Evidence-based information for patients, clinicians, and researchers.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="#" class="bg-white text-slate-900 px-8 py-4 rounded-3xl font-semibold text-lg flex items-center gap-2 hover:shadow-xl">
-          Learn What DIMD Is
-        </a>
-        <a href="#" class="border-2 border-white text-white px-8 py-4 rounded-3xl font-semibold text-lg hover:bg-white hover:text-slate-900">
-          Join the Registry
-        </a>
-     
+  <section class="hero">
+    <h1>Drug-Induced Mitochondrial Dysfunction</h1>
+    <p class="subtitle">is a public health issue</p>
+    <p>Evidence-based information for patients, clinicians, and researchers.</p>
+   
+    <div style="margin-top: 3rem;">
+      <a href="#" class="btn btn-primary" style="font-size:1.2rem; padding:16px 36px; margin:0 10px;">Learn What DIMD Is</a>
+      <a href="#" class="btn btn-outline" style="font-size:1.2rem; padding:16px 36px; margin:0 10px; background:white; color:var(--dark-green);">Join the Registry</a>
+    </div>
+  </section>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🔬</div>
+      <h3>Understanding DIMD</h3>
+      <p>Learn how certain medications can damage mitochondria and what the real science shows.</p>
+      <a href="#" style="color:var(--dark-green); font-weight:600; margin-top:1rem; display:inline-block;">Learn More →</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3>Join the Registry</h3>
+      <p>Help build real evidence. Your experience matters.</p>
+      <a href="#" style="color:var(--dark-green); font-weight:600; margin-top:1rem; display:inline-block;">Register Now →</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">📜</div>
+      <h3>Take Action</h3>
+      <p>Read the petition and help raise awareness.</p>
+      <a href="#" style="color:var(--dark-green); font-weight:600; margin-top:1rem; display:inline-block;">Read Petition →</a>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>Understanding Drug-Induced Mitochondrial Dysfunction</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+      <div>
+        <p>Mitochondria are the tiny power plants inside almost every cell in your body. They produce the energy your cells need to function.</p>
+        <p>When certain drugs damage them, energy production drops dramatically. Symptoms can appear days, weeks, or even months later.</p>
+      </div>
+      <div>
+        <img src="https://via.placeholder.com/600x400/0A3D2A/4ADE80?text=Mitochondria+Diagram" alt="Mitochondria structure diagram" style="width:100%; border-radius:16px;">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--soft-green);">
+    <h2>Common Symptoms</h2>
+    <p style="text-align:center; max-width:800px; margin:0 auto 3rem;">Click any symptom below to learn more about why it occurs in DIMD.</p>
+    
+    <div class="accordion">
+      <div class="accordion-header">Tendon Rupture or Severe Tendon Pain <span class="arrow">▼</span></div>
+      <div class="accordion-content">Especially Achilles tendon. Mitochondrial damage impairs collagen repair, making tendons weak and prone to rupture even with normal activity.</div>
+    </div>
+    <div class="accordion">
+      <div class="accordion-header">Severe Fatigue & Exercise Intolerance <span class="arrow">▼</span></div>
+      <div class="accordion-content">The most common symptom. Cells cannot produce enough ATP, so even light activity can be exhausting.</div>
+    </div>
+    <div class="accordion">
+      <div class="accordion-header">Neuropathy & Nerve Pain <span class="arrow">▼</span></div>
+      <div class="accordion-content">Burning, tingling, numbness, or shooting pain. Can also include brain fog, anxiety, and dizziness.</div>
+    </div>
+    <div class="accordion">
+      <div class="accordion-header">Muscle Weakness & Pain <span class="arrow">▼</span></div>
+      <div class="accordion-content">Proximal muscle weakness and widespread myalgia.</div>
+    </div>
+    <div class="accordion">
+      <div class="accordion-header">Heart Palpitations & Cardiovascular Issues <span class="arrow">▼</span></div>
+      <div class="accordion-content">Arrhythmias, chest pain, and blood pressure problems.</div>
+    </div>
+    <div class="accordion">
+      <div class="accordion-header">Cognitive Dysfunction (Brain Fog) <span class="arrow">▼</span></div>
+      <div class="accordion-content">Memory issues, difficulty concentrating, and mental fatigue.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Drug-Induced Mitochondrial Dysfunction Awareness. All rights reserved.</p>
+    <p style="margin-top:0.5rem; opacity:0.8;">This is a patient-led initiative. Not medical advice.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const isOpen = content.classList.contains('open');
+        
+        document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+        document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+        
+        if (!isOpen) {
+          content.classList.add('open');
+          header.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
