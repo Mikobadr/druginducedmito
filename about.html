@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Johanna Ihli, BSN — Independent Researcher in Drug-Induced Mitochondrial Dysfunction. Former critical care nurse, patient advocate, and founder of druginducedmito.org.">
+  <title>About | DIMD — Drug-Induced Mitochondrial Dysfunction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-floor:    #071410;
+      --bg-deep:     #0A1C14;
+      --bg-mid:      #0E2318;
+      --bg-lift:     #122B1E;
+      --e1:          #3D9E72;
+      --e1-btn:      #2E8A60;
+      --e2:          #2A7A56;
+      --e2-text:     #327A5A;
+      --e3:          #1A5C3E;
+      --e3-border:   rgba(30,92,62,0.18);
+      --e3-border-lift: rgba(42,122,86,0.28);
+      --t1:   #D4E8DC;
+      --t2:   #9DBDAF;
+      --t3:   #6A9080;
+      --card-white: #F4F7F3;
+      --card-text:  #0E2018;
+      --card-mid:   #304A3C;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 8%,  rgba(26,92,62,0.13) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 92%, rgba(18,78,48,0.10) 0%, transparent 48%),
+        linear-gradient(168deg, #0C1F16 0%, #091A12 40%, #071410 70%, #0A1A12 100%);
+      background-attachment:fixed;
+      color:var(--t1);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    #mito-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.32; }
+    #atmosphere { position:fixed; inset:0; pointer-events:none; z-index:1;
+      background:
+        radial-gradient(ellipse at 15% 25%, rgba(42,122,86,0.048) 0%, transparent 44%),
+        radial-gradient(ellipse at 85% 70%, rgba(26,92,62,0.036) 0%, transparent 40%); }
+    #vignette { position:fixed; inset:0; pointer-events:none; z-index:2;
+      box-shadow: inset 0 0 200px rgba(5,12,9,0.72), inset 160px 0 200px rgba(5,12,9,0.52), inset -160px 0 200px rgba(5,12,9,0.52); }
+    nav,main,footer { position:relative; z-index:10; }
+
+    /* ══ NAV ══ */
+    nav { position:sticky; top:0; z-index:1000; background:rgba(8,20,14,0.95); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); }
+    .nav-inner { max-width:1340px; margin:0 auto; padding:0 2.5rem; height:70px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#163C28,#1A5C3E); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
+    .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+    .nav-links a { color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--e2); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
+    .nav-links a:hover { color:var(--t1); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-links a.active { color:var(--t1); }
+    .nav-links a.active::after { transform:scaleX(1); }
+    .nav-cta { background:linear-gradient(90deg,#163C28,var(--e2)) !important; color:var(--t1) !important; padding:8px 22px; border-radius:9999px; font-weight:600 !important; box-shadow:0 3px 12px rgba(42,122,86,0.20); }
+    .nav-cta::after { display:none !important; }
+
+    /* ══ PAGE HERO ══ */
+    .page-hero {
+      padding: 5rem 2.5rem 3.5rem;
+      position: relative; overflow:hidden;
+      background:
+        radial-gradient(ellipse at 50% 60%, rgba(61,158,114,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(42,122,86,0.05) 0%, transparent 44%);
+    }
+    .page-hero::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:120px;
+      background:linear-gradient(to bottom, transparent, rgba(10,28,20,0.50));
+      pointer-events:none;
+    }
+    .page-hero-inner { max-width:860px; margin:0 auto; position:relative; z-index:2; }
+    .page-breadcrumb {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.76rem; color:var(--t3); letter-spacing:0.08em;
+      text-transform:uppercase; font-weight:500; margin-bottom:1.8rem;
+    }
+    .page-breadcrumb a { color:var(--t3); text-decoration:none; transition:color 0.2s; }
+    .page-breadcrumb a:hover { color:var(--t2); }
+    .page-breadcrumb span { color:var(--e2); }
+
+    .page-hero h1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(2.4rem,5vw,4rem);
+      line-height:1.08; letter-spacing:-0.03em;
+      color:var(--t1); margin-bottom:1rem;
+      animation:fadeUp 0.8s ease both;
+    }
+    .page-hero h1 em { font-style:italic; color:var(--e1); }
+    .page-hero-sub {
+      font-size:1.05rem; line-height:1.72; color:var(--t2);
+      max-width:680px; font-weight:300;
+      animation:fadeUp 0.8s 0.1s ease both;
+    }
+    .credential-badge {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(42,122,86,0.07);
+      border:1px solid rgba(42,122,86,0.18);
+      border-radius:12px; padding:10px 18px;
+      margin-top:2rem; font-size:0.84rem; color:var(--t2);
+      animation:fadeUp 0.8s 0.2s ease both;
+    }
+    .credential-badge i { color:var(--e2); }
+    .credential-badge strong { color:var(--t1); font-weight:500; }
+    .credential-badge a { color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.30); transition:color 0.2s; }
+    .credential-badge a:hover { color:var(--e1); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ══ SHARED SECTION ══ */
+    section { padding:4.5rem 2.5rem; position:relative; overflow:hidden; }
+    .section-inner { max-width:1060px; margin:0 auto; position:relative; z-index:2; }
+    .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.7rem,3.5vw,2.5rem); line-height:1.14; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.1rem; }
+    .section-divider { width:38px; height:2px; background:linear-gradient(90deg,var(--e3),transparent); border-radius:2px; margin-bottom:1.8rem; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.15rem; }
+    .body-text strong { color:var(--t1); font-weight:500; }
+    .body-text em { color:var(--e2-text); font-style:italic; }
+
+    /* ══ ORIGIN SECTION ══ */
+    .origin {
+      background:
+        radial-gradient(ellipse at 5% 50%, rgba(42,122,86,0.055) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    }
+    .origin::before { content:''; position:absolute; top:0; left:0; right:0; height:100px; background:linear-gradient(to bottom,rgba(10,28,20,0.45),transparent); pointer-events:none; z-index:1; }
+    .origin-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+
+    /* Pull quote */
+    .pull-quote {
+      background:linear-gradient(135deg,rgba(22,60,42,0.42),rgba(12,36,24,0.52));
+      border-left:3px solid var(--e2);
+      border-radius:0 12px 12px 0;
+      padding:1.6rem 1.8rem; margin:1.8rem 0;
+    }
+    .pull-quote p { font-family:'DM Serif Display',serif; font-size:1.32rem; font-style:italic; color:var(--t1); line-height:1.45; }
+
+    /* Perspective cards */
+    .perspective-cards { display:flex; flex-direction:column; gap:1rem; margin-top:0.5rem; }
+    .perspective-card {
+      background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95));
+      border:1px solid var(--e3-border);
+      border-radius:13px; padding:1.2rem 1.5rem;
+      display:flex; gap:1rem; align-items:flex-start;
+      transition:border-color 0.3s, transform 0.3s;
+    }
+    .perspective-card:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .perspective-card-icon {
+      width:38px; height:38px; flex-shrink:0;
+      background:rgba(42,122,86,0.10);
+      border:1px solid rgba(42,122,86,0.18);
+      border-radius:9px; display:flex; align-items:center; justify-content:center;
+      color:var(--e2); font-size:0.95rem; margin-top:2px;
+    }
+    .perspective-card h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.28rem; }
+    .perspective-card p { font-size:0.87rem; color:var(--t2); line-height:1.58; font-weight:300; }
+
+    /* ══ TIMELINE ══ */
+    .timeline-section {
+      background:
+        radial-gradient(ellipse at 90% 35%, rgba(42,122,86,0.048) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .timeline-section::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(42,122,86,0.10),transparent);
+      pointer-events:none; z-index:1;
+    }
+    .timeline-intro { max-width:660px; margin-bottom:3rem; }
+    .timeline-intro p { color:var(--t2); font-size:0.95rem; line-height:1.72; font-weight:300; font-style:italic; }
+
+    .timeline {
+      position:relative;
+      max-width:800px;
+    }
+    /* Vertical line */
+    .timeline::before {
+      content:'';
+      position:absolute;
+      left:120px;
+      top:0; bottom:0;
+      width:1px;
+      background:linear-gradient(to bottom,
+        transparent 0%,
+        rgba(42,122,86,0.25) 8%,
+        rgba(42,122,86,0.25) 92%,
+        transparent 100%);
+    }
+
+    .timeline-item {
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:0 2rem;
+      margin-bottom:2.2rem;
+      position:relative;
+    }
+    .timeline-item:last-child { margin-bottom:0; }
+
+    .timeline-era {
+      text-align:right;
+      padding-right:2rem;
+      padding-top:3px;
+      font-family:'DM Serif Display',serif;
+      font-size:0.95rem;
+      color:var(--e2-text);
+      font-style:italic;
+      line-height:1.3;
+      flex-shrink:0;
+    }
+
+    /* Dot on the line */
+    .timeline-item::after {
+      content:'';
+      position:absolute;
+      left:114px;
+      top:10px;
+      width:13px; height:13px;
+      border-radius:50%;
+      background:var(--bg-mid);
+      border:2px solid var(--e2);
+      transition:border-color 0.3s, background 0.3s;
+    }
+    .timeline-item:hover::after { background:var(--e2); }
+    /* Highlight the 2025 item */
+    .timeline-item.highlight::after { background:var(--e1); border-color:var(--e1); box-shadow:0 0 10px rgba(61,158,114,0.35); }
+
+    .timeline-content {
+      padding-left:0.5rem;
+    }
+    .timeline-content h4 {
+      font-size:0.94rem; font-weight:600; color:var(--t1);
+      margin-bottom:0.38rem; line-height:1.35;
+    }
+    .timeline-content p {
+      font-size:0.88rem; color:var(--t2); line-height:1.62; font-weight:300;
+    }
+    .timeline-content .tag {
+      display:inline-block;
+      background:rgba(42,122,86,0.10);
+      border:1px solid rgba(42,122,86,0.20);
+      border-radius:9999px;
+      padding:2px 10px;
+      font-size:0.72rem; font-weight:600;
+      color:var(--e2-text);
+      letter-spacing:0.04em;
+      margin-top:0.5rem;
+    }
+    .timeline-item.highlight .timeline-content .tag {
+      background:rgba(61,158,114,0.12);
+      border-color:rgba(61,158,114,0.28);
+      color:var(--e1);
+    }
+
+    /* ══ THE WORK ══ */
+    .the-work {
+      background:
+        radial-gradient(ellipse at 8% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .work-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+
+    .work-list { list-style:none; display:flex; flex-direction:column; gap:0.9rem; margin-top:1.2rem; }
+    .work-list li {
+      display:flex; align-items:flex-start; gap:12px;
+      color:var(--t2); font-size:0.96rem; font-weight:300; line-height:1.58;
+    }
+    .work-list li i {
+      color:var(--e2); font-size:0.78rem;
+      margin-top:5px; flex-shrink:0; width:14px;
+    }
+    .work-list li strong { color:var(--t1); font-weight:500; }
+
+    .credential-block {
+      background:linear-gradient(135deg,rgba(16,46,30,0.58),rgba(10,30,20,0.68));
+      border:1px solid var(--e3-border);
+      border-radius:16px; padding:2rem 2.2rem;
+      margin-top:2rem;
+    }
+    .credential-block h4 { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:1rem; }
+    .credential-line { font-size:0.92rem; color:var(--t2); line-height:1.65; font-weight:300; margin-bottom:0.6rem; }
+    .credential-line strong { color:var(--t1); font-weight:500; }
+    .orcid-link {
+      display:inline-flex; align-items:center; gap:7px;
+      font-size:0.84rem; color:var(--e2-text);
+      text-decoration:none;
+      border-bottom:1px solid rgba(42,122,86,0.28);
+      transition:color 0.2s;
+      margin-top:0.4rem;
+    }
+    .orcid-link:hover { color:var(--e1); }
+
+    /* Statement card */
+    .mission-statement {
+      background:linear-gradient(135deg,rgba(20,56,38,0.45),rgba(12,36,24,0.55));
+      border-left:3px solid var(--e2);
+      border-radius:0 14px 14px 0;
+      padding:1.7rem 1.9rem;
+    }
+    .mission-statement p {
+      font-family:'DM Serif Display',serif;
+      font-size:1.22rem; font-style:italic;
+      color:var(--t1); line-height:1.48;
+    }
+    .mission-statement cite {
+      display:block; margin-top:0.8rem;
+      font-size:0.78rem; font-style:normal;
+      color:var(--e2); font-weight:600;
+      letter-spacing:0.05em; text-transform:uppercase;
+    }
+
+    /* ══ CTA STRIP ══ */
+    .about-cta {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%),
+        linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78));
+      border-top:1px solid rgba(42,122,86,0.13);
+      padding:4rem 2.5rem; text-align:center;
+    }
+    .about-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
+    .about-cta p { color:var(--t2); font-size:1rem; line-height:1.72; max-width:540px; margin:0 auto 1.8rem; font-weight:300; }
+    .cta-btns { display:flex; gap:1.1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:14px 32px; border-radius:9999px; font-weight:600; font-size:0.97rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .btn-outline { border:1.5px solid rgba(42,122,86,0.30); color:var(--t2); padding:14px 32px; border-radius:9999px; font-weight:500; font-size:0.97rem; text-decoration:none; transition:all 0.3s; }
+    .btn-outline:hover { background:rgba(42,122,86,0.07); border-color:rgba(42,122,86,0.48); color:var(--t1); }
+
+    /* ══ FOOTER ══ */
+    footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
+    .footer-brand p { color:rgba(106,144,128,0.52);font-size:0.85rem;line-height:1.74;margin-top:1rem;font-weight:300; }
+    .footer-col h4 { font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--e2);margin-bottom:0.9rem; }
+    .footer-col a { display:block;color:rgba(106,144,128,0.45);text-decoration:none;font-size:0.86rem;font-weight:300;margin-bottom:0.46rem;transition:color 0.2s; }
+    .footer-col a:hover { color:var(--t1); }
+    .footer-bottom { max-width:1100px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(30,92,62,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+    .footer-bottom p { font-size:0.77rem;color:rgba(106,144,128,0.26); }
+    .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
+    .footer-bottom a:hover { color:var(--t2); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:1024px) {
+      .origin-grid, .work-grid { grid-template-columns:1fr; gap:3rem; }
+      .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
+    }
+    @media (max-width:680px) {
+      .nav-links { display:none; }
+      .footer-inner { grid-template-columns:1fr; }
+      .timeline::before { left:80px; }
+      .timeline-item { grid-template-columns:80px 1fr; }
+      .timeline-item::after { left:74px; }
+      .timeline-era { font-size:0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="mito-canvas"></canvas>
+  <div id="atmosphere"></div>
+  <div id="vignette"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🧬</div>
+        <div>
+          <div class="nav-logo-text">DIMD</div>
+          <div class="nav-logo-sub">Science · Evidence · Policy</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="science.html">The Science</a></li>
+        <li><a href="fqad.html">FQAD</a></li>
+        <li><a href="action.html">Take Action</a></li>
+        <li><a href="evidence.html">Evidence</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="registry.html" class="nav-cta">Registry</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>About the Researcher</span>
+        </div>
+        <h1>Johanna Ihli, <em>BSN</em></h1>
+        <p class="page-hero-sub">
+          Former Registered Nurse · Independent Researcher in Drug-Induced Mitochondrial Dysfunction ·
+          Founder, druginducedmito.org
+        </p>
+        <div class="credential-badge">
+          <i class="fas fa-id-badge"></i>
+          <span>
+            <strong>Emergency · Trauma · Critical Care Nursing</strong>
+            &nbsp;·&nbsp;
+            ORCID: <a href="https://orcid.org/0009-0008-1486-7242" target="_blank" rel="noopener">0009-0008-1486-7242</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORIGIN SECTION -->
+    <section class="origin">
+      <div class="section-inner">
+        <div class="origin-grid">
+          <div>
+            <div class="section-label">Origin</div>
+            <h2 class="section-title">How This Work Began</h2>
+            <div class="section-divider"></div>
+
+            <p class="body-text">
+              This work did not begin in a laboratory or an academic institution.
+              It began through <strong>decades of lived experience</strong> — a long and evolving pattern of health issues that often failed to fit neatly within traditional organ-based medical models.
+            </p>
+            <p class="body-text">
+              Beginning in the late 1980s, a progressively disabling constellation of symptoms emerged across multiple body systems: fatigue, musculoskeletal pain, connective tissue problems, neurologic symptoms, autonomic dysfunction, and recurrent unexplained systemic decline. Over the years, these were frequently fragmented into separate diagnoses rather than understood as part of a unified process.
+            </p>
+
+            <div class="pull-quote">
+              <p>"As both a patient and a healthcare professional, I experienced firsthand the gap that can exist between patient-reported patterns and the frameworks available to interpret them clinically."</p>
+            </div>
+
+            <p class="body-text">
+              After recognizing a possible connection between fluoroquinolone antibiotic exposure and the progression of these symptoms, an independent investigation began into mitochondrial biology, pharmacology, toxicology, adverse event reporting systems, and the emerging literature surrounding medication-induced mitochondrial injury.
+            </p>
+            <p class="body-text">
+              What started as an effort to understand a personal condition gradually evolved into a <strong>broader systems-level investigation</strong> — into how modern pharmacovigilance may overlook delayed, cumulative, and multisystem medication effects.
+            </p>
+          </div>
+
+          <div>
+            <div class="section-label">Perspective</div>
+            <h2 class="section-title">Two Lenses on the Same Problem</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">This work is informed by two complementary perspectives that rarely exist in the same person:</p>
+
+            <div class="perspective-cards">
+              <div class="perspective-card">
+                <div class="perspective-card-icon"><i class="fas fa-hospital"></i></div>
+                <div>
+                  <h4>Clinical Training</h4>
+                  <p>Over three decades as a registered nurse in emergency, trauma, and critical care — learning firsthand how guideline-based systems, diagnostic categories, and healthcare protocols function under real-world pressure.</p>
+                </div>
+              </div>
+              <div class="perspective-card">
+                <div class="perspective-card-icon"><i class="fas fa-person"></i></div>
+                <div>
+                  <h4>Patient Experience</h4>
+                  <p>Nearly four decades of progressive, unexplained multisystem decline following medication exposures — navigating a fragmented healthcare system that struggled to unify what was happening across specialties.</p>
+                </div>
+              </div>
+              <div class="perspective-card">
+                <div class="perspective-card-icon"><i class="fas fa-microscope"></i></div>
+                <div>
+                  <h4>Independent Research</h4>
+                  <p>Self-directed study into mitochondrial biology, pharmacotoxicology, pharmacovigilance architecture, and the emerging science of delayed drug-induced energy system injury — driven by the need to find a framework that actually fit.</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="body-text" style="margin-top:1.8rem;">
+              This combination — clinical systems knowledge, patient-reported pattern recognition, and independent mechanistic research — is what shapes the DIMD framework.
+              <strong>It is not one perspective alone, but the intersection of all three.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline-section">
+      <div class="section-inner">
+        <div class="section-label">Trajectory</div>
+        <h2 class="section-title">A Four-Decade Arc</h2>
+        <div class="section-divider"></div>
+
+        <div class="timeline-intro">
+          <p>The following is a distilled arc of a long journey — not a clinical record, but a pattern. Approximate dates reflect an evolving progression of symptoms, exposures, and ultimately recognition. It is shared here not for attention, but because the trajectory itself is evidence of the problem this site exists to address.</p>
+        </div>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-era">Late<br>1980s</div>
+            <div class="timeline-content">
+              <h4>Early Unexplained Symptoms Begin</h4>
+              <p>Onset of fatigue, exercise intolerance, musculoskeletal pain, and intermittent neurologic-type symptoms that were difficult to explain clinically.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-era">1990s</div>
+            <div class="timeline-content">
+              <h4>Progressive Multisystem Involvement</h4>
+              <p>Development of spasmodic dysphonia, PSVT, increasing autonomic symptoms, muscle spasms, chronic fatigue, and connective tissue vulnerability. Exercise intolerance becomes more pronounced.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-era">Early<br>2000s</div>
+            <div class="timeline-content">
+              <h4>First Fluoroquinolone Exposure</h4>
+              <p>Worsening of musculoskeletal symptoms, escalating neurologic symptoms, increasing fatigue, and progressive physical decline following antibiotic exposure.</p>
+              <span class="tag">Exposure Event</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-era">Mid<br>2000s</div>
+            <div class="timeline-content">
+              <h4>Peripheral Neuropathy &amp; Tendon Involvement</h4>
+              <p>Peripheral neuropathy, recurrent tendon injuries, severe chronic back pain, increasing autonomic dysfunction, cognitive symptoms, and progressive exertional intolerance.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-era">2007–<br>2009</div>
+            <div class="timeline-content">
+              <h4>Second Exposure &amp; Significant Escalation</h4>
+              <p>Severe symptom escalation following repeat fluoroquinolone exposure. Widespread connective tissue problems, neuropathic pain, chronic fatigue, and major systemic dysfunction.</p>
+              <span class="tag">Exposure Event</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-era">2010s</div>
+            <div class="timeline-content">
+              <h4>Progressive Multisystem Decline</h4>
+              <p>Chronic exertional intolerance, muscle weakness and spasms, persistent tendon vulnerability, cognitive dysfunction, sleep disruption, and functional decline impacting work and daily life.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-era">Early<br>2020s</div>
+            <div class="timeline-content">
+              <h4>Pattern Recognition &amp; Independent Research Begins</h4>
+              <p>Recognition of a possible connection between fluoroquinolone exposure and long-term symptom progression. Independent investigation into mitochondrial biology, pharmacotoxicology, and adverse event reporting systems begins in earnest.</p>
+              <span class="tag">Research Begins</span>
+            </div>
+          </div>
+
+          <div class="timeline-item highlight">
+            <div class="timeline-era">2025–<br>Present</div>
+            <div class="timeline-content">
+              <h4>Confirmation &amp; Advocacy</h4>
+              <p>Comprehensive mitochondrial testing reveals <strong>Complex I deficiency</strong> — confirming long-suspected drug-induced mitochondrial dysfunction. FDA Citizen Petition accepted for filing (Docket FDA-2026-P-5116). Manuscript under peer review. DIMD Registry development underway.</p>
+              <span class="tag">FDA Petition · Complex I Confirmed</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- THE WORK -->
+    <section class="the-work">
+      <div class="section-inner">
+        <div class="work-grid">
+          <div>
+            <div class="section-label">The Work</div>
+            <h2 class="section-title">What This Initiative Is Building</h2>
+            <div class="section-divider"></div>
+
+            <p class="body-text">
+              Today, the focus is on increasing awareness of mitochondrial vulnerability in medicine, improving informed consent and pharmacovigilance frameworks, and advancing recognition of DIMD as a potentially underrecognized contributor to chronic multisystem illness.
+            </p>
+            <p class="body-text">
+              This is not a single-discipline effort. It sits at the intersection of molecular biology, clinical medicine, patient experience, and regulatory policy — and it requires all four lenses to do the work properly.
+            </p>
+
+            <ul class="work-list">
+              <li><i class="fas fa-circle-dot"></i><span><strong>druginducedmito.org</strong> — educational and advocacy initiative for public awareness, research communication, and patient support</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>FDA Citizen Petition</strong> — Docket FDA-2026-P-5116, requesting stronger informed-consent and risk communication for fluoroquinolone antibiotics</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>Manuscript under peer review</strong> — advancing the mechanistic and pharmacovigilance framework</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>DIMD Registry</strong> — structured patient data collection to build the longitudinal evidence base</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>Clinician &amp; policymaker education</strong> — bridging the gap between what molecular science understands and what clinical practice currently reflects</span></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="mission-statement">
+              <p>"The limitation lies not in the absence of signal — but in the framework used to interpret it. If our understanding of energy biology has advanced, shouldn't our safety models evolve with it?"</p>
+              <cite>— Core framing, DIMD Initiative</cite>
+            </div>
+
+            <div class="credential-block" style="margin-top:2rem;">
+              <h4>Credentials</h4>
+              <p class="credential-line"><strong>Johanna Ihli, BSN</strong></p>
+              <p class="credential-line">Former Registered Nurse<br>Emergency · Trauma · Critical Care</p>
+              <p class="credential-line" style="margin-top:0.8rem;">Independent Researcher<br>Drug-Induced Mitochondrial Dysfunction</p>
+              <p class="credential-line" style="margin-top:0.8rem;">Founder, druginducedmito.org</p>
+              <a href="https://orcid.org/0009-0008-1486-7242" target="_blank" rel="noopener" class="orcid-link">
+                <i class="fas fa-id-card"></i>
+                ORCID: 0009-0008-1486-7242
+              </a>
+            </div>
+
+            <p class="body-text" style="margin-top:1.8rem; font-size:0.88rem; font-style:italic;">
+              This site is for educational and advocacy purposes only. It does not provide medical advice, and nothing here should be interpreted as a clinical recommendation or treatment guidance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="about-cta">
+      <h2>The Work Continues</h2>
+      <p>Whether you are a patient, clinician, researcher, or policymaker — there is a place for you in this effort. Help build the evidence base that has been missing.</p>
+      <div class="cta-btns">
+        <a href="registry.html" class="btn-primary"><i class="fas fa-users"></i> Join the Registry</a>
+        <a href="evidence.html" class="btn-outline">View the Evidence</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="text-decoration:none;">
+          <div class="nav-logo-icon">🧬</div>
+          <div style="margin-left:10px;">
+            <div class="nav-logo-text">DIMD</div>
+            <div class="nav-logo-sub">Science · Evidence · Policy</div>
+          </div>
+        </a>
+        <p>Patient-led · Evidence-focused · Science-driven.<br>
+        This site is for educational and advocacy purposes only and does not provide medical advice.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="science.html">Understanding DIMD</a>
+        <a href="fqad.html">FQAD</a>
+        <a href="evidence.html">Evidence &amp; References</a>
+      </div>
+      <div class="footer-col">
+        <h4>Act</h4>
+        <a href="registry.html">DIMD Registry</a>
+        <a href="action.html">Take Action</a>
+        <a href="#">FDA Petition</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="about.html">The Researcher</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="evidence.html">References</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING MITOCHONDRIA -->
+  <script>
+  (function(){
+    const canvas=document.getElementById('mito-canvas');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    resize(); window.addEventListener('resize',resize);
+    function drawMito(ctx,x,y,rx,ry,angle,alpha){
+      ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(angle);
+      const c='#1A5C3E';
+      ctx.beginPath(); ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,rx*.68,ry*.68,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.0; ctx.stroke();
+      const folds=Math.max(2,Math.round(rx/11)), step=(ry*1.2)/(folds+1);
+      ctx.lineWidth=0.72;
+      for(let i=1;i<=folds;i++){
+        const fy=(-ry*.55)+(i*step),amp=rx*.23;
+        ctx.beginPath(); ctx.moveTo(-rx*.50,fy); ctx.bezierCurveTo(-rx*.16,fy-amp,rx*.16,fy+amp,rx*.50,fy); ctx.stroke();
+      }
+      [0.25,0.5,0.75,1.0,1.5,1.75].forEach(t=>{
+        const a2=t*Math.PI*2;
+        ctx.beginPath(); ctx.arc(Math.cos(a2)*rx*.68,Math.sin(a2)*ry*.68,rx*.036,0,Math.PI*2); ctx.fillStyle=c; ctx.fill();
+      });
+      ctx.restore();
+    }
+    const COUNT=22; const P=[];
+    function rp(edge){
+      const rx=14+Math.random()*42,ry=rx*(.34+Math.random()*.24);
+      const speed=.08+Math.random()*.16,dir=Math.random()*Math.PI*2;
+      let x,y;
+      if(edge){
+        const e=Math.floor(Math.random()*4);
+        if(e===0){x=Math.random()*canvas.width;y=-rx*2;}
+        else if(e===1){x=canvas.width+rx*2;y=Math.random()*canvas.height;}
+        else if(e===2){x=Math.random()*canvas.width;y=canvas.height+rx*2;}
+        else{x=-rx*2;y=Math.random()*canvas.height;}
+      }else{x=Math.random()*canvas.width;y=Math.random()*canvas.height;}
+      return{x,y,rx,ry,angle:Math.random()*Math.PI*2,drift:(Math.random()-.5)*.0025,alpha:.05+Math.random()*.20,vx:Math.cos(dir)*speed,vy:Math.sin(dir)*speed};
+    }
+    for(let i=0;i<COUNT;i++)P.push(rp(false));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<P.length;i++){
+        const p=P[i];p.x+=p.vx;p.y+=p.vy;p.angle+=p.drift;
+        const pad=p.rx*2.5;
+        if(p.x<-pad||p.x>canvas.width+pad||p.y<-pad||p.y>canvas.height+pad){P[i]=rp(true);continue;}
+        drawMito(ctx,p.x,p.y,p.rx,p.ry,p.angle,p.alpha);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+  </script>
+
+</body>
+</html>

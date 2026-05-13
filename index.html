@@ -3,276 +3,838 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Drug-Induced Mitochondrial Dysfunction (DIMD) — Advancing recognition, prevention, and scientific understanding of medication-induced mitochondrial toxicity.">
   <title>DIMD | Drug-Induced Mitochondrial Dysfunction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
-      --dark-green: #0A3D2A;
-      --mid-green: #1E5C45;
-      --accent: #4ADE80;
-      --soft-green: #E8F0EB;
+      /* ══════════════════════════════════════════
+         THE GREEN — pulled from the nav icon.
+         That icon uses: #163C28 → #1A5C3E
+         The rich forest-botanical green we want
+         everywhere. Slightly warmer, less cyan,
+         more olive-depth.
+
+         TIER 1 — hero title, primary buttons
+         Brightest expression of the icon green.
+         Think: bioluminescent moss, not electric teal.
+      ══════════════════════════════════════════ */
+      --e1:          #3D9E72;   /* hero title — warm botanical, NOT cyan */
+      --e1-light:    #4AAF80;   /* button highlight end */
+      --e1-btn:      #2E8A60;   /* button base — deeper, richer */
+      --e1-glow:     rgba(61,158,114,0.18);
+
+      /* ══════════════════════════════════════════
+         TIER 2 — stat numbers, section labels,
+         dividers, icons, ticker icons, quote borders.
+         The mid-tone of the icon green.
+      ══════════════════════════════════════════ */
+      --e2:          #2A7A56;   /* muted forest green — the icon's soul */
+      --e2-text:     #327A5A;   /* slightly brighter for small text */
+
+      /* ══════════════════════════════════════════
+         TIER 3 — borders, card surfaces, hover,
+         atmospheric backgrounds, canvas mitos.
+         The shadow of the icon green.
+      ══════════════════════════════════════════ */
+      --e3:          #1A5C3E;   /* deep jade — exactly the icon dark stop */
+      --e3-surface:  rgba(18,50,34,0.70);
+      --e3-border:   rgba(30,92,62,0.18);
+      --e3-border-lift: rgba(42,122,86,0.28);
+
+      /* ══ BACKGROUNDS ══ */
+      --bg-floor:    #071410;
+      --bg-deep:     #0A1C14;
+      --bg-mid:      #0E2318;
+      --bg-lift:     #122B1E;
+
+      /* ══ TEXT ══ */
+      --t1:   #D4E8DC;
+      --t2:   #9DBDAF;
+      --t3:   #6A9080;
+
+      /* ══ SURFACES ══ */
+      --card-white:  #F4F7F3;
+      --card-text:   #0E2018;
+      --card-mid:    #304A3C;
     }
-   
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      line-height: 1.7;
-      color: #333;
-      background: #f8fbf9;
+      font-family:'DM Sans', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 8%,  rgba(26,92,62,0.13) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 92%, rgba(18,78,48,0.10) 0%, transparent 48%),
+        radial-gradient(ellipse at 50% 50%, rgba(14,62,38,0.08) 0%, transparent 65%),
+        linear-gradient(168deg, #0C1F16 0%, #091A12 40%, #071410 70%, #0A1A12 100%);
+      background-attachment:fixed;
+      color:var(--t1);
+      min-height:100vh;
+      overflow-x:hidden;
     }
+
+    #mito-canvas {
+      position:fixed; inset:0; width:100%; height:100%;
+      pointer-events:none; z-index:0; opacity:0.38;
+    }
+    #atmosphere {
+      position:fixed; inset:0; pointer-events:none; z-index:1;
+      background:
+        radial-gradient(ellipse at 15% 25%, rgba(42,122,86,0.050) 0%, transparent 44%),
+        radial-gradient(ellipse at 85% 70%, rgba(26,92,62,0.040) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 100%,rgba(42,122,86,0.035) 0%, transparent 36%);
+    }
+    #vignette {
+      position:fixed; inset:0; pointer-events:none; z-index:2;
+      box-shadow:
+        inset 0 0 200px rgba(5,12,9,0.72),
+        inset 160px 0 200px rgba(5,12,9,0.52),
+        inset -160px 0 200px rgba(5,12,9,0.52);
+    }
+    nav,main,footer,.petition-banner,.ticker { position:relative; z-index:10; }
+
+    /* ══ NAV ══ */
     nav {
-      background: white;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position:sticky; top:0; z-index:1000;
+      background:rgba(8,20,14,0.95);
+      backdrop-filter:blur(22px);
+      border-bottom:1px solid var(--e3-border);
     }
-    .nav-container {
-      max-width: 1350px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+    .nav-inner {
+      max-width:1340px; margin:0 auto;
+      padding:0 2.5rem; height:70px;
+      display:flex; align-items:center; justify-content:space-between;
     }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 1.85rem;
-      color: var(--dark-green);
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon {
+      width:36px; height:36px;
+      /* The reference icon — this is the source green */
+      background:linear-gradient(135deg, #163C28, #1A5C3E);
+      border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem;
     }
+    .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
+    .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
     .nav-links a {
-      text-decoration: none;
-      color: #222;
-      font-weight: 500;
-      margin-left: 1.8rem;
+      color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500;
+      transition:color 0.25s; position:relative; padding-bottom:2px;
     }
-    .nav-links a:hover { color: var(--accent); }
-
-    .btn {
-      padding: 11px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s;
-      display: inline-block;
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-2px; left:0; right:0;
+      height:1px; background:var(--e2);
+      transform:scaleX(0); transition:transform 0.25s; transform-origin:left;
     }
-    .btn-primary { background: var(--dark-green); color: white; }
-    .btn-primary:hover { background: #0f5c42; transform: translateY(-2px); }
-    .btn-outline { border: 2px solid var(--dark-green); color: var(--dark-green); }
-    .btn-outline:hover { background: var(--dark-green); color: white; }
+    .nav-links a:hover { color:var(--t1); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    /* Registry nav button — Tier 2 green, not Tier 1 */
+    .nav-cta {
+      background:linear-gradient(90deg, #163C28, var(--e2)) !important;
+      color:var(--t1) !important; padding:8px 22px;
+      border-radius:9999px; font-weight:600 !important;
+      box-shadow:0 3px 12px rgba(42,122,86,0.20);
+    }
+    .nav-cta::after { display:none !important; }
+    .nav-cta:hover { opacity:0.88; }
 
+    /* ══ TICKER ══ */
+    .ticker {
+      background:rgba(12,30,20,0.80);
+      border-bottom:1px solid rgba(30,92,62,0.10);
+      padding:0.58rem 0; overflow:hidden;
+    }
+    .ticker-track {
+      display:flex; gap:4rem;
+      animation:ticker 34s linear infinite;
+      white-space:nowrap; width:max-content;
+    }
+    .ticker-track span { font-size:0.82rem; color:var(--t3); display:flex; align-items:center; gap:8px; }
+    .ticker-track span i { color:var(--e2); font-size:0.70rem; }
+    @keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+    /* ══ HERO ══ */
     .hero {
-      background: linear-gradient(135deg, var(--dark-green), var(--mid-green));
-      color: white;
-      text-align: center;
-      padding: 180px 20px 120px;
+      min-height:92vh;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; padding:5rem 2.5rem 4rem;
+      position:relative; overflow:hidden;
     }
-    .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.8rem; }
-    .subtitle { font-size: 1.55rem; margin-bottom: 1rem; opacity: 0.95; }
-    
-    .cards {
-      max-width: 1350px;
-      margin: -60px auto 80px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2rem;
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 50% 44%, rgba(61,158,114,0.09) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 65%, rgba(42,122,86,0.05) 0%, transparent 44%),
+        radial-gradient(ellipse at 70% 28%, rgba(26,92,62,0.04)  0%, transparent 40%);
+      pointer-events:none; z-index:0;
     }
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+    .hero::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:160px;
+      background:linear-gradient(to bottom, transparent, rgba(10,28,20,0.55));
+      pointer-events:none; z-index:0;
     }
-    .card:hover { transform: translateY(-8px); }
-    .card-icon {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(42,122,86,0.07);
+      border:1px solid rgba(42,122,86,0.18);
+      border-radius:9999px; padding:6px 18px;
+      font-size:0.78rem; font-weight:600;
+      letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--e2-text);
+      margin-bottom:1.8rem; position:relative; z-index:2;
+      animation:fadeUp 0.8s ease both;
+    }
+    .hero-eyebrow .dot {
+      width:5px; height:5px; background:var(--e1);
+      border-radius:50%; animation:pulse 2.5s ease infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.28;transform:scale(0.52);} }
+
+    .hero-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(3rem,6vw,5.5rem);
+      line-height:1.06; letter-spacing:-0.03em;
+      color:var(--t1);
+      max-width:900px; margin-bottom:1.5rem;
+      position:relative; z-index:2;
+      animation:fadeUp 0.8s 0.1s ease both;
+    }
+    /* TIER 1 — the icon green, bright botanical expression */
+    .hero-title em {
+      font-style:italic;
+      color:var(--e1);
+      display:block;
+    }
+    .hero-sub {
+      font-size:clamp(1rem,1.8vw,1.18rem);
+      line-height:1.78; color:var(--t2);
+      max-width:680px; margin:0 auto 2.6rem; font-weight:300;
+      position:relative; z-index:2;
+      animation:fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-sub strong { color:#BED8CC; font-weight:500; }
+    .hero-actions {
+      display:flex; gap:1.1rem; flex-wrap:wrap; justify-content:center;
+      position:relative; z-index:2;
+      animation:fadeUp 0.8s 0.3s ease both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+    .scroll-hint {
+      position:absolute; bottom:1.8rem; left:50%; transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:5px;
+      color:rgba(106,144,128,0.30); font-size:0.68rem;
+      letter-spacing:0.1em; text-transform:uppercase; z-index:2;
+      animation:fadeUp 1s 1.2s ease both;
+    }
+    .scroll-hint i { animation:bounce 2.2s ease infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);} }
+
+    /* ── BUTTONS ──
+       Primary = Tier 1 forest botanical green
+       Outline  = quiet border
+    */
+    .btn-primary {
+      background:linear-gradient(90deg, var(--e1-btn), var(--e1));
+      color:#081A10; padding:15px 36px; border-radius:9999px;
+      font-weight:600; font-size:1rem; text-decoration:none;
+      display:inline-flex; align-items:center; gap:9px;
+      box-shadow:0 6px 20px rgba(61,158,114,0.20);
+      transition:all 0.3s; font-family:'DM Sans',sans-serif;
+    }
+    .btn-primary:hover {
+      transform:translateY(-2px);
+      box-shadow:0 12px 30px rgba(61,158,114,0.28);
+    }
+    .btn-outline {
+      border:1.5px solid rgba(42,122,86,0.30);
+      color:var(--t2);
+      padding:15px 36px; border-radius:9999px;
+      font-weight:500; font-size:1rem; text-decoration:none; transition:all 0.3s;
+    }
+    .btn-outline:hover {
+      background:rgba(42,122,86,0.07);
+      border-color:rgba(42,122,86,0.48);
+      color:var(--t1);
     }
 
-    .section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 20px;
+    /* ══ PETITION BANNER ══ */
+    .petition-banner {
+      background:
+        radial-gradient(ellipse at 0% 50%, rgba(42,122,86,0.07) 0%, transparent 55%),
+        linear-gradient(135deg, rgba(20,60,40,0.55), rgba(12,38,24,0.65));
+      border-top:1px solid var(--e3-border-lift);
+      border-bottom:1px solid var(--e3-border);
+      padding:2.4rem 2.5rem;
     }
-    .section h2 {
-      text-align: center;
-      font-size: 2.8rem;
-      color: var(--dark-green);
-      margin-bottom: 2.5rem;
+    .petition-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:2rem; }
+    .petition-icon {
+      width:54px; height:54px;
+      background:rgba(42,122,86,0.08);
+      border:1px solid rgba(42,122,86,0.20);
+      border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0;
     }
+    .petition-label { font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--e2-text); margin-bottom:0.32rem; }
+    .petition-title { font-family:'DM Serif Display',serif; font-size:1.30rem; color:var(--t1); margin-bottom:0.32rem; }
+    .petition-docket { font-size:0.84rem; color:var(--t2); font-weight:300; }
+    .petition-docket strong { color:var(--e2-text); font-weight:600; }
+    .petition-btn {
+      background:var(--t1); color:var(--card-text);
+      padding:11px 24px; border-radius:9999px;
+      font-weight:600; font-size:0.88rem; text-decoration:none;
+      display:inline-flex; align-items:center; gap:7px;
+      white-space:nowrap; transition:all 0.3s; flex-shrink:0;
+    }
+    .petition-btn:hover { background:var(--e1); color:#081A10; transform:translateY(-2px); }
 
-    .accordion {
-      border: 1px solid #c8d8d0;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
-    .accordion-header {
-      padding: 1.4rem 1.8rem;
-      background: white;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--dark-green);
-      transition: background 0.3s;
-    }
-    .accordion-header:hover { background: var(--soft-green); }
-    .accordion-header .arrow {
-      transition: transform 0.4s ease;
-    }
-    .accordion-header.active .arrow {
-      transform: rotate(180deg);
-    }
-    .accordion-content {
-      padding: 0 1.8rem;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      background: var(--soft-green);
-    }
-    .accordion-content.open {
-      padding: 1.8rem;
-      max-height: 600px;
-    }
+    /* ══ SHARED SECTIONS ══ */
+    section { padding:5.5rem 2.5rem; position:relative; overflow:hidden; }
+    .section-inner { max-width:1100px; margin:0 auto; position:relative; z-index:2; }
+    .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.9rem,3.8vw,2.75rem); line-height:1.12; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.2rem; }
+    .section-divider { width:40px; height:2px; background:linear-gradient(90deg, var(--e3), transparent); border-radius:2px; margin-bottom:1.9rem; }
 
+    /* ══ WHAT IS DIMD ══ */
+    .what-is-dimd {
+      background:
+        radial-gradient(ellipse at 4% 50%,  rgba(42,122,86,0.055) 0%, transparent 48%),
+        radial-gradient(ellipse at 96% 18%, rgba(26,92,62,0.038)  0%, transparent 44%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    }
+    .what-is-dimd::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:110px;
+      background:linear-gradient(to bottom, rgba(10,28,20,0.45), transparent);
+      pointer-events:none; z-index:1;
+    }
+    .what-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .what-text p { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.2rem; }
+    .what-text p strong { color:var(--t1); font-weight:500; }
+    .what-text p em { color:var(--e2-text); font-style:italic; }
+
+    .what-visual { display:flex; flex-direction:column; gap:0.85rem; }
+    .stat-card {
+      background:linear-gradient(135deg, rgba(16,40,28,0.92), rgba(12,30,20,0.96));
+      border:1px solid var(--e3-border);
+      border-radius:14px; padding:1.15rem 1.5rem;
+      display:flex; align-items:flex-start; gap:1.1rem; transition:all 0.32s;
+      box-shadow:inset 0 1px 0 rgba(42,122,86,0.055);
+    }
+    .stat-card:hover {
+      background:linear-gradient(135deg, rgba(20,48,34,0.96), rgba(16,38,26,1.0));
+      border-color:var(--e3-border-lift);
+      transform:translateX(3px);
+    }
+    /* TIER 2 stat numbers — forest green, not teal */
+    .stat-num {
+      font-family:'DM Serif Display',serif;
+      font-size:2.1rem; color:var(--e2-text);
+      line-height:1; flex-shrink:0; min-width:70px;
+    }
+    .stat-desc { font-size:0.89rem; color:var(--t2); line-height:1.58; padding-top:3px; font-weight:300; }
+    .stat-desc strong { color:var(--t1); font-weight:500; }
+
+    /* ══ NOT RARE ══ */
+    .not-rare {
+      background:
+        radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.050) 0%, transparent 46%),
+        radial-gradient(ellipse at 12% 78%, rgba(26,92,62,0.036)  0%, transparent 40%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .not-rare::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(42,122,86,0.09), transparent);
+      pointer-events:none; z-index:1;
+    }
+    .not-rare::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(42,122,86,0.07), transparent);
+      pointer-events:none; z-index:1;
+    }
+    .not-rare-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .quote-block {
+      background:linear-gradient(135deg, rgba(20,56,38,0.45), rgba(12,36,24,0.55));
+      border-left:3px solid var(--e2);
+      border-radius:0 12px 12px 0;
+      padding:1.6rem 1.8rem; margin:1.6rem 0;
+    }
+    .quote-block p { font-family:'DM Serif Display',serif; font-size:1.38rem; font-style:italic; color:var(--t1); line-height:1.42; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:0.99rem; font-weight:300; margin-bottom:1.1rem; }
+    .body-text strong { color:var(--t1); font-weight:500; }
+    .mission-list { list-style:none; display:flex; flex-direction:column; gap:0.68rem; margin-top:1.1rem; }
+    .mission-list li { display:flex; align-items:center; gap:12px; color:var(--t2); font-size:0.96rem; font-weight:300; }
+    .mission-list li::before { content:''; width:6px; height:6px; background:var(--e3); border-radius:50%; flex-shrink:0; }
+    .mission-list li strong { color:var(--t1); font-weight:500; }
+    .impact-statement {
+      background:linear-gradient(135deg, rgba(16,46,30,0.58), rgba(10,30,20,0.68));
+      border:1px solid var(--e3-border);
+      border-radius:15px; padding:1.9rem; text-align:center; margin-top:1.8rem;
+      box-shadow:inset 0 1px 0 rgba(42,122,86,0.050);
+    }
+    .impact-statement p { font-family:'DM Serif Display',serif; font-size:1.16rem; font-style:italic; color:var(--t1); line-height:1.52; margin-bottom:0.75rem; }
+    .impact-statement small { font-size:0.76rem; color:var(--e2); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; }
+
+    /* ══ CARDS ══ */
+    .navigate {
+      background:
+        radial-gradient(ellipse at 50% 28%, rgba(42,122,86,0.050) 0%, transparent 52%),
+        radial-gradient(ellipse at 18% 82%, rgba(26,92,62,0.036)  0%, transparent 44%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 55%, var(--bg-deep) 100%);
+    }
+    .cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.3rem; margin-top:2.5rem; }
+    .feature-card {
+      background:var(--card-white);
+      border:5px solid rgba(26,92,62,0.26);
+      border-radius:18px; padding:1.55rem 1.75rem 1.25rem;
+      text-align:center; display:flex; flex-direction:column;
+      align-items:center; position:relative; overflow:hidden;
+      transition:all 0.42s cubic-bezier(0.4,0,0.2,1);
+      box-shadow:0 8px 24px rgba(0,0,0,0.16), inset 0 2px 4px rgba(255,255,255,0.44);
+    }
+    .feature-card::before {
+      content:''; position:absolute; top:0;left:0;right:0; height:34%;
+      background:linear-gradient(180deg,rgba(255,255,255,0.55) 0%,transparent 100%);
+      pointer-events:none; z-index:1;
+    }
+    .feature-card:hover {
+      border-color:rgba(42,122,86,0.44);
+      transform:translateY(-3px);
+      box-shadow:0 18px 38px rgba(0,0,0,0.20), inset 0 2px 4px rgba(255,255,255,0.48);
+    }
+    /* TIER 2 icons — forest green */
+    .feature-icon { width:54px;height:54px; color:var(--e2); margin-bottom:0.85rem;position:relative;z-index:2; }
+    .feature-card h3 { font-size:1.06rem;font-weight:600;color:var(--card-text);margin-bottom:0.48rem;position:relative;z-index:2; }
+    .feature-card p { font-size:0.88rem;color:var(--card-mid);line-height:1.6;flex-grow:1;position:relative;z-index:2; }
+    .feature-card a {
+      margin-top:0.9rem; color:var(--e3);
+      font-weight:600;font-size:0.88rem;
+      text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+      position:relative;z-index:2;transition:color 0.2s;
+    }
+    .feature-card a:hover { color:#14482E; }
+    .feature-card a::after { content:"→";transition:transform 0.25s; }
+    .feature-card a:hover::after { transform:translateX(5px); }
+
+    /* ══ CTA ══ */
+    .cta-section {
+      background:
+        radial-gradient(ellipse at 50% 0%,   rgba(61,158,114,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%,  rgba(26,92,62,0.05)  0%, transparent 46%),
+        linear-gradient(135deg, rgba(16,48,30,0.68), rgba(10,28,18,0.78));
+      border-top:1px solid rgba(42,122,86,0.13);
+      padding:5rem 2.5rem; text-align:center;
+    }
+    .cta-section h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.8rem,3.5vw,2.6rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:1rem; }
+    .cta-section p { color:var(--t2);font-size:1.02rem;line-height:1.75;max-width:580px;margin:0 auto 2rem;font-weight:300; }
+    .cta-btns { display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap; }
+
+    /* ══ FOOTER ══ */
     footer {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 3rem 20px;
-      font-size: 0.95rem;
+      background:
+        radial-gradient(ellipse at 28% 0%, rgba(42,122,86,0.035) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-floor) 0%, #060F0B 100%);
+      border-top:1px solid rgba(30,92,62,0.10);
+      padding:3rem 2.5rem 1.8rem;
     }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
+    .footer-brand p { color:rgba(106,144,128,0.52);font-size:0.85rem;line-height:1.74;margin-top:1rem;font-weight:300; }
+    .footer-col h4 { font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--e2);margin-bottom:0.9rem; }
+    .footer-col a { display:block;color:rgba(106,144,128,0.45);text-decoration:none;font-size:0.86rem;font-weight:300;margin-bottom:0.46rem;transition:color 0.2s; }
+    .footer-col a:hover { color:var(--t1); }
+    .footer-bottom { max-width:1100px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(30,92,62,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+    .footer-bottom p { font-size:0.77rem;color:rgba(106,144,128,0.26); }
+    .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
+    .footer-bottom a:hover { color:var(--t2); }
 
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.8rem; }
-      .nav-links a { margin: 0 0.8rem; font-size: 0.95rem; }
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:1024px) {
+      .what-grid,.not-rare-grid { grid-template-columns:1fr; gap:3rem; }
+      .cards-grid { grid-template-columns:repeat(2,1fr); }
+      .petition-inner { grid-template-columns:auto 1fr; }
+      .petition-btn { grid-column:1/-1; }
+      .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
+    }
+    @media (max-width:680px) {
+      .cards-grid { grid-template-columns:1fr; }
+      .nav-links { display:none; }
+      .footer-inner { grid-template-columns:1fr; }
+      .petition-inner { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
+
+  <canvas id="mito-canvas"></canvas>
+  <div id="atmosphere"></div>
+  <div id="vignette"></div>
+
+  <!-- NAV -->
   <nav>
-    <div class="nav-container">
-      <div class="logo">🧬 <span>DIMD</span></div>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Understanding DIMD</a>
-        <a href="#">FQAD</a>
-        <a href="#">Federal Conversation</a>
-        <a href="#">Evidence & References</a>
-        <a href="#">Registry</a>
-        <a href="#">About</a>
-      </div>
-      <div>
-        <a href="https://doi.org/10.5281/zenodo.19895781" target="_blank" class="btn btn-outline">📜 Read Petition</a>
-        <a href="#" class="btn btn-primary">Join Registry</a>
-      </div>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🧬</div>
+        <div>
+          <div class="nav-logo-text">DIMD</div>
+          <div class="nav-logo-sub">Science · Evidence · Policy</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="science.html">The Science</a></li>
+        <li><a href="fqad.html">FQAD</a></li>
+        <li><a href="action.html">Take Action</a></li>
+        <li><a href="evidence.html">Evidence</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="registry.html" class="nav-cta">Registry</a></li>
+      </ul>
     </div>
   </nav>
 
-  <section class="hero">
-    <h1>Drug-Induced Mitochondrial Dysfunction</h1>
-    <p class="subtitle">is a public health issue</p>
-    <p>Evidence-based information for patients, clinicians, and researchers.</p>
-   
-    <div style="margin-top: 3rem;">
-      <a href="#" class="btn btn-primary" style="font-size:1.2rem; padding:16px 36px; margin:0 10px;">Learn What DIMD Is</a>
-      <a href="#" class="btn btn-outline" style="font-size:1.2rem; padding:16px 36px; margin:0 10px; background:white; color:var(--dark-green);">Join the Registry</a>
-    </div>
-  </section>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-icon">🔬</div>
-      <h3>Understanding DIMD</h3>
-      <p>Learn how certain medications can damage mitochondria and what the real science shows.</p>
-      <a href="#" style="color:var(--dark-green); font-weight:600; margin-top:1rem; display:inline-block;">Learn More →</a>
-    </div>
-    <div class="card">
-      <div class="card-icon">📋</div>
-      <h3>Join the Registry</h3>
-      <p>Help build real evidence. Your experience matters.</p>
-      <a href="#" style="color:var(--dark-green); font-weight:600; margin-top:1rem; display:inline-block;">Register Now →</a>
-    </div>
-    <div class="card">
-      <div class="card-icon">📜</div>
-      <h3>Take Action</h3>
-      <p>Read the petition and help raise awareness.</p>
-      <a href="#" style="color:var(--dark-green); font-weight:600; margin-top:1rem; display:inline-block;">Read Petition →</a>
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
+      <span><i class="fas fa-flask"></i> Manuscript under peer review</span>
+      <span><i class="fas fa-users"></i> DIMD Registry now open for contributions</span>
+      <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
+      <span><i class="fas fa-circle-check"></i> New case studies being added</span>
+      <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
+      <span><i class="fas fa-flask"></i> Manuscript under peer review</span>
+      <span><i class="fas fa-users"></i> DIMD Registry now open for contributions</span>
+      <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
+      <span><i class="fas fa-circle-check"></i> New case studies being added</span>
     </div>
   </div>
 
-  <section class="section">
-    <h2>Understanding Drug-Induced Mitochondrial Dysfunction</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-      <div>
-        <p>Mitochondria are the tiny power plants inside almost every cell in your body. They produce the energy your cells need to function.</p>
-        <p>When certain drugs damage them, energy production drops dramatically. Symptoms can appear days, weeks, or even months later.</p>
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/600x400/0A3D2A/4ADE80?text=Mitochondria+Diagram" alt="Mitochondria structure diagram" style="width:100%; border-radius:16px;">
-      </div>
-    </div>
-  </section>
+  <main>
 
-  <section class="section" style="background: var(--soft-green);">
-    <h2>Common Symptoms</h2>
-    <p style="text-align:center; max-width:800px; margin:0 auto 3rem;">Click any symptom below to learn more about why it occurs in DIMD.</p>
-    
-    <div class="accordion">
-      <div class="accordion-header">Tendon Rupture or Severe Tendon Pain <span class="arrow">▼</span></div>
-      <div class="accordion-content">Especially Achilles tendon. Mitochondrial damage impairs collagen repair, making tendons weak and prone to rupture even with normal activity.</div>
-    </div>
-    <div class="accordion">
-      <div class="accordion-header">Severe Fatigue & Exercise Intolerance <span class="arrow">▼</span></div>
-      <div class="accordion-content">The most common symptom. Cells cannot produce enough ATP, so even light activity can be exhausting.</div>
-    </div>
-    <div class="accordion">
-      <div class="accordion-header">Neuropathy & Nerve Pain <span class="arrow">▼</span></div>
-      <div class="accordion-content">Burning, tingling, numbness, or shooting pain. Can also include brain fog, anxiety, and dizziness.</div>
-    </div>
-    <div class="accordion">
-      <div class="accordion-header">Muscle Weakness & Pain <span class="arrow">▼</span></div>
-      <div class="accordion-content">Proximal muscle weakness and widespread myalgia.</div>
-    </div>
-    <div class="accordion">
-      <div class="accordion-header">Heart Palpitations & Cardiovascular Issues <span class="arrow">▼</span></div>
-      <div class="accordion-content">Arrhythmias, chest pain, and blood pressure problems.</div>
-    </div>
-    <div class="accordion">
-      <div class="accordion-header">Cognitive Dysfunction (Brain Fog) <span class="arrow">▼</span></div>
-      <div class="accordion-content">Memory issues, difficulty concentrating, and mental fatigue.</div>
-    </div>
-  </section>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Patient-led · Evidence-focused · Science-driven
+      </div>
+      <h1 class="hero-title">
+        Drug-Induced
+        <em>Mitochondrial Dysfunction</em>
+      </h1>
+      <p class="hero-sub">
+        Medications can disrupt the body's energy system — sometimes with delayed, multisystem effects.
+        <strong>If our understanding of energy biology and mitochondria has advanced, shouldn't our safety models for medications evolve with it?</strong>
+      </p>
+      <div class="hero-actions">
+        <a href="science.html" class="btn-primary"><i class="fas fa-dna"></i> Understand DIMD</a>
+        <a href="registry.html" class="btn-outline">Join the Registry</a>
+      </div>
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
 
+    <!-- PETITION BANNER -->
+    <div class="petition-banner">
+      <div class="petition-inner">
+        <div class="petition-icon">📋</div>
+        <div>
+          <div class="petition-label">Official Filing — U.S. Food &amp; Drug Administration</div>
+          <div class="petition-title">FDA Citizen Petition Officially Accepted for Filing</div>
+          <div class="petition-docket">
+            Docket No. <strong>FDA-2026-P-5116</strong> &nbsp;·&nbsp;
+            Requesting stronger informed-consent language and improved patient-facing risk communication
+            for fluoroquinolone antibiotics. Now open for public comment on regulations.gov.
+          </div>
+        </div>
+        <a href="#" class="petition-btn">Read the Petition <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- WHAT IS DIMD -->
+    <section class="what-is-dimd">
+      <div class="section-inner">
+        <div class="what-grid">
+          <div class="what-text">
+            <div class="section-label">The Science</div>
+            <h2 class="section-title">Mitochondria Are Not Isolated Structures</h2>
+            <div class="section-divider"></div>
+            <p>Mitochondria are <strong>signaling hubs</strong> that communicate directly with nuclear DNA, coordinating cellular energy production with gene expression. When this communication is disrupted, the effects extend beyond energy failure — altering cellular behavior at the genomic level and driving multisystem disease.</p>
+            <p>When medication-related injury disrupts the body's energy system, the effects can be <strong>widespread and often misunderstood.</strong> Millions develop persistent, multisystem symptoms following medication exposure: pain, neurologic dysfunction, tendon injury, and autonomic instability. Too often, they are told these symptoms are <em>unrelated, idiopathic, or functional.</em></p>
+            <p>While mitochondrial biology has advanced dramatically over the past several decades, <strong>drug safety frameworks have not fully integrated this knowledge.</strong></p>
+            <p style="margin-top:1.3rem;">This site explores the science, the clinical implications, and the need for <strong>evolution — not blame.</strong></p>
+          </div>
+          <div class="what-visual">
+            <div class="stat-card">
+              <div class="stat-num">400+</div>
+              <div class="stat-desc"><strong>Medications carry FDA boxed warnings</strong> — nearly half involve mechanisms known to impair mitochondrial function.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">~50%</div>
+              <div class="stat-desc"><strong>Of boxed-warning drugs</strong> are associated with mitochondrial mechanisms — yet mitochondrial injury is rarely named explicitly in labeling.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">&gt;40%</div>
+              <div class="stat-desc"><strong>Of ambulatory care patients</strong> received at least one boxed-warning medication over a 30-month period. These exposures are common, not exceptional.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">Zero</div>
+              <div class="stat-desc"><strong>National systems</strong> currently track delayed, cumulative mitochondrial injury following drug exposure.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOT RARE -->
+    <section class="not-rare">
+      <div class="section-inner">
+        <div class="not-rare-grid">
+          <div>
+            <div class="section-label">Public Health</div>
+            <h2 class="section-title">DIMD Is a Public Health Issue — Not a Rare Event</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">Medications known to impair mitochondrial function are currently prescribed — often repeatedly — to patients whose mitochondria have already been damaged by prior drug exposure. This occurs <strong>without screening, without informed consent, and without longitudinal tracking.</strong></p>
+            <div class="quote-block">
+              <p>"It's not so rare when it happens to you."</p>
+            </div>
+            <p class="body-text">The potential scale is substantial: <strong>tens of millions of Americans may be exposed to mitochondria-impairing medications</strong> — and that estimate does not account for repeat exposures, polypharmacy, age-related mitochondrial decline, or delayed clinical manifestations.</p>
+            <p class="body-text">We are building the <strong>missing bridge</strong> between drug exposure and delayed, multi-system disease — across molecular biology, clinical medicine, advocacy, and policy.</p>
+          </div>
+          <div>
+            <p class="body-text"><strong style="color:var(--t1);">This platform is dedicated to:</strong></p>
+            <ul class="mission-list">
+              <li><strong>Patient education</strong> — understanding what happened and why</li>
+              <li><strong>Clinician awareness</strong> — recognizing delayed mitochondrial patterns</li>
+              <li><strong>Research infrastructure</strong> — building the evidence base</li>
+              <li><strong>National registry development</strong> — tracking what no one is tracking</li>
+              <li><strong>Legislative advocacy</strong> — driving policy-level recognition</li>
+            </ul>
+            <div class="impact-statement">
+              <p>"Despite decades of use, no national system currently tracks delayed, cumulative mitochondrial injury following drug exposure."</p>
+              <small>— druginducedmito.org</small>
+            </div>
+            <p class="body-text" style="margin-top:1.8rem;">This gap is not due to malice or neglect — it's <strong>structural and educational.</strong> Modern medicine is simply not yet equipped to routinely recognize and address it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="navigate">
+      <div class="section-inner">
+        <div class="section-label">Explore</div>
+        <h2 class="section-title">Navigate the Evidence</h2>
+        <div class="section-divider"></div>
+        <div class="cards-grid">
+          <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 200 200" fill="none">
+              <ellipse cx="100" cy="100" rx="48" ry="28" stroke="currentColor" stroke-width="14"/>
+              <ellipse cx="100" cy="100" rx="32" ry="18" stroke="currentColor" stroke-width="10"/>
+              <circle cx="100" cy="100" r="8" fill="currentColor"/>
+              <path d="M70 65 Q100 45 130 65" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+              <path d="M72 135 Q100 155 128 135" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+            </svg>
+            <h3>Understanding DIMD</h3>
+            <p>Mitochondrial toxicology and the mechanisms of drug-induced energy dysfunction.</p>
+            <a href="science.html">Explore Mechanisms</a>
+          </div>
+          <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 200 200" fill="none">
+              <path d="M72 55 Q100 35 128 55" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+              <path d="M72 75 Q100 55 128 75" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+              <path d="M72 95 Q100 115 128 95" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+              <path d="M72 115 Q100 135 128 115" stroke="currentColor" stroke-width="16" stroke-linecap="round"/>
+              <circle cx="68" cy="48" r="7" fill="currentColor"/>
+              <circle cx="132" cy="48" r="7" fill="currentColor"/>
+              <circle cx="68" cy="122" r="7" fill="currentColor"/>
+              <circle cx="132" cy="122" r="7" fill="currentColor"/>
+            </svg>
+            <h3>Fluoroquinolone-Associated Disability</h3>
+            <p>Special focus on the persistent multisystem effects of fluoroquinolone antibiotics.</p>
+            <a href="fqad.html">Learn More</a>
+          </div>
+          <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 200 200" fill="none">
+              <path d="M55 112 Q100 52 145 112" stroke="currentColor" stroke-width="14"/>
+              <rect x="68" y="112" width="64" height="16" rx="4" stroke="currentColor" stroke-width="12"/>
+              <rect x="58" y="126" width="84" height="32" rx="5" stroke="currentColor" stroke-width="12"/>
+              <rect x="70" y="127" width="7" height="29" stroke="currentColor" stroke-width="6"/>
+              <rect x="85" y="127" width="7" height="29" stroke="currentColor" stroke-width="6"/>
+              <rect x="100" y="127" width="7" height="29" stroke="currentColor" stroke-width="6"/>
+              <rect x="115" y="127" width="7" height="29" stroke="currentColor" stroke-width="6"/>
+              <rect x="56" y="155" width="88" height="10" rx="3" stroke="currentColor" stroke-width="10"/>
+            </svg>
+            <h3>Take Action</h3>
+            <p>Petitions, regulatory modernization, federal engagement, and public health awareness.</p>
+            <a href="action.html">Federal Conversation</a>
+          </div>
+          <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 200 200" fill="none">
+              <rect x="55" y="48" width="90" height="118" rx="8" stroke="currentColor" stroke-width="14"/>
+              <path d="M72 72 H128" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+              <path d="M72 92 H128" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+              <path d="M72 112 H128" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+              <path d="M72 132 H105" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+            </svg>
+            <h3>Evidence &amp; References</h3>
+            <p>Peer-reviewed studies organized by mechanism — not organ system.</p>
+            <a href="evidence.html">View Sources</a>
+          </div>
+          <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 200 200" fill="none">
+              <rect x="48" y="55" width="104" height="98" rx="10" stroke="currentColor" stroke-width="13"/>
+              <rect x="65" y="72" width="18" height="18" rx="3" stroke="currentColor" stroke-width="9"/>
+              <rect x="117" y="72" width="18" height="18" rx="3" stroke="currentColor" stroke-width="9"/>
+              <rect x="65" y="115" width="18" height="18" rx="3" stroke="currentColor" stroke-width="9"/>
+              <rect x="117" y="115" width="18" height="18" rx="3" stroke="currentColor" stroke-width="9"/>
+            </svg>
+            <h3>DIMD Registry</h3>
+            <p>Contribute structured patient data. Help close the evidence gap on delayed drug injury.</p>
+            <a href="registry.html">Join the Registry</a>
+          </div>
+          <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="92" r="26" stroke="currentColor" stroke-width="14"/>
+              <path d="M100 118 L100 148" stroke="currentColor" stroke-width="13" stroke-linecap="round"/>
+              <circle cx="100" cy="162" r="9" fill="currentColor"/>
+              <circle cx="65" cy="65" r="13" stroke="currentColor" stroke-width="11"/>
+              <circle cx="135" cy="65" r="13" stroke="currentColor" stroke-width="11"/>
+              <circle cx="55" cy="115" r="13" stroke="currentColor" stroke-width="11"/>
+              <circle cx="145" cy="115" r="13" stroke="currentColor" stroke-width="11"/>
+              <path d="M100 92 L65 65" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+              <path d="M100 92 L135 65" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+              <path d="M100 92 L55 115" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+              <path d="M100 92 L145 115" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            <h3>About the Researcher</h3>
+            <p>Johanna Ihli, BSN — Critical care nurse, patient, independent researcher. ORCID verified.</p>
+            <a href="about.html">Our Mission</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="section-inner">
+        <h2>Join the Effort to Recognize and Prevent DIMD</h2>
+        <p>Whether you are a patient, clinician, researcher, or policymaker — your contribution matters. Help close the evidence gap and support pharmacovigilance modernization.</p>
+        <div class="cta-btns">
+          <a href="registry.html" class="btn-primary"><i class="fas fa-users"></i> Contribute to the Registry</a>
+          <a href="#" class="btn-outline">Download Clinician Brief</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Drug-Induced Mitochondrial Dysfunction Awareness. All rights reserved.</p>
-    <p style="margin-top:0.5rem; opacity:0.8;">This is a patient-led initiative. Not medical advice.</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="text-decoration:none;">
+          <div class="nav-logo-icon">🧬</div>
+          <div style="margin-left:10px;">
+            <div class="nav-logo-text">DIMD</div>
+            <div class="nav-logo-sub">Science · Evidence · Policy</div>
+          </div>
+        </a>
+        <p>Patient-led · Evidence-focused · Science-driven.<br>
+        Bridging the gap between molecular science and clinical practice, regulatory policy, and patient care.<br>
+        This site is for educational and advocacy purposes only and does not provide medical advice.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="science.html">Understanding DIMD</a>
+        <a href="fqad.html">FQAD</a>
+        <a href="evidence.html">Evidence &amp; References</a>
+      </div>
+      <div class="footer-col">
+        <h4>Act</h4>
+        <a href="registry.html">DIMD Registry</a>
+        <a href="action.html">Take Action</a>
+        <a href="#">FDA Petition</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="about.html">The Researcher</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="evidence.html">References</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
   </footer>
 
+  <!-- FLOATING MITOCHONDRIA -->
   <script>
-    document.querySelectorAll('.accordion-header').forEach(header => {
-      header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const isOpen = content.classList.contains('open');
-        
-        document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
-        document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
-        
-        if (!isOpen) {
-          content.classList.add('open');
-          header.classList.add('active');
-        }
+  (function(){
+    const canvas=document.getElementById('mito-canvas');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    resize(); window.addEventListener('resize',resize);
+    function drawMito(ctx,x,y,rx,ry,angle,alpha){
+      ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(angle);
+      const c='#1A5C3E';
+      ctx.beginPath(); ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2);
+      ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,rx*.68,ry*.68,0,0,Math.PI*2);
+      ctx.strokeStyle=c; ctx.lineWidth=1.0; ctx.stroke();
+      const folds=Math.max(2,Math.round(rx/11));
+      const step=(ry*1.2)/(folds+1);
+      ctx.lineWidth=0.72;
+      for(let i=1;i<=folds;i++){
+        const fy=(-ry*.55)+(i*step),amp=rx*.23;
+        ctx.beginPath();
+        ctx.moveTo(-rx*.50,fy);
+        ctx.bezierCurveTo(-rx*.16,fy-amp,rx*.16,fy+amp,rx*.50,fy);
+        ctx.stroke();
+      }
+      [0.25,0.5,0.75,1.0,1.5,1.75].forEach(t=>{
+        const a2=t*Math.PI*2;
+        ctx.beginPath();
+        ctx.arc(Math.cos(a2)*rx*.68,Math.sin(a2)*ry*.68,rx*.036,0,Math.PI*2);
+        ctx.fillStyle=c; ctx.fill();
       });
-    });
+      ctx.restore();
+    }
+    const COUNT=28; const P=[];
+    function rp(edge){
+      const rx=16+Math.random()*46,ry=rx*(.36+Math.random()*.24);
+      const speed=.09+Math.random()*.18,dir=Math.random()*Math.PI*2;
+      let x,y;
+      if(edge){
+        const e=Math.floor(Math.random()*4);
+        if(e===0){x=Math.random()*canvas.width;y=-rx*2;}
+        else if(e===1){x=canvas.width+rx*2;y=Math.random()*canvas.height;}
+        else if(e===2){x=Math.random()*canvas.width;y=canvas.height+rx*2;}
+        else{x=-rx*2;y=Math.random()*canvas.height;}
+      }else{x=Math.random()*canvas.width;y=Math.random()*canvas.height;}
+      return{x,y,rx,ry,angle:Math.random()*Math.PI*2,
+             drift:(Math.random()-.5)*.0028,
+             alpha:.06+Math.random()*.22,
+             vx:Math.cos(dir)*speed,vy:Math.sin(dir)*speed};
+    }
+    for(let i=0;i<COUNT;i++)P.push(rp(false));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<P.length;i++){
+        const p=P[i];p.x+=p.vx;p.y+=p.vy;p.angle+=p.drift;
+        const pad=p.rx*2.5;
+        if(p.x<-pad||p.x>canvas.width+pad||p.y<-pad||p.y>canvas.height+pad){P[i]=rp(true);continue;}
+        drawMito(ctx,p.x,p.y,p.rx,p.ry,p.angle,p.alpha);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
   </script>
+
 </body>
 </html>
