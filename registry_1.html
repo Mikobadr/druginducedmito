@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DIMD Registry — Contribute structured patient data on drug-induced mitochondrial dysfunction. Help build the longitudinal evidence base that pharmacovigilance is missing.">
+  <title>Registry | DIMD — Drug-Induced Mitochondrial Dysfunction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-floor:    #071410;
+      --bg-deep:     #0A1C14;
+      --bg-mid:      #0E2318;
+      --bg-lift:     #122B1E;
+      --e1:          #3D9E72;
+      --e1-btn:      #2E8A60;
+      --e2:          #2A7A56;
+      --e2-text:     #327A5A;
+      --e3:          #1A5C3E;
+      --e3-border:   rgba(30,92,62,0.18);
+      --e3-border-lift: rgba(42,122,86,0.28);
+      --t1:   #D4E8DC;
+      --t2:   #9DBDAF;
+      --t3:   #6A9080;
+      --card-white: #F4F7F3;
+      --card-text:  #0E2018;
+      --card-mid:   #304A3C;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 8%,  rgba(26,92,62,0.13) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 92%, rgba(18,78,48,0.10) 0%, transparent 48%),
+        linear-gradient(168deg, #0C1F16 0%, #091A12 40%, #071410 70%, #0A1A12 100%);
+      background-attachment:fixed;
+      color:var(--t1);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    #mito-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.32; }
+    #atmosphere { position:fixed; inset:0; pointer-events:none; z-index:1;
+      background: radial-gradient(ellipse at 15% 25%, rgba(42,122,86,0.048) 0%, transparent 44%),
+        radial-gradient(ellipse at 85% 70%, rgba(26,92,62,0.036) 0%, transparent 40%); }
+    #vignette { position:fixed; inset:0; pointer-events:none; z-index:2;
+      box-shadow: inset 0 0 200px rgba(5,12,9,0.72), inset 160px 0 200px rgba(5,12,9,0.52), inset -160px 0 200px rgba(5,12,9,0.52); }
+    nav,main,footer { position:relative; z-index:10; }
+
+    /* ══ NAV ══ */
+    nav { position:sticky; top:0; z-index:1000; background:rgba(8,20,14,0.95); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); }
+    .nav-inner { max-width:1340px; margin:0 auto; padding:0 2.5rem; height:70px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#163C28,#1A5C3E); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
+    .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+    .nav-links a { color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--e2); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
+    .nav-links a:hover { color:var(--t1); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-links a.active { color:var(--t1); }
+    .nav-links a.active::after { transform:scaleX(1); }
+    .nav-cta { background:linear-gradient(90deg,#163C28,var(--e2)) !important; color:var(--t1) !important; padding:8px 22px; border-radius:9999px; font-weight:600 !important; box-shadow:0 3px 12px rgba(42,122,86,0.20); }
+    .nav-cta::after { display:none !important; }
+
+    /* ══ PAGE HERO ══ */
+    .page-hero {
+      padding:5rem 2.5rem 3.5rem; position:relative; overflow:hidden;
+      background:
+        radial-gradient(ellipse at 50% 60%, rgba(61,158,114,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(42,122,86,0.05) 0%, transparent 44%);
+    }
+    .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:120px; background:linear-gradient(to bottom, transparent, rgba(10,28,20,0.50)); pointer-events:none; }
+    .page-hero-inner { max-width:860px; margin:0 auto; position:relative; z-index:2; }
+    .page-breadcrumb { display:inline-flex; align-items:center; gap:8px; font-size:0.76rem; color:var(--t3); letter-spacing:0.08em; text-transform:uppercase; font-weight:500; margin-bottom:1.8rem; }
+    .page-breadcrumb a { color:var(--t3); text-decoration:none; transition:color 0.2s; }
+    .page-breadcrumb a:hover { color:var(--t2); }
+    .page-breadcrumb span { color:var(--e2); }
+    .page-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.4rem,5vw,4rem); line-height:1.08; letter-spacing:-0.03em; color:var(--t1); margin-bottom:1rem; animation:fadeUp 0.8s ease both; }
+    .page-hero h1 em { font-style:italic; color:var(--e1); }
+    .page-hero-sub { font-size:1.05rem; line-height:1.72; color:var(--t2); max-width:700px; font-weight:300; animation:fadeUp 0.8s 0.1s ease both; }
+    .page-hero-sub strong { color:var(--t1); font-weight:500; }
+    .hero-badges { display:flex; flex-wrap:wrap; gap:10px; margin-top:2rem; animation:fadeUp 0.8s 0.2s ease both; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(42,122,86,0.07); border:1px solid rgba(42,122,86,0.18); border-radius:12px; padding:8px 16px; font-size:0.82rem; color:var(--t2); }
+    .hero-badge i { color:var(--e2); font-size:0.78rem; }
+    .hero-badge strong { color:var(--t1); font-weight:500; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ══ SHARED ══ */
+    section { padding:4.5rem 2.5rem; position:relative; overflow:hidden; }
+    .section-inner { max-width:1060px; margin:0 auto; position:relative; z-index:2; }
+    .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.7rem,3.5vw,2.5rem); line-height:1.14; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.1rem; }
+    .section-divider { width:38px; height:2px; background:linear-gradient(90deg,var(--e3),transparent); border-radius:2px; margin-bottom:1.8rem; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.15rem; }
+    .body-text strong { color:var(--t1); font-weight:500; }
+    .body-text em { color:var(--e2-text); font-style:italic; }
+    .pull-quote { background:linear-gradient(135deg,rgba(22,60,42,0.42),rgba(12,36,24,0.52)); border-left:3px solid var(--e2); border-radius:0 12px 12px 0; padding:1.6rem 1.8rem; margin:1.8rem 0; }
+    .pull-quote p { font-family:'DM Serif Display',serif; font-size:1.28rem; font-style:italic; color:var(--t1); line-height:1.45; }
+
+    /* ══ WHY THE REGISTRY EXISTS ══ */
+    .why-registry {
+      background:
+        radial-gradient(ellipse at 5% 50%, rgba(42,122,86,0.055) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    }
+    .why-registry::before { content:''; position:absolute; top:0; left:0; right:0; height:100px; background:linear-gradient(to bottom,rgba(10,28,20,0.45),transparent); pointer-events:none; z-index:1; }
+    .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+
+    /* Gap stat cards */
+    .gap-stats { display:flex; flex-direction:column; gap:0.85rem; }
+    .gap-stat { background:linear-gradient(135deg,rgba(16,40,28,0.92),rgba(12,30,20,0.96)); border:1px solid var(--e3-border); border-radius:14px; padding:1.2rem 1.5rem; display:flex; align-items:flex-start; gap:1.1rem; transition:all 0.32s; }
+    .gap-stat:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .gap-stat-icon { width:40px; height:40px; flex-shrink:0; background:rgba(42,122,86,0.10); border:1px solid rgba(42,122,86,0.18); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--e2); font-size:1rem; }
+    .gap-stat h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.22rem; }
+    .gap-stat p { font-size:0.86rem; color:var(--t2); line-height:1.56; font-weight:300; }
+
+    /* ══ WHAT WE COLLECT ══ */
+    .what-collect {
+      background:
+        radial-gradient(ellipse at 90% 35%, rgba(42,122,86,0.048) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .what-collect::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(42,122,86,0.10),transparent); pointer-events:none; z-index:1; }
+    .collect-intro { max-width:660px; margin-bottom:2.5rem; }
+    .collect-intro p { color:var(--t2); font-size:0.97rem; line-height:1.78; font-weight:300; }
+    .collect-intro p strong { color:var(--t1); font-weight:500; }
+
+    .domains-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .domain-card {
+      background:var(--card-white); border:4px solid rgba(26,92,62,0.22); border-radius:16px;
+      padding:1.4rem 1.5rem; display:flex; flex-direction:column; align-items:flex-start;
+      position:relative; overflow:hidden; transition:all 0.35s;
+      box-shadow:0 5px 18px rgba(0,0,0,0.12), inset 0 2px 3px rgba(255,255,255,0.44);
+    }
+    .domain-card::before { content:''; position:absolute; top:0;left:0;right:0; height:28%; background:linear-gradient(180deg,rgba(255,255,255,0.50) 0%,transparent 100%); pointer-events:none; z-index:1; }
+    .domain-card:hover { border-color:rgba(42,122,86,0.40); transform:translateY(-3px); box-shadow:0 14px 32px rgba(0,0,0,0.16); }
+    .domain-icon { width:42px; height:42px; color:var(--e2); margin-bottom:0.75rem; position:relative; z-index:2; }
+    .domain-card h3 { font-size:0.97rem; font-weight:600; color:var(--card-text); margin-bottom:0.5rem; position:relative; z-index:2; }
+    .domain-items { list-style:none; display:flex; flex-direction:column; gap:0.38rem; position:relative; z-index:2; }
+    .domain-items li { font-size:0.82rem; color:var(--card-mid); line-height:1.48; display:flex; align-items:flex-start; gap:7px; }
+    .domain-items li::before { content:'·'; color:var(--e3); flex-shrink:0; font-size:1rem; line-height:1.2; }
+
+    /* ══ HOW IT WORKS ══ */
+    .how-works {
+      background:
+        radial-gradient(ellipse at 8% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .how-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .process-steps { display:flex; flex-direction:column; gap:0.6rem; }
+    .process-step { display:grid; grid-template-columns:56px 1fr; gap:0 1.5rem; position:relative; }
+    .process-step:not(:last-child)::after { content:''; position:absolute; left:27px; top:56px; bottom:-0.6rem; width:1px; background:linear-gradient(to bottom,rgba(42,122,86,0.22),rgba(42,122,86,0.08)); }
+    .ps-num { width:56px; height:56px; border-radius:50%; background:rgba(16,44,30,0.95); border:1.5px solid var(--e2); display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:1.3rem; color:var(--e2-text); font-style:italic; flex-shrink:0; transition:background 0.3s; }
+    .process-step:hover .ps-num { background:rgba(42,122,86,0.15); }
+    .ps-body { padding-top:0.9rem; padding-bottom:1.4rem; }
+    .ps-body h4 { font-size:0.95rem; font-weight:600; color:var(--t1); margin-bottom:0.28rem; }
+    .ps-body p { font-size:0.87rem; color:var(--t2); line-height:1.62; font-weight:300; }
+
+    /* Privacy block */
+    .privacy-block { background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68)); border:1px solid var(--e3-border); border-radius:16px; padding:1.8rem 2rem; }
+    .privacy-block h4 { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:1rem; }
+    .privacy-list { list-style:none; display:flex; flex-direction:column; gap:0.75rem; }
+    .privacy-list li { display:flex; align-items:flex-start; gap:12px; font-size:0.90rem; color:var(--t2); line-height:1.60; font-weight:300; }
+    .privacy-list li i { color:var(--e2); font-size:0.78rem; margin-top:4px; flex-shrink:0; }
+    .privacy-list li strong { color:var(--t1); font-weight:500; }
+
+    /* ══ WHO SHOULD CONTRIBUTE ══ */
+    .who-contribute {
+      background:
+        radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.050) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .who-contribute::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(42,122,86,0.09),transparent); pointer-events:none; z-index:1; }
+    .who-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .who-cards { display:flex; flex-direction:column; gap:0.9rem; }
+    .who-card { background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:13px; padding:1.2rem 1.5rem; display:flex; gap:1rem; align-items:flex-start; transition:border-color 0.3s, transform 0.3s; }
+    .who-card:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .who-icon { width:38px; height:38px; flex-shrink:0; background:rgba(42,122,86,0.10); border:1px solid rgba(42,122,86,0.18); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--e2); font-size:0.95rem; margin-top:2px; }
+    .who-card h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.25rem; }
+    .who-card p { font-size:0.86rem; color:var(--t2); line-height:1.58; font-weight:300; }
+
+    /* Why it matters statement */
+    .matters-statement { background:linear-gradient(135deg,rgba(20,56,38,0.45),rgba(12,36,24,0.55)); border-left:3px solid var(--e2); border-radius:0 14px 14px 0; padding:1.7rem 1.9rem; margin-bottom:1.8rem; }
+    .matters-statement p { font-family:'DM Serif Display',serif; font-size:1.18rem; font-style:italic; color:var(--t1); line-height:1.50; }
+    .matters-statement cite { display:block; margin-top:0.8rem; font-size:0.78rem; font-style:normal; color:var(--e2); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
+
+    /* ══ JOIN FORM SECTION ══ */
+    .join-section {
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(61,158,114,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 5% 60%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .join-inner { max-width:680px; margin:0 auto; text-align:center; }
+    .join-inner .section-divider { margin-left:auto; margin-right:auto; }
+
+    /* Interest form card */
+    .interest-card {
+      background:linear-gradient(135deg,rgba(16,46,30,0.60),rgba(10,30,20,0.72));
+      border:1px solid rgba(61,158,114,0.22); border-radius:20px; padding:2.8rem 3rem;
+      margin-top:2rem; text-align:left;
+    }
+    .interest-card .ic-label { font-size:0.70rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--e1); margin-bottom:0.5rem; display:flex; align-items:center; gap:7px; }
+    .interest-card .ic-label::before { content:''; width:6px; height:6px; background:var(--e1); border-radius:50%; animation:pulse 2.5s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.28;transform:scale(0.52);} }
+    .interest-card h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; color:var(--t1); margin-bottom:0.6rem; line-height:1.28; }
+    .interest-card .ic-sub { font-size:0.95rem; color:var(--t2); line-height:1.72; font-weight:300; margin-bottom:1.8rem; }
+    .interest-card .ic-sub strong { color:var(--t1); font-weight:500; }
+
+    /* Form fields */
+    .form-group { margin-bottom:1.1rem; }
+    .form-group label { display:block; font-size:0.78rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--e2); margin-bottom:0.45rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width:100%; background:rgba(10,28,18,0.70); border:1px solid rgba(42,122,86,0.22);
+      border-radius:10px; padding:11px 14px; font-size:0.93rem; color:var(--t1);
+      font-family:'DM Sans',sans-serif; outline:none; transition:border-color 0.25s, background 0.25s;
+      appearance:none;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color:var(--t3); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:rgba(61,158,114,0.45); background:rgba(14,36,24,0.80); }
+    .form-group select option { background:#0E2318; color:var(--t1); }
+    .form-group textarea { resize:vertical; min-height:90px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .form-check { display:flex; align-items:flex-start; gap:10px; margin-bottom:0.7rem; }
+    .form-check input[type="checkbox"] { width:16px; height:16px; flex-shrink:0; margin-top:2px; accent-color:var(--e1); cursor:pointer; }
+    .form-check label { font-size:0.86rem; color:var(--t2); line-height:1.55; cursor:pointer; font-weight:300; }
+    .form-check label strong { color:var(--t1); font-weight:500; }
+    .form-note { font-size:0.78rem; color:var(--t3); line-height:1.58; margin-top:0.4rem; font-style:italic; }
+    .btn-submit { width:100%; background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:15px 32px; border-radius:9999px; font-weight:600; font-size:1rem; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; font-family:'DM Sans',sans-serif; margin-top:1.4rem; }
+    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .form-disclaimer { font-size:0.76rem; color:var(--t3); line-height:1.62; text-align:center; margin-top:1rem; font-style:italic; }
+
+    /* ══ CTA ══ */
+    .registry-cta { background:radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%), linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78)); border-top:1px solid rgba(42,122,86,0.13); padding:4rem 2.5rem; text-align:center; }
+    .registry-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
+    .registry-cta p { color:var(--t2); font-size:1rem; line-height:1.72; max-width:540px; margin:0 auto 1.8rem; font-weight:300; }
+    .cta-btns { display:flex; gap:1.1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:14px 32px; border-radius:9999px; font-weight:600; font-size:0.97rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .btn-outline { border:1.5px solid rgba(42,122,86,0.30); color:var(--t2); padding:14px 32px; border-radius:9999px; font-weight:500; font-size:0.97rem; text-decoration:none; transition:all 0.3s; }
+    .btn-outline:hover { background:rgba(42,122,86,0.07); border-color:rgba(42,122,86,0.48); color:var(--t1); }
+
+    /* ══ FOOTER ══ */
+    footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
+    .footer-brand p { color:rgba(106,144,128,0.52);font-size:0.85rem;line-height:1.74;margin-top:1rem;font-weight:300; }
+    .footer-col h4 { font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--e2);margin-bottom:0.9rem; }
+    .footer-col a { display:block;color:rgba(106,144,128,0.45);text-decoration:none;font-size:0.86rem;font-weight:300;margin-bottom:0.46rem;transition:color 0.2s; }
+    .footer-col a:hover { color:var(--t1); }
+    .footer-bottom { max-width:1100px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(30,92,62,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+    .footer-bottom p { font-size:0.77rem;color:rgba(106,144,128,0.26); }
+    .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
+    .footer-bottom a:hover { color:var(--t2); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:1024px) {
+      .why-grid,.how-grid,.who-grid { grid-template-columns:1fr; gap:3rem; }
+      .domains-grid { grid-template-columns:1fr 1fr; }
+      .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
+      .interest-card { padding:2rem; }
+    }
+    @media (max-width:680px) {
+      .nav-links { display:none; }
+      .footer-inner { grid-template-columns:1fr; }
+      .domains-grid { grid-template-columns:1fr; }
+      .form-row { grid-template-columns:1fr; }
+      .interest-card { padding:1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="mito-canvas"></canvas>
+  <div id="atmosphere"></div>
+  <div id="vignette"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🧬</div>
+        <div>
+          <div class="nav-logo-text">DIMD</div>
+          <div class="nav-logo-sub">Science · Evidence · Policy</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="science.html">The Science</a></li>
+        <li><a href="fqad.html">FQAD</a></li>
+        <li><a href="action.html">Take Action</a></li>
+        <li><a href="evidence.html">Evidence</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="registry.html" class="nav-cta active" style="color:var(--t1)!important;">Registry</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>DIMD Registry</span>
+        </div>
+        <h1>The <em>Evidence Gap</em> Closes One Record at a Time</h1>
+        <p class="page-hero-sub">
+          No national system currently tracks delayed, cumulative mitochondrial injury following drug exposure.
+          <strong>The DIMD Registry exists to build that record — structured, longitudinal, and open to all who have been affected.</strong>
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <i class="fas fa-users"></i>
+            <span><strong>Open for contributions</strong> — patients, families, clinicians</span>
+          </div>
+          <div class="hero-badge">
+            <i class="fas fa-shield-halved"></i>
+            <span>Privacy-first — <strong>no identifying information required</strong></span>
+          </div>
+          <div class="hero-badge">
+            <i class="fas fa-lock"></i>
+            <span><strong>Data used only</strong> for DIMD research and advocacy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY THE REGISTRY EXISTS -->
+    <section class="why-registry">
+      <div class="section-inner">
+        <div class="why-grid">
+          <div>
+            <div class="section-label">The Missing Infrastructure</div>
+            <h2 class="section-title">Why a Registry — and Why Now</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              The pharmacovigilance gap at the center of the DIMD problem is not just theoretical. It is structural: there is <strong>no existing system designed to capture what actually happens to patients over time after drug exposure.</strong> MedWatch captures acute events. EHRs document individual encounters. Insurance claims track diagnoses. None of these systems are designed to link a drug exposure to symptoms that emerge months or years later across multiple body systems.
+            </p>
+            <p class="body-text">
+              The result is a kind of systematic invisibility. Patients who develop FQAD or other drug-induced mitochondrial syndromes are not being ignored maliciously — they are being missed structurally, by systems that were never designed to see what happened to them.
+            </p>
+            <div class="pull-quote">
+              <p>"An adverse effect that is never recorded is an adverse effect that never happened — as far as the data is concerned."</p>
+            </div>
+            <p class="body-text">
+              The DIMD Registry is built to close that gap. It is designed from the ground up to capture the things current systems miss: <strong>exposure histories, symptom timelines, delayed onset patterns, functional impact, and multisystem involvement</strong> — organized in a structured format that can generate meaningful evidence over time.
+            </p>
+          </div>
+
+          <div>
+            <div class="section-label">What Currently Exists</div>
+            <h2 class="section-title">The Gaps in Current Surveillance</h2>
+            <div class="section-divider"></div>
+            <div class="gap-stats">
+              <div class="gap-stat">
+                <div class="gap-stat-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                  <h4>No Longitudinal Tracking</h4>
+                  <p>Existing pharmacovigilance systems do not follow patients over months or years after drug exposure. Delayed effects that emerge after discharge or prescription completion are rarely captured.</p>
+                </div>
+              </div>
+              <div class="gap-stat">
+                <div class="gap-stat-icon"><i class="fas fa-link-slash"></i></div>
+                <div>
+                  <h4>No Exposure-Effect Linkage</h4>
+                  <p>No system routinely links a specific drug exposure to symptoms that appear weeks, months, or years later — even when the clinical pattern strongly suggests a causal relationship.</p>
+                </div>
+              </div>
+              <div class="gap-stat">
+                <div class="gap-stat-icon"><i class="fas fa-layer-group"></i></div>
+                <div>
+                  <h4>Organ-Based Fragmentation</h4>
+                  <p>Systems organized by specialty or diagnosis code cannot recognize multisystem patterns. The neurologist sees neuropathy; the rheumatologist sees joint involvement; no system sees both as one coherent syndrome.</p>
+                </div>
+              </div>
+              <div class="gap-stat">
+                <div class="gap-stat-icon"><i class="fas fa-repeat"></i></div>
+                <div>
+                  <h4>No Repeat-Exposure Flagging</h4>
+                  <p>No EHR or prescribing system alerts a clinician that a patient has a prior adverse effect history consistent with FQAD before a new fluoroquinolone prescription is written.</p>
+                </div>
+              </div>
+              <div class="gap-stat">
+                <div class="gap-stat-icon"><i class="fas fa-microscope"></i></div>
+                <div>
+                  <h4>No Mitochondrial Biomarker Endpoints</h4>
+                  <p>Standard clinical workups do not include mtDNA copy number, OXPHOS complex activity, or other mitochondrial biomarkers — so mitochondrial injury is invisible to routine surveillance even when present.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE COLLECT -->
+    <section class="what-collect">
+      <div class="section-inner">
+        <div class="section-label">Data Domains</div>
+        <h2 class="section-title">What the Registry Collects</h2>
+        <div class="section-divider"></div>
+        <div class="collect-intro">
+          <p>The registry is organized around <strong>structured data domains</strong> designed to capture the information that current surveillance systems miss. Every domain serves a specific purpose in building the longitudinal evidence base for DIMD recognition.</p>
+        </div>
+        <div class="domains-grid">
+          <div class="domain-card">
+            <svg class="domain-icon" viewBox="0 0 200 200" fill="none">
+              <path d="M72 55 Q100 35 128 55" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+              <path d="M72 80 Q100 60 128 80" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+              <path d="M72 105 Q100 125 128 105" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+              <path d="M72 130 Q100 150 128 130" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+            </svg>
+            <h3>Drug Exposure History</h3>
+            <ul class="domain-items">
+              <li>Specific fluoroquinolone(s) received</li>
+              <li>Dosage, duration, indication</li>
+              <li>Number of courses and dates</li>
+              <li>Concurrent medications at time of exposure</li>
+              <li>Route of administration</li>
+            </ul>
+          </div>
+          <div class="domain-card">
+            <svg class="domain-icon" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="38" stroke="currentColor" stroke-width="13"/>
+              <path d="M100 62 L100 100 L126 126" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Symptom Timeline</h3>
+            <ul class="domain-items">
+              <li>Onset timing relative to exposure</li>
+              <li>Symptom progression over time</li>
+              <li>Waxing and waning patterns</li>
+              <li>Post-exertional symptom changes</li>
+              <li>Identification of second-hit events</li>
+            </ul>
+          </div>
+          <div class="domain-card">
+            <svg class="domain-icon" viewBox="0 0 200 200" fill="none">
+              <rect x="55" y="50" width="90" height="110" rx="8" stroke="currentColor" stroke-width="13"/>
+              <path d="M74 78 H126" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <path d="M74 100 H126" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <path d="M74 122 H104" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+            <h3>Multisystem Involvement</h3>
+            <ul class="domain-items">
+              <li>Neurological symptoms (peripheral, central)</li>
+              <li>Musculoskeletal and tendon involvement</li>
+              <li>Autonomic and cardiovascular symptoms</li>
+              <li>Cognitive and psychiatric symptoms</li>
+              <li>Fatigue and exertional intolerance</li>
+            </ul>
+          </div>
+          <div class="domain-card">
+            <svg class="domain-icon" viewBox="0 0 200 200" fill="none">
+              <path d="M55 150 L80 110 L105 130 L130 80 L155 100" stroke="currentColor" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="80" cy="110" r="6" fill="currentColor"/>
+              <circle cx="105" cy="130" r="6" fill="currentColor"/>
+              <circle cx="130" cy="80" r="6" fill="currentColor"/>
+            </svg>
+            <h3>Functional Impact</h3>
+            <ul class="domain-items">
+              <li>Work and occupational capacity changes</li>
+              <li>Activities of daily living limitations</li>
+              <li>Exercise and exertion tolerance</li>
+              <li>Sleep quality and disruption</li>
+              <li>Overall quality of life trajectory</li>
+            </ul>
+          </div>
+          <div class="domain-card">
+            <svg class="domain-icon" viewBox="0 0 200 200" fill="none">
+              <ellipse cx="100" cy="100" rx="40" ry="22" stroke="currentColor" stroke-width="12"/>
+              <ellipse cx="100" cy="100" rx="26" ry="14" stroke="currentColor" stroke-width="9"/>
+              <circle cx="100" cy="100" r="6" fill="currentColor"/>
+            </svg>
+            <h3>Diagnostic Journey</h3>
+            <ul class="domain-items">
+              <li>Diagnoses received and timeline</li>
+              <li>Time to recognition of drug-exposure link</li>
+              <li>Specialties consulted</li>
+              <li>Mitochondrial or metabolic testing performed</li>
+              <li>Diagnostic codes assigned (ICD-10)</li>
+            </ul>
+          </div>
+          <div class="domain-card">
+            <svg class="domain-icon" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="80" r="26" stroke="currentColor" stroke-width="13"/>
+              <path d="M58 158 C58 128 142 128 142 158" stroke="currentColor" stroke-width="13" stroke-linecap="round"/>
+            </svg>
+            <h3>Demographics &amp; Context</h3>
+            <ul class="domain-items">
+              <li>Age range and biological sex</li>
+              <li>Pre-existing conditions at time of exposure</li>
+              <li>Indication for fluoroquinolone use</li>
+              <li>Geographic region (broad)</li>
+              <li>Year(s) of exposure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-works">
+      <div class="section-inner">
+        <div class="how-grid">
+          <div>
+            <div class="section-label">Process</div>
+            <h2 class="section-title">How Contributing Works</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              The registry is designed to be accessible — not burdensome. You do not need a medical record in front of you. You do not need perfect recall of every date. <strong>Approximate timelines, partial information, and best estimates are all valuable.</strong> Something is always better than nothing, and the structured format is designed to accommodate the reality that patients navigating these conditions often have fragmented records.
+            </p>
+            <div class="process-steps">
+              <div class="process-step">
+                <div class="ps-num">1</div>
+                <div class="ps-body">
+                  <h4>Express Interest Below</h4>
+                  <p>Complete the interest form on this page. You'll receive confirmation and information about the full registry intake process, which is conducted via a secure structured questionnaire.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <div class="ps-num">2</div>
+                <div class="ps-body">
+                  <h4>Complete the Structured Intake</h4>
+                  <p>Work through the registry questionnaire at your own pace. It is designed to be completed in sections — you do not need to finish in one sitting. Save and return as needed.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <div class="ps-num">3</div>
+                <div class="ps-body">
+                  <h4>Optional Follow-Up</h4>
+                  <p>Participants may opt into periodic follow-up surveys to capture longitudinal changes — the most valuable data the registry can collect. This is entirely optional and can be withdrawn at any time.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <div class="ps-num">4</div>
+                <div class="ps-body">
+                  <h4>Your Data Builds the Record</h4>
+                  <p>Aggregated, de-identified data from the registry will be used to support research, policy advocacy, and the growing evidence base for DIMD recognition. You will never be individually identifiable in any output.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="privacy-block">
+              <h4>Privacy &amp; Data Handling</h4>
+              <ul class="privacy-list">
+                <li><i class="fas fa-circle-check"></i><span><strong>No identifying information required.</strong> The registry does not collect your name, address, date of birth, or any information that could directly identify you.</span></li>
+                <li><i class="fas fa-circle-check"></i><span><strong>Email is optional.</strong> Providing an email allows for follow-up and longitudinal participation, but is not required for a one-time contribution.</span></li>
+                <li><i class="fas fa-circle-check"></i><span><strong>Data is used only for DIMD research and advocacy.</strong> Registry data will not be sold, shared with pharmaceutical companies, or used for any commercial purpose.</span></li>
+                <li><i class="fas fa-circle-check"></i><span><strong>You can withdraw at any time.</strong> If you provided an email, you may request deletion of your contribution at any point.</span></li>
+                <li><i class="fas fa-circle-check"></i><span><strong>All outputs are de-identified.</strong> Any publication, report, or advocacy document derived from registry data will use aggregated, de-identified information only.</span></li>
+                <li><i class="fas fa-circle-check"></i><span><strong>This is a research registry, not a clinical service.</strong> Contributing to the registry does not establish a patient-provider relationship and does not constitute medical advice or care.</span></li>
+              </ul>
+            </div>
+
+            <p class="body-text" style="margin-top:1.5rem; font-size:0.88rem; font-style:italic;">
+              The registry is currently in active development. The interest form below captures your information now; full structured intake will be available shortly. All expressions of interest will be contacted as the full registry launches.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO SHOULD CONTRIBUTE -->
+    <section class="who-contribute">
+      <div class="section-inner">
+        <div class="who-grid">
+          <div>
+            <div class="matters-statement">
+              <p>"Every record in this registry represents a person the current system failed to see. Together, they become the evidence the system can no longer ignore."</p>
+              <cite>— DIMD Registry</cite>
+            </div>
+            <p class="body-text">
+              The registry is most powerful when it captures the full range of experiences — from severe, life-altering presentations to milder cases that resolved partially. <strong>All of it is signal. All of it is data.</strong> The absence of severe disability does not mean your experience is less valuable to the evidence base.
+            </p>
+            <p class="body-text">
+              Clinicians who have observed patterns in their practice can also contribute — not as patients, but as professional observers. A clinician who has seen multiple FQAD presentations, who has noted diagnostic fragmentation, or who has struggled to code or communicate these effects has valuable structured information to add.
+            </p>
+          </div>
+
+          <div>
+            <div class="section-label">Who Is Invited to Contribute</div>
+            <h2 class="section-title" style="font-size:clamp(1.4rem,2.8vw,2rem);">The Registry Is Open To</h2>
+            <div class="section-divider"></div>
+            <div class="who-cards">
+              <div class="who-card">
+                <div class="who-icon"><i class="fas fa-person"></i></div>
+                <div>
+                  <h4>Patients Who Received Fluoroquinolones</h4>
+                  <p>Anyone who received a systemic fluoroquinolone antibiotic and experienced adverse effects — whether mild, severe, resolved, or ongoing. Any timeline, any severity level.</p>
+                </div>
+              </div>
+              <div class="who-card">
+                <div class="who-icon"><i class="fas fa-people-group"></i></div>
+                <div>
+                  <h4>Family Members or Caregivers</h4>
+                  <p>Those who observed and supported someone affected by fluoroquinolone adverse effects — particularly where the patient is unable to participate directly.</p>
+                </div>
+              </div>
+              <div class="who-card">
+                <div class="who-icon"><i class="fas fa-stethoscope"></i></div>
+                <div>
+                  <h4>Clinicians Who Have Observed FQAD</h4>
+                  <p>Healthcare providers who have seen clinical presentations consistent with FQAD in their practice and wish to contribute professional observations to the aggregate record.</p>
+                </div>
+              </div>
+              <div class="who-card">
+                <div class="who-icon"><i class="fas fa-dna"></i></div>
+                <div>
+                  <h4>Patients With Other Suspected DIMD</h4>
+                  <p>Individuals who experienced delayed, persistent, multisystem adverse effects following other medication classes associated with mitochondrial mechanisms — not limited to fluoroquinolones.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN / INTEREST FORM -->
+    <section class="join-section">
+      <div class="section-inner">
+        <div class="join-inner">
+          <div class="section-label">Join the Registry</div>
+          <h2 class="section-title">Express Your Interest</h2>
+          <div class="section-divider"></div>
+          <p class="body-text">The full registry intake is launching shortly. Leave your information below and you'll be among the first contacted when it opens — or contribute your initial information now.</p>
+
+          <div class="interest-card">
+            <div class="ic-label">Registry — Now Open</div>
+            <h3>DIMD Registry Interest Form</h3>
+            <p class="ic-sub">This form captures your initial information. <strong>No identifying details required.</strong> Full structured intake will follow by email if provided, or you may complete it anonymously without an email address.</p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reg-role">I am contributing as</label>
+                <select id="reg-role" name="role">
+                  <option value="">Select your role…</option>
+                  <option value="patient">A patient / person affected</option>
+                  <option value="caregiver">A family member or caregiver</option>
+                  <option value="clinician">A clinician or healthcare provider</option>
+                  <option value="researcher">A researcher or scientist</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="reg-drug">Primary drug of concern</label>
+                <select id="reg-drug" name="drug">
+                  <option value="">Select…</option>
+                  <option value="ciprofloxacin">Ciprofloxacin (Cipro)</option>
+                  <option value="levofloxacin">Levofloxacin (Levaquin)</option>
+                  <option value="moxifloxacin">Moxifloxacin (Avelox)</option>
+                  <option value="other-fq">Other fluoroquinolone</option>
+                  <option value="other-drug">Other medication class</option>
+                  <option value="multiple">Multiple / unsure</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reg-onset">Approximate symptom onset</label>
+                <select id="reg-onset" name="onset">
+                  <option value="">Select…</option>
+                  <option value="during">During the course of treatment</option>
+                  <option value="days">Within days of completing treatment</option>
+                  <option value="weeks">Within weeks of completing treatment</option>
+                  <option value="months">Weeks to months after treatment</option>
+                  <option value="over1yr">More than one year after treatment</option>
+                  <option value="unsure">Uncertain / gradual</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="reg-duration">Duration of symptoms</label>
+                <select id="reg-duration" name="duration">
+                  <option value="">Select…</option>
+                  <option value="resolved">Fully resolved</option>
+                  <option value="partial">Partially resolved</option>
+                  <option value="ongoing-stable">Ongoing, stable</option>
+                  <option value="ongoing-progressing">Ongoing, still progressing</option>
+                  <option value="fluctuating">Fluctuating / relapsing</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Systems affected (select all that apply)</label>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; margin-top:0.3rem;">
+                <div class="form-check"><input type="checkbox" id="sys-neuro" name="systems" value="peripheral-neuro"><label for="sys-neuro">Peripheral neuropathy / nerve pain</label></div>
+                <div class="form-check"><input type="checkbox" id="sys-tendon" name="systems" value="tendon"><label for="sys-tendon">Tendon / musculoskeletal</label></div>
+                <div class="form-check"><input type="checkbox" id="sys-fatigue" name="systems" value="fatigue"><label for="sys-fatigue">Fatigue / exertional intolerance</label></div>
+                <div class="form-check"><input type="checkbox" id="sys-auto" name="systems" value="autonomic"><label for="sys-auto">Autonomic / dysautonomia</label></div>
+                <div class="form-check"><input type="checkbox" id="sys-cog" name="systems" value="cognitive"><label for="sys-cog">Cognitive dysfunction / brain fog</label></div>
+                <div class="form-check"><input type="checkbox" id="sys-psych" name="systems" value="psychiatric"><label for="sys-psych">Anxiety / psychiatric symptoms</label></div>
+                <div class="form-check"><input type="checkbox" id="sys-cns" name="systems" value="cns"><label for="sys-cns">Central nervous system</label></div>
+                <div class="form-check"><input type="checkbox" id="sys-other" name="systems" value="other"><label for="sys-other">Other / not listed</label></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-notes">Anything you'd like to add <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
+              <textarea id="reg-notes" name="notes" placeholder="Brief description of your experience, questions, or anything you want the registry team to know…"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-email">Email address <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional — for follow-up and longitudinal participation)</span></label>
+              <input type="email" id="reg-email" name="email" placeholder="your@email.com">
+              <p class="form-note">Your email will never be shared. It is used only to send you registry intake information and optional longitudinal follow-up surveys. Leave blank to contribute anonymously.</p>
+            </div>
+
+            <div class="form-check" style="margin-top:0.5rem;">
+              <input type="checkbox" id="reg-consent" name="consent" value="yes">
+              <label for="reg-consent"><strong>I understand</strong> that this is a research registry, not a clinical service, and that contributing does not establish a patient-provider relationship or constitute medical advice.</label>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="handleRegistrySubmit()">
+              <i class="fas fa-users"></i> Submit Registry Interest
+            </button>
+
+            <p class="form-disclaimer">This site is for educational and advocacy purposes only. The DIMD Registry does not provide medical advice, diagnosis, or treatment. All data is handled with strict privacy protections and used solely for DIMD research and advocacy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="registry-cta">
+      <h2>Every Record Is a Voice the System Must Count</h2>
+      <p>The registry does not replace clinical research — it builds the foundation that makes clinical research possible. Join it, share it, and help make the invisible visible.</p>
+      <div class="cta-btns">
+        <a href="action.html" class="btn-primary"><i class="fas fa-file-contract"></i> Read the FDA Petition</a>
+        <a href="evidence.html" class="btn-outline">View the Evidence</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="text-decoration:none;">
+          <div class="nav-logo-icon">🧬</div>
+          <div style="margin-left:10px;">
+            <div class="nav-logo-text">DIMD</div>
+            <div class="nav-logo-sub">Science · Evidence · Policy</div>
+          </div>
+        </a>
+        <p>Patient-led · Evidence-focused · Science-driven.<br>
+        This site is for educational and advocacy purposes only and does not provide medical advice.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="science.html">Understanding DIMD</a>
+        <a href="fqad.html">FQAD</a>
+        <a href="evidence.html">Evidence &amp; References</a>
+      </div>
+      <div class="footer-col">
+        <h4>Act</h4>
+        <a href="registry.html">DIMD Registry</a>
+        <a href="action.html">Take Action</a>
+        <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener">FDA Petition</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="about.html">The Researcher</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="evidence.html">References</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING MITOCHONDRIA + FORM HANDLER -->
+  <script>
+  function handleRegistrySubmit() {
+    const consent = document.getElementById('reg-consent');
+    const role = document.getElementById('reg-role');
+    if (!consent.checked) {
+      alert('Please check the consent acknowledgment before submitting.');
+      return;
+    }
+    if (!role.value) {
+      alert('Please select your role before submitting.');
+      return;
+    }
+    // Replace this with actual form submission endpoint when ready
+    const btn = document.querySelector('.btn-submit');
+    btn.innerHTML = '<i class="fas fa-circle-check"></i> Interest Submitted — Thank You';
+    btn.style.background = 'linear-gradient(90deg,#1A5C3E,#2A7A56)';
+    btn.style.color = '#D4E8DC';
+    btn.disabled = true;
+  }
+
+  (function(){
+    const canvas=document.getElementById('mito-canvas');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    resize(); window.addEventListener('resize',resize);
+    function drawMito(ctx,x,y,rx,ry,angle,alpha){
+      ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(angle);
+      const c='#1A5C3E';
+      ctx.beginPath(); ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,rx*.68,ry*.68,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.0; ctx.stroke();
+      const folds=Math.max(2,Math.round(rx/11)), step=(ry*1.2)/(folds+1);
+      ctx.lineWidth=0.72;
+      for(let i=1;i<=folds;i++){
+        const fy=(-ry*.55)+(i*step),amp=rx*.23;
+        ctx.beginPath(); ctx.moveTo(-rx*.50,fy); ctx.bezierCurveTo(-rx*.16,fy-amp,rx*.16,fy+amp,rx*.50,fy); ctx.stroke();
+      }
+      [0.25,0.5,0.75,1.0,1.5,1.75].forEach(t=>{
+        const a2=t*Math.PI*2;
+        ctx.beginPath(); ctx.arc(Math.cos(a2)*rx*.68,Math.sin(a2)*ry*.68,rx*.036,0,Math.PI*2); ctx.fillStyle=c; ctx.fill();
+      });
+      ctx.restore();
+    }
+    const COUNT=22; const P=[];
+    function rp(edge){
+      const rx=14+Math.random()*42,ry=rx*(.34+Math.random()*.24);
+      const speed=.08+Math.random()*.16,dir=Math.random()*Math.PI*2;
+      let x,y;
+      if(edge){
+        const e=Math.floor(Math.random()*4);
+        if(e===0){x=Math.random()*canvas.width;y=-rx*2;}
+        else if(e===1){x=canvas.width+rx*2;y=Math.random()*canvas.height;}
+        else if(e===2){x=Math.random()*canvas.width;y=canvas.height+rx*2;}
+        else{x=-rx*2;y=Math.random()*canvas.height;}
+      }else{x=Math.random()*canvas.width;y=Math.random()*canvas.height;}
+      return{x,y,rx,ry,angle:Math.random()*Math.PI*2,drift:(Math.random()-.5)*.0025,alpha:.05+Math.random()*.20,vx:Math.cos(dir)*speed,vy:Math.sin(dir)*speed};
+    }
+    for(let i=0;i<COUNT;i++)P.push(rp(false));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<P.length;i++){
+        const p=P[i];p.x+=p.vx;p.y+=p.vy;p.angle+=p.drift;
+        const pad=p.rx*2.5;
+        if(p.x<-pad||p.x>canvas.width+pad||p.y<-pad||p.y>canvas.height+pad){P[i]=rp(true);continue;}
+        drawMito(ctx,p.x,p.y,p.rx,p.ry,p.angle,p.alpha);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+  </script>
+
+</body>
+</html>

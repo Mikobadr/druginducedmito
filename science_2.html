@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Understanding Drug-Induced Mitochondrial Dysfunction (DIMD) — The science behind how medications can disrupt the body's energy system, with delayed and multisystem effects.">
+  <title>The Science | DIMD — Drug-Induced Mitochondrial Dysfunction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-floor:    #071410;
+      --bg-deep:     #0A1C14;
+      --bg-mid:      #0E2318;
+      --bg-lift:     #122B1E;
+      --e1:          #3D9E72;
+      --e1-btn:      #2E8A60;
+      --e2:          #2A7A56;
+      --e2-text:     #327A5A;
+      --e3:          #1A5C3E;
+      --e3-border:   rgba(30,92,62,0.18);
+      --e3-border-lift: rgba(42,122,86,0.28);
+      --t1:   #D4E8DC;
+      --t2:   #9DBDAF;
+      --t3:   #6A9080;
+      --card-white: #F4F7F3;
+      --card-text:  #0E2018;
+      --card-mid:   #304A3C;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 8%,  rgba(26,92,62,0.13) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 92%, rgba(18,78,48,0.10) 0%, transparent 48%),
+        linear-gradient(168deg, #0C1F16 0%, #091A12 40%, #071410 70%, #0A1A12 100%);
+      background-attachment:fixed;
+      color:var(--t1);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    #mito-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.32; }
+    #atmosphere { position:fixed; inset:0; pointer-events:none; z-index:1;
+      background:
+        radial-gradient(ellipse at 15% 25%, rgba(42,122,86,0.048) 0%, transparent 44%),
+        radial-gradient(ellipse at 85% 70%, rgba(26,92,62,0.036) 0%, transparent 40%); }
+    #vignette { position:fixed; inset:0; pointer-events:none; z-index:2;
+      box-shadow: inset 0 0 200px rgba(5,12,9,0.72), inset 160px 0 200px rgba(5,12,9,0.52), inset -160px 0 200px rgba(5,12,9,0.52); }
+    nav,main,footer { position:relative; z-index:10; }
+
+    /* ══ NAV ══ */
+    nav { position:sticky; top:0; z-index:1000; background:rgba(8,20,14,0.95); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); }
+    .nav-inner { max-width:1340px; margin:0 auto; padding:0 2.5rem; height:70px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#163C28,#1A5C3E); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
+    .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+    .nav-links a { color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--e2); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
+    .nav-links a:hover { color:var(--t1); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-links a.active { color:var(--t1); }
+    .nav-links a.active::after { transform:scaleX(1); }
+    .nav-cta { background:linear-gradient(90deg,#163C28,var(--e2)) !important; color:var(--t1) !important; padding:8px 22px; border-radius:9999px; font-weight:600 !important; box-shadow:0 3px 12px rgba(42,122,86,0.20); }
+    .nav-cta::after { display:none !important; }
+
+    /* ══ PAGE HERO ══ */
+    .page-hero {
+      padding: 5rem 2.5rem 3.5rem;
+      position: relative; overflow:hidden;
+      background:
+        radial-gradient(ellipse at 50% 60%, rgba(61,158,114,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(42,122,86,0.05) 0%, transparent 44%);
+    }
+    .page-hero::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:120px;
+      background:linear-gradient(to bottom, transparent, rgba(10,28,20,0.50));
+      pointer-events:none;
+    }
+    .page-hero-inner { max-width:860px; margin:0 auto; position:relative; z-index:2; }
+    .page-breadcrumb {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.76rem; color:var(--t3); letter-spacing:0.08em;
+      text-transform:uppercase; font-weight:500; margin-bottom:1.8rem;
+    }
+    .page-breadcrumb a { color:var(--t3); text-decoration:none; transition:color 0.2s; }
+    .page-breadcrumb a:hover { color:var(--t2); }
+    .page-breadcrumb span { color:var(--e2); }
+    .page-hero h1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(2.4rem,5vw,4rem);
+      line-height:1.08; letter-spacing:-0.03em;
+      color:var(--t1); margin-bottom:1rem;
+      animation:fadeUp 0.8s ease both;
+    }
+    .page-hero h1 em { font-style:italic; color:var(--e1); }
+    .page-hero-sub {
+      font-size:1.05rem; line-height:1.72; color:var(--t2);
+      max-width:700px; font-weight:300;
+      animation:fadeUp 0.8s 0.1s ease both;
+    }
+    .page-hero-sub strong { color:var(--t1); font-weight:500; }
+    .hero-badges {
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:2rem;
+      animation:fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(42,122,86,0.07);
+      border:1px solid rgba(42,122,86,0.18);
+      border-radius:12px; padding:8px 16px;
+      font-size:0.82rem; color:var(--t2);
+    }
+    .hero-badge i { color:var(--e2); font-size:0.78rem; }
+    .hero-badge strong { color:var(--t1); font-weight:500; }
+    .hero-badge a { color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.30); transition:color 0.2s; }
+    .hero-badge a:hover { color:var(--e1); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ══ SHARED SECTION ══ */
+    section { padding:4.5rem 2.5rem; position:relative; overflow:hidden; }
+    .section-inner { max-width:1060px; margin:0 auto; position:relative; z-index:2; }
+    .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.7rem,3.5vw,2.5rem); line-height:1.14; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.1rem; }
+    .section-divider { width:38px; height:2px; background:linear-gradient(90deg,var(--e3),transparent); border-radius:2px; margin-bottom:1.8rem; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.15rem; }
+    .body-text strong { color:var(--t1); font-weight:500; }
+    .body-text em { color:var(--e2-text); font-style:italic; }
+
+    /* Pull quote */
+    .pull-quote {
+      background:linear-gradient(135deg,rgba(22,60,42,0.42),rgba(12,36,24,0.52));
+      border-left:3px solid var(--e2);
+      border-radius:0 12px 12px 0;
+      padding:1.6rem 1.8rem; margin:1.8rem 0;
+    }
+    .pull-quote p { font-family:'DM Serif Display',serif; font-size:1.28rem; font-style:italic; color:var(--t1); line-height:1.45; }
+
+    /* ══ WHAT IS DIMD INTRO ══ */
+    .what-dimd {
+      background:
+        radial-gradient(ellipse at 5% 50%, rgba(42,122,86,0.055) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    }
+    .what-dimd::before { content:''; position:absolute; top:0; left:0; right:0; height:100px; background:linear-gradient(to bottom,rgba(10,28,20,0.45),transparent); pointer-events:none; z-index:1; }
+    .intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+
+    /* Stat cards */
+    .stat-stack { display:flex; flex-direction:column; gap:0.85rem; }
+    .stat-card {
+      background:linear-gradient(135deg, rgba(16,40,28,0.92), rgba(12,30,20,0.96));
+      border:1px solid var(--e3-border);
+      border-radius:14px; padding:1.15rem 1.5rem;
+      display:flex; align-items:flex-start; gap:1.1rem; transition:all 0.32s;
+    }
+    .stat-card:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .stat-num { font-family:'DM Serif Display',serif; font-size:2.1rem; color:var(--e2-text); line-height:1; flex-shrink:0; min-width:70px; }
+    .stat-desc { font-size:0.89rem; color:var(--t2); line-height:1.58; padding-top:3px; font-weight:300; }
+    .stat-desc strong { color:var(--t1); font-weight:500; }
+
+    /* ══ MITO AS SIGNALING HUB ══ */
+    .signaling-section {
+      background:
+        radial-gradient(ellipse at 90% 35%, rgba(42,122,86,0.048) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .signaling-section::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(42,122,86,0.10),transparent);
+      pointer-events:none; z-index:1;
+    }
+    .signaling-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+    .hub-cards { display:flex; flex-direction:column; gap:1rem; }
+    .hub-card {
+      background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95));
+      border:1px solid var(--e3-border);
+      border-radius:13px; padding:1.2rem 1.5rem;
+      display:flex; gap:1rem; align-items:flex-start;
+      transition:border-color 0.3s, transform 0.3s;
+    }
+    .hub-card:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .hub-card-icon {
+      width:38px; height:38px; flex-shrink:0;
+      background:rgba(42,122,86,0.10);
+      border:1px solid rgba(42,122,86,0.18);
+      border-radius:9px; display:flex; align-items:center; justify-content:center;
+      color:var(--e2); font-size:0.95rem; margin-top:2px;
+    }
+    .hub-card h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.28rem; }
+    .hub-card p { font-size:0.87rem; color:var(--t2); line-height:1.58; font-weight:300; }
+
+    /* ══ FIVE STEPS ══ */
+    .five-steps {
+      background:
+        radial-gradient(ellipse at 8% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .steps-intro { max-width:660px; margin-bottom:3rem; }
+    .steps-intro p { color:var(--t2); font-size:0.95rem; line-height:1.72; font-weight:300; }
+
+    .steps-grid { display:flex; flex-direction:column; gap:0; position:relative; max-width:880px; }
+    /* Vertical connector line */
+    .steps-grid::before {
+      content:''; position:absolute;
+      left:28px; top:28px; bottom:28px; width:1px;
+      background:linear-gradient(to bottom,
+        transparent 0%,
+        rgba(42,122,86,0.22) 8%,
+        rgba(42,122,86,0.22) 92%,
+        transparent 100%);
+    }
+    .step-item {
+      display:grid; grid-template-columns:60px 1fr;
+      gap:0 1.8rem; margin-bottom:0.6rem; position:relative;
+    }
+    .step-item:last-child { margin-bottom:0; }
+    .step-num-col { display:flex; flex-direction:column; align-items:center; padding-top:1.2rem; }
+    .step-num {
+      width:56px; height:56px; border-radius:50%; flex-shrink:0;
+      background:rgba(16,44,30,0.95);
+      border:1.5px solid var(--e2);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'DM Serif Display',serif; font-size:1.3rem;
+      color:var(--e2-text); font-style:italic;
+      position:relative; z-index:2;
+      transition:background 0.3s, border-color 0.3s;
+    }
+    .step-item:hover .step-num { background:rgba(42,122,86,0.15); border-color:var(--e1); }
+    .step-body {
+      background:linear-gradient(135deg,rgba(16,40,28,0.88),rgba(12,30,20,0.92));
+      border:1px solid var(--e3-border);
+      border-radius:14px; padding:1.4rem 1.6rem; margin-bottom:0.6rem;
+      transition:border-color 0.3s;
+    }
+    .step-item:hover .step-body { border-color:var(--e3-border-lift); }
+    .step-body h4 {
+      font-size:1rem; font-weight:600; color:var(--t1); margin-bottom:0.5rem;
+      display:flex; align-items:center; gap:10px;
+    }
+    .step-body h4 .step-tag {
+      font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:700;
+      letter-spacing:0.10em; text-transform:uppercase;
+      color:var(--e2); background:rgba(42,122,86,0.10);
+      border:1px solid rgba(42,122,86,0.18); border-radius:9999px;
+      padding:2px 9px; font-style:normal;
+    }
+    .step-body p { font-size:0.90rem; color:var(--t2); line-height:1.68; font-weight:300; }
+    .step-body p strong { color:var(--t1); font-weight:500; }
+    .step-body .detail-list { list-style:none; margin-top:0.7rem; display:flex; flex-direction:column; gap:0.35rem; }
+    .step-body .detail-list li { font-size:0.86rem; color:var(--t3); display:flex; align-items:flex-start; gap:8px; line-height:1.52; }
+    .step-body .detail-list li::before { content:'→'; color:var(--e2); flex-shrink:0; font-size:0.78rem; margin-top:2px; }
+
+    .step-highlight { background:rgba(61,158,114,0.06); border-color:rgba(61,158,114,0.22); }
+    .step-item:hover .step-highlight { border-color:rgba(61,158,114,0.36); }
+    .step-highlight h4 .step-tag { color:var(--e1); background:rgba(61,158,114,0.10); border-color:rgba(61,158,114,0.24); }
+    .step-item:hover .step-highlight .step-num { background:rgba(61,158,114,0.14); border-color:var(--e1); }
+
+    /* Hypothesis disclaimer */
+    .hypothesis-note {
+      background:rgba(10,28,18,0.70);
+      border:1px solid rgba(42,122,86,0.14);
+      border-radius:12px; padding:1.1rem 1.4rem;
+      margin-top:1.6rem; display:flex; gap:12px; align-items:flex-start; max-width:880px;
+    }
+    .hypothesis-note i { color:var(--e2); margin-top:2px; flex-shrink:0; }
+    .hypothesis-note p { font-size:0.84rem; color:var(--t3); line-height:1.62; font-style:italic; }
+    .hypothesis-note p strong { color:var(--t2); font-style:normal; }
+
+    /* ══ PK MISMATCH ══ */
+    .pk-mismatch {
+      background:
+        radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.050) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .pk-mismatch::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(42,122,86,0.09), transparent);
+      pointer-events:none; z-index:1;
+    }
+    .mismatch-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .mismatch-visual {
+      display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+    }
+    .mismatch-card {
+      background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95));
+      border:1px solid var(--e3-border); border-radius:13px; padding:1.3rem;
+      transition:border-color 0.3s;
+    }
+    .mismatch-card:hover { border-color:var(--e3-border-lift); }
+    .mismatch-card .mc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e2); margin-bottom:0.5rem; }
+    .mismatch-card .mc-value { font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--t1); line-height:1.1; margin-bottom:0.3rem; font-style:italic; }
+    .mismatch-card .mc-desc { font-size:0.82rem; color:var(--t2); line-height:1.55; font-weight:300; }
+    .mismatch-card.contrast { background:linear-gradient(135deg,rgba(20,52,36,0.55),rgba(14,38,26,0.65)); border-color:rgba(42,122,86,0.22); }
+    .mismatch-card.contrast .mc-value { color:var(--e1); }
+    .vs-divider {
+      grid-column:1/-1; display:flex; align-items:center; gap:12px;
+      margin:0.2rem 0;
+    }
+    .vs-divider::before,.vs-divider::after { content:''; flex:1; height:1px; background:rgba(42,122,86,0.15); }
+    .vs-divider span { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--t3); }
+
+    /* ══ VALIDATION / EXTERNAL EVIDENCE ══ */
+    .validation-section {
+      background:
+        radial-gradient(ellipse at 5% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .validation-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .citation-card {
+      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
+      border:1px solid var(--e3-border);
+      border-radius:16px; padding:1.8rem 2rem;
+      transition:border-color 0.3s;
+    }
+    .citation-card:hover { border-color:var(--e3-border-lift); }
+    .citation-card .cit-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.7rem; }
+    .citation-card .cit-title { font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--t1); line-height:1.38; margin-bottom:0.6rem; font-style:italic; }
+    .citation-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; }
+    .citation-card .cit-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
+    .citation-card .cit-finding strong { color:var(--t1); font-weight:500; }
+    .citation-card .cit-why {
+      margin-top:0.9rem; padding-top:0.9rem;
+      border-top:1px solid rgba(42,122,86,0.12);
+      font-size:0.82rem; color:var(--e2-text); line-height:1.58;
+      font-style:italic;
+    }
+    .preprint-card {
+      background:linear-gradient(135deg,rgba(20,56,38,0.45),rgba(12,36,24,0.55));
+      border-left:3px solid var(--e2);
+      border-radius:0 14px 14px 0;
+      padding:1.7rem 1.9rem;
+      margin-top:1.5rem;
+    }
+    .preprint-card .pc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.6rem; }
+    .preprint-card .pc-title { font-family:'DM Serif Display',serif; font-size:1.08rem; color:var(--t1); line-height:1.38; margin-bottom:0.5rem; }
+    .preprint-card .pc-meta { font-size:0.82rem; color:var(--t3); line-height:1.58; font-weight:300; margin-bottom:0.8rem; }
+    .preprint-card a {
+      display:inline-flex; align-items:center; gap:7px;
+      font-size:0.86rem; color:var(--e2-text);
+      text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28);
+      transition:color 0.2s; font-weight:500;
+    }
+    .preprint-card a:hover { color:var(--e1); }
+
+    /* ══ WHY FRAMEWORKS HAVEN'T KEPT UP ══ */
+    .gap-section {
+      background:
+        radial-gradient(ellipse at 90% 38%, rgba(42,122,86,0.048) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .gap-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .gap-list { list-style:none; display:flex; flex-direction:column; gap:0.9rem; margin-top:1.2rem; }
+    .gap-list li { display:flex; align-items:flex-start; gap:12px; color:var(--t2); font-size:0.96rem; font-weight:300; line-height:1.58; }
+    .gap-list li i { color:var(--e2); font-size:0.78rem; margin-top:5px; flex-shrink:0; width:14px; }
+    .gap-list li strong { color:var(--t1); font-weight:500; }
+    .mission-statement {
+      background:linear-gradient(135deg,rgba(20,56,38,0.45),rgba(12,36,24,0.55));
+      border-left:3px solid var(--e2);
+      border-radius:0 14px 14px 0;
+      padding:1.7rem 1.9rem;
+    }
+    .mission-statement p { font-family:'DM Serif Display',serif; font-size:1.22rem; font-style:italic; color:var(--t1); line-height:1.48; }
+    .mission-statement cite { display:block; margin-top:0.8rem; font-size:0.78rem; font-style:normal; color:var(--e2); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
+
+    /* ══ CTA STRIP ══ */
+    .science-cta {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%),
+        linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78));
+      border-top:1px solid rgba(42,122,86,0.13);
+      padding:4rem 2.5rem; text-align:center;
+    }
+    .science-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
+    .science-cta p { color:var(--t2); font-size:1rem; line-height:1.72; max-width:540px; margin:0 auto 1.8rem; font-weight:300; }
+    .cta-btns { display:flex; gap:1.1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:14px 32px; border-radius:9999px; font-weight:600; font-size:0.97rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .btn-outline { border:1.5px solid rgba(42,122,86,0.30); color:var(--t2); padding:14px 32px; border-radius:9999px; font-weight:500; font-size:0.97rem; text-decoration:none; transition:all 0.3s; }
+    .btn-outline:hover { background:rgba(42,122,86,0.07); border-color:rgba(42,122,86,0.48); color:var(--t1); }
+
+    /* ══ FOOTER ══ */
+    footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
+    .footer-brand p { color:rgba(106,144,128,0.52);font-size:0.85rem;line-height:1.74;margin-top:1rem;font-weight:300; }
+    .footer-col h4 { font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--e2);margin-bottom:0.9rem; }
+    .footer-col a { display:block;color:rgba(106,144,128,0.45);text-decoration:none;font-size:0.86rem;font-weight:300;margin-bottom:0.46rem;transition:color 0.2s; }
+    .footer-col a:hover { color:var(--t1); }
+    .footer-bottom { max-width:1100px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(30,92,62,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+    .footer-bottom p { font-size:0.77rem;color:rgba(106,144,128,0.26); }
+    .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
+    .footer-bottom a:hover { color:var(--t2); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:1024px) {
+      .intro-grid, .signaling-grid, .mismatch-grid, .validation-grid, .gap-grid { grid-template-columns:1fr; gap:3rem; }
+      .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
+    }
+    @media (max-width:680px) {
+      .nav-links { display:none; }
+      .footer-inner { grid-template-columns:1fr; }
+      .steps-grid::before { display:none; }
+      .step-item { grid-template-columns:1fr; }
+      .step-num-col { flex-direction:row; padding-top:0; margin-bottom:0.6rem; }
+      .mismatch-visual { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="mito-canvas"></canvas>
+  <div id="atmosphere"></div>
+  <div id="vignette"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🧬</div>
+        <div>
+          <div class="nav-logo-text">DIMD</div>
+          <div class="nav-logo-sub">Science · Evidence · Policy</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="science.html" class="active">The Science</a></li>
+        <li><a href="fqad.html">FQAD</a></li>
+        <li><a href="action.html">Take Action</a></li>
+        <li><a href="evidence.html">Evidence</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="registry.html" class="nav-cta">Registry</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>The Science</span>
+        </div>
+        <h1>Understanding <em>Drug-Induced Mitochondrial Dysfunction</em></h1>
+        <p class="page-hero-sub">
+          Medications can disrupt the body's energy system at the cellular level — sometimes with effects that are
+          <strong>delayed, progressive, and multisystem.</strong> Understanding why requires a framework that goes beyond organ-based medicine.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <i class="fas fa-file-lines"></i>
+            <span>Preprint: <a href="https://doi.org/10.5281/zenodo.20015205" target="_blank" rel="noopener">DOI 10.5281/zenodo.20015205</a></span>
+          </div>
+          <div class="hero-badge">
+            <i class="fas fa-flask"></i>
+            <span><strong>Manuscript under peer review</strong> at a peer-reviewed journal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT IS DIMD -->
+    <section class="what-dimd">
+      <div class="section-inner">
+        <div class="intro-grid">
+          <div>
+            <div class="section-label">The Framework</div>
+            <h2 class="section-title">What DIMD Is — and What It Is Not</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              Drug-Induced Mitochondrial Dysfunction (DIMD) is proposed as an <strong>acquired, exposure-associated, systems-level disease model</strong> — one capable of producing delayed, multisystem, and potentially persistent clinical manifestations following medication exposure.
+            </p>
+            <p class="body-text">
+              DIMD is <em>not</em> a new diagnosis to replace existing ones. It is a <strong>unifying mechanistic lens</strong> that explains why patients with certain drug exposures develop overlapping symptoms across multiple organ systems — symptoms that fragment into separate diagnoses when viewed through a traditional organ-based framework.
+            </p>
+            <div class="pull-quote">
+              <p>"The limitation lies not in the absence of signal — but in the framework used to interpret it."</p>
+            </div>
+            <p class="body-text">
+              Current pharmacovigilance systems are organized around organ systems and short-term adverse events. But mitochondria are present in virtually every cell of the body. When they are injured by a medication, the downstream effects do not respect organ boundaries — and they may not appear for weeks, months, or even years after the drug has cleared the system.
+            </p>
+            <p class="body-text">
+              Fluoroquinolone-Associated Disability (FQAD) is the <strong>prototype subtype</strong> of DIMD — regulatorily documented, mechanistically grounded, and the focus of the FDA Citizen Petition currently on file as Docket FDA-2026-P-5116.
+            </p>
+          </div>
+
+          <div>
+            <div class="section-label">The Scale</div>
+            <h2 class="section-title">Numbers That Reframe the Problem</h2>
+            <div class="section-divider"></div>
+            <div class="stat-stack">
+              <div class="stat-card">
+                <div class="stat-num">400+</div>
+                <div class="stat-desc"><strong>Medications carry FDA boxed warnings</strong> — nearly half involve mechanisms known to impair mitochondrial function.</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">~50%</div>
+                <div class="stat-desc"><strong>Of boxed-warning drugs</strong> are associated with mitochondrial mechanisms — yet mitochondrial injury is rarely named explicitly in labeling.</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">&gt;40%</div>
+                <div class="stat-desc"><strong>Of ambulatory care patients</strong> received at least one boxed-warning medication over a 30-month period. These exposures are common, not exceptional.</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-num">Zero</div>
+                <div class="stat-desc"><strong>National systems</strong> currently track delayed, cumulative mitochondrial injury following drug exposure — leaving a critical gap in pharmacovigilance.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MITOCHONDRIA AS SIGNALING HUB -->
+    <section class="signaling-section">
+      <div class="section-inner">
+        <div class="signaling-grid">
+          <div>
+            <div class="section-label">Biology</div>
+            <h2 class="section-title">Mitochondria Are Not Isolated Energy Factories</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              The textbook description of mitochondria as the cell's "power plant" is true but incomplete. Mitochondria are <strong>dynamic signaling hubs</strong> that communicate directly with nuclear DNA, coordinating energy production with gene expression across the entire cell.
+            </p>
+            <p class="body-text">
+              When this communication is disrupted, the effects extend well beyond energy failure. Dysregulated mitochondria alter calcium signaling, trigger inflammatory cascades, impair protein quality control, and drive changes in gene expression at the genomic level. In tissues with high energy demands and low cellular turnover — nerves, tendons, cardiac muscle, the central nervous system — the consequences can be profound and lasting.
+            </p>
+            <p class="body-text">
+              This is why drug-induced mitochondrial injury does not produce a single, localized symptom. It produces <strong>a pattern</strong> — one that crosses organ systems, waxes and wanes with energy expenditure, and resists explanations framed around individual specialties.
+            </p>
+          </div>
+          <div>
+            <div class="hub-cards">
+              <div class="hub-card">
+                <div class="hub-card-icon"><i class="fas fa-bolt"></i></div>
+                <div>
+                  <h4>ATP Production &amp; Bioenergetic Reserve</h4>
+                  <p>Mitochondria generate 90%+ of cellular ATP via oxidative phosphorylation. When OXPHOS complexes are impaired, cells fall below their bioenergetic threshold — particularly under stress.</p>
+                </div>
+              </div>
+              <div class="hub-card">
+                <div class="hub-card-icon"><i class="fas fa-dna"></i></div>
+                <div>
+                  <h4>Nuclear-Mitochondrial Communication</h4>
+                  <p>Mitochondria carry their own DNA (mtDNA), separate from nuclear DNA. Drug-induced mtDNA damage disrupts the retrograde signaling that coordinates energy production with gene expression.</p>
+                </div>
+              </div>
+              <div class="hub-card">
+                <div class="hub-card-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                <div>
+                  <h4>Reactive Oxygen Species (ROS) &amp; Redox Signaling</h4>
+                  <p>Damaged mitochondria generate excess ROS, triggering oxidative stress that amplifies cellular injury, impairs antioxidant capacity, and can create self-sustaining damage loops.</p>
+                </div>
+              </div>
+              <div class="hub-card">
+                <div class="hub-card-icon"><i class="fas fa-recycle"></i></div>
+                <div>
+                  <h4>Mitochondrial Quality Control (MQC)</h4>
+                  <p>Cells continuously clear damaged mitochondria via mitophagy and replace them through biogenesis. When drug-induced injury exceeds MQC capacity, damaged mitochondria accumulate and perpetuate dysfunction.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIVE-STEP MECHANISM -->
+    <section class="five-steps">
+      <div class="section-inner">
+        <div class="section-label">Mechanism</div>
+        <h2 class="section-title">A Five-Step Framework for Delayed, Progressive Toxicity</h2>
+        <div class="section-divider"></div>
+
+        <div class="steps-intro">
+          <p>How does a short-course medication produce symptoms that persist and progress for years after the drug is gone? The following framework describes a plausible mechanistic pathway — from initial drug exposure to delayed, self-sustaining mitochondrial injury. This is a hypothesis-generating model grounded in converging biological evidence, not a fully validated clinical mechanism.</p>
+        </div>
+
+        <div class="steps-grid">
+
+          <div class="step-item">
+            <div class="step-num-col">
+              <div class="step-num">1</div>
+            </div>
+            <div class="step-body">
+              <h4>Transient Drug Exposure <span class="step-tag">Entry Point</span></h4>
+              <p>A medication with a short plasma half-life clears rapidly from the bloodstream — but not before sufficient cellular interaction has occurred to trigger lasting downstream consequences. <strong>Drug clearance does not equal biological clearance.</strong></p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num-col">
+              <div class="step-num">2</div>
+            </div>
+            <div class="step-body">
+              <h4>Initial Mitochondrial Injury — The Point of No Return <span class="step-tag">Multi-Hit Insult</span></h4>
+              <p>A multi-hit insult to the mitochondrial system occurs simultaneously or in rapid succession:</p>
+              <ul class="detail-list">
+                <li><strong>TOP2β inhibition</strong> — disrupts mtDNA topology and replication integrity</li>
+                <li><strong>AIFM1 binding</strong> — impairs biogenesis of Complexes I and IV (validated in Reinhardt et al. 2025)</li>
+                <li><strong>IDH2 inhibition</strong> — reduces NADPH production and antioxidant capacity (validated in Reinhardt et al. 2025)</li>
+                <li>Reactive oxygen species (ROS) surge and rapid mitochondrial DNA copy number (mtCN) depletion</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num-col">
+              <div class="step-num">3</div>
+            </div>
+            <div class="step-body">
+              <h4>System Imbalance and MQC Overload <span class="step-tag">Cascade</span></h4>
+              <p>Mitochondrial quality control systems — PINK1/Parkin mitophagy, fission/fusion dynamics, proteostasis networks, LONP1 protease activity — are overwhelmed. ER-mitochondria contact sites (MAMs) become dysregulated. Incomplete clearance of damaged mitochondria sets the stage for persistent dysfunction.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num-col">
+              <div class="step-num">4</div>
+            </div>
+            <div class="step-body step-highlight">
+              <h4>Propagation Through Selection Dynamics <span class="step-tag">Central Novelty</span></h4>
+              <p>This is the proposed mechanism for <strong>why injury persists and progresses after drug clearance.</strong> The hypothesis: the stress-response transcription factor ATFS-1 accumulates preferentially in dysfunctional mitochondria, where it evades LONP1-mediated degradation and recruits mitochondrial DNA polymerase (POLG) to damaged or mutant mtDNA templates — conferring replicative advantage to damaged mitochondrial genomes.</p>
+              <ul class="detail-list">
+                <li>This creates a self-sustaining propagation loop independent of ongoing drug exposure</li>
+                <li>Rising heteroplasmy elevates ROS, which further reinforces the ATFS-1/POLG loop</li>
+                <li>Explains the "pharmacokinetic–clinical mismatch": drug is gone, symptoms persist and progress</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num-col">
+              <div class="step-num">5</div>
+            </div>
+            <div class="step-body">
+              <h4>Delayed and Progressive Clinical Manifestation <span class="step-tag">Clinical Expression</span></h4>
+              <p>Tissues with <strong>high energy demand and low cellular turnover</strong> — peripheral nerves, tendons, skeletal muscle, cardiac tissue, CNS — are most vulnerable. Symptoms emerge or worsen weeks to decades after initial exposure. A subsequent drug exposure can act as a <strong>"second-hit"</strong> in a mitochondrially primed system, triggering disproportionate escalation.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="hypothesis-note">
+          <i class="fas fa-circle-info"></i>
+          <p><strong>Important scientific note:</strong> Direct longitudinal evidence linking specific drug exposures to ATFS-1-mediated replicative bias in human tissues is currently limited. The mechanism described in Steps 3 and 4 is biologically plausible and grounded in converging evidence, but has not yet been directly validated in human drug-induced injury models. This framework is presented as hypothesis-generating — not as established clinical mechanism. The preprint and manuscript under peer review distinguish clearly between what is established and what is proposed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PK-CLINICAL MISMATCH -->
+    <section class="pk-mismatch">
+      <div class="section-inner">
+        <div class="mismatch-grid">
+          <div>
+            <div class="section-label">The Central Clinical Puzzle</div>
+            <h2 class="section-title">The Pharmacokinetic–Clinical Mismatch</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              Traditional adverse event frameworks assume a relatively direct relationship between drug presence and drug effect. If a drug causes harm, the harm should appear while the drug is present — or shortly after.
+            </p>
+            <p class="body-text">
+              But mitochondrial injury does not follow this model. The pharmacokinetic profile of a drug (its plasma half-life, tissue distribution, clearance rate) tells us almost nothing about the biological timeline of the injury it may have initiated at the cellular level.
+            </p>
+            <p class="body-text">
+              This mismatch is not idiosyncratic or mysterious. It is an <strong>expected outcome of mitochondrial population dynamics under stress.</strong> When a self-sustaining propagation loop is established — as described in Step 4 — the clinical trajectory becomes decoupled from the pharmacokinetic one.
+            </p>
+            <p class="body-text">
+              This is why patients who report worsening symptoms months or years after a medication course are not being dramatic or confused about causality. <strong>They are describing the correct biology.</strong>
+            </p>
+          </div>
+          <div>
+            <div class="mismatch-visual">
+              <div class="mismatch-card">
+                <div class="mc-label">Drug Plasma Half-Life</div>
+                <div class="mc-value">Hours</div>
+                <div class="mc-desc">Fluoroquinolones clear the bloodstream within hours to days after the last dose.</div>
+              </div>
+              <div class="mismatch-card contrast">
+                <div class="mc-label">Symptom Trajectory</div>
+                <div class="mc-value">Months–Years</div>
+                <div class="mc-desc">Clinical deterioration can continue, emerge, or escalate long after drug clearance.</div>
+              </div>
+              <div class="vs-divider"><span>The Mismatch</span></div>
+              <div class="mismatch-card">
+                <div class="mc-label">What Safety Models Expect</div>
+                <div class="mc-value">Concurrent</div>
+                <div class="mc-desc">Adverse events should appear while the drug is present or soon after.</div>
+              </div>
+              <div class="mismatch-card contrast">
+                <div class="mc-label">What DIMD Produces</div>
+                <div class="mc-value">Decoupled</div>
+                <div class="mc-desc">Biological injury can be self-sustaining, producing delayed and progressive effects.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXTERNAL VALIDATION -->
+    <section class="validation-section">
+      <div class="section-inner">
+        <div class="section-label">External Validation</div>
+        <h2 class="section-title">Independent Science Supporting the Framework</h2>
+        <div class="section-divider"></div>
+
+        <div class="validation-grid">
+          <div>
+            <p class="body-text">The DIMD framework does not rest on a single study or a single research group. Independent lines of evidence — from chemical proteomics, clinical pharmacology, and mitochondrial biology — converge on the same conclusion: <strong>mitochondrial vulnerability is a real, measurable, and clinically relevant risk factor that current safety models do not adequately capture.</strong></p>
+
+            <div class="citation-card" style="margin-top:1.5rem;">
+              <div class="cit-label">Chemical Proteomics · 2025</div>
+              <div class="cit-title">Chemical proteomics reveals human off-targets of fluoroquinolone-induced mitochondrial toxicity</div>
+              <div class="cit-meta">Reinhardt et al. · <em>Angewandte Chemie International Edition</em> · 2025;64(18):e202421124</div>
+              <div class="cit-finding">Using chemical proteomics in human cells, this study identified <strong>AIFM1</strong> (Assembly Factor for NADH Dehydrogenase) and <strong>IDH2</strong> (Isocitrate Dehydrogenase 2) as direct, validated molecular off-targets of fluoroquinolone binding — and confirmed downstream downregulation of mitochondrial <strong>Complexes I and IV.</strong></div>
+              <div class="cit-why">This is not a theoretical mechanism. These are empirically confirmed molecular interactions in human cells. It directly validates two of the multi-hit insults described in Step 2 of the DIMD framework.</div>
+            </div>
+
+            <div class="citation-card" style="margin-top:1.2rem;">
+              <div class="cit-label">Mitochondrial Biology · 2026 · Article in Press</div>
+              <div class="cit-title">Mitochondrial vulnerability underlies myocarditis from COVID-19 mRNA vaccine</div>
+              <div class="cit-meta">Mori et al. · <em>Nature Communications</em> · 2026 (accepted March 18, 2026) · DOI: 10.1038/s41467-026-71295-1</div>
+              <div class="cit-finding">An independent research group (University of Tsukuba, Japan) demonstrated that <strong>subclinical mitochondrial vulnerability</strong> — compensated and clinically silent at baseline — can be unmasked by biological stress, triggering cardiac dysfunction through mitochondrial ROS and necroptosis.</div>
+              <div class="cit-why">A completely separate research group, studying a completely different exposure, confirming the same principle: pre-existing mitochondrial vulnerability is a hidden risk factor that standard safety evaluation does not account for. This is precisely the systemic gap the DIMD framework addresses.</div>
+            </div>
+          </div>
+
+          <div>
+            <p class="body-text" style="margin-bottom:1.5rem;">The published work underpinning this initiative is open-access and publicly available. The preprint represents the full systems-level framework and is the basis for the manuscript currently under peer review.</p>
+
+            <div class="preprint-card">
+              <div class="pc-label">Open-Access Preprint · Zenodo</div>
+              <div class="pc-title">Drug-Induced Mitochondrial Dysfunction: A Systems-Level Framework for Understanding Delayed and Multisystem Drug Effects</div>
+              <div class="pc-meta">Johanna Ihli, BSN · Published May 3, 2026 (v2) · CC BY 4.0 · Under peer review at a peer-reviewed journal</div>
+              <a href="https://doi.org/10.5281/zenodo.20015205" target="_blank" rel="noopener">
+                <i class="fas fa-arrow-up-right-from-square"></i>
+                Read the Framework · DOI 10.5281/zenodo.20015205
+              </a>
+            </div>
+
+            <div class="preprint-card" style="margin-top:1.2rem;">
+              <div class="pc-label">Open-Access Publication · Zenodo</div>
+              <div class="pc-title">Drug-Induced Mitochondrial Dysfunction: Mechanisms, Persistence, and Challenges for Pharmacovigilance</div>
+              <div class="pc-meta">Johanna Ihli, BSN · Published March 25, 2025 (v3) · CC BY 4.0</div>
+              <a href="https://doi.org/10.5281/zenodo.19224996" target="_blank" rel="noopener">
+                <i class="fas fa-arrow-up-right-from-square"></i>
+                Read · DOI 10.5281/zenodo.19224996
+              </a>
+            </div>
+
+            <div style="margin-top:1.8rem;">
+              <p class="body-text" style="font-size:0.88rem;">
+                The clinical overlap between DIMD/FQAD and commonly misattributed diagnostic categories — including fibromyalgia-like syndromes, ME/CFS-like presentations, peripheral neuropathy, dysautonomia, cognitive dysfunction syndromes, and connective tissue disorders — is documented in the systems-level framework. Each overlap reflects a distinct mitochondrial mechanism, not coincidental similarity.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY FRAMEWORKS HAVEN'T CAUGHT UP -->
+    <section class="gap-section">
+      <div class="section-inner">
+        <div class="gap-grid">
+          <div>
+            <div class="section-label">The Structural Gap</div>
+            <h2 class="section-title">Why Drug Safety Frameworks Have Not Kept Pace</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              This is not a story about negligence or bad actors. It is a story about frameworks that were designed before modern mitochondrial biology existed — and have not been updated to reflect what science now knows.
+            </p>
+            <p class="body-text">
+              The gap between what molecular biology understands about mitochondrial injury and what clinical practice currently recognizes is <strong>structural and educational</strong> — and closing it requires evolution, not blame.
+            </p>
+
+            <ul class="gap-list">
+              <li><i class="fas fa-circle-dot"></i><span><strong>Organ-based pharmacovigilance</strong> fragments what is actually a coherent multisystem pattern into separate specialty diagnoses</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>Short-window adverse event reporting</strong> misses delayed toxicity that emerges months to years after drug clearance</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>No mitochondrial safety endpoints</strong> exist in standard preclinical or post-market drug evaluation for most drug classes</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>No longitudinal tracking systems</strong> follow patients for delayed, cumulative mitochondrial effects after drug exposure</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>Repeat exposures</strong> to mitochondria-impairing drugs occur in already-primed patients without any screening or flagging mechanism</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>Informed consent frameworks</strong> do not reflect the possibility of delayed, multisystem, or persistent adverse effects</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mission-statement">
+              <p>"If our understanding of energy biology and mitochondria has advanced, shouldn't our safety models for medications evolve with it?"</p>
+              <cite>— Core framing, DIMD Initiative</cite>
+            </div>
+
+            <p class="body-text" style="margin-top:1.8rem;">
+              The DIMD framework proposes concrete, achievable changes to address this structural gap:
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:0.85rem; margin-top:1.2rem;">
+              <div class="hub-card">
+                <div class="hub-card-icon"><i class="fas fa-vial"></i></div>
+                <div>
+                  <h4>Mitochondrial Safety Endpoints</h4>
+                  <p>Integration of mtDNA copy number, OXPHOS complex activity, and mitochondrial membrane potential into preclinical and post-market safety evaluation for implicated drug classes.</p>
+                </div>
+              </div>
+              <div class="hub-card">
+                <div class="hub-card-icon"><i class="fas fa-clock-rotate-left"></i></div>
+                <div>
+                  <h4>Systems-Level Pharmacovigilance</h4>
+                  <p>Longitudinal adverse-event tracking that follows patients over years, not days — with exposure-linked registries that can detect delayed and cumulative injury patterns.</p>
+                </div>
+              </div>
+              <div class="hub-card">
+                <div class="hub-card-icon"><i class="fas fa-file-contract"></i></div>
+                <div>
+                  <h4>Informed Consent Reform</h4>
+                  <p>Patient-facing risk communication that accurately reflects the possibility of delayed, multisystem, or persistent adverse effects — beginning with fluoroquinolone antibiotics (FDA-2026-P-5116).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="science-cta">
+      <h2>Ready to Go Deeper?</h2>
+      <p>Explore the fluoroquinolone prototype, review the full evidence base, or contribute to the patient registry — every piece of the puzzle matters.</p>
+      <div class="cta-btns">
+        <a href="fqad.html" class="btn-primary"><i class="fas fa-dna"></i> Explore FQAD</a>
+        <a href="evidence.html" class="btn-outline">View the Evidence</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="text-decoration:none;">
+          <div class="nav-logo-icon">🧬</div>
+          <div style="margin-left:10px;">
+            <div class="nav-logo-text">DIMD</div>
+            <div class="nav-logo-sub">Science · Evidence · Policy</div>
+          </div>
+        </a>
+        <p>Patient-led · Evidence-focused · Science-driven.<br>
+        This site is for educational and advocacy purposes only and does not provide medical advice.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="science.html">Understanding DIMD</a>
+        <a href="fqad.html">FQAD</a>
+        <a href="evidence.html">Evidence &amp; References</a>
+      </div>
+      <div class="footer-col">
+        <h4>Act</h4>
+        <a href="registry.html">DIMD Registry</a>
+        <a href="action.html">Take Action</a>
+        <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener">FDA Petition</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="about.html">The Researcher</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="evidence.html">References</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING MITOCHONDRIA -->
+  <script>
+  (function(){
+    const canvas=document.getElementById('mito-canvas');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    resize(); window.addEventListener('resize',resize);
+    function drawMito(ctx,x,y,rx,ry,angle,alpha){
+      ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(angle);
+      const c='#1A5C3E';
+      ctx.beginPath(); ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,rx*.68,ry*.68,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.0; ctx.stroke();
+      const folds=Math.max(2,Math.round(rx/11)), step=(ry*1.2)/(folds+1);
+      ctx.lineWidth=0.72;
+      for(let i=1;i<=folds;i++){
+        const fy=(-ry*.55)+(i*step),amp=rx*.23;
+        ctx.beginPath(); ctx.moveTo(-rx*.50,fy); ctx.bezierCurveTo(-rx*.16,fy-amp,rx*.16,fy+amp,rx*.50,fy); ctx.stroke();
+      }
+      [0.25,0.5,0.75,1.0,1.5,1.75].forEach(t=>{
+        const a2=t*Math.PI*2;
+        ctx.beginPath(); ctx.arc(Math.cos(a2)*rx*.68,Math.sin(a2)*ry*.68,rx*.036,0,Math.PI*2); ctx.fillStyle=c; ctx.fill();
+      });
+      ctx.restore();
+    }
+    const COUNT=22; const P=[];
+    function rp(edge){
+      const rx=14+Math.random()*42,ry=rx*(.34+Math.random()*.24);
+      const speed=.08+Math.random()*.16,dir=Math.random()*Math.PI*2;
+      let x,y;
+      if(edge){
+        const e=Math.floor(Math.random()*4);
+        if(e===0){x=Math.random()*canvas.width;y=-rx*2;}
+        else if(e===1){x=canvas.width+rx*2;y=Math.random()*canvas.height;}
+        else if(e===2){x=Math.random()*canvas.width;y=canvas.height+rx*2;}
+        else{x=-rx*2;y=Math.random()*canvas.height;}
+      }else{x=Math.random()*canvas.width;y=Math.random()*canvas.height;}
+      return{x,y,rx,ry,angle:Math.random()*Math.PI*2,drift:(Math.random()-.5)*.0025,alpha:.05+Math.random()*.20,vx:Math.cos(dir)*speed,vy:Math.sin(dir)*speed};
+    }
+    for(let i=0;i<COUNT;i++)P.push(rp(false));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<P.length;i++){
+        const p=P[i];p.x+=p.vx;p.y+=p.vy;p.angle+=p.drift;
+        const pad=p.rx*2.5;
+        if(p.x<-pad||p.x>canvas.width+pad||p.y<-pad||p.y>canvas.height+pad){P[i]=rp(true);continue;}
+        drawMito(ctx,p.x,p.y,p.rx,p.ry,p.angle,p.alpha);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+  </script>
+
+</body>
+</html>

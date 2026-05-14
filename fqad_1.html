@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fluoroquinolone-Associated Disability (FQAD) — The prototype subtype of Drug-Induced Mitochondrial Dysfunction. Regulatory history, molecular mechanisms, multisystem phenotype, and clinical recognition.">
+  <title>FQAD | DIMD — Drug-Induced Mitochondrial Dysfunction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-floor:    #071410;
+      --bg-deep:     #0A1C14;
+      --bg-mid:      #0E2318;
+      --bg-lift:     #122B1E;
+      --e1:          #3D9E72;
+      --e1-btn:      #2E8A60;
+      --e2:          #2A7A56;
+      --e2-text:     #327A5A;
+      --e3:          #1A5C3E;
+      --e3-border:   rgba(30,92,62,0.18);
+      --e3-border-lift: rgba(42,122,86,0.28);
+      --t1:   #D4E8DC;
+      --t2:   #9DBDAF;
+      --t3:   #6A9080;
+      --card-white: #F4F7F3;
+      --card-text:  #0E2018;
+      --card-mid:   #304A3C;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 8%,  rgba(26,92,62,0.13) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 92%, rgba(18,78,48,0.10) 0%, transparent 48%),
+        linear-gradient(168deg, #0C1F16 0%, #091A12 40%, #071410 70%, #0A1A12 100%);
+      background-attachment:fixed;
+      color:var(--t1);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    #mito-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.32; }
+    #atmosphere { position:fixed; inset:0; pointer-events:none; z-index:1;
+      background: radial-gradient(ellipse at 15% 25%, rgba(42,122,86,0.048) 0%, transparent 44%),
+        radial-gradient(ellipse at 85% 70%, rgba(26,92,62,0.036) 0%, transparent 40%); }
+    #vignette { position:fixed; inset:0; pointer-events:none; z-index:2;
+      box-shadow: inset 0 0 200px rgba(5,12,9,0.72), inset 160px 0 200px rgba(5,12,9,0.52), inset -160px 0 200px rgba(5,12,9,0.52); }
+    nav,main,footer { position:relative; z-index:10; }
+
+    /* ══ NAV ══ */
+    nav { position:sticky; top:0; z-index:1000; background:rgba(8,20,14,0.95); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); }
+    .nav-inner { max-width:1340px; margin:0 auto; padding:0 2.5rem; height:70px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#163C28,#1A5C3E); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
+    .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+    .nav-links a { color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--e2); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
+    .nav-links a:hover { color:var(--t1); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-links a.active { color:var(--t1); }
+    .nav-links a.active::after { transform:scaleX(1); }
+    .nav-cta { background:linear-gradient(90deg,#163C28,var(--e2)) !important; color:var(--t1) !important; padding:8px 22px; border-radius:9999px; font-weight:600 !important; box-shadow:0 3px 12px rgba(42,122,86,0.20); }
+    .nav-cta::after { display:none !important; }
+
+    /* ══ PAGE HERO ══ */
+    .page-hero {
+      padding: 5rem 2.5rem 3.5rem; position:relative; overflow:hidden;
+      background:
+        radial-gradient(ellipse at 50% 60%, rgba(61,158,114,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(42,122,86,0.05) 0%, transparent 44%);
+    }
+    .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:120px; background:linear-gradient(to bottom, transparent, rgba(10,28,20,0.50)); pointer-events:none; }
+    .page-hero-inner { max-width:860px; margin:0 auto; position:relative; z-index:2; }
+    .page-breadcrumb { display:inline-flex; align-items:center; gap:8px; font-size:0.76rem; color:var(--t3); letter-spacing:0.08em; text-transform:uppercase; font-weight:500; margin-bottom:1.8rem; }
+    .page-breadcrumb a { color:var(--t3); text-decoration:none; transition:color 0.2s; }
+    .page-breadcrumb a:hover { color:var(--t2); }
+    .page-breadcrumb span { color:var(--e2); }
+    .page-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.4rem,5vw,4rem); line-height:1.08; letter-spacing:-0.03em; color:var(--t1); margin-bottom:1rem; animation:fadeUp 0.8s ease both; }
+    .page-hero h1 em { font-style:italic; color:var(--e1); }
+    .page-hero-sub { font-size:1.05rem; line-height:1.72; color:var(--t2); max-width:700px; font-weight:300; animation:fadeUp 0.8s 0.1s ease both; }
+    .page-hero-sub strong { color:var(--t1); font-weight:500; }
+    .hero-badges { display:flex; flex-wrap:wrap; gap:10px; margin-top:2rem; animation:fadeUp 0.8s 0.2s ease both; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(42,122,86,0.07); border:1px solid rgba(42,122,86,0.18); border-radius:12px; padding:8px 16px; font-size:0.82rem; color:var(--t2); }
+    .hero-badge i { color:var(--e2); font-size:0.78rem; }
+    .hero-badge strong { color:var(--t1); font-weight:500; }
+    .hero-badge a { color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.30); transition:color 0.2s; }
+    .hero-badge a:hover { color:var(--e1); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ══ SHARED ══ */
+    section { padding:4.5rem 2.5rem; position:relative; overflow:hidden; }
+    .section-inner { max-width:1060px; margin:0 auto; position:relative; z-index:2; }
+    .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.7rem,3.5vw,2.5rem); line-height:1.14; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.1rem; }
+    .section-divider { width:38px; height:2px; background:linear-gradient(90deg,var(--e3),transparent); border-radius:2px; margin-bottom:1.8rem; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.15rem; }
+    .body-text strong { color:var(--t1); font-weight:500; }
+    .body-text em { color:var(--e2-text); font-style:italic; }
+    .pull-quote { background:linear-gradient(135deg,rgba(22,60,42,0.42),rgba(12,36,24,0.52)); border-left:3px solid var(--e2); border-radius:0 12px 12px 0; padding:1.6rem 1.8rem; margin:1.8rem 0; }
+    .pull-quote p { font-family:'DM Serif Display',serif; font-size:1.28rem; font-style:italic; color:var(--t1); line-height:1.45; }
+
+    /* ══ WHAT IS FQAD ══ */
+    .what-fqad {
+      background:
+        radial-gradient(ellipse at 5% 50%, rgba(42,122,86,0.055) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    }
+    .what-fqad::before { content:''; position:absolute; top:0; left:0; right:0; height:100px; background:linear-gradient(to bottom,rgba(10,28,20,0.45),transparent); pointer-events:none; z-index:1; }
+    .what-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+
+    /* Definition card */
+    .definition-card {
+      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
+      border:1px solid rgba(61,158,114,0.22);
+      border-radius:16px; padding:1.8rem 2rem; margin-bottom:1.5rem;
+    }
+    .definition-card .dc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e1); margin-bottom:0.6rem; }
+    .definition-card p { font-family:'DM Serif Display',serif; font-size:1.08rem; color:var(--t1); line-height:1.52; font-style:italic; }
+
+    /* Regulatory badge row */
+    .reg-badges { display:flex; flex-direction:column; gap:0.8rem; margin-top:0.5rem; }
+    .reg-badge { display:flex; align-items:flex-start; gap:12px; background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:12px; padding:1rem 1.2rem; transition:border-color 0.3s; }
+    .reg-badge:hover { border-color:var(--e3-border-lift); }
+    .reg-badge-year { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--e2-text); font-style:italic; flex-shrink:0; min-width:46px; margin-top:1px; }
+    .reg-badge h4 { font-size:0.90rem; font-weight:600; color:var(--t1); margin-bottom:0.22rem; }
+    .reg-badge p { font-size:0.84rem; color:var(--t2); line-height:1.55; font-weight:300; }
+
+    /* ══ REGULATORY TIMELINE ══ */
+    .reg-timeline {
+      background:
+        radial-gradient(ellipse at 90% 35%, rgba(42,122,86,0.048) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .reg-timeline::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(42,122,86,0.10),transparent); pointer-events:none; z-index:1; }
+    .timeline-intro { max-width:660px; margin-bottom:3rem; }
+    .timeline-intro p { color:var(--t2); font-size:0.95rem; line-height:1.72; font-weight:300; font-style:italic; }
+
+    .rtimeline { position:relative; max-width:860px; }
+    .rtimeline::before { content:''; position:absolute; left:130px; top:0; bottom:0; width:1px;
+      background:linear-gradient(to bottom, transparent 0%, rgba(42,122,86,0.25) 8%, rgba(42,122,86,0.25) 92%, transparent 100%); }
+    .rt-item { display:grid; grid-template-columns:130px 1fr; gap:0 2rem; margin-bottom:2rem; position:relative; }
+    .rt-item:last-child { margin-bottom:0; }
+    .rt-era { text-align:right; padding-right:2rem; padding-top:4px; font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--e2-text); font-style:italic; line-height:1.2; flex-shrink:0; }
+    .rt-era small { display:block; font-size:0.72rem; font-style:normal; color:var(--t3); margin-top:2px; letter-spacing:0.04em; }
+    .rt-item::after { content:''; position:absolute; left:124px; top:10px; width:13px; height:13px; border-radius:50%; background:var(--bg-mid); border:2px solid var(--e2); transition:border-color 0.3s, background 0.3s; }
+    .rt-item:hover::after { background:var(--e2); }
+    .rt-item.major::after { background:var(--e1); border-color:var(--e1); box-shadow:0 0 10px rgba(61,158,114,0.35); }
+    .rt-content { padding-left:0.5rem; }
+    .rt-content h4 { font-size:0.95rem; font-weight:600; color:var(--t1); margin-bottom:0.38rem; line-height:1.35; }
+    .rt-content p { font-size:0.88rem; color:var(--t2); line-height:1.62; font-weight:300; }
+    .rt-content .rt-tag { display:inline-block; background:rgba(42,122,86,0.10); border:1px solid rgba(42,122,86,0.20); border-radius:9999px; padding:2px 10px; font-size:0.72rem; font-weight:600; color:var(--e2-text); letter-spacing:0.04em; margin-top:0.5rem; }
+    .rt-item.major .rt-content .rt-tag { background:rgba(61,158,114,0.12); border-color:rgba(61,158,114,0.28); color:var(--e1); }
+
+    /* ══ MOLECULAR MECHANISMS ══ */
+    .molecular {
+      background:
+        radial-gradient(ellipse at 8% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .mol-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .citation-card { background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68)); border:1px solid var(--e3-border); border-radius:16px; padding:1.8rem 2rem; transition:border-color 0.3s; margin-bottom:1.2rem; }
+    .citation-card:hover { border-color:var(--e3-border-lift); }
+    .citation-card .cit-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.7rem; }
+    .citation-card .cit-title { font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--t1); line-height:1.38; margin-bottom:0.6rem; font-style:italic; }
+    .citation-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; }
+    .citation-card .cit-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
+    .citation-card .cit-finding strong { color:var(--t1); font-weight:500; }
+    .citation-card .cit-why { margin-top:0.9rem; padding-top:0.9rem; border-top:1px solid rgba(42,122,86,0.12); font-size:0.82rem; color:var(--e2-text); line-height:1.58; font-style:italic; }
+
+    .target-cards { display:flex; flex-direction:column; gap:0.9rem; }
+    .target-card { background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:13px; padding:1.15rem 1.4rem; display:flex; gap:1rem; align-items:flex-start; transition:border-color 0.3s, transform 0.3s; }
+    .target-card:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .target-icon { width:38px; height:38px; flex-shrink:0; background:rgba(42,122,86,0.10); border:1px solid rgba(42,122,86,0.18); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--e2); font-size:0.95rem; margin-top:2px; }
+    .target-card h4 { font-size:0.90rem; font-weight:600; color:var(--t1); margin-bottom:0.22rem; }
+    .target-card p { font-size:0.85rem; color:var(--t2); line-height:1.56; font-weight:300; }
+    .target-card .validated { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--e1); background:rgba(61,158,114,0.10); border:1px solid rgba(61,158,114,0.22); border-radius:9999px; padding:1px 8px; margin-top:4px; }
+
+    /* ══ MULTISYSTEM PHENOTYPE ══ */
+    .phenotype {
+      background:
+        radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.050) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .phenotype::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(42,122,86,0.09),transparent); pointer-events:none; z-index:1; }
+    .phenotype-intro { max-width:700px; margin-bottom:2.5rem; }
+    .phenotype-intro p { color:var(--t2); font-size:0.97rem; line-height:1.78; font-weight:300; }
+    .phenotype-intro p strong { color:var(--t1); font-weight:500; }
+
+    /* Table */
+    .overlap-table { width:100%; border-collapse:collapse; }
+    .overlap-table thead tr { background:rgba(20,52,36,0.60); }
+    .overlap-table thead th { padding:0.85rem 1.1rem; text-align:left; font-size:0.72rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e2); border-bottom:1px solid rgba(42,122,86,0.20); }
+    .overlap-table tbody tr { border-bottom:1px solid rgba(30,92,62,0.12); transition:background 0.2s; }
+    .overlap-table tbody tr:hover { background:rgba(42,122,86,0.05); }
+    .overlap-table tbody td { padding:0.85rem 1.1rem; font-size:0.88rem; color:var(--t2); line-height:1.55; font-weight:300; vertical-align:top; }
+    .overlap-table tbody td:first-child { color:var(--t1); font-weight:500; font-size:0.90rem; }
+    .overlap-table tbody td:last-child { color:var(--e2-text); font-style:italic; font-size:0.84rem; }
+    .table-wrapper { background:linear-gradient(135deg,rgba(12,32,22,0.75),rgba(8,22,14,0.85)); border:1px solid var(--e3-border); border-radius:14px; overflow:hidden; }
+    .table-caption { padding:0.6rem 1.1rem; font-size:0.74rem; color:var(--t3); background:rgba(10,28,18,0.50); border-top:1px solid rgba(30,92,62,0.10); font-style:italic; }
+
+    /* ══ SECOND HIT ══ */
+    .second-hit {
+      background:
+        radial-gradient(ellipse at 5% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .hit-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .hit-visual { display:flex; flex-direction:column; gap:0; }
+
+    /* Bomb visual — two exposures */
+    .exposure-chain { display:flex; flex-direction:column; gap:0; }
+    .exposure-block {
+      background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95));
+      border:1px solid var(--e3-border); border-radius:13px; padding:1.3rem 1.5rem;
+      margin-bottom:0.5rem;
+    }
+    .exposure-block.primed { border-color:rgba(61,158,114,0.22); background:rgba(20,52,36,0.40); }
+    .exposure-block .exp-label { font-size:0.68rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e2); margin-bottom:0.4rem; }
+    .exposure-block .exp-title { font-size:1rem; font-weight:600; color:var(--t1); margin-bottom:0.3rem; }
+    .exposure-block p { font-size:0.86rem; color:var(--t2); line-height:1.58; font-weight:300; }
+    .exposure-block.primed .exp-label { color:var(--e1); }
+    .exposure-arrow { display:flex; align-items:center; justify-content:center; padding:0.4rem 0; color:var(--e2); font-size:0.9rem; }
+    .exposure-result {
+      background:linear-gradient(135deg,rgba(61,158,114,0.08),rgba(42,122,86,0.06));
+      border:1px solid rgba(61,158,114,0.24); border-radius:13px; padding:1.3rem 1.5rem; margin-top:0.3rem;
+    }
+    .exposure-result .exp-label { font-size:0.68rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e1); margin-bottom:0.4rem; }
+    .exposure-result .exp-title { font-size:1rem; font-weight:600; color:var(--t1); margin-bottom:0.3rem; }
+    .exposure-result p { font-size:0.86rem; color:var(--t2); line-height:1.58; font-weight:300; }
+
+    /* ══ ICD-10 CODES ══ */
+    .icd-section {
+      background:
+        radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.048) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .icd-section::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(42,122,86,0.09),transparent); pointer-events:none; z-index:1; }
+    .icd-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .icd-cards { display:flex; flex-direction:column; gap:0.8rem; margin-top:1rem; }
+    .icd-card { background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:12px; padding:1rem 1.3rem; display:flex; gap:1rem; align-items:flex-start; transition:border-color 0.3s; }
+    .icd-card:hover { border-color:var(--e3-border-lift); }
+    .icd-code { font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--e2-text); font-style:italic; flex-shrink:0; min-width:80px; line-height:1.2; margin-top:1px; }
+    .icd-card h4 { font-size:0.88rem; font-weight:600; color:var(--t1); margin-bottom:0.18rem; }
+    .icd-card p { font-size:0.82rem; color:var(--t2); line-height:1.52; font-weight:300; }
+    .icd-note { background:rgba(10,28,18,0.70); border:1px solid rgba(42,122,86,0.14); border-radius:12px; padding:1.1rem 1.4rem; margin-top:1.4rem; display:flex; gap:12px; align-items:flex-start; }
+    .icd-note i { color:var(--e2); margin-top:2px; flex-shrink:0; }
+    .icd-note p { font-size:0.84rem; color:var(--t3); line-height:1.62; font-style:italic; }
+    .icd-note p strong { color:var(--t2); font-style:normal; }
+
+    /* Petition callout */
+    .petition-callout {
+      background:linear-gradient(135deg,rgba(20,56,38,0.45),rgba(12,36,24,0.55));
+      border-left:3px solid var(--e2); border-radius:0 14px 14px 0; padding:1.7rem 1.9rem; margin-top:1.8rem;
+    }
+    .petition-callout .pc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.6rem; }
+    .petition-callout .pc-title { font-family:'DM Serif Display',serif; font-size:1.08rem; color:var(--t1); line-height:1.38; margin-bottom:0.5rem; }
+    .petition-callout .pc-meta { font-size:0.84rem; color:var(--t3); line-height:1.58; font-weight:300; margin-bottom:0.9rem; }
+    .petition-callout a { display:inline-flex; align-items:center; gap:7px; font-size:0.88rem; color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); transition:color 0.2s; font-weight:500; }
+    .petition-callout a:hover { color:var(--e1); }
+
+    /* ══ CTA ══ */
+    .fqad-cta { background: radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%), linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78)); border-top:1px solid rgba(42,122,86,0.13); padding:4rem 2.5rem; text-align:center; }
+    .fqad-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
+    .fqad-cta p { color:var(--t2); font-size:1rem; line-height:1.72; max-width:540px; margin:0 auto 1.8rem; font-weight:300; }
+    .cta-btns { display:flex; gap:1.1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:14px 32px; border-radius:9999px; font-weight:600; font-size:0.97rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .btn-outline { border:1.5px solid rgba(42,122,86,0.30); color:var(--t2); padding:14px 32px; border-radius:9999px; font-weight:500; font-size:0.97rem; text-decoration:none; transition:all 0.3s; }
+    .btn-outline:hover { background:rgba(42,122,86,0.07); border-color:rgba(42,122,86,0.48); color:var(--t1); }
+
+    /* ══ FOOTER ══ */
+    footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
+    .footer-brand p { color:rgba(106,144,128,0.52);font-size:0.85rem;line-height:1.74;margin-top:1rem;font-weight:300; }
+    .footer-col h4 { font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--e2);margin-bottom:0.9rem; }
+    .footer-col a { display:block;color:rgba(106,144,128,0.45);text-decoration:none;font-size:0.86rem;font-weight:300;margin-bottom:0.46rem;transition:color 0.2s; }
+    .footer-col a:hover { color:var(--t1); }
+    .footer-bottom { max-width:1100px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(30,92,62,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+    .footer-bottom p { font-size:0.77rem;color:rgba(106,144,128,0.26); }
+    .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
+    .footer-bottom a:hover { color:var(--t2); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:1024px) {
+      .what-grid,.mol-grid,.hit-grid,.icd-grid { grid-template-columns:1fr; gap:3rem; }
+      .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
+      .rtimeline::before { left:90px; }
+      .rt-item { grid-template-columns:90px 1fr; }
+      .rt-item::after { left:84px; }
+    }
+    @media (max-width:680px) {
+      .nav-links { display:none; }
+      .footer-inner { grid-template-columns:1fr; }
+      .rtimeline::before { display:none; }
+      .rt-item { grid-template-columns:1fr; }
+      .rt-era { text-align:left; padding-right:0; margin-bottom:0.4rem; }
+      .rt-item::after { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="mito-canvas"></canvas>
+  <div id="atmosphere"></div>
+  <div id="vignette"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🧬</div>
+        <div>
+          <div class="nav-logo-text">DIMD</div>
+          <div class="nav-logo-sub">Science · Evidence · Policy</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="science.html">The Science</a></li>
+        <li><a href="fqad.html" class="active">FQAD</a></li>
+        <li><a href="action.html">Take Action</a></li>
+        <li><a href="evidence.html">Evidence</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="registry.html" class="nav-cta">Registry</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <a href="science.html">The Science</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>FQAD</span>
+        </div>
+        <h1>Fluoroquinolone-Associated <em>Disability</em></h1>
+        <p class="page-hero-sub">
+          FQAD is the <strong>prototype subtype of DIMD</strong> — regulatorily documented, molecularly confirmed, and the most extensively studied example of drug-induced mitochondrial injury producing delayed, persistent, multisystem disability.
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <i class="fas fa-file-contract"></i>
+            <span>FDA Docket <strong>FDA-2026-P-5116</strong> — Citizen Petition Accepted</span>
+          </div>
+          <div class="hero-badge">
+            <i class="fas fa-flask"></i>
+            <span>Reinhardt et al. 2025 — <strong>AIFM1 &amp; IDH2 confirmed off-targets</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT IS FQAD -->
+    <section class="what-fqad">
+      <div class="section-inner">
+        <div class="what-grid">
+          <div>
+            <div class="section-label">Definition</div>
+            <h2 class="section-title">Not a Controversy — A Regulatory Reality</h2>
+            <div class="section-divider"></div>
+
+            <div class="definition-card">
+              <div class="dc-label">FQAD — Fluoroquinolone-Associated Disability</div>
+              <p>A syndrome of delayed, persistent, and potentially disabling adverse effects involving tendons, muscles, joints, peripheral nerves, and the central nervous system following exposure to fluoroquinolone antibiotics.</p>
+            </div>
+
+            <p class="body-text">
+              FQAD is not a patient-invented diagnosis. It is a <strong>regulatorily recognized clinical syndrome</strong> — formally acknowledged by the U.S. Food and Drug Administration and the European Medicines Agency following years of accumulating safety signals and patient reports that could no longer be dismissed.
+            </p>
+            <p class="body-text">
+              What distinguishes FQAD from other drug adverse effects is its <strong>multisystem nature, delayed onset, and persistence</strong> long after the antibiotic has cleared the body. Patients describe symptoms emerging days to weeks after completing a course — and in some cases, continuing to worsen for months or years.
+            </p>
+            <div class="pull-quote">
+              <p>"The drug is gone. The damage is not. That is not a coincidence — it is a mechanism."</p>
+            </div>
+            <p class="body-text">
+              Fluoroquinolones are among the most widely prescribed antibiotic classes in the world. Ciprofloxacin, levofloxacin, and moxifloxacin are routinely used for urinary tract infections, respiratory infections, and a broad range of indications — often in patients who were previously healthy and had no warning that a standard course of antibiotics could produce lasting disability.
+            </p>
+          </div>
+
+          <div>
+            <div class="section-label">Regulatory Record</div>
+            <h2 class="section-title">Key Regulatory Milestones</h2>
+            <div class="section-divider"></div>
+            <div class="reg-badges">
+              <div class="reg-badge">
+                <div class="reg-year">2008</div>
+                <div>
+                  <h4>FDA Boxed Warning — Tendinopathy &amp; Rupture</h4>
+                  <p>FDA adds black box warning to all systemic fluoroquinolones for risk of tendinitis and tendon rupture, including risk persisting after discontinuation.</p>
+                </div>
+              </div>
+              <div class="reg-badge">
+                <div class="reg-year">2013</div>
+                <div>
+                  <h4>FDA Warning — Peripheral Neuropathy</h4>
+                  <p>FDA updates labeling to warn that peripheral neuropathy may occur "soon after" initiation and may be <em>permanent</em> — a landmark acknowledgment of irreversibility.</p>
+                </div>
+              </div>
+              <div class="reg-badge">
+                <div class="reg-year">2016</div>
+                <div>
+                  <h4>FDA Safety Communication — Disabling &amp; Potentially Permanent Effects</h4>
+                  <p>FDA issues Drug Safety Communication explicitly describing "disabling and potentially permanent serious side effects" involving tendons, muscles, joints, nerves, and the CNS. Recommends restricting use for minor infections. First use of the word <em>permanent</em> in this context.</p>
+                </div>
+              </div>
+              <div class="reg-badge">
+                <div class="reg-year">2018</div>
+                <div>
+                  <h4>EMA Restriction — Disabling Musculoskeletal &amp; Nervous System Effects</h4>
+                  <p>European Medicines Agency recommends restrictions on fluoroquinolone use, citing disabling and long-lasting adverse reactions affecting the musculoskeletal system and nervous system.</p>
+                </div>
+              </div>
+              <div class="reg-badge" style="border-color:rgba(61,158,114,0.22);">
+                <div class="reg-year" style="color:var(--e1);">2026</div>
+                <div>
+                  <h4>FDA Citizen Petition — Enhanced Informed Consent</h4>
+                  <p>Docket FDA-2026-P-5116 accepted for filing. Requests stronger informed-consent language and improved patient-facing risk communication to reflect what the regulatory record already documents.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGULATORY TIMELINE (detailed) -->
+    <section class="reg-timeline">
+      <div class="section-inner">
+        <div class="section-label">Historical Arc</div>
+        <h2 class="section-title">From First Approval to Disability Recognition</h2>
+        <div class="section-divider"></div>
+        <div class="timeline-intro">
+          <p>The regulatory history of fluoroquinolones is a decades-long story of accumulating safety signals, incremental warnings, and a widening gap between what the regulatory record documented and what patients were told at the point of prescribing.</p>
+        </div>
+
+        <div class="rtimeline">
+
+          <div class="rt-item">
+            <div class="rt-era">1980s<small>Approval Era</small></div>
+            <div class="rt-content">
+              <h4>Fluoroquinolones Enter Clinical Use</h4>
+              <p>Nalidixic acid, the first quinolone, introduced in the 1960s. Second-generation fluoroquinolones (ciprofloxacin, norfloxacin) approved in the 1980s. Broad-spectrum activity and oral bioavailability drive rapid adoption across multiple specialties.</p>
+            </div>
+          </div>
+
+          <div class="rt-item">
+            <div class="rt-era">1990s<small>Early Signals</small></div>
+            <div class="rt-content">
+              <h4>Tendon Injury Reports Begin Accumulating</h4>
+              <p>Case reports of Achilles tendon rupture and tendinopathy following fluoroquinolone use begin appearing in the literature. Spontaneous adverse event reports to FDA accumulate but do not yet trigger labeling changes.</p>
+              <span class="rt-tag">Signal Emerging</span>
+            </div>
+          </div>
+
+          <div class="rt-item">
+            <div class="rt-era">Early 2000s<small>Withdrawal</small></div>
+            <div class="rt-content">
+              <h4>Trovafloxacin Withdrawn — Hepatotoxicity</h4>
+              <p>Trovafloxacin (Trovan) withdrawn from general use due to severe hepatotoxicity and liver failure. An early signal that this drug class carries serious organ-level toxicity beyond its antimicrobial profile.</p>
+              <span class="rt-tag">Class Safety Event</span>
+            </div>
+          </div>
+
+          <div class="rt-item major">
+            <div class="rt-era">2008<small>FDA Action</small></div>
+            <div class="rt-content">
+              <h4>Black Box Warning — Tendinitis &amp; Tendon Rupture</h4>
+              <p>FDA mandates a boxed warning for all systemic fluoroquinolones, noting that tendon rupture can occur during or after treatment and that risk may persist for months after discontinuation. The first major regulatory acknowledgment that effects outlast drug presence.</p>
+              <span class="rt-tag">Boxed Warning Added</span>
+            </div>
+          </div>
+
+          <div class="rt-item major">
+            <div class="rt-era">2013<small>FDA Action</small></div>
+            <div class="rt-content">
+              <h4>Warning Added — Peripheral Neuropathy (Potentially Permanent)</h4>
+              <p>FDA updates labeling to warn that peripheral neuropathy associated with fluoroquinolones may be permanent. This is a significant milestone: regulatory acknowledgment of <em>irreversibility</em> for a nervous system adverse effect of a commonly prescribed antibiotic.</p>
+              <span class="rt-tag">Permanence Acknowledged</span>
+            </div>
+          </div>
+
+          <div class="rt-item major">
+            <div class="rt-era">2016<small>FDA Action</small></div>
+            <div class="rt-content">
+              <h4>Drug Safety Communication — "Disabling and Potentially Permanent"</h4>
+              <p>FDA issues a Drug Safety Communication using explicit language: fluoroquinolones are associated with "disabling and potentially permanent serious side effects" involving multiple body systems simultaneously. FDA recommends avoiding use for uncomplicated infections where alternatives exist. This is the closest the FDA has come to formally recognizing the multisystem syndrome patients call FQAD.</p>
+              <span class="rt-tag">Landmark Communication</span>
+            </div>
+          </div>
+
+          <div class="rt-item">
+            <div class="rt-era">2018<small>EMA Action</small></div>
+            <div class="rt-content">
+              <h4>European Medicines Agency — Use Restrictions</h4>
+              <p>EMA recommends restrictions on fluoroquinolone prescribing across EU member states, citing disabling and long-lasting adverse reactions. Reinforces the international dimension of the safety signal — this is not a US-specific regulatory concern.</p>
+              <span class="rt-tag">International Recognition</span>
+            </div>
+          </div>
+
+          <div class="rt-item major">
+            <div class="rt-era">2025–26<small>Now</small></div>
+            <div class="rt-content">
+              <h4>Molecular Confirmation &amp; Citizen Petition</h4>
+              <p>Reinhardt et al. (2025) publish chemical proteomics data confirming AIFM1 and IDH2 as direct FQ off-targets in human cells, with downstream Complex I and IV downregulation — providing molecular mechanistic grounding for what the regulatory record has documented clinically. FDA Citizen Petition FDA-2026-P-5116 accepted, requesting enhanced informed consent reflecting this accumulated evidence.</p>
+              <span class="rt-tag">Molecular Confirmation · Petition Filed</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MOLECULAR MECHANISMS -->
+    <section class="molecular">
+      <div class="section-inner">
+        <div class="mol-grid">
+          <div>
+            <div class="section-label">Confirmed Molecular Targets</div>
+            <h2 class="section-title">What Fluoroquinolones Actually Do Inside Cells</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              For decades, fluoroquinolone toxicity was attributed primarily to topoisomerase inhibition — a well-understood mechanism responsible for the antibacterial effect. But this explanation was always incomplete. It did not account for the multisystem, mitochondrial, and delayed nature of the adverse effects seen clinically.
+            </p>
+            <p class="body-text">
+              The 2025 chemical proteomics study by Reinhardt and colleagues changed this. Using thermal proteome profiling in human cells, the study identified previously unknown direct binding targets — and the findings directly validate key elements of the DIMD mechanistic framework.
+            </p>
+
+            <div class="citation-card">
+              <div class="cit-label">Chemical Proteomics · Angewandte Chemie · 2025</div>
+              <div class="cit-title">Chemical proteomics reveals human off-targets of fluoroquinolone-induced mitochondrial toxicity</div>
+              <div class="cit-meta">Reinhardt T, El Harraoui Y, Rothemann A, et al. · <em>Angew Chem Int Ed.</em> 2025;64(18):e202421124</div>
+              <div class="cit-finding">Using thermal proteome profiling in human cells, this study identified <strong>AIFM1</strong> (Apoptosis-Inducing Factor Mitochondria-Associated 1) and <strong>IDH2</strong> (Isocitrate Dehydrogenase 2) as validated direct off-targets of fluoroquinolone binding — and confirmed downstream <strong>downregulation of mitochondrial Complexes I and IV.</strong> These are not predicted or theoretical interactions. They are empirically confirmed in human cell systems.</div>
+              <div class="cit-why">This study is the molecular foundation beneath what patients and regulators have been observing for thirty years. The mechanism is no longer theoretical.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-label">The Multi-Hit Insult</div>
+            <h2 class="section-title">Four Simultaneous Strikes on the Energy System</h2>
+            <div class="section-divider"></div>
+            <div class="target-cards">
+              <div class="target-card">
+                <div class="target-icon"><i class="fas fa-dna"></i></div>
+                <div>
+                  <h4>TOP2β Inhibition — mtDNA Topology Disruption</h4>
+                  <p>Fluoroquinolones inhibit bacterial topoisomerase II — but also human mitochondrial topoisomerase IIβ (TOP2β), disrupting mtDNA topology, replication fidelity, and structural integrity of the mitochondrial genome.</p>
+                </div>
+              </div>
+              <div class="target-card">
+                <div class="target-icon"><i class="fas fa-bolt"></i></div>
+                <div>
+                  <h4>AIFM1 Binding — Complex I &amp; IV Impairment</h4>
+                  <p>Direct binding to AIFM1 (Apoptosis-Inducing Factor Mitochondria-Associated 1) impairs the biogenesis and assembly of respiratory chain Complexes I and IV — the primary engines of mitochondrial energy production.</p>
+                  <span class="validated">Confirmed · Reinhardt 2025</span>
+                </div>
+              </div>
+              <div class="target-card">
+                <div class="target-icon"><i class="fas fa-shield-halved"></i></div>
+                <div>
+                  <h4>IDH2 Inhibition — Antioxidant Capacity Depleted</h4>
+                  <p>Direct inhibition of IDH2 (Isocitrate Dehydrogenase 2) reduces mitochondrial NADPH production — the key currency of the mitochondrial antioxidant system. This leaves mitochondria unable to quench the ROS surge that follows the other hits.</p>
+                  <span class="validated">Confirmed · Reinhardt 2025</span>
+                </div>
+              </div>
+              <div class="target-card">
+                <div class="target-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                <div>
+                  <h4>ROS Surge &amp; mtDNA Copy Number Depletion</h4>
+                  <p>The combination of impaired electron transport, depleted antioxidant capacity, and mtDNA structural damage triggers a reactive oxygen species surge — and rapid depletion of mitochondrial DNA copy number, removing the cell's ability to replace damaged mitochondrial components.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MULTISYSTEM PHENOTYPE -->
+    <section class="phenotype">
+      <div class="section-inner">
+        <div class="section-label">Clinical Pattern</div>
+        <h2 class="section-title">The Multisystem Phenotype — and Why It Gets Misattributed</h2>
+        <div class="section-divider"></div>
+        <div class="phenotype-intro">
+          <p>Because FQAD crosses organ systems and follows a delayed onset pattern, it is routinely fragmented into separate specialty diagnoses. Each specialist sees their piece of the picture — the neurologist sees neuropathy, the rheumatologist sees connective tissue dysfunction, the cardiologist sees dysautonomia — without a framework that unifies them. <strong>The following table maps common diagnostic categories to their underlying mitochondrial mechanisms within the DIMD framework.</strong></p>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="overlap-table">
+            <thead>
+              <tr>
+                <th>Common Misattributed Category</th>
+                <th>Typical Presentation in FQAD</th>
+                <th>Underlying Mitochondrial Mechanism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fibromyalgia-like syndrome</td>
+                <td>Widespread musculoskeletal pain, fatigue, tender points, sleep disruption</td>
+                <td>Bioenergetic dysfunction, oxidative stress, mitochondrial quality control impairment</td>
+              </tr>
+              <tr>
+                <td>ME/CFS-like syndrome</td>
+                <td>Post-exertional malaise, profound fatigue disproportionate to activity, cognitive dysfunction</td>
+                <td>Impaired ATP reserve, ROS amplification, failure of bioenergetic threshold under exertion</td>
+              </tr>
+              <tr>
+                <td>Peripheral neuropathy</td>
+                <td>Burning, tingling, numbness in extremities; electric shock sensations; sensory loss</td>
+                <td>Neuronal mitochondrial vulnerability; high energy demand of peripheral axons; Complex I/IV impairment</td>
+              </tr>
+              <tr>
+                <td>Dysautonomia / POTS-like syndrome</td>
+                <td>Heart rate instability, orthostatic intolerance, blood pressure dysregulation, temperature dysregulation</td>
+                <td>Autonomic nervous system bioenergetic failure; impaired mitochondrial function in autonomic neurons</td>
+              </tr>
+              <tr>
+                <td>Cognitive dysfunction syndrome</td>
+                <td>Brain fog, memory impairment, word-finding difficulty, impaired processing speed</td>
+                <td>Neuronal calcium dysregulation, ROS-mediated synaptic dysfunction, CNS bioenergetic deficit</td>
+              </tr>
+              <tr>
+                <td>Connective tissue / musculoskeletal disorder</td>
+                <td>Tendon pain and rupture, joint hypermobility, muscle weakness, recurrent injury</td>
+                <td>Oxidative damage to collagen-producing cells; impaired tissue repair via mitochondrial ROS; TOP2β-mediated mtDNA damage in tenocytes</td>
+              </tr>
+              <tr>
+                <td>Anxiety / psychiatric disorder</td>
+                <td>New-onset anxiety, panic attacks, depersonalization, emotional dysregulation</td>
+                <td>Neuronal mitochondrial dysfunction; altered neurotransmitter synthesis dependent on mitochondrial cofactors; hippocampal bioenergetic stress</td>
+              </tr>
+              <tr>
+                <td>Idiopathic multisystem illness</td>
+                <td>Symptoms spanning multiple systems with no unifying diagnosis; labeled functional or psychosomatic</td>
+                <td>Systemic bioenergetic failure — the unified mechanism that organ-based frameworks cannot see as a single entity</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table-caption">Source: Clinical overlap framework from the DIMD systems-level preprint (DOI: 10.5281/zenodo.20015205). Each overlap reflects a distinct mitochondrial mechanism, not coincidental symptom similarity.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECOND HIT -->
+    <section class="second-hit">
+      <div class="section-inner">
+        <div class="hit-grid">
+          <div>
+            <div class="section-label">The Second-Hit Phenomenon</div>
+            <h2 class="section-title">When a Primed System Meets Another Exposure</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              One of the most clinically important — and least recognized — aspects of FQAD is what happens when a patient with prior fluoroquinolone exposure receives a second course. Or a different mitochondria-impairing medication. Or undergoes significant physiological stress.
+            </p>
+            <p class="body-text">
+              In a mitochondrially primed system — one where MQC capacity has already been depleted, heteroplasmy has already shifted, and bioenergetic reserve is already reduced — a subsequent insult does not produce a proportional response. It can produce a <strong>disproportionate, catastrophic escalation.</strong>
+            </p>
+            <p class="body-text">
+              This is the "second-hit" phenomenon. Patients who tolerated a first fluoroquinolone course with manageable effects sometimes describe the second course as the one that <em>changed everything</em> — a sudden, dramatic worsening from which they did not recover.
+            </p>
+            <p class="body-text">
+              This pattern is not coincidence, and it is not psychological sensitization. It is an <strong>expected outcome of mitochondrial population dynamics</strong> in a system that has already crossed a critical threshold.
+            </p>
+            <p class="body-text" style="font-size:0.88rem; font-style:italic; margin-top:1.5rem;">
+              Currently, no prescribing system flags prior fluoroquinolone adverse effects when a new prescription is written. No electronic health record alerts a clinician that this patient has a history suggestive of FQAD before a second course is initiated. This is the gap the DIMD framework and the FDA petition exist to address.
+            </p>
+          </div>
+          <div>
+            <div class="exposure-chain">
+              <div class="exposure-block">
+                <div class="exp-label">First Exposure</div>
+                <div class="exp-title">Standard Course of Fluoroquinolone</div>
+                <p>Drug clears within days. Patient may notice fatigue, joint discomfort, or neurologic symptoms — often dismissed or attributed to the original infection. MQC systems are stressed but partially compensate. Bioenergetic reserve is reduced. Heteroplasmy begins to shift.</p>
+              </div>
+              <div class="exposure-arrow"><i class="fas fa-arrow-down"></i></div>
+              <div class="exposure-block primed">
+                <div class="exp-label">The Primed State</div>
+                <div class="exp-title">Mitochondrially Vulnerable System</div>
+                <p>Months or years pass. Patient may be "functional" but operating with reduced bioenergetic reserve. Subclinical mitochondrial dysfunction is present but compensated — clinically silent, not detectable by standard workup. The system is primed.</p>
+              </div>
+              <div class="exposure-arrow"><i class="fas fa-arrow-down"></i></div>
+              <div class="exposure-result">
+                <div class="exp-label">Second Hit</div>
+                <div class="exp-title">Disproportionate Escalation</div>
+                <p>A second fluoroquinolone course — or another mitochondria-impairing drug, or significant physiological stress — strikes a system with depleted reserve and no buffer. The result is a catastrophic escalation that can produce permanent, severe, multisystem disability. <strong>The second hit is not the cause. The primed system is.</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ICD-10 CODES -->
+    <section class="icd-section">
+      <div class="section-inner">
+        <div class="icd-grid">
+          <div>
+            <div class="section-label">Clinical Recognition</div>
+            <h2 class="section-title">ICD-10-CM Coding for Fluoroquinolone Adverse Effects</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              ICD-10-CM fluoroquinolone adverse effect codes exist in the 2025 coding system — providing a mechanism for clinicians to document and track fluoroquinolone-related adverse effects in the medical record. Their clinical utility depends entirely on clinician awareness that these codes exist and should be applied.
+            </p>
+            <p class="body-text">
+              Proper coding creates the longitudinal data trail that pharmacovigilance needs. An adverse effect that is never coded is an adverse effect that never exists in the data — and cannot be counted, tracked, or used to inform future safety decisions.
+            </p>
+            <p class="body-text">
+              When a patient presents with symptoms consistent with FQAD — neuropathy, tendinopathy, fatigue, cognitive dysfunction, dysautonomia — and there is a history of fluoroquinolone exposure, <strong>documenting that exposure in the medical record is not speculation. It is accurate clinical documentation.</strong>
+            </p>
+
+            <div class="icd-note">
+              <i class="fas fa-circle-info"></i>
+              <p><strong>For clinicians:</strong> Proper use of fluoroquinolone adverse effect codes supports both individual patient care and population-level pharmacovigilance. Coding the exposure-effect relationship is a clinical and public health responsibility — not an assignment of legal blame.</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="icd-cards">
+              <div class="icd-card">
+                <div class="icd-code">J02.0X5A</div>
+                <div>
+                  <h4>Adverse Effect of Fluoroquinolones — Initial Encounter</h4>
+                  <p>Use for the initial encounter when documenting an adverse effect of a fluoroquinolone antibiotic that was properly prescribed and administered.</p>
+                </div>
+              </div>
+              <div class="icd-card">
+                <div class="icd-code">J02.0X5D</div>
+                <div>
+                  <h4>Adverse Effect of Fluoroquinolones — Subsequent Encounter</h4>
+                  <p>Use for ongoing follow-up encounters for the same adverse effect event.</p>
+                </div>
+              </div>
+              <div class="icd-card">
+                <div class="icd-code">J02.0X5S</div>
+                <div>
+                  <h4>Adverse Effect of Fluoroquinolones — Sequela</h4>
+                  <p>Use for late effects and sequelae — the persistent or delayed consequences that continue after the initial adverse effect period. This is the code most applicable to FQAD presentations.</p>
+                </div>
+              </div>
+              <div class="icd-card">
+                <div class="icd-code">M79.2</div>
+                <div>
+                  <h4>Neuralgia &amp; Neuritis, Unspecified</h4>
+                  <p>May be used in conjunction with the adverse effect code to document neuropathic pain components. Code the adverse effect first.</p>
+                </div>
+              </div>
+              <div class="icd-card">
+                <div class="icd-code">M76.6–</div>
+                <div>
+                  <h4>Achilles Tendinitis / Tendon Rupture</h4>
+                  <p>Tendon-specific codes should be used alongside the adverse effect code when tendinopathy is a presenting component. Document the drug exposure as the underlying cause.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="petition-callout">
+              <div class="pc-label">FDA Citizen Petition · Docket FDA-2026-P-5116</div>
+              <div class="pc-title">Requesting Enhanced Informed Consent for Systemic Fluoroquinolone Antibiotics</div>
+              <div class="pc-meta">Accepted for filing · Open for public comment on regulations.gov · DOI: 10.5281/zenodo.20128765</div>
+              <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener">
+                <i class="fas fa-arrow-up-right-from-square"></i>
+                Read the Petition
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="fqad-cta">
+      <h2>The Evidence Exists. The Framework Exists. Now We Build the Record.</h2>
+      <p>Every patient who contributes to the registry, every clinician who codes correctly, every policymaker who reads the petition — that is how the evidence base grows.</p>
+      <div class="cta-btns">
+        <a href="registry.html" class="btn-primary"><i class="fas fa-users"></i> Join the Registry</a>
+        <a href="action.html" class="btn-outline">Take Action</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="text-decoration:none;">
+          <div class="nav-logo-icon">🧬</div>
+          <div style="margin-left:10px;">
+            <div class="nav-logo-text">DIMD</div>
+            <div class="nav-logo-sub">Science · Evidence · Policy</div>
+          </div>
+        </a>
+        <p>Patient-led · Evidence-focused · Science-driven.<br>
+        This site is for educational and advocacy purposes only and does not provide medical advice.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="science.html">Understanding DIMD</a>
+        <a href="fqad.html">FQAD</a>
+        <a href="evidence.html">Evidence &amp; References</a>
+      </div>
+      <div class="footer-col">
+        <h4>Act</h4>
+        <a href="registry.html">DIMD Registry</a>
+        <a href="action.html">Take Action</a>
+        <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener">FDA Petition</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="about.html">The Researcher</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="evidence.html">References</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING MITOCHONDRIA -->
+  <script>
+  (function(){
+    const canvas=document.getElementById('mito-canvas');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    resize(); window.addEventListener('resize',resize);
+    function drawMito(ctx,x,y,rx,ry,angle,alpha){
+      ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(angle);
+      const c='#1A5C3E';
+      ctx.beginPath(); ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,rx*.68,ry*.68,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.0; ctx.stroke();
+      const folds=Math.max(2,Math.round(rx/11)), step=(ry*1.2)/(folds+1);
+      ctx.lineWidth=0.72;
+      for(let i=1;i<=folds;i++){
+        const fy=(-ry*.55)+(i*step),amp=rx*.23;
+        ctx.beginPath(); ctx.moveTo(-rx*.50,fy); ctx.bezierCurveTo(-rx*.16,fy-amp,rx*.16,fy+amp,rx*.50,fy); ctx.stroke();
+      }
+      [0.25,0.5,0.75,1.0,1.5,1.75].forEach(t=>{
+        const a2=t*Math.PI*2;
+        ctx.beginPath(); ctx.arc(Math.cos(a2)*rx*.68,Math.sin(a2)*ry*.68,rx*.036,0,Math.PI*2); ctx.fillStyle=c; ctx.fill();
+      });
+      ctx.restore();
+    }
+    const COUNT=22; const P=[];
+    function rp(edge){
+      const rx=14+Math.random()*42,ry=rx*(.34+Math.random()*.24);
+      const speed=.08+Math.random()*.16,dir=Math.random()*Math.PI*2;
+      let x,y;
+      if(edge){
+        const e=Math.floor(Math.random()*4);
+        if(e===0){x=Math.random()*canvas.width;y=-rx*2;}
+        else if(e===1){x=canvas.width+rx*2;y=Math.random()*canvas.height;}
+        else if(e===2){x=Math.random()*canvas.width;y=canvas.height+rx*2;}
+        else{x=-rx*2;y=Math.random()*canvas.height;}
+      }else{x=Math.random()*canvas.width;y=Math.random()*canvas.height;}
+      return{x,y,rx,ry,angle:Math.random()*Math.PI*2,drift:(Math.random()-.5)*.0025,alpha:.05+Math.random()*.20,vx:Math.cos(dir)*speed,vy:Math.sin(dir)*speed};
+    }
+    for(let i=0;i<COUNT;i++)P.push(rp(false));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<P.length;i++){
+        const p=P[i];p.x+=p.vx;p.y+=p.vy;p.angle+=p.drift;
+        const pad=p.rx*2.5;
+        if(p.x<-pad||p.x>canvas.width+pad||p.y<-pad||p.y>canvas.height+pad){P[i]=rp(true);continue;}
+        drawMito(ctx,p.x,p.y,p.rx,p.ry,p.angle,p.alpha);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+  </script>
+
+</body>
+</html>

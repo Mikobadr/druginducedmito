@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Take Action on Drug-Induced Mitochondrial Dysfunction — FDA Citizen Petition FDA-2026-P-5116, public comment, legislative advocacy, clinician education, and pharmacovigilance modernization.">
+  <title>Take Action | DIMD — Drug-Induced Mitochondrial Dysfunction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-floor:    #071410;
+      --bg-deep:     #0A1C14;
+      --bg-mid:      #0E2318;
+      --bg-lift:     #122B1E;
+      --e1:          #3D9E72;
+      --e1-btn:      #2E8A60;
+      --e2:          #2A7A56;
+      --e2-text:     #327A5A;
+      --e3:          #1A5C3E;
+      --e3-border:   rgba(30,92,62,0.18);
+      --e3-border-lift: rgba(42,122,86,0.28);
+      --t1:   #D4E8DC;
+      --t2:   #9DBDAF;
+      --t3:   #6A9080;
+      --card-white: #F4F7F3;
+      --card-text:  #0E2018;
+      --card-mid:   #304A3C;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'DM Sans', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 8%,  rgba(26,92,62,0.13) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 92%, rgba(18,78,48,0.10) 0%, transparent 48%),
+        linear-gradient(168deg, #0C1F16 0%, #091A12 40%, #071410 70%, #0A1A12 100%);
+      background-attachment:fixed;
+      color:var(--t1);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    #mito-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.32; }
+    #atmosphere { position:fixed; inset:0; pointer-events:none; z-index:1;
+      background: radial-gradient(ellipse at 15% 25%, rgba(42,122,86,0.048) 0%, transparent 44%),
+        radial-gradient(ellipse at 85% 70%, rgba(26,92,62,0.036) 0%, transparent 40%); }
+    #vignette { position:fixed; inset:0; pointer-events:none; z-index:2;
+      box-shadow: inset 0 0 200px rgba(5,12,9,0.72), inset 160px 0 200px rgba(5,12,9,0.52), inset -160px 0 200px rgba(5,12,9,0.52); }
+    nav,main,footer { position:relative; z-index:10; }
+
+    /* ══ NAV ══ */
+    nav { position:sticky; top:0; z-index:1000; background:rgba(8,20,14,0.95); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); }
+    .nav-inner { max-width:1340px; margin:0 auto; padding:0 2.5rem; height:70px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#163C28,#1A5C3E); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
+    .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+    .nav-links a { color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--e2); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
+    .nav-links a:hover { color:var(--t1); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-links a.active { color:var(--t1); }
+    .nav-links a.active::after { transform:scaleX(1); }
+    .nav-cta { background:linear-gradient(90deg,#163C28,var(--e2)) !important; color:var(--t1) !important; padding:8px 22px; border-radius:9999px; font-weight:600 !important; box-shadow:0 3px 12px rgba(42,122,86,0.20); }
+    .nav-cta::after { display:none !important; }
+
+    /* ══ PAGE HERO ══ */
+    .page-hero {
+      padding:5rem 2.5rem 3.5rem; position:relative; overflow:hidden;
+      background:
+        radial-gradient(ellipse at 50% 60%, rgba(61,158,114,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(42,122,86,0.05) 0%, transparent 44%);
+    }
+    .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:120px; background:linear-gradient(to bottom, transparent, rgba(10,28,20,0.50)); pointer-events:none; }
+    .page-hero-inner { max-width:860px; margin:0 auto; position:relative; z-index:2; }
+    .page-breadcrumb { display:inline-flex; align-items:center; gap:8px; font-size:0.76rem; color:var(--t3); letter-spacing:0.08em; text-transform:uppercase; font-weight:500; margin-bottom:1.8rem; }
+    .page-breadcrumb a { color:var(--t3); text-decoration:none; transition:color 0.2s; }
+    .page-breadcrumb a:hover { color:var(--t2); }
+    .page-breadcrumb span { color:var(--e2); }
+    .page-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.4rem,5vw,4rem); line-height:1.08; letter-spacing:-0.03em; color:var(--t1); margin-bottom:1rem; animation:fadeUp 0.8s ease both; }
+    .page-hero h1 em { font-style:italic; color:var(--e1); }
+    .page-hero-sub { font-size:1.05rem; line-height:1.72; color:var(--t2); max-width:700px; font-weight:300; animation:fadeUp 0.8s 0.1s ease both; }
+    .page-hero-sub strong { color:var(--t1); font-weight:500; }
+    .hero-badges { display:flex; flex-wrap:wrap; gap:10px; margin-top:2rem; animation:fadeUp 0.8s 0.2s ease both; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(42,122,86,0.07); border:1px solid rgba(42,122,86,0.18); border-radius:12px; padding:8px 16px; font-size:0.82rem; color:var(--t2); }
+    .hero-badge i { color:var(--e2); font-size:0.78rem; }
+    .hero-badge strong { color:var(--t1); font-weight:500; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ══ SHARED ══ */
+    section { padding:4.5rem 2.5rem; position:relative; overflow:hidden; }
+    .section-inner { max-width:1060px; margin:0 auto; position:relative; z-index:2; }
+    .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.7rem,3.5vw,2.5rem); line-height:1.14; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.1rem; }
+    .section-divider { width:38px; height:2px; background:linear-gradient(90deg,var(--e3),transparent); border-radius:2px; margin-bottom:1.8rem; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.15rem; }
+    .body-text strong { color:var(--t1); font-weight:500; }
+    .body-text em { color:var(--e2-text); font-style:italic; }
+    .pull-quote { background:linear-gradient(135deg,rgba(22,60,42,0.42),rgba(12,36,24,0.52)); border-left:3px solid var(--e2); border-radius:0 12px 12px 0; padding:1.6rem 1.8rem; margin:1.8rem 0; }
+    .pull-quote p { font-family:'DM Serif Display',serif; font-size:1.28rem; font-style:italic; color:var(--t1); line-height:1.45; }
+
+    /* ══ PETITION FEATURED ══ */
+    .petition-featured {
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(61,158,114,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 5% 50%, rgba(42,122,86,0.055) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+    }
+    .petition-featured::before { content:''; position:absolute; top:0; left:0; right:0; height:100px; background:linear-gradient(to bottom,rgba(10,28,20,0.45),transparent); pointer-events:none; z-index:1; }
+
+    /* Big petition card */
+    .petition-card {
+      background:linear-gradient(135deg,rgba(20,56,38,0.50),rgba(12,36,24,0.65));
+      border:1px solid rgba(61,158,114,0.24);
+      border-radius:20px; padding:2.8rem 3rem; margin-bottom:2.5rem;
+      position:relative; overflow:hidden;
+    }
+    .petition-card::before {
+      content:''; position:absolute; top:-60px; right:-60px;
+      width:260px; height:260px; border-radius:50%;
+      background:radial-gradient(circle, rgba(61,158,114,0.06) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .petition-card-header { display:flex; align-items:flex-start; gap:1.5rem; margin-bottom:1.8rem; }
+    .petition-card-icon { width:60px; height:60px; flex-shrink:0; background:rgba(61,158,114,0.10); border:1px solid rgba(61,158,114,0.22); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
+    .petition-card-meta .pc-status { font-size:0.70rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e1); margin-bottom:0.4rem; display:flex; align-items:center; gap:7px; }
+    .petition-card-meta .pc-status::before { content:''; width:6px; height:6px; background:var(--e1); border-radius:50%; animation:pulse 2.5s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.28;transform:scale(0.52);} }
+    .petition-card-meta h3 { font-family:'DM Serif Display',serif; font-size:1.45rem; color:var(--t1); line-height:1.3; margin-bottom:0.3rem; }
+    .petition-card-meta .pc-docket { font-size:0.86rem; color:var(--t2); font-weight:300; }
+    .petition-card-meta .pc-docket strong { color:var(--e2-text); font-weight:600; }
+    .petition-body { font-size:0.97rem; color:var(--t2); line-height:1.80; font-weight:300; margin-bottom:1.5rem; }
+    .petition-body strong { color:var(--t1); font-weight:500; }
+    .petition-actions { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
+    .btn-petition-primary { background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:13px 28px; border-radius:9999px; font-weight:600; font-size:0.95rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(61,158,114,0.22); transition:all 0.3s; }
+    .btn-petition-primary:hover { transform:translateY(-2px); box-shadow:0 12px 28px rgba(61,158,114,0.30); }
+    .btn-petition-outline { border:1.5px solid rgba(61,158,114,0.30); color:var(--t2); padding:13px 28px; border-radius:9999px; font-weight:500; font-size:0.95rem; text-decoration:none; transition:all 0.3s; display:inline-flex; align-items:center; gap:8px; }
+    .btn-petition-outline:hover { background:rgba(61,158,114,0.07); border-color:rgba(61,158,114,0.50); color:var(--t1); }
+    .petition-docket-pill { display:inline-flex; align-items:center; gap:7px; background:rgba(42,122,86,0.08); border:1px solid rgba(42,122,86,0.20); border-radius:9999px; padding:6px 14px; font-size:0.80rem; color:var(--t3); }
+    .petition-docket-pill strong { color:var(--e2-text); font-weight:600; }
+
+    /* What the petition requests */
+    .petition-requests { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:0.5rem; }
+    .request-card { background:rgba(12,30,20,0.70); border:1px solid var(--e3-border); border-radius:13px; padding:1.2rem 1.4rem; display:flex; gap:12px; align-items:flex-start; transition:border-color 0.3s; }
+    .request-card:hover { border-color:var(--e3-border-lift); }
+    .request-num { font-family:'DM Serif Display',serif; font-size:1.5rem; color:var(--e3); line-height:1; flex-shrink:0; min-width:28px; font-style:italic; }
+    .request-card h4 { font-size:0.90rem; font-weight:600; color:var(--t1); margin-bottom:0.25rem; }
+    .request-card p { font-size:0.84rem; color:var(--t2); line-height:1.58; font-weight:300; }
+
+    /* ══ PUBLIC COMMENT ══ */
+    .public-comment {
+      background:
+        radial-gradient(ellipse at 90% 35%, rgba(42,122,86,0.048) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .public-comment::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(42,122,86,0.10),transparent); pointer-events:none; z-index:1; }
+    .comment-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+
+    /* Step-by-step */
+    .comment-steps { display:flex; flex-direction:column; gap:0.7rem; margin-top:1rem; }
+    .comment-step { display:flex; gap:1.2rem; align-items:flex-start; padding:1.1rem 1.3rem; background:linear-gradient(135deg,rgba(16,40,28,0.88),rgba(12,30,20,0.92)); border:1px solid var(--e3-border); border-radius:12px; transition:border-color 0.3s; }
+    .comment-step:hover { border-color:var(--e3-border-lift); }
+    .cs-num { width:32px; height:32px; border-radius:50%; background:rgba(42,122,86,0.12); border:1.5px solid rgba(42,122,86,0.28); display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:1rem; color:var(--e2-text); flex-shrink:0; font-style:italic; }
+    .cs-body h4 { font-size:0.90rem; font-weight:600; color:var(--t1); margin-bottom:0.2rem; }
+    .cs-body p { font-size:0.84rem; color:var(--t2); line-height:1.55; font-weight:300; }
+    .cs-body a { color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); transition:color 0.2s; font-size:0.82rem; }
+    .cs-body a:hover { color:var(--e1); }
+
+    /* Comment guidance box */
+    .comment-guidance {
+      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
+      border:1px solid var(--e3-border); border-radius:16px; padding:1.8rem 2rem; margin-top:1.5rem;
+    }
+    .comment-guidance h4 { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:1rem; }
+    .guidance-list { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+    .guidance-list li { display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:var(--t2); line-height:1.60; font-weight:300; }
+    .guidance-list li i { color:var(--e2); font-size:0.72rem; margin-top:4px; flex-shrink:0; }
+    .guidance-list li strong { color:var(--t1); font-weight:500; }
+
+    /* ══ AUDIENCES ══ */
+    .audiences {
+      background:
+        radial-gradient(ellipse at 8% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .audience-intro { max-width:660px; margin-bottom:2.5rem; }
+    .audience-intro p { color:var(--t2); font-size:0.97rem; line-height:1.78; font-weight:300; }
+    .audience-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+    .audience-card {
+      background:var(--card-white); border:4px solid rgba(26,92,62,0.22); border-radius:18px;
+      padding:1.6rem 1.7rem; display:flex; flex-direction:column; align-items:flex-start;
+      position:relative; overflow:hidden; transition:all 0.35s;
+      box-shadow:0 6px 20px rgba(0,0,0,0.14), inset 0 2px 3px rgba(255,255,255,0.44);
+    }
+    .audience-card::before { content:''; position:absolute; top:0;left:0;right:0; height:30%; background:linear-gradient(180deg,rgba(255,255,255,0.52) 0%,transparent 100%); pointer-events:none; z-index:1; }
+    .audience-card:hover { border-color:rgba(42,122,86,0.40); transform:translateY(-3px); box-shadow:0 16px 36px rgba(0,0,0,0.18); }
+    .audience-icon { width:46px; height:46px; color:var(--e2); margin-bottom:0.9rem; position:relative; z-index:2; }
+    .audience-card h3 { font-size:1.02rem; font-weight:600; color:var(--card-text); margin-bottom:0.5rem; position:relative; z-index:2; }
+    .audience-card .audience-tag { font-size:0.68rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color:var(--e2); margin-bottom:0.7rem; position:relative; z-index:2; }
+    .audience-action-list { list-style:none; display:flex; flex-direction:column; gap:0.5rem; position:relative; z-index:2; flex-grow:1; }
+    .audience-action-list li { font-size:0.85rem; color:var(--card-mid); line-height:1.52; display:flex; align-items:flex-start; gap:8px; }
+    .audience-action-list li::before { content:'→'; color:var(--e3); flex-shrink:0; font-size:0.78rem; margin-top:1px; }
+
+    /* ══ WHAT WE'RE ASKING FOR ══ */
+    .asks-section {
+      background:
+        radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.050) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
+    }
+    .asks-section::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(42,122,86,0.09),transparent); pointer-events:none; z-index:1; }
+    .asks-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .ask-cards { display:flex; flex-direction:column; gap:0.9rem; margin-top:1rem; }
+    .ask-card { background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:13px; padding:1.2rem 1.5rem; display:flex; gap:1rem; align-items:flex-start; transition:border-color 0.3s, transform 0.3s; }
+    .ask-card:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .ask-icon { width:38px; height:38px; flex-shrink:0; background:rgba(42,122,86,0.10); border:1px solid rgba(42,122,86,0.18); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--e2); font-size:0.95rem; margin-top:2px; }
+    .ask-card h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.25rem; }
+    .ask-card p { font-size:0.86rem; color:var(--t2); line-height:1.58; font-weight:300; }
+
+    .mission-statement { background:linear-gradient(135deg,rgba(20,56,38,0.45),rgba(12,36,24,0.55)); border-left:3px solid var(--e2); border-radius:0 14px 14px 0; padding:1.7rem 1.9rem; }
+    .mission-statement p { font-family:'DM Serif Display',serif; font-size:1.22rem; font-style:italic; color:var(--t1); line-height:1.48; }
+    .mission-statement cite { display:block; margin-top:0.8rem; font-size:0.78rem; font-style:normal; color:var(--e2); font-weight:600; letter-spacing:0.05em; text-transform:uppercase; }
+
+    /* ══ NOT BLAME ══ */
+    .not-blame {
+      background:
+        radial-gradient(ellipse at 5% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
+    }
+    .not-blame-inner { max-width:760px; margin:0 auto; text-align:center; }
+    .not-blame-inner .section-divider { margin-left:auto; margin-right:auto; }
+    .not-blame-inner .body-text { text-align:left; }
+    .framing-cards { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:2rem; text-align:left; }
+    .framing-card { background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:13px; padding:1.3rem 1.5rem; transition:border-color 0.3s; }
+    .framing-card:hover { border-color:var(--e3-border-lift); }
+    .framing-card .fc-not { font-size:0.68rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--t3); margin-bottom:0.4rem; }
+    .framing-card .fc-but { font-size:0.68rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e2); margin-bottom:0.4rem; }
+    .framing-card p { font-size:0.90rem; color:var(--t2); line-height:1.60; font-weight:300; }
+    .framing-card p strong { color:var(--t1); font-weight:500; }
+
+    /* ══ CTA ══ */
+    .action-cta { background:radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%), linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78)); border-top:1px solid rgba(42,122,86,0.13); padding:4rem 2.5rem; text-align:center; }
+    .action-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
+    .action-cta p { color:var(--t2); font-size:1rem; line-height:1.72; max-width:540px; margin:0 auto 1.8rem; font-weight:300; }
+    .cta-btns { display:flex; gap:1.1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:14px 32px; border-radius:9999px; font-weight:600; font-size:0.97rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .btn-outline { border:1.5px solid rgba(42,122,86,0.30); color:var(--t2); padding:14px 32px; border-radius:9999px; font-weight:500; font-size:0.97rem; text-decoration:none; transition:all 0.3s; }
+    .btn-outline:hover { background:rgba(42,122,86,0.07); border-color:rgba(42,122,86,0.48); color:var(--t1); }
+
+    /* ══ FOOTER ══ */
+    footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
+    .footer-brand p { color:rgba(106,144,128,0.52);font-size:0.85rem;line-height:1.74;margin-top:1rem;font-weight:300; }
+    .footer-col h4 { font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--e2);margin-bottom:0.9rem; }
+    .footer-col a { display:block;color:rgba(106,144,128,0.45);text-decoration:none;font-size:0.86rem;font-weight:300;margin-bottom:0.46rem;transition:color 0.2s; }
+    .footer-col a:hover { color:var(--t1); }
+    .footer-bottom { max-width:1100px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(30,92,62,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+    .footer-bottom p { font-size:0.77rem;color:rgba(106,144,128,0.26); }
+    .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
+    .footer-bottom a:hover { color:var(--t2); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:1024px) {
+      .comment-grid,.asks-grid { grid-template-columns:1fr; gap:3rem; }
+      .audience-grid { grid-template-columns:1fr 1fr; }
+      .petition-requests { grid-template-columns:1fr; }
+      .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
+      .framing-cards { grid-template-columns:1fr; }
+    }
+    @media (max-width:680px) {
+      .nav-links { display:none; }
+      .footer-inner { grid-template-columns:1fr; }
+      .audience-grid { grid-template-columns:1fr; }
+      .petition-card { padding:1.8rem; }
+      .petition-card-header { flex-direction:column; gap:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="mito-canvas"></canvas>
+  <div id="atmosphere"></div>
+  <div id="vignette"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🧬</div>
+        <div>
+          <div class="nav-logo-text">DIMD</div>
+          <div class="nav-logo-sub">Science · Evidence · Policy</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="science.html">The Science</a></li>
+        <li><a href="fqad.html">FQAD</a></li>
+        <li><a href="action.html" class="active">Take Action</a></li>
+        <li><a href="evidence.html">Evidence</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="registry.html" class="nav-cta">Registry</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>Take Action</span>
+        </div>
+        <h1>The Federal <em>Conversation</em> Has Begun</h1>
+        <p class="page-hero-sub">
+          An FDA Citizen Petition is on record. A manuscript is under peer review. A registry is open.
+          <strong>The evidence base is being built — and every voice, every data point, every public comment matters.</strong>
+        </p>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <i class="fas fa-circle-check"></i>
+            <span>FDA Docket <strong>FDA-2026-P-5116</strong> — Accepted &amp; Open for Public Comment</span>
+          </div>
+          <div class="hero-badge">
+            <i class="fas fa-scale-balanced"></i>
+            <span>Evolution, not blame — <strong>frameworks catching up to science</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PETITION FEATURED -->
+    <section class="petition-featured">
+      <div class="section-inner">
+        <div class="section-label">Primary Action</div>
+        <h2 class="section-title">The FDA Citizen Petition</h2>
+        <div class="section-divider"></div>
+
+        <div class="petition-card">
+          <div class="petition-card-header">
+            <div class="petition-card-icon">📋</div>
+            <div class="petition-card-meta">
+              <div class="pc-status">Accepted for Filing · Open for Public Comment</div>
+              <h3>Citizen Petition Regarding Enhanced Informed Consent for Systemic Fluoroquinolone Antibiotics</h3>
+              <div class="pc-docket">Docket No. <strong>FDA-2026-P-5116</strong> &nbsp;·&nbsp; U.S. Food &amp; Drug Administration &nbsp;·&nbsp; Filed May 2026</div>
+            </div>
+          </div>
+          <p class="petition-body">
+            This petition does not ask the FDA to ban fluoroquinolones. It asks for something more precise and more achievable: that the informed consent and patient-facing risk communication for systemic fluoroquinolone antibiotics be updated to accurately reflect what the regulatory record — and modern molecular science — already documents. Patients deserve to know, before they take these medications, that delayed, multisystem, and potentially permanent adverse effects are <strong>a recognized regulatory reality, not a rare coincidence.</strong>
+          </p>
+          <div class="petition-actions">
+            <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener" class="btn-petition-primary">
+              <i class="fas fa-arrow-up-right-from-square"></i> Read the Full Petition
+            </a>
+            <a href="https://www.regulations.gov" target="_blank" rel="noopener" class="btn-petition-outline">
+              <i class="fas fa-comment"></i> Submit Public Comment
+            </a>
+            <div class="petition-docket-pill">
+              <i class="fas fa-hashtag"></i>
+              <span>Docket <strong>FDA-2026-P-5116</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-top:0.5rem;">What the Petition Requests</div>
+        <div class="petition-requests">
+          <div class="request-card">
+            <div class="request-num">1</div>
+            <div>
+              <h4>Updated Informed Consent Language</h4>
+              <p>Patient-facing risk communication that accurately describes the possibility of delayed, multisystem, and potentially permanent adverse effects — in language patients can understand before making a treatment decision.</p>
+            </div>
+          </div>
+          <div class="request-card">
+            <div class="request-num">2</div>
+            <div>
+              <h4>Improved Risk Communication Materials</h4>
+              <p>Medication guides and prescriber communications updated to reflect the 2016 FDA Safety Communication language — "disabling and potentially permanent" — in a format that reaches patients at the point of prescribing.</p>
+            </div>
+          </div>
+          <div class="request-card">
+            <div class="request-num">3</div>
+            <div>
+              <h4>Recognition of Multisystem Syndrome</h4>
+              <p>Regulatory acknowledgment that the constellation of symptoms described in FQAD represents a coherent multisystem syndrome, not a collection of unrelated individual adverse events.</p>
+            </div>
+          </div>
+          <div class="request-card">
+            <div class="request-num">4</div>
+            <div>
+              <h4>Restriction Reinforcement for Minor Infections</h4>
+              <p>Reinforcement of the existing 2016 FDA recommendation to avoid fluoroquinolone use for uncomplicated infections when effective alternatives are available — a recommendation that remains inconsistently applied in practice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO SUBMIT A PUBLIC COMMENT -->
+    <section class="public-comment">
+      <div class="section-inner">
+        <div class="comment-grid">
+          <div>
+            <div class="section-label">Your Voice on the Record</div>
+            <h2 class="section-title">How to Submit a Public Comment</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              The FDA docket is open for public comment on regulations.gov. Public comments become part of the official administrative record and are considered by the FDA in its review of the petition. <strong>Your comment matters — whether you are a patient, clinician, researcher, or concerned member of the public.</strong>
+            </p>
+            <p class="body-text">
+              You do not need special credentials to submit a comment. You do not need to be a scientist or a lawyer. What the record needs is <em>voices</em> — specific, substantive, and grounded in real experience or professional knowledge.
+            </p>
+
+            <div class="comment-steps">
+              <div class="comment-step">
+                <div class="cs-num">1</div>
+                <div class="cs-body">
+                  <h4>Go to regulations.gov</h4>
+                  <p>Visit <a href="https://www.regulations.gov" target="_blank" rel="noopener">regulations.gov</a> and search for docket number <strong>FDA-2026-P-5116</strong>.</p>
+                </div>
+              </div>
+              <div class="comment-step">
+                <div class="cs-num">2</div>
+                <div class="cs-body">
+                  <h4>Click "Comment" on the Docket</h4>
+                  <p>Open the docket page and click the green "Comment" button to begin your submission. No account is required.</p>
+                </div>
+              </div>
+              <div class="comment-step">
+                <div class="cs-num">3</div>
+                <div class="cs-body">
+                  <h4>Write Your Comment</h4>
+                  <p>Be specific. Describe your experience, your professional perspective, or your concern. Concrete and personal comments carry more weight than general statements.</p>
+                </div>
+              </div>
+              <div class="comment-step">
+                <div class="cs-num">4</div>
+                <div class="cs-body">
+                  <h4>Submit and Receive Confirmation</h4>
+                  <p>Submit your comment and save your confirmation number. Your comment is now part of the official FDA administrative record.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="comment-guidance">
+              <h4>Guidance for Effective Comments</h4>
+              <ul class="guidance-list">
+                <li><i class="fas fa-circle-dot"></i><span><strong>Be specific about your experience.</strong> Dates of exposure, medications involved, timeline of symptoms, and functional impact all add evidentiary weight to the record.</span></li>
+                <li><i class="fas fa-circle-dot"></i><span><strong>Connect your experience to the petition's requests.</strong> If you were not adequately informed of these risks before prescribing, say so directly.</span></li>
+                <li><i class="fas fa-circle-dot"></i><span><strong>Clinicians:</strong> Document your clinical observations — patterns you've seen, patients who did not receive adequate pre-treatment information, diagnostic challenges in attributing delayed symptoms to prior drug exposure.</span></li>
+                <li><i class="fas fa-circle-dot"></i><span><strong>Researchers:</strong> Reference relevant literature and note where the current scientific understanding exceeds current labeling and informed consent frameworks.</span></li>
+                <li><i class="fas fa-circle-dot"></i><span><strong>Keep it factual and calm.</strong> The most effective comments are precise, grounded, and professional — not emotional appeals. The science and the regulatory record already make the case.</span></li>
+                <li><i class="fas fa-circle-dot"></i><span><strong>There is no minimum length.</strong> A single, specific, well-documented paragraph is more valuable than a lengthy unfocused comment.</span></li>
+              </ul>
+            </div>
+
+            <div class="pull-quote" style="margin-top:1.5rem;">
+              <p>"The federal conversation has begun. Public comments are how the record grows from one voice to many."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIENCES -->
+    <section class="audiences">
+      <div class="section-inner">
+        <div class="section-label">Who Can Help</div>
+        <h2 class="section-title">There Is a Role for Every Audience</h2>
+        <div class="section-divider"></div>
+        <div class="audience-intro">
+          <p>This effort does not belong to any single group. Patients, clinicians, researchers, and policymakers each hold a different piece of what is needed — and each has a distinct way to contribute.</p>
+        </div>
+        <div class="audience-grid">
+          <div class="audience-card">
+            <svg class="audience-icon" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="72" r="26" stroke="currentColor" stroke-width="14"/>
+              <path d="M55 162 C55 130 145 130 145 162" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+            </svg>
+            <div class="audience-tag">Patients &amp; Families</div>
+            <h3>Your experience is evidence</h3>
+            <ul class="audience-action-list">
+              <li>Submit a public comment to FDA docket FDA-2026-P-5116</li>
+              <li>Contribute to the DIMD Registry with structured symptom and exposure data</li>
+              <li>Share the petition with others who may have been affected</li>
+              <li>Ask your clinician to document the exposure-effect relationship in your medical record</li>
+            </ul>
+          </div>
+          <div class="audience-card">
+            <svg class="audience-icon" viewBox="0 0 200 200" fill="none">
+              <rect x="62" y="48" width="76" height="104" rx="8" stroke="currentColor" stroke-width="13"/>
+              <path d="M80 76 H120" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <path d="M80 96 H120" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <path d="M80 116 H104" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="100" cy="42" r="10" stroke="currentColor" stroke-width="10"/>
+            </svg>
+            <div class="audience-tag">Clinicians &amp; Prescribers</div>
+            <h3>Code it. Document it. Report it.</h3>
+            <ul class="audience-action-list">
+              <li>Use ICD-10-CM fluoroquinolone adverse effect codes when clinically appropriate</li>
+              <li>Document exposure-effect relationships in the medical record</li>
+              <li>Submit MedWatch reports for delayed or persistent adverse effects</li>
+              <li>Submit a professional comment to the FDA docket</li>
+              <li>Review the systems-level framework preprint (DOI: 10.5281/zenodo.20015205)</li>
+            </ul>
+          </div>
+          <div class="audience-card">
+            <svg class="audience-icon" viewBox="0 0 200 200" fill="none">
+              <ellipse cx="100" cy="100" rx="42" ry="24" stroke="currentColor" stroke-width="13"/>
+              <ellipse cx="100" cy="100" rx="28" ry="16" stroke="currentColor" stroke-width="9"/>
+              <circle cx="100" cy="100" r="7" fill="currentColor"/>
+              <path d="M68 70 Q100 52 132 70" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+              <path d="M70 130 Q100 148 130 130" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+            <div class="audience-tag">Researchers &amp; Scientists</div>
+            <h3>The gaps are documented. Fill them.</h3>
+            <ul class="audience-action-list">
+              <li>Cite and build on the DIMD mechanistic framework</li>
+              <li>Design studies with delayed adverse effect endpoints</li>
+              <li>Investigate ATFS-1/POLG-mediated heteroplasmy propagation in human drug-induced injury models</li>
+              <li>Submit peer review comments or letters to the FDA docket</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE'RE ASKING FOR -->
+    <section class="asks-section">
+      <div class="section-inner">
+        <div class="asks-grid">
+          <div>
+            <div class="section-label">The Systemic Ask</div>
+            <h2 class="section-title">What Needs to Change — and Why It Can</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              Beyond the petition, the DIMD initiative advocates for systemic changes to how drug safety is evaluated, communicated, and tracked. These are not radical asks. They are <strong>logical extensions of what modern mitochondrial science already demands.</strong>
+            </p>
+            <div class="ask-cards">
+              <div class="ask-card">
+                <div class="ask-icon"><i class="fas fa-vial"></i></div>
+                <div>
+                  <h4>Mitochondrial Safety Endpoints in Drug Evaluation</h4>
+                  <p>Integration of mtDNA copy number, OXPHOS complex activity, and ROS biomarkers into preclinical and post-market safety studies for drug classes with known mitochondrial mechanisms.</p>
+                </div>
+              </div>
+              <div class="ask-card">
+                <div class="ask-icon"><i class="fas fa-clock-rotate-left"></i></div>
+                <div>
+                  <h4>Longitudinal Adverse Event Tracking</h4>
+                  <p>Pharmacovigilance systems that follow patients over months and years — not just during or immediately after drug exposure — with explicit tracking of delayed and cumulative mitochondrial effects.</p>
+                </div>
+              </div>
+              <div class="ask-card">
+                <div class="ask-icon"><i class="fas fa-database"></i></div>
+                <div>
+                  <h4>National Exposure-Linked Registry</h4>
+                  <p>A structured national registry linking drug exposure histories to delayed adverse outcomes — building the longitudinal evidence base that currently does not exist.</p>
+                </div>
+              </div>
+              <div class="ask-card">
+                <div class="ask-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div>
+                  <h4>Clinician Education on Delayed Mitochondrial Patterns</h4>
+                  <p>Integration of mitochondrial pharmacotoxicology into medical education and continuing education — bridging the gap between what molecular biology understands and what clinical practice currently recognizes.</p>
+                </div>
+              </div>
+              <div class="ask-card">
+                <div class="ask-icon"><i class="fas fa-code-branch"></i></div>
+                <div>
+                  <h4>Electronic Health Record Flagging</h4>
+                  <p>EHR-level alerts that flag prior fluoroquinolone adverse effect history before a subsequent prescription is written — a basic patient safety mechanism that does not currently exist.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="mission-statement">
+              <p>"Modern medicine is simply not yet equipped to routinely recognize and address this. That is not a moral failing — it is a structural one. And structural gaps can be closed."</p>
+              <cite>— DIMD Initiative</cite>
+            </div>
+
+            <p class="body-text" style="margin-top:1.8rem;">
+              The DIMD framework does not ask anyone to accept blame. It asks the scientific and regulatory community to do what it does best: <strong>update its models when the evidence demands it.</strong>
+            </p>
+            <p class="body-text">
+              Mitochondrial biology has advanced dramatically in the past three decades. Drug safety frameworks were designed before much of this science existed. The ask is simply that they evolve — as all good scientific frameworks do when new evidence arrives.
+            </p>
+
+            <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.8rem;">
+              <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); width:fit-content; transition:color 0.2s; padding-bottom:2px;">
+                <i class="fas fa-arrow-up-right-from-square"></i> Read the FDA Petition (DOI: 10.5281/zenodo.20128765)
+              </a>
+              <a href="https://doi.org/10.5281/zenodo.20015205" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; font-size:0.88rem; color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); width:fit-content; transition:color 0.2s; padding-bottom:2px;">
+                <i class="fas fa-arrow-up-right-from-square"></i> Read the Systems-Level Framework Preprint
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVOLUTION NOT BLAME -->
+    <section class="not-blame">
+      <div class="section-inner">
+        <div class="not-blame-inner">
+          <div class="section-label" style="text-align:center;">Core Framing</div>
+          <h2 class="section-title" style="text-align:center;">Evolution, Not Blame</h2>
+          <div class="section-divider"></div>
+          <p class="body-text">
+            This initiative is not an indictment of any prescriber, any pharmaceutical company, or any regulatory agency. The medications in question were approved on the best available science of their era. The clinicians who prescribed them followed guidelines. The patients who took them trusted their doctors.
+          </p>
+          <p class="body-text">
+            The problem is not malice. The problem is that <strong>our understanding of mitochondrial biology has advanced enormously</strong> in the past thirty years — and our safety models have not fully kept pace. That is a structural and educational gap, and it is one that can be closed through precisely the kind of regulatory, scientific, and clinical engagement this initiative is pursuing.
+          </p>
+          <div class="framing-cards">
+            <div class="framing-card">
+              <div class="fc-not">This is not about</div>
+              <p>Assigning fault to prescribers who followed guidelines, pharmaceutical companies who met approval standards, or regulators who acted on available evidence.</p>
+            </div>
+            <div class="framing-card">
+              <div class="fc-but">This is about</div>
+              <p><strong>Updating the framework.</strong> Incorporating what modern mitochondrial science now demands into how drugs are evaluated, labeled, and communicated to patients.</p>
+            </div>
+            <div class="framing-card">
+              <div class="fc-not">This is not about</div>
+              <p>Sensationalizing rare adverse events or creating fear around broadly useful antibiotic classes that have saved millions of lives.</p>
+            </div>
+            <div class="framing-card">
+              <div class="fc-but">This is about</div>
+              <p><strong>Accurate informed consent.</strong> Giving patients the information they need to make real decisions — including knowledge that delayed, multisystem, and permanent effects are a documented regulatory reality.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="action-cta">
+      <h2>Every Action Adds to the Record</h2>
+      <p>Comment. Contribute. Share. The evidence base for DIMD recognition is being built in real time — and every piece of it matters.</p>
+      <div class="cta-btns">
+        <a href="https://www.regulations.gov" target="_blank" rel="noopener" class="btn-primary"><i class="fas fa-comment"></i> Submit a Public Comment</a>
+        <a href="registry.html" class="btn-outline">Join the Registry</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="text-decoration:none;">
+          <div class="nav-logo-icon">🧬</div>
+          <div style="margin-left:10px;">
+            <div class="nav-logo-text">DIMD</div>
+            <div class="nav-logo-sub">Science · Evidence · Policy</div>
+          </div>
+        </a>
+        <p>Patient-led · Evidence-focused · Science-driven.<br>
+        This site is for educational and advocacy purposes only and does not provide medical advice.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="science.html">Understanding DIMD</a>
+        <a href="fqad.html">FQAD</a>
+        <a href="evidence.html">Evidence &amp; References</a>
+      </div>
+      <div class="footer-col">
+        <h4>Act</h4>
+        <a href="registry.html">DIMD Registry</a>
+        <a href="action.html">Take Action</a>
+        <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener">FDA Petition</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="about.html">The Researcher</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="evidence.html">References</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING MITOCHONDRIA -->
+  <script>
+  (function(){
+    const canvas=document.getElementById('mito-canvas');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    resize(); window.addEventListener('resize',resize);
+    function drawMito(ctx,x,y,rx,ry,angle,alpha){
+      ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(angle);
+      const c='#1A5C3E';
+      ctx.beginPath(); ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,rx*.68,ry*.68,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.0; ctx.stroke();
+      const folds=Math.max(2,Math.round(rx/11)), step=(ry*1.2)/(folds+1);
+      ctx.lineWidth=0.72;
+      for(let i=1;i<=folds;i++){
+        const fy=(-ry*.55)+(i*step),amp=rx*.23;
+        ctx.beginPath(); ctx.moveTo(-rx*.50,fy); ctx.bezierCurveTo(-rx*.16,fy-amp,rx*.16,fy+amp,rx*.50,fy); ctx.stroke();
+      }
+      [0.25,0.5,0.75,1.0,1.5,1.75].forEach(t=>{
+        const a2=t*Math.PI*2;
+        ctx.beginPath(); ctx.arc(Math.cos(a2)*rx*.68,Math.sin(a2)*ry*.68,rx*.036,0,Math.PI*2); ctx.fillStyle=c; ctx.fill();
+      });
+      ctx.restore();
+    }
+    const COUNT=22; const P=[];
+    function rp(edge){
+      const rx=14+Math.random()*42,ry=rx*(.34+Math.random()*.24);
+      const speed=.08+Math.random()*.16,dir=Math.random()*Math.PI*2;
+      let x,y;
+      if(edge){
+        const e=Math.floor(Math.random()*4);
+        if(e===0){x=Math.random()*canvas.width;y=-rx*2;}
+        else if(e===1){x=canvas.width+rx*2;y=Math.random()*canvas.height;}
+        else if(e===2){x=Math.random()*canvas.width;y=canvas.height+rx*2;}
+        else{x=-rx*2;y=Math.random()*canvas.height;}
+      }else{x=Math.random()*canvas.width;y=Math.random()*canvas.height;}
+      return{x,y,rx,ry,angle:Math.random()*Math.PI*2,drift:(Math.random()-.5)*.0025,alpha:.05+Math.random()*.20,vx:Math.cos(dir)*speed,vy:Math.sin(dir)*speed};
+    }
+    for(let i=0;i<COUNT;i++)P.push(rp(false));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<P.length;i++){
+        const p=P[i];p.x+=p.vx;p.y+=p.vy;p.angle+=p.drift;
+        const pad=p.rx*2.5;
+        if(p.x<-pad||p.x>canvas.width+pad||p.y<-pad||p.y>canvas.height+pad){P[i]=rp(true);continue;}
+        drawMito(ctx,p.x,p.y,p.rx,p.ry,p.angle,p.alpha);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+  </script>
+
+</body>
+</html>
