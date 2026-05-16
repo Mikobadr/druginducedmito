@@ -18,13 +18,13 @@
       --e1:          #3D9E72;
       --e1-btn:      #2E8A60;
       --e2:          #2A7A56;
-      --e2-text:     #327A5A;
+      --e2-text:     #7AAF95;
       --e3:          #1A5C3E;
       --e3-border:   rgba(30,92,62,0.18);
       --e3-border-lift: rgba(42,122,86,0.28);
       --t1:   #D4E8DC;
-      --t2:   #9DBDAF;
-      --t3:   #6A9080;
+      --t2:   #B0CCBF;
+      --t3:   #8AA89A;
       --card-white: #F4F7F3;
       --card-text:  #0E2018;
       --card-mid:   #304A3C;
@@ -231,8 +231,13 @@
     .form-check label { font-size:0.86rem; color:var(--t2); line-height:1.55; cursor:pointer; font-weight:300; }
     .form-check label strong { color:var(--t1); font-weight:500; }
     .form-note { font-size:0.78rem; color:var(--t3); line-height:1.58; margin-top:0.4rem; font-style:italic; }
+    .consent-block { background:rgba(10,28,18,0.60); border:1px solid rgba(42,122,86,0.20); border-radius:12px; padding:1.2rem 1.4rem; margin-top:1.2rem; }
+    .consent-label { font-size:0.72rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e2); margin-bottom:0.7rem; display:flex; align-items:center; gap:7px; }
+    .consent-check { align-items:flex-start !important; }
+    .consent-check label { font-size:0.84rem; line-height:1.62; }
     .btn-submit { width:100%; background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:15px 32px; border-radius:9999px; font-weight:600; font-size:1rem; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; font-family:'DM Sans',sans-serif; margin-top:1.4rem; }
     .btn-submit:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .btn-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
     .form-disclaimer { font-size:0.76rem; color:var(--t3); line-height:1.62; text-align:center; margin-top:1rem; font-style:italic; }
 
     /* ══ CTA ══ */
@@ -609,7 +614,7 @@
                 <div class="who-icon"><i class="fas fa-stethoscope"></i></div>
                 <div>
                   <h4>Clinicians Who Have Observed FQAD</h4>
-                  <p>Healthcare providers who have seen clinical presentations consistent with FQAD in their practice and wish to contribute professional observations to the aggregate record.</p>
+                  <p>Healthcare providers who have seen clinical presentations consistent with FQAD in their practice and wish to participate and share professional observations to the aggregate record.</p>
                 </div>
               </div>
               <div class="who-card">
@@ -629,20 +634,32 @@
     <section class="join-section">
       <div class="section-inner">
         <div class="join-inner">
-          <div class="section-label">Join the Registry</div>
-          <h2 class="section-title">Express Your Interest</h2>
+          <div class="section-label">Phase 1 Registry — Now Open</div>
+          <h2 class="section-title">Join the DIMD Registry</h2>
           <div class="section-divider"></div>
-          <p class="body-text">The full registry intake is launching shortly. Leave your information below and you'll be among the first contacted when it opens — or contribute your initial information now.</p>
+          <p class="body-text">The Phase 1 DIMD Registry is now open for fluoroquinolone-related patient-reported outcomes. You may complete the structured intake below. No identifying information is required. Email is optional and only needed if you want future follow-up, updates, or the ability to clarify your submission later.</p>
 
           <div class="interest-card">
-            <div class="ic-label">Registry — Now Open</div>
-            <h3>DIMD Registry Interest Form</h3>
-            <p class="ic-sub">This form captures your initial information. <strong>No identifying details required.</strong> Full structured intake will follow by email if provided, or you may complete it anonymously without an email address.</p>
+            <div class="ic-label">Phase 1 Registry Intake — Active</div>
+            <h3>DIMD Registry Intake Form</h3>
+            <p class="ic-sub"><strong>No identifying information is required.</strong> Email is optional. Your responses are patient-reported and will be used only in de-identified, aggregate form for research, education, and advocacy purposes.</p>
+
+            <!-- ============================================================
+                 ADMIN NOTE — FORMSPREE ENDPOINT CONNECTED
+                 Live endpoint: https://formspree.io/f/xaqkwowq
+                 Submissions go to your Formspree dashboard and email.
+                 Export to CSV anytime from formspree.io/forms
+                 To change the endpoint, update the form action above.
+            ============================================================ -->
+            <form id="registryForm" action="https://formspree.io/f/xaqkwowq" method="POST">
+              <!-- Hidden field to identify form source -->
+              <input type="hidden" name="_subject" value="DIMD Phase 1 Registry Submission">
+              <input type="hidden" name="_next" value="thank-you.html">
 
             <div class="form-row">
               <div class="form-group">
-                <label for="reg-role">I am contributing as</label>
-                <select id="reg-role" name="role">
+                <label for="reg-role">I am participating as</label>
+                <select id="reg-role" name="role" required>
                   <option value="">Select your role…</option>
                   <option value="patient">A patient / person affected</option>
                   <option value="caregiver">A family member or caregiver</option>
@@ -707,25 +724,34 @@
 
             <div class="form-group">
               <label for="reg-notes">Anything you'd like to add <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
-              <textarea id="reg-notes" name="notes" placeholder="Brief description of your experience, questions, or anything you want the registry team to know…"></textarea>
+              <textarea id="reg-notes" name="notes" placeholder="Brief description of your experience, or anything you want the registry team to know. Please do not include your name, address, date of birth, or other personal identifiers."></textarea>
             </div>
 
             <div class="form-group">
-              <label for="reg-email">Email address <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional — for follow-up and longitudinal participation)</span></label>
+              <label for="reg-email">Email address <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
               <input type="email" id="reg-email" name="email" placeholder="your@email.com">
-              <p class="form-note">Your email will never be shared. It is used only to send you registry intake information and optional longitudinal follow-up surveys. Leave blank to contribute anonymously.</p>
+              <p class="form-note">Email is optional. It is used only if you want future follow-up, updates, or to clarify your submission. Leave blank to participate anonymously. Your email will never be shared or sold.</p>
             </div>
 
-            <div class="form-check" style="margin-top:0.5rem;">
-              <input type="checkbox" id="reg-consent" name="consent" value="yes">
-              <label for="reg-consent"><strong>I understand</strong> that this is a research registry, not a clinical service, and that contributing does not establish a patient-provider relationship or constitute medical advice.</label>
+            <!-- CONSENT BLOCK -->
+            <div class="consent-block">
+              <div class="consent-label"><i class="fas fa-shield-halved"></i> Consent Required</div>
+              <div class="form-check consent-check">
+                <input type="checkbox" id="reg-consent" name="consent" value="yes" required>
+                <label for="reg-consent">
+                  <strong>Consent *</strong><br>
+                  By submitting this form, I understand that my responses are patient-reported and do not replace medical evaluation or advice. I consent to the use of my de-identified responses in aggregate for research, education, public awareness, advocacy, and policy-related purposes. I understand that no identifying information is required and that I should not include personal identifiers in my responses.
+                </label>
+              </div>
             </div>
 
-            <button type="button" class="btn-submit" onclick="handleRegistrySubmit()">
-              <i class="fas fa-users"></i> Submit Registry Interest
+            <button type="submit" class="btn-submit" id="submitBtn">
+              <i class="fas fa-users"></i> Submit Registry Intake
             </button>
 
-            <p class="form-disclaimer">This site is for educational and advocacy purposes only. The DIMD Registry does not provide medical advice, diagnosis, or treatment. All data is handled with strict privacy protections and used solely for DIMD research and advocacy.</p>
+            </form>
+
+            <p class="form-disclaimer">This site is for educational and advocacy purposes only. The DIMD Registry does not provide medical advice, diagnosis, or treatment. All data is handled with strict privacy protections and used solely in de-identified, aggregate form for DIMD research, education, and advocacy. See our <a href="privacy.html" style="color:var(--e2-text);border-bottom:1px solid rgba(42,122,86,0.28);">Privacy Policy</a>.</p>
           </div>
         </div>
       </div>
@@ -772,40 +798,42 @@
       <div class="footer-col">
         <h4>About</h4>
         <a href="about.html">The Researcher</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:admin-dimd@proton.me">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
       <div>
-        <a href="#">Privacy</a>
+        <a href="privacy.html">Privacy</a>
         <a href="evidence.html">References</a>
-        <a href="#">Contact</a>
+        <a href="mailto:admin-dimd@proton.me">Contact</a>
       </div>
     </div>
   </footer>
 
   <!-- FLOATING MITOCHONDRIA + FORM HANDLER -->
   <script>
-  function handleRegistrySubmit() {
-    const consent = document.getElementById('reg-consent');
-    const role = document.getElementById('reg-role');
+  // Registry form handler — Formspree submission
+  // ADMIN: Replace YOUR_FORMSPREE_ENDPOINT_HERE in the form action above with your Formspree URL
+  document.getElementById('registryForm').addEventListener('submit', function(e) {
+    var consent = document.getElementById('reg-consent');
+    var role = document.getElementById('reg-role');
     if (!consent.checked) {
+      e.preventDefault();
       alert('Please check the consent acknowledgment before submitting.');
       return;
     }
     if (!role.value) {
+      e.preventDefault();
       alert('Please select your role before submitting.');
       return;
     }
-    // Replace this with actual form submission endpoint when ready
-    const btn = document.querySelector('.btn-submit');
-    btn.innerHTML = '<i class="fas fa-circle-check"></i> Interest Submitted — Thank You';
-    btn.style.background = 'linear-gradient(90deg,#1A5C3E,#2A7A56)';
-    btn.style.color = '#D4E8DC';
+    var btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Submitting…';
     btn.disabled = true;
-  }
+  });
+  </script>
 
   (function(){
     const canvas=document.getElementById('mito-canvas');

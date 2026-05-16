@@ -33,7 +33,7 @@
          The mid-tone of the icon green.
       ══════════════════════════════════════════ */
       --e2:          #2A7A56;   /* muted forest green — the icon's soul */
-      --e2-text:     #327A5A;   /* slightly brighter for small text */
+      --e2-text:     #7AAF95;   /* readability upgrade: fog sage — replaces low-contrast green-on-dark */
 
       /* ══════════════════════════════════════════
          TIER 3 — borders, card surfaces, hover,
@@ -53,8 +53,8 @@
 
       /* ══ TEXT ══ */
       --t1:   #D4E8DC;
-      --t2:   #9DBDAF;
-      --t3:   #6A9080;
+      --t2:   #B0CCBF;
+      --t3:   #8AA89A;
 
       /* ══ SURFACES ══ */
       --card-white:  #F4F7F3;
@@ -462,6 +462,25 @@
       .footer-inner { grid-template-columns:1fr; }
       .petition-inner { grid-template-columns:1fr; }
     }
+    /* ══ MEDICATION EXPAND ══ */
+    .med-expand-wrap { margin-top:0.9rem; }
+    .med-expand-btn { width:100%; background:rgba(16,40,28,0.85); border:1px solid var(--e3-border); border-radius:12px; padding:0.9rem 1.2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; cursor:pointer; color:var(--t2); font-size:0.86rem; font-weight:500; font-family:'DM Sans',sans-serif; transition:all 0.25s; text-align:left; }
+    .med-expand-btn:hover { border-color:var(--e3-border-lift); color:var(--t1); background:rgba(20,48,34,0.90); }
+    .med-expand-btn i { color:var(--e2); transition:transform 0.25s; flex-shrink:0; }
+    .med-expand-btn.open i { transform:rotate(45deg); }
+    .med-expand-body { max-height:0; overflow:hidden; transition:max-height 0.45s ease, opacity 0.3s ease; opacity:0; }
+    .med-expand-body.open { max-height:1200px; opacity:1; }
+    .med-expand-intro { font-size:0.86rem; color:var(--t2); line-height:1.70; font-weight:300; padding:1rem 0 0.6rem; }
+    .med-expand-disclaimer { font-size:0.80rem; color:var(--t3); line-height:1.65; font-style:italic; padding-bottom:1rem; border-bottom:1px solid rgba(42,122,86,0.10); margin-bottom:0.8rem; }
+    .med-table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--e3-border); }
+    .med-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .med-table thead tr { background:rgba(20,52,36,0.60); }
+    .med-table thead th { padding:0.7rem 0.9rem; text-align:left; font-size:0.68rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--e2-text); border-bottom:1px solid rgba(42,122,86,0.18); white-space:nowrap; }
+    .med-table tbody tr { border-bottom:1px solid rgba(30,92,62,0.10); transition:background 0.2s; }
+    .med-table tbody tr:hover { background:rgba(42,122,86,0.05); }
+    .med-table tbody td { padding:0.65rem 0.9rem; color:var(--t2); line-height:1.50; font-weight:300; vertical-align:top; }
+    .med-table tbody td:first-child { color:var(--t1); font-weight:500; }
+    .med-expand-source { font-size:0.76rem; color:var(--t3); margin-top:0.8rem; font-style:italic; }
   </style>
 </head>
 <body>
@@ -495,12 +514,12 @@
   <div class="ticker">
     <div class="ticker-track">
       <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
-      <span><i class="fas fa-flask"></i> Manuscript under peer review</span>
+      <span><i class="fas fa-flask"></i> Manuscript submitted for journal consideration</span>
       <span><i class="fas fa-users"></i> DIMD Registry now open for contributions</span>
       <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
       <span><i class="fas fa-circle-check"></i> New case studies being added</span>
       <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
-      <span><i class="fas fa-flask"></i> Manuscript under peer review</span>
+      <span><i class="fas fa-flask"></i> Manuscript submitted for journal consideration</span>
       <span><i class="fas fa-users"></i> DIMD Registry now open for contributions</span>
       <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
       <span><i class="fas fa-circle-check"></i> New case studies being added</span>
@@ -525,7 +544,6 @@
       </p>
       <div class="hero-actions">
         <a href="science.html" class="btn-primary"><i class="fas fa-dna"></i> Understand DIMD</a>
-        <a href="registry.html" class="btn-outline">Join the Registry</a>
       </div>
       <div class="scroll-hint">
         <span>Scroll</span>
@@ -546,7 +564,7 @@
             for fluoroquinolone antibiotics. Now open for public comment on regulations.gov.
           </div>
         </div>
-        <a href="#" class="petition-btn">Read the Petition <i class="fas fa-arrow-right"></i></a>
+        <a href="https://www.regulations.gov/search?filter=fda-2026-p-5116" target="_blank" rel="noopener" class="petition-btn">View Petition on Regulations.gov <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
@@ -558,6 +576,7 @@
             <div class="section-label">The Science</div>
             <h2 class="section-title">Mitochondria Are Not Isolated Structures</h2>
             <div class="section-divider"></div>
+            <p>In the 1960s, mitochondria were still often understood primarily as supporting players in the cell — structures that helped nuclear DNA carry out the work of life. Since then, mitochondrial biology has advanced dramatically. We now understand mitochondria as semi-autonomous organelles with their own DNA, their own stress responses, and direct communication with the nucleus.</p>
             <p>Mitochondria are <strong>signaling hubs</strong> that communicate directly with nuclear DNA, coordinating cellular energy production with gene expression. When this communication is disrupted, the effects extend beyond energy failure — altering cellular behavior at the genomic level and driving multisystem disease.</p>
             <p>When medication-related injury disrupts the body's energy system, the effects can be <strong>widespread and often misunderstood.</strong> Millions develop persistent, multisystem symptoms following medication exposure: pain, neurologic dysfunction, tendon injury, and autonomic instability. Too often, they are told these symptoms are <em>unrelated, idiopathic, or functional.</em></p>
             <p>While mitochondrial biology has advanced dramatically over the past several decades, <strong>drug safety frameworks have not fully integrated this knowledge.</strong></p>
@@ -580,7 +599,39 @@
               <div class="stat-num">Zero</div>
               <div class="stat-desc"><strong>National systems</strong> currently track delayed, cumulative mitochondrial injury following drug exposure.</div>
             </div>
-          </div>
+
+            <!-- EXPANDABLE MEDICATION CLASSES -->
+            <div class="med-expand-wrap">
+              <button class="med-expand-btn" onclick="toggleMedClasses(this)" aria-expanded="false">
+                <span>View medication classes documented to affect mitochondria</span>
+                <i class="fas fa-plus"></i>
+              </button>
+              <div class="med-expand-body" id="medClassesBody">
+                <p class="med-expand-intro">A 2008 review in <em>Molecular Nutrition &amp; Food Research</em> summarized multiple medication classes that have been documented to affect mitochondrial function or induce mitochondrial damage. These included pain relievers and anti-inflammatory drugs, anesthetics, antiarrhythmics, antibiotics, antidepressants, antipsychotics, cholesterol-lowering medications and statins, chemotherapy agents, diabetes medications, HIV/AIDS medications, seizure medications, mood stabilizers, and Parkinson's disease medications.</p>
+                <p class="med-expand-disclaimer">This list is provided for educational and research-context purposes only. It is not a recommendation to stop, avoid, or change any medication. The purpose is to show that mitochondrial toxicity has been documented across multiple medication classes and may be relevant to broader drug-safety evaluation. Patients should speak with a qualified clinician before making any medication decisions.</p>
+                <div class="med-table-wrap">
+                  <table class="med-table">
+                    <thead><tr><th>Medication Class</th><th>Examples</th><th>Mitochondrial Concern</th></tr></thead>
+                    <tbody>
+                      <tr><td>Analgesics / Anti-inflammatory</td><td>Aspirin, acetaminophen, NSAIDs</td><td>ROS generation, glutathione depletion, membrane disruption</td></tr>
+                      <tr><td>Antibiotics</td><td>Fluoroquinolones, tetracyclines, aminoglycosides</td><td>mtDNA damage, ETC inhibition, oxidative stress</td></tr>
+                      <tr><td>Antidepressants</td><td>Amitriptyline, fluoxetine, citalopram</td><td>ETC complex inhibition, mitochondrial membrane effects</td></tr>
+                      <tr><td>Antipsychotics</td><td>Haloperidol, risperidone, clozapine, olanzapine</td><td>Complex I inhibition, increased ROS production</td></tr>
+                      <tr><td>Statins / Cholesterol-lowering</td><td>Atorvastatin, simvastatin, lovastatin</td><td>CoQ10 depletion, calcium-mediated mitochondrial permeability</td></tr>
+                      <tr><td>Chemotherapy agents</td><td>Doxorubicin, mitomycin C</td><td>mtDNA damage, ETC disruption, oxidative injury</td></tr>
+                      <tr><td>Diabetes medications</td><td>Metformin, troglitazone</td><td>Complex I inhibition, mitochondrial respiration impairment</td></tr>
+                      <tr><td>HIV/AIDS medications (NRTIs)</td><td>Zidovudine (AZT), stavudine, didanosine</td><td>DNA polymerase-γ inhibition, mtDNA depletion</td></tr>
+                      <tr><td>Seizure / Epilepsy medications</td><td>Valproic acid</td><td>Carnitine depletion, β-oxidation impairment</td></tr>
+                      <tr><td>Anesthetics</td><td>Bupivacaine, propofol, lidocaine</td><td>Mitochondrial membrane disruption</td></tr>
+                      <tr><td>Antiarrhythmics / Angina</td><td>Amiodarone, perhexiline</td><td>β-oxidation inhibition, OXPHOS uncoupling</td></tr>
+                      <tr><td>Mood stabilizers</td><td>Lithium</td><td>Mitochondrial function alteration</td></tr>
+                      <tr><td>Parkinson's disease medications</td><td>Tolcapone, entacapone</td><td>Mitochondrial toxicity, hepatocellular effects</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="med-expand-source">Source: Neustadt J, Pieczenik SR. Medication-induced mitochondrial damage and disease. <em>Mol Nutr Food Res.</em> 2008;52:780–788.</p>
+              </div>
+            </div>
         </div>
       </div>
     </section>
@@ -594,6 +645,7 @@
             <h2 class="section-title">DIMD Is a Public Health Issue — Not a Rare Event</h2>
             <div class="section-divider"></div>
             <p class="body-text">Medications known to impair mitochondrial function are currently prescribed — often repeatedly — to patients whose mitochondria have already been damaged by prior drug exposure. This occurs <strong>without screening, without informed consent, and without longitudinal tracking.</strong></p>
+            <p class="body-text">Fluoroquinolones are a particularly important example. Although they can be lifesaving when truly needed, they have also been widely prescribed for convenience: broad-spectrum coverage, oral availability, and ease of use have allowed them to substitute for more targeted therapy — in both medical and dental settings — in situations where safer alternatives may have been available. In those cases, risk is not eliminated — it is redistributed to the patient.</p>
             <div class="quote-block">
               <p>"It's not so rare when it happens to you."</p>
             </div>
@@ -720,8 +772,8 @@
         <h2>Join the Effort to Recognize and Prevent DIMD</h2>
         <p>Whether you are a patient, clinician, researcher, or policymaker — your contribution matters. Help close the evidence gap and support pharmacovigilance modernization.</p>
         <div class="cta-btns">
-          <a href="registry.html" class="btn-primary"><i class="fas fa-users"></i> Contribute to the Registry</a>
-          <a href="#" class="btn-outline">Download Clinician Brief</a>
+          <a href="registry.html" class="btn-primary"><i class="fas fa-users"></i> Participate in the Registry</a>
+          <a href="https://www.regulations.gov/search?filter=fda-2026-p-5116" target="_blank" rel="noopener" class="btn-outline">View FDA Petition FDA-2026-P-5116</a>
         </div>
       </div>
     </section>
@@ -758,16 +810,16 @@
       <div class="footer-col">
         <h4>About</h4>
         <a href="about.html">The Researcher</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:admin-dimd@proton.me">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
       <div>
-        <a href="#">Privacy</a>
+        <a href="privacy.html">Privacy</a>
         <a href="evidence.html">References</a>
-        <a href="#">Contact</a>
+        <a href="mailto:admin-dimd@proton.me">Contact</a>
       </div>
     </div>
   </footer>
@@ -836,5 +888,14 @@
   })();
   </script>
 
+  <script>
+  function toggleMedClasses(btn) {
+    var body = document.getElementById('medClassesBody');
+    var isOpen = btn.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    btn.setAttribute('aria-expanded', !isOpen);
+  }
+  </script>
 </body>
 </html>
