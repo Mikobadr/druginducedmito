@@ -234,7 +234,38 @@
     @media (max-width:680px) {
       .nav-links { display:none; }
       .footer-inner { grid-template-columns:1fr; }
+      section { padding:3rem 1.2rem; }
+      .page-hero { padding:3rem 1.2rem 2.5rem; }
       .ref-entry-top { flex-direction:column; gap:0.5rem; }
+      /* Featured pub cards */
+      .pub-card-featured { padding:1.4rem 1.3rem; }
+      .pub-card-featured h3 { font-size:0.97rem; }
+      .pub-card-featured .pcf-meta { font-size:0.76rem; }
+      .pub-card-featured .pcf-desc { font-size:0.84rem; }
+      /* Reference entries */
+      .ref-entry { padding:0.9rem 1rem; }
+      .ref-authors { font-size:0.84rem; }
+      .ref-title { font-size:0.86rem; }
+      .ref-journal { font-size:0.76rem; }
+      .ref-note { font-size:0.77rem; }
+      .ref-tags { margin-top:0.3rem; }
+      /* Nav buttons */
+      .ref-nav { gap:0.4rem; }
+      .ref-nav-btn { font-size:0.74rem; padding:6px 12px; }
+      /* Section headers */
+      .ref-section-header h3 { font-size:1rem; }
+      /* Hero badges */
+      .hero-badges { flex-direction:column; }
+      /* CTA */
+      .cta-btns { flex-direction:column; align-items:stretch; }
+      .btn-primary,.btn-outline { justify-content:center; }
+      /* Footer */
+      .footer-bottom { flex-direction:column; align-items:flex-start; gap:0.5rem; }
+      .footer-bottom a { margin-left:0; margin-right:0.8rem; }
+    }
+    @media (max-width:420px) {
+      .section-title { font-size:1.5rem; }
+      .ref-nav-btn span { display:none; }
     }
   </style>
 </head>

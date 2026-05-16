@@ -296,10 +296,46 @@
     @media (max-width:680px) {
       .nav-links { display:none; }
       .footer-inner { grid-template-columns:1fr; }
+      section { padding:3rem 1.2rem; }
+      .page-hero { padding:3rem 1.2rem 2.5rem; }
+      /* Legacy single-track timeline (not currently shown but keep for safety) */
       .rtimeline::before { display:none; }
       .rt-item { grid-template-columns:1fr; }
       .rt-era { text-align:left; padding-right:0; margin-bottom:0.4rem; }
       .rt-item::after { display:none; }
+      /* Overlap table — horizontal scroll */
+      .table-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+      .overlap-table { min-width:520px; }
+      .overlap-table thead th { font-size:0.68rem; padding:0.6rem 0.7rem; }
+      .overlap-table tbody td { font-size:0.80rem; padding:0.6rem 0.7rem; }
+      /* ICD codes */
+      .icd-code { min-width:60px; font-size:0.90rem; }
+      .icd-card h4 { font-size:0.84rem; }
+      .icd-card p { font-size:0.80rem; }
+      /* Target cards */
+      .target-card { padding:0.9rem 1rem; }
+      .target-card h4 { font-size:0.86rem; }
+      .target-card p { font-size:0.81rem; }
+      /* Exposure chain */
+      .exposure-block { padding:1rem 1.1rem; }
+      .exposure-block .exp-title { font-size:0.92rem; }
+      .exposure-result { padding:1rem 1.1rem; }
+      /* Reg badges */
+      .reg-badge { padding:0.8rem 1rem; }
+      .reg-badge h4 { font-size:0.86rem; }
+      .reg-badge p { font-size:0.80rem; }
+      /* Hero badges */
+      .hero-badges { flex-direction:column; }
+      /* CTA */
+      .cta-btns { flex-direction:column; align-items:stretch; }
+      .btn-primary,.btn-outline { justify-content:center; }
+      /* Footer */
+      .footer-bottom { flex-direction:column; align-items:flex-start; gap:0.5rem; }
+      .footer-bottom a { margin-left:0; margin-right:0.8rem; }
+    }
+    @media (max-width:420px) {
+      .section-title { font-size:1.5rem; }
+      .definition-card p { font-size:0.95rem; }
     }
   </style>
 </head>
@@ -586,10 +622,22 @@
     @media (max-width:760px) {
       .dual-track-headers { grid-template-columns:1fr; gap:0.5rem; }
       .dth-center { display:none; }
+      .dth-right { justify-content:flex-start; }
       .dual-track::before { display:none; }
-      .dt-row { grid-template-columns:1fr; gap:0.5rem; }
-      .dt-center { flex-direction:row; padding-top:0; justify-content:flex-start; gap:8px; }
+      .dt-row { grid-template-columns:1fr; gap:0.5rem; margin-bottom:1.5rem; }
+      .dt-center { flex-direction:row; padding-top:0; justify-content:flex-start; gap:8px; margin-bottom:0.2rem; }
       .dt-left { justify-content:flex-start; padding-right:0; }
+      .dt-right { padding-left:0; }
+      .dt-year { font-size:0.88rem; background:transparent; }
+      .dt-card { padding:0.85rem 1rem; }
+      .dt-card h4 { font-size:0.84rem; }
+      .dt-card p { font-size:0.79rem; }
+      .dt-expand-inner p { font-size:0.79rem; }
+      .gap-callout { flex-direction:column; gap:0.6rem; font-size:0.84rem; }
+    }
+    @media (max-width:420px) {
+      .dt-card h4 { font-size:0.82rem; }
+      .expand-icon { width:20px; height:20px; font-size:0.56rem; }
     }
     </style>
 
