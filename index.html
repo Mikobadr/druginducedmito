@@ -309,7 +309,9 @@
       background:linear-gradient(to bottom, rgba(10,28,20,0.45), transparent);
       pointer-events:none; z-index:1;
     }
-    .what-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .what-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; width:100%; }
+    .what-grid > * { min-width:0; overflow:hidden; }
+    .what-text { min-width:0; overflow:hidden; word-break:break-word; }
     .what-text p { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.2rem; overflow-wrap:break-word; word-break:break-word; max-width:100%; }
     .what-text p strong { color:var(--t1); font-weight:500; }
     .what-text p em { color:var(--e2-text); font-style:italic; }
@@ -353,7 +355,8 @@
       background:linear-gradient(90deg, transparent, rgba(42,122,86,0.07), transparent);
       pointer-events:none; z-index:1;
     }
-    .not-rare-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
+    .not-rare-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; width:100%; }
+    .not-rare-grid > * { min-width:0; overflow:hidden; }
     .quote-block {
       background:linear-gradient(135deg, rgba(20,56,38,0.45), rgba(12,36,24,0.55));
       border-left:3px solid var(--e2);
@@ -461,9 +464,12 @@
       .nav-links { display:none; }
       .footer-inner { grid-template-columns:1fr; }
       .petition-inner { grid-template-columns:1fr; }
-      section { padding:3rem 1rem; }
-      .section-inner { padding:0; width:100%; max-width:100%; }
-      .what-text p, .body-text, p { overflow-wrap:break-word; word-break:break-word; max-width:100%; }
+      section { padding:3rem 1rem; overflow:hidden; }
+      .section-inner { padding:0; width:100%; max-width:100%; overflow:hidden; }
+      .what-grid, .not-rare-grid { grid-template-columns:1fr; gap:2rem; width:100%; overflow:hidden; }
+      .what-grid > *, .not-rare-grid > * { min-width:0; width:100%; overflow:hidden; }
+      .what-text, .what-text p, .body-text, p { overflow-wrap:break-word; word-break:break-word; max-width:100%; width:100%; }
+      .what-text p { font-size:0.95rem; }
       .page-hero { padding:3rem 1.2rem 2.5rem; }
       .hero-eyebrow { font-size:0.70rem; padding:5px 14px; }
       .hero-title { font-size:clamp(2.2rem,9vw,3rem); }
