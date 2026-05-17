@@ -292,7 +292,7 @@
 
     /* ══ SHARED SECTIONS ══ */
     section { padding:5.5rem 2.5rem; position:relative; overflow:hidden; }
-    .section-inner { max-width:1100px; margin:0 auto; position:relative; z-index:2; }
+    .section-inner { max-width:1100px; margin:0 auto; position:relative; z-index:2; overflow-x:hidden; box-sizing:border-box; }
     .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
     .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.9rem,3.8vw,2.75rem); line-height:1.12; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.2rem; }
     .section-divider { width:40px; height:2px; background:linear-gradient(90deg, var(--e3), transparent); border-radius:2px; margin-bottom:1.9rem; }
@@ -310,7 +310,7 @@
       pointer-events:none; z-index:1;
     }
     .what-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
-    .what-text p { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.2rem; }
+    .what-text p { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.2rem; overflow-wrap:break-word; word-break:break-word; max-width:100%; }
     .what-text p strong { color:var(--t1); font-weight:500; }
     .what-text p em { color:var(--e2-text); font-style:italic; }
 
@@ -361,7 +361,7 @@
       padding:1.6rem 1.8rem; margin:1.6rem 0;
     }
     .quote-block p { font-family:'DM Serif Display',serif; font-size:1.38rem; font-style:italic; color:var(--t1); line-height:1.42; }
-    .body-text { color:var(--t2); line-height:1.86; font-size:0.99rem; font-weight:300; margin-bottom:1.1rem; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:0.99rem; font-weight:300; margin-bottom:1.1rem; overflow-wrap:break-word; word-break:break-word; max-width:100%; }
     .body-text strong { color:var(--t1); font-weight:500; }
     .mission-list { list-style:none; display:flex; flex-direction:column; gap:0.68rem; margin-top:1.1rem; }
     .mission-list li { display:flex; align-items:center; gap:12px; color:var(--t2); font-size:0.96rem; font-weight:300; }
@@ -461,7 +461,9 @@
       .nav-links { display:none; }
       .footer-inner { grid-template-columns:1fr; }
       .petition-inner { grid-template-columns:1fr; }
-      section { padding:3rem 1.2rem; }
+      section { padding:3rem 1rem; }
+      .section-inner { padding:0; width:100%; max-width:100%; }
+      .what-text p, .body-text, p { overflow-wrap:break-word; word-break:break-word; max-width:100%; }
       .page-hero { padding:3rem 1.2rem 2.5rem; }
       .hero-eyebrow { font-size:0.70rem; padding:5px 14px; }
       .hero-title { font-size:clamp(2.2rem,9vw,3rem); }
@@ -548,7 +550,7 @@
         <li><a href="about.html">About</a></li>
         <li><a href="registry.html" class="nav-cta">Registry</a></li>
       </ul>
-      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav()">
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -949,6 +951,35 @@
     body.classList.toggle('open', !isOpen);
     btn.setAttribute('aria-expanded', !isOpen);
   }
+  </script>
+  <script>
+  function toggleMobileNav() {
+    var nav = document.getElementById("mobileNav");
+    var btn = document.getElementById("hamburger");
+    if (!nav || !btn) return;
+    var isOpen = nav.classList.contains("open");
+    nav.classList.toggle("open", !isOpen);
+    btn.classList.toggle("open", !isOpen);
+    btn.setAttribute("aria-expanded", String(!isOpen));
+    nav.setAttribute("aria-hidden", String(isOpen));
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    // Wire hamburger button
+    var hamburgerBtn = document.getElementById("hamburger");
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener("click", function() { toggleMobileNav(); });
+    }
+    // Close nav when a link is tapped
+    var links = document.querySelectorAll(".mobile-nav a");
+    links.forEach(function(link) {
+      link.addEventListener("click", function() {
+        var nav = document.getElementById("mobileNav");
+        var btn = document.getElementById("hamburger");
+        if (nav) nav.classList.remove("open");
+        if (btn) { btn.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+      });
+    });
+  });
   </script>
 </body>
 </html>

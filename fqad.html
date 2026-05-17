@@ -377,7 +377,7 @@
         <li><a href="about.html">About</a></li>
         <li><a href="registry.html" class="nav-cta">Registry</a></li>
       </ul>
-      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav()">
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -1049,5 +1049,34 @@
   })();
   </script>
 
+  <script>
+  function toggleMobileNav() {
+    var nav = document.getElementById("mobileNav");
+    var btn = document.getElementById("hamburger");
+    if (!nav || !btn) return;
+    var isOpen = nav.classList.contains("open");
+    nav.classList.toggle("open", !isOpen);
+    btn.classList.toggle("open", !isOpen);
+    btn.setAttribute("aria-expanded", String(!isOpen));
+    nav.setAttribute("aria-hidden", String(isOpen));
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    // Wire hamburger button
+    var hamburgerBtn = document.getElementById("hamburger");
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener("click", function() { toggleMobileNav(); });
+    }
+    // Close nav when a link is tapped
+    var links = document.querySelectorAll(".mobile-nav a");
+    links.forEach(function(link) {
+      link.addEventListener("click", function() {
+        var nav = document.getElementById("mobileNav");
+        var btn = document.getElementById("hamburger");
+        if (nav) nav.classList.remove("open");
+        if (btn) { btn.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+      });
+    });
+  });
+  </script>
 </body>
 </html>
