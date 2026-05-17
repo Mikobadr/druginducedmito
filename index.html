@@ -63,7 +63,7 @@
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
+    html { scroll-behavior:smooth; overflow-x:hidden; }
 
     body {
       font-family:'DM Sans', system-ui, sans-serif;
@@ -75,7 +75,7 @@
       background-attachment:fixed;
       color:var(--t1);
       min-height:100vh;
-      overflow-x:hidden;
+      overflow-x:hidden; word-wrap:break-word;
     }
 
     #mito-canvas {
@@ -508,6 +508,20 @@
     .med-table tbody td { padding:0.65rem 0.9rem; color:var(--t2); line-height:1.50; font-weight:300; vertical-align:top; }
     .med-table tbody td:first-child { color:var(--t1); font-weight:500; }
     .med-expand-source { font-size:0.76rem; color:var(--t3); margin-top:0.8rem; font-style:italic; }
+
+    /* ══ HAMBURGER MOBILE NAV ══ */
+    .hamburger { display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:44px; height:44px; background:none; border:1px solid rgba(42,122,86,0.30); border-radius:8px; cursor:pointer; padding:8px; flex-shrink:0; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--t2); border-radius:2px; transition:all 0.25s; transform-origin:center; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display:none; position:absolute; top:70px; left:0; right:0; background:rgba(8,20,14,0.98); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); padding:0.8rem 0; z-index:999; flex-direction:column; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { display:block; padding:0.75rem 2rem; color:var(--t2); text-decoration:none; font-size:1rem; font-weight:500; border-bottom:1px solid rgba(30,92,62,0.08); transition:color 0.2s, background 0.2s; }
+    .mobile-nav a:last-child { border-bottom:none; }
+    .mobile-nav a:hover, .mobile-nav a:active { color:var(--t1); background:rgba(42,122,86,0.07); }
+    .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
+    @media (max-width:680px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
   </style>
 </head>
 <body>
@@ -534,6 +548,18 @@
         <li><a href="about.html">About</a></li>
         <li><a href="registry.html" class="nav-cta">Registry</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile nav drawer -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <a href="science.html">The Science</a>
+      <a href="fqad.html">FQAD</a>
+      <a href="action.html">Take Action</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="about.html">About</a>
+      <a href="registry.html" class="mobile-nav-cta">Registry</a>
     </div>
   </nav>
 
@@ -542,12 +568,12 @@
     <div class="ticker-track">
       <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
       <span><i class="fas fa-flask"></i> Manuscript submitted for journal consideration</span>
-      <span><i class="fas fa-users"></i> DIMD Registry now open for contributions</span>
+      <span><i class="fas fa-users"></i> DIMD Registry now open for participation</span>
       <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
       <span><i class="fas fa-circle-check"></i> New case studies being added</span>
       <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
       <span><i class="fas fa-flask"></i> Manuscript submitted for journal consideration</span>
-      <span><i class="fas fa-users"></i> DIMD Registry now open for contributions</span>
+      <span><i class="fas fa-users"></i> DIMD Registry now open for participation</span>
       <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
       <span><i class="fas fa-circle-check"></i> New case studies being added</span>
     </div>
@@ -768,7 +794,7 @@
               <rect x="117" y="115" width="18" height="18" rx="3" stroke="currentColor" stroke-width="9"/>
             </svg>
             <h3>DIMD Registry</h3>
-            <p>Contribute structured patient data. Help close the evidence gap on delayed drug injury.</p>
+            <p>Participate and share your experience. Help close the evidence gap on delayed drug injury.</p>
             <a href="registry.html">Join the Registry</a>
           </div>
           <div class="feature-card">
@@ -797,7 +823,7 @@
     <section class="cta-section">
       <div class="section-inner">
         <h2>Join the Effort to Recognize and Prevent DIMD</h2>
-        <p>Whether you are a patient, clinician, researcher, or policymaker — your contribution matters. Help close the evidence gap and support pharmacovigilance modernization.</p>
+        <p>Whether you are a patient, clinician, researcher, or policymaker — your participation matters. Help close the evidence gap and support pharmacovigilance modernization.</p>
         <div class="cta-btns">
           <a href="registry.html" class="btn-primary"><i class="fas fa-users"></i> Participate in the Registry</a>
           <a href="https://www.regulations.gov/search?filter=fda-2026-p-5116" target="_blank" rel="noopener" class="btn-outline">View FDA Petition FDA-2026-P-5116</a>
