@@ -331,6 +331,37 @@
       .form-group select,
       .form-group textarea { font-size:1rem; } /* prevent iOS zoom on focus */
     }
+
+    /* ══ ACCORDION ══ */
+    .acc-item { border:1px solid var(--e3-border); border-radius:12px; margin-bottom:0.7rem; overflow:hidden; transition:border-color 0.25s; }
+    .acc-item:hover { border-color:var(--e3-border-lift); }
+    .acc-item.acc-item-consent { border-color:rgba(61,158,114,0.22); }
+    .acc-header { width:100%; background:linear-gradient(135deg,rgba(16,40,28,0.88),rgba(12,30,20,0.92)); border:none; padding:1rem 1.3rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; cursor:pointer; color:var(--t1); font-size:0.92rem; font-weight:600; font-family:'DM Sans',sans-serif; text-align:left; transition:background 0.25s; }
+    .acc-header:hover { background:linear-gradient(135deg,rgba(20,48,34,0.95),rgba(14,36,24,0.98)); }
+    .acc-header[aria-expanded="true"] { background:linear-gradient(135deg,rgba(22,56,38,0.95),rgba(14,40,26,0.98)); border-bottom:1px solid var(--e3-border); }
+    .acc-num { display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; background:rgba(42,122,86,0.15); border:1px solid rgba(42,122,86,0.25); border-radius:50%; font-family:'DM Serif Display',serif; font-size:0.88rem; color:var(--e2-text); font-style:italic; flex-shrink:0; margin-right:8px; }
+    .acc-icon { color:var(--e2); font-size:0.72rem; flex-shrink:0; transition:transform 0.25s; }
+    .acc-header[aria-expanded="true"] .acc-icon { transform:rotate(45deg); }
+    .acc-body { max-height:0; overflow:hidden; transition:max-height 0.4s ease, opacity 0.3s ease; opacity:0; padding:0; }
+    .acc-body.open { max-height:2400px; opacity:1; padding:0; }
+    .acc-body .form-group { padding:0 1.3rem; margin-bottom:1rem; }
+    .acc-body .form-group:first-child { padding-top:1.2rem; }
+    .acc-body .form-group:last-child { padding-bottom:1.2rem; }
+    .acc-body .form-row { padding:0 1.3rem; margin-bottom:0; }
+    .acc-body .form-row .form-group { padding:0; }
+    .acc-body .consent-block { margin:1rem 1.3rem; }
+    .acc-body .btn-submit { margin:0 1.3rem 1.3rem; width:calc(100% - 2.6rem); }
+    .acc-section-note { font-size:0.84rem; color:var(--t3); line-height:1.65; font-style:italic; padding:1rem 1.3rem 0; display:block; }
+    .check-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; margin-top:0.4rem; }
+    .req { color:var(--e1); font-weight:700; }
+    @media (max-width:480px) {
+      .check-grid { grid-template-columns:1fr; }
+      .acc-header { font-size:0.86rem; padding:0.9rem 1rem; }
+      .acc-body .form-group { padding:0 1rem; }
+      .acc-body .form-row { padding:0 1rem; }
+      .acc-body .consent-block { margin:0.8rem 1rem; }
+      .acc-body .btn-submit { margin:0 1rem 1rem; width:calc(100% - 2rem); }
+    }
   </style>
 </head>
 <body>
@@ -571,38 +602,38 @@
         <div class="how-grid">
           <div>
             <div class="section-label">Process</div>
-            <h2 class="section-title">How Contributing Works</h2>
+            <h2 class="section-title">How the Intake Works</h2>
             <div class="section-divider"></div>
             <p class="body-text">
-              The registry is designed to be accessible — not burdensome. You do not need a medical record in front of you. You do not need perfect recall of every date. <strong>Approximate timelines, partial information, and best estimates are all valuable.</strong> Something is always better than nothing, and the structured format is designed to accommodate the reality that patients navigating these conditions often have fragmented records.
+              The registry is designed to be accessible — not burdensome. You do not need a medical record in front of you. You do not need perfect recall of every date. <strong>Approximate timelines, partial information, and best estimates are all valuable.</strong> The structured intake is organized into sections so you can work through it at your own pace.
             </p>
             <div class="process-steps">
               <div class="process-step">
                 <div class="ps-num">1</div>
                 <div class="ps-body">
-                  <h4>Express Interest Below</h4>
-                  <p>Complete the interest form on this page. You'll receive confirmation and information about the full registry intake process, which is conducted via a secure structured questionnaire.</p>
+                  <h4>Begin the Structured Intake</h4>
+                  <p>Complete the Phase 1 DIMD Registry intake directly on this page. No identifying information is required, and email is optional.</p>
                 </div>
               </div>
               <div class="process-step">
                 <div class="ps-num">2</div>
                 <div class="ps-body">
-                  <h4>Complete the Structured Intake</h4>
-                  <p>Work through the registry questionnaire at your own pace. It is designed to be completed in sections — you do not need to finish in one sitting. Save and return as needed.</p>
+                  <h4>Work Through Sections at Your Own Pace</h4>
+                  <p>The questionnaire is organized into collapsible sections so participants can provide approximate timelines, partial information, and best estimates without needing perfect recall or complete medical records.</p>
                 </div>
               </div>
               <div class="process-step">
                 <div class="ps-num">3</div>
                 <div class="ps-body">
                   <h4>Optional Follow-Up</h4>
-                  <p>Participants may opt into periodic follow-up surveys to capture longitudinal changes — the most valuable data the registry can collect. This is entirely optional and can be withdrawn at any time.</p>
+                  <p>If you choose to provide an email address, you may receive future follow-up surveys or clarification requests. This is optional and can be withdrawn at any time.</p>
                 </div>
               </div>
               <div class="process-step">
                 <div class="ps-num">4</div>
                 <div class="ps-body">
                   <h4>Your Data Builds the Record</h4>
-                  <p>Aggregated, de-identified data from the registry will be used to support research, policy advocacy, and the growing evidence base for DIMD recognition. You will never be individually identifiable in any output.</p>
+                  <p>De-identified, aggregated registry data may be used to support research, education, pharmacovigilance, policy advocacy, and improved recognition of delayed multisystem drug injury.</p>
                 </div>
               </div>
             </div>
@@ -613,17 +644,13 @@
               <h4>Privacy &amp; Data Handling</h4>
               <ul class="privacy-list">
                 <li><i class="fas fa-circle-check"></i><span><strong>No identifying information required.</strong> The registry does not collect your name, address, date of birth, or any information that could directly identify you.</span></li>
-                <li><i class="fas fa-circle-check"></i><span><strong>Email is optional.</strong> Providing an email allows for follow-up and longitudinal participation, but is not required for a one-time contribution.</span></li>
+                <li><i class="fas fa-circle-check"></i><span><strong>Email is optional.</strong> Providing an email allows for optional follow-up and longitudinal participation, but is not required.</span></li>
                 <li><i class="fas fa-circle-check"></i><span><strong>Data is used only for DIMD research and advocacy.</strong> Registry data will not be sold, shared with pharmaceutical companies, or used for any commercial purpose.</span></li>
                 <li><i class="fas fa-circle-check"></i><span><strong>You can withdraw at any time.</strong> If you provided an email, you may request deletion of your contribution at any point.</span></li>
                 <li><i class="fas fa-circle-check"></i><span><strong>All outputs are de-identified.</strong> Any publication, report, or advocacy document derived from registry data will use aggregated, de-identified information only.</span></li>
-                <li><i class="fas fa-circle-check"></i><span><strong>This is a research registry, not a clinical service.</strong> Contributing to the registry does not establish a patient-provider relationship and does not constitute medical advice or care.</span></li>
+                <li><i class="fas fa-circle-check"></i><span><strong>This is a research registry, not a clinical service.</strong> Participating does not establish a patient-provider relationship and does not constitute medical advice or care.</span></li>
               </ul>
             </div>
-
-            <p class="body-text" style="margin-top:1.5rem; font-size:0.88rem; font-style:italic;">
-              The registry is currently in active development. The interest form below captures your information now; full structured intake will be available shortly. All expressions of interest will be contacted as the full registry launches.
-            </p>
           </div>
         </div>
       </div>
@@ -690,13 +717,14 @@
       <div class="section-inner">
         <div class="join-inner">
           <div class="section-label">Phase 1 Registry — Now Open</div>
-          <h2 class="section-title">Join the DIMD Registry</h2>
+          <h2 class="section-title">Phase 1 DIMD Registry Intake</h2>
           <div class="section-divider"></div>
-          <p class="body-text">The Phase 1 DIMD Registry is now open for fluoroquinolone-related patient-reported outcomes. You may complete the structured intake below. No identifying information is required. Email is optional and only needed if you want future follow-up, updates, or the ability to clarify your submission later.</p>
+          <p class="body-text">The Phase 1 DIMD Registry is now open for fluoroquinolone-related patient-reported outcomes. You may complete the structured intake directly below. No identifying information is required. Email is optional and only needed if you want future follow-up, updates, or the ability to clarify your submission later.</p>
+          <p class="body-text" style="font-size:0.90rem;">Open each section, complete it at your own pace, then proceed to the next. Approximate timelines, partial information, and best estimates are all valuable — you do not need perfect recall or complete medical records.</p>
 
           <div class="interest-card">
             <div class="ic-label">Phase 1 Registry Intake — Active</div>
-            <h3>DIMD Registry Intake Form</h3>
+            <h3>DIMD Structured Intake Form</h3>
             <p class="ic-sub"><strong>No identifying information is required.</strong> Email is optional. Your responses are patient-reported and will be used only in de-identified, aggregate form for research, education, and advocacy purposes.</p>
 
             <!-- ============================================================
@@ -704,105 +732,384 @@
                  Live endpoint: https://formspree.io/f/xaqkwowq
                  Submissions go to your Formspree dashboard and email.
                  Export to CSV anytime from formspree.io/forms
-                 To change the endpoint, update the form action above.
             ============================================================ -->
             <form id="registryForm" action="https://formspree.io/f/xaqkwowq" method="POST">
-              <!-- Hidden field to identify form source -->
               <input type="hidden" name="_subject" value="DIMD Phase 1 Registry Submission">
               <input type="hidden" name="_next" value="thank-you.html">
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="reg-role">I am participating as</label>
-                <select id="reg-role" name="role" required>
-                  <option value="">Select your role…</option>
-                  <option value="patient">A patient / person affected</option>
-                  <option value="caregiver">A family member or caregiver</option>
-                  <option value="clinician">A clinician or healthcare provider</option>
-                  <option value="researcher">A researcher or scientist</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="reg-drug">Primary drug of concern</label>
-                <select id="reg-drug" name="drug">
-                  <option value="">Select…</option>
-                  <option value="ciprofloxacin">Ciprofloxacin (Cipro)</option>
-                  <option value="levofloxacin">Levofloxacin (Levaquin)</option>
-                  <option value="moxifloxacin">Moxifloxacin (Avelox)</option>
-                  <option value="other-fq">Other fluoroquinolone</option>
-                  <option value="other-drug">Other medication class</option>
-                  <option value="multiple">Multiple / unsure</option>
-                </select>
-              </div>
-            </div>
+              <!-- ── ACCORDION SECTIONS ── -->
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="reg-onset">Approximate symptom onset</label>
-                <select id="reg-onset" name="onset">
-                  <option value="">Select…</option>
-                  <option value="during">During the course of treatment</option>
-                  <option value="days">Within days of completing treatment</option>
-                  <option value="weeks">Within weeks of completing treatment</option>
-                  <option value="months">Weeks to months after treatment</option>
-                  <option value="over1yr">More than one year after treatment</option>
-                  <option value="unsure">Uncertain / gradual</option>
-                </select>
+              <!-- 1. Participant ID & Optional Contact -->
+              <div class="acc-item" id="acc1">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc1')" aria-expanded="false">
+                  <span><span class="acc-num">1</span> Participant ID &amp; Optional Contact</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="reg-role">I am participating as <span class="req">*</span></label>
+                      <select id="reg-role" name="role" required>
+                        <option value="">Select your role…</option>
+                        <option value="patient">A patient / person affected</option>
+                        <option value="caregiver">A family member or caregiver</option>
+                        <option value="clinician">A clinician or healthcare provider</option>
+                        <option value="researcher">A researcher or scientist</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="reg-age">Age range (optional)</label>
+                      <select id="reg-age" name="age_range">
+                        <option value="">Select…</option>
+                        <option value="under30">Under 30</option>
+                        <option value="30-39">30–39</option>
+                        <option value="40-49">40–49</option>
+                        <option value="50-59">50–59</option>
+                        <option value="60-69">60–69</option>
+                        <option value="70plus">70 or older</option>
+                        <option value="prefer-not">Prefer not to say</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="reg-sex">Biological sex (optional)</label>
+                      <select id="reg-sex" name="bio_sex">
+                        <option value="">Select…</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other / prefer not to say</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="reg-region">Geographic region (optional)</label>
+                      <select id="reg-region" name="region">
+                        <option value="">Select…</option>
+                        <option value="us-south">US — South</option>
+                        <option value="us-northeast">US — Northeast</option>
+                        <option value="us-midwest">US — Midwest</option>
+                        <option value="us-west">US — West</option>
+                        <option value="us-other">US — Other</option>
+                        <option value="canada">Canada</option>
+                        <option value="europe">Europe</option>
+                        <option value="australia-nz">Australia / New Zealand</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not">Prefer not to say</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-email">Email address <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
+                    <input type="email" id="reg-email" name="email" placeholder="your@email.com">
+                    <p class="form-note">Email is optional. Used only for optional follow-up or to clarify your submission. Leave blank to participate anonymously. Never shared or sold.</p>
+                  </div>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="reg-duration">Duration of symptoms</label>
-                <select id="reg-duration" name="duration">
-                  <option value="">Select…</option>
-                  <option value="resolved">Fully resolved</option>
-                  <option value="partial">Partially resolved</option>
-                  <option value="ongoing-stable">Ongoing, stable</option>
-                  <option value="ongoing-progressing">Ongoing, still progressing</option>
-                  <option value="fluctuating">Fluctuating / relapsing</option>
-                </select>
+
+              <!-- 2. Fluoroquinolone Exposure -->
+              <div class="acc-item" id="acc2">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc2')" aria-expanded="false">
+                  <span><span class="acc-num">2</span> Fluoroquinolone Exposure</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="reg-drug">Primary fluoroquinolone received</label>
+                      <select id="reg-drug" name="drug">
+                        <option value="">Select…</option>
+                        <option value="ciprofloxacin">Ciprofloxacin (Cipro)</option>
+                        <option value="levofloxacin">Levofloxacin (Levaquin)</option>
+                        <option value="moxifloxacin">Moxifloxacin (Avelox)</option>
+                        <option value="norfloxacin">Norfloxacin</option>
+                        <option value="ofloxacin">Ofloxacin</option>
+                        <option value="other-fq">Other fluoroquinolone</option>
+                        <option value="multiple">Multiple / unsure</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="reg-courses">Number of courses (approximate)</label>
+                      <select id="reg-courses" name="courses">
+                        <option value="">Select…</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3-5">3–5</option>
+                        <option value="6plus">6 or more</option>
+                        <option value="unsure">Unsure</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="reg-year-first">Approximate year of first exposure</label>
+                      <input type="text" id="reg-year-first" name="year_first_exposure" placeholder="e.g. 2007, or approximate decade">
+                    </div>
+                    <div class="form-group">
+                      <label for="reg-indication">Indication (what it was prescribed for)</label>
+                      <input type="text" id="reg-indication" name="indication" placeholder="e.g. UTI, sinusitis, dental procedure…">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Route of administration (select all that apply)</label>
+                    <div class="check-grid">
+                      <div class="form-check"><input type="checkbox" id="route-oral" name="route" value="oral"><label for="route-oral">Oral (tablet/capsule)</label></div>
+                      <div class="form-check"><input type="checkbox" id="route-iv" name="route" value="iv"><label for="route-iv">IV / intravenous</label></div>
+                      <div class="form-check"><input type="checkbox" id="route-eye" name="route" value="topical-eye"><label for="route-eye">Ophthalmic (eye drops)</label></div>
+                      <div class="form-check"><input type="checkbox" id="route-unsure" name="route" value="unsure"><label for="route-unsure">Unsure</label></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-concurrent">Concurrent medications at time of exposure (optional)</label>
+                    <textarea id="reg-concurrent" name="concurrent_meds" placeholder="List any other medications you were taking at the time, if known. No need to be exhaustive." style="min-height:70px;"></textarea>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label>Systems affected (select all that apply)</label>
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; margin-top:0.3rem;">
-                <div class="form-check"><input type="checkbox" id="sys-neuro" name="systems" value="peripheral-neuro"><label for="sys-neuro">Peripheral neuropathy / nerve pain</label></div>
-                <div class="form-check"><input type="checkbox" id="sys-tendon" name="systems" value="tendon"><label for="sys-tendon">Tendon / musculoskeletal</label></div>
-                <div class="form-check"><input type="checkbox" id="sys-fatigue" name="systems" value="fatigue"><label for="sys-fatigue">Fatigue / exertional intolerance</label></div>
-                <div class="form-check"><input type="checkbox" id="sys-auto" name="systems" value="autonomic"><label for="sys-auto">Autonomic / dysautonomia</label></div>
-                <div class="form-check"><input type="checkbox" id="sys-cog" name="systems" value="cognitive"><label for="sys-cog">Cognitive dysfunction / brain fog</label></div>
-                <div class="form-check"><input type="checkbox" id="sys-psych" name="systems" value="psychiatric"><label for="sys-psych">Anxiety / psychiatric symptoms</label></div>
-                <div class="form-check"><input type="checkbox" id="sys-cns" name="systems" value="cns"><label for="sys-cns">Central nervous system</label></div>
-                <div class="form-check"><input type="checkbox" id="sys-other" name="systems" value="other"><label for="sys-other">Other / not listed</label></div>
+              <!-- 3. Symptom Onset & Timeline -->
+              <div class="acc-item" id="acc3">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc3')" aria-expanded="false">
+                  <span><span class="acc-num">3</span> Symptom Onset &amp; Timeline</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="reg-onset">Approximate symptom onset relative to exposure</label>
+                      <select id="reg-onset" name="onset">
+                        <option value="">Select…</option>
+                        <option value="during">During the course of treatment</option>
+                        <option value="days">Within days of completing treatment</option>
+                        <option value="weeks">Within weeks of completing treatment</option>
+                        <option value="months">Weeks to months after treatment</option>
+                        <option value="over1yr">More than one year after treatment</option>
+                        <option value="unsure">Uncertain / gradual</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="reg-duration">Duration / current status of symptoms</label>
+                      <select id="reg-duration" name="duration">
+                        <option value="">Select…</option>
+                        <option value="resolved">Fully resolved</option>
+                        <option value="partial">Partially resolved</option>
+                        <option value="ongoing-stable">Ongoing, stable</option>
+                        <option value="ongoing-progressing">Ongoing, still progressing</option>
+                        <option value="fluctuating">Fluctuating / relapsing</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-timeline-notes">Timeline description (optional)</label>
+                    <textarea id="reg-timeline-notes" name="timeline_notes" placeholder="Describe the timing and progression of your symptoms in your own words. Approximate dates, patterns, or turning points are helpful. No need for precise dates."></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Symptom pattern (select all that apply)</label>
+                    <div class="check-grid">
+                      <div class="form-check"><input type="checkbox" id="patt-delayed" name="symptom_pattern" value="delayed-onset"><label for="patt-delayed">Delayed onset (after drug cleared)</label></div>
+                      <div class="form-check"><input type="checkbox" id="patt-progressive" name="symptom_pattern" value="progressive"><label for="patt-progressive">Progressive over time</label></div>
+                      <div class="form-check"><input type="checkbox" id="patt-relapsing" name="symptom_pattern" value="relapsing"><label for="patt-relapsing">Relapsing / waxing and waning</label></div>
+                      <div class="form-check"><input type="checkbox" id="patt-exertional" name="symptom_pattern" value="post-exertional"><label for="patt-exertional">Post-exertional worsening</label></div>
+                      <div class="form-check"><input type="checkbox" id="patt-stable" name="symptom_pattern" value="stable"><label for="patt-stable">Stable / not progressing</label></div>
+                      <div class="form-check"><input type="checkbox" id="patt-resolved" name="symptom_pattern" value="resolved"><label for="patt-resolved">Resolved fully</label></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="reg-notes">Anything you'd like to add <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
-              <textarea id="reg-notes" name="notes" placeholder="Brief description of your experience, or anything you want the registry team to know. Please do not include your name, address, date of birth, or other personal identifiers."></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="reg-email">Email address <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
-              <input type="email" id="reg-email" name="email" placeholder="your@email.com">
-              <p class="form-note">Email is optional. It is used only if you want future follow-up, updates, or to clarify your submission. Leave blank to participate anonymously. Your email will never be shared or sold.</p>
-            </div>
-
-            <!-- CONSENT BLOCK -->
-            <div class="consent-block">
-              <div class="consent-label"><i class="fas fa-shield-halved"></i> Consent Required</div>
-              <div class="form-check consent-check">
-                <input type="checkbox" id="reg-consent" name="consent" value="yes" required>
-                <label for="reg-consent">
-                  <strong>Consent *</strong><br>
-                  By submitting this form, I understand that my responses are patient-reported and do not replace medical evaluation or advice. I consent to the use of my de-identified responses in aggregate for research, education, public awareness, advocacy, and policy-related purposes. I understand that no identifying information is required and that I should not include personal identifiers in my responses.
-                </label>
+              <!-- 4. Multisystem Symptoms -->
+              <div class="acc-item" id="acc4">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc4')" aria-expanded="false">
+                  <span><span class="acc-num">4</span> Multisystem Symptoms</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="form-group">
+                    <label>Systems affected (select all that apply)</label>
+                    <div class="check-grid">
+                      <div class="form-check"><input type="checkbox" id="sys-neuro" name="systems" value="peripheral-neuro"><label for="sys-neuro">Peripheral neuropathy / nerve pain</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-tendon" name="systems" value="tendon"><label for="sys-tendon">Tendon / musculoskeletal</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-fatigue" name="systems" value="fatigue"><label for="sys-fatigue">Fatigue / exertional intolerance</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-auto" name="systems" value="autonomic"><label for="sys-auto">Autonomic / dysautonomia / POTS</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-cog" name="systems" value="cognitive"><label for="sys-cog">Cognitive dysfunction / brain fog</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-psych" name="systems" value="psychiatric"><label for="sys-psych">Anxiety / psychiatric symptoms</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-cns" name="systems" value="cns"><label for="sys-cns">Central nervous system</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-cardiac" name="systems" value="cardiac"><label for="sys-cardiac">Cardiac / arrhythmia</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-gi" name="systems" value="gi"><label for="sys-gi">Gastrointestinal</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-vision" name="systems" value="vision"><label for="sys-vision">Vision / ocular</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-skin" name="systems" value="skin"><label for="sys-skin">Skin / integumentary</label></div>
+                      <div class="form-check"><input type="checkbox" id="sys-other" name="systems" value="other"><label for="sys-other">Other / not listed</label></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-symptom-desc">Symptom description (optional)</label>
+                    <textarea id="reg-symptom-desc" name="symptom_description" placeholder="Describe your most significant or persistent symptoms in your own words. What did they feel like? Which were most disabling?"></textarea>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <button type="submit" class="btn-submit" id="submitBtn">
-              <i class="fas fa-users"></i> Submit Registry Intake
-            </button>
+              <!-- 5. Functional Impact -->
+              <div class="acc-item" id="acc5">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc5')" aria-expanded="false">
+                  <span><span class="acc-num">5</span> Functional Impact</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="form-group">
+                    <label>Areas of functional impact (select all that apply)</label>
+                    <div class="check-grid">
+                      <div class="form-check"><input type="checkbox" id="fi-work" name="functional_impact" value="work"><label for="fi-work">Work / occupational capacity</label></div>
+                      <div class="form-check"><input type="checkbox" id="fi-adl" name="functional_impact" value="adl"><label for="fi-adl">Activities of daily living</label></div>
+                      <div class="form-check"><input type="checkbox" id="fi-exercise" name="functional_impact" value="exercise"><label for="fi-exercise">Exercise / physical activity</label></div>
+                      <div class="form-check"><input type="checkbox" id="fi-sleep" name="functional_impact" value="sleep"><label for="fi-sleep">Sleep quality</label></div>
+                      <div class="form-check"><input type="checkbox" id="fi-social" name="functional_impact" value="social"><label for="fi-social">Social / family life</label></div>
+                      <div class="form-check"><input type="checkbox" id="fi-disability" name="functional_impact" value="disability"><label for="fi-disability">Disability / unable to work</label></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-impact-notes">Functional impact description (optional)</label>
+                    <textarea id="reg-impact-notes" name="impact_notes" placeholder="Describe how your symptoms have affected your daily functioning, work, or quality of life. Approximate timeframes welcome."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. Diagnostic Journey -->
+              <div class="acc-item" id="acc6">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc6')" aria-expanded="false">
+                  <span><span class="acc-num">6</span> Diagnostic Journey</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="form-group">
+                    <label for="reg-diagnoses">Diagnoses received (optional)</label>
+                    <textarea id="reg-diagnoses" name="diagnoses" placeholder="List any diagnoses you received following your fluoroquinolone exposure, even if you believe they may be related or may represent the same underlying condition. e.g. fibromyalgia, peripheral neuropathy, POTS, ME/CFS, tendinopathy…" style="min-height:70px;"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-time-to-recognition">Time from exposure to recognition of possible link (optional)</label>
+                    <select id="reg-time-to-recognition" name="time_to_recognition">
+                      <option value="">Select…</option>
+                      <option value="immediate">Immediately / during treatment</option>
+                      <option value="under6mo">Within 6 months</option>
+                      <option value="6-12mo">6–12 months</option>
+                      <option value="1-3yr">1–3 years</option>
+                      <option value="3-10yr">3–10 years</option>
+                      <option value="over10yr">More than 10 years</option>
+                      <option value="not-yet">Not yet recognized by clinicians</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Testing performed (select all that apply)</label>
+                    <div class="check-grid">
+                      <div class="form-check"><input type="checkbox" id="test-emg" name="testing" value="emg-ncs"><label for="test-emg">EMG / nerve conduction</label></div>
+                      <div class="form-check"><input type="checkbox" id="test-mri" name="testing" value="mri"><label for="test-mri">MRI</label></div>
+                      <div class="form-check"><input type="checkbox" id="test-mito" name="testing" value="mitochondrial"><label for="test-mito">Mitochondrial function testing</label></div>
+                      <div class="form-check"><input type="checkbox" id="test-labs" name="testing" value="labs"><label for="test-labs">Standard blood/metabolic labs</label></div>
+                      <div class="form-check"><input type="checkbox" id="test-tilt" name="testing" value="tilt-table"><label for="test-tilt">Tilt table / autonomic testing</label></div>
+                      <div class="form-check"><input type="checkbox" id="test-none" name="testing" value="none"><label for="test-none">No specific testing done</label></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-icd-coded">Were fluoroquinolone adverse effects ever documented or coded in your medical record? (optional)</label>
+                    <select id="reg-icd-coded" name="icd_coded">
+                      <option value="">Select…</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                      <option value="unsure">Unsure</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Later Stressors / Second-Hit Events -->
+              <div class="acc-item" id="acc7">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc7')" aria-expanded="false">
+                  <span><span class="acc-num">7</span> Later Stressors / Second-Hit Events</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <p class="acc-section-note">Later physiologic stressors may act as a "second hit," amplifying or unmasking an altered mitochondrial state initiated by fluoroquinolone exposure. Please indicate if any of the following occurred after your initial exposure and appeared to worsen your symptoms.</p>
+                  <div class="form-group">
+                    <label>Potential second-hit events (select all that apply)</label>
+                    <div class="check-grid">
+                      <div class="form-check"><input type="checkbox" id="sh-fq2" name="second_hit" value="second-fq-course"><label for="sh-fq2">Additional fluoroquinolone course(s)</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-other-mito" name="second_hit" value="other-mito-drug"><label for="sh-other-mito">Other mitochondrial-toxic medication</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-surgery" name="second_hit" value="surgery-anesthesia"><label for="sh-surgery">Surgery / anesthesia</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-steroids" name="second_hit" value="corticosteroids"><label for="sh-steroids">Corticosteroid exposure</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-nsaids" name="second_hit" value="nsaids"><label for="sh-nsaids">NSAIDs</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-infection" name="second_hit" value="infection-illness"><label for="sh-infection">Major infection or illness</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-exertion" name="second_hit" value="intense-exertion"><label for="sh-exertion">Intense physical exertion</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-metabolic" name="second_hit" value="metabolic-stress"><label for="sh-metabolic">Metabolic or nutritional stress</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-none" name="second_hit" value="none-identified"><label for="sh-none">None identified</label></div>
+                      <div class="form-check"><input type="checkbox" id="sh-unsure" name="second_hit" value="unsure"><label for="sh-unsure">Unsure</label></div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-second-hit-notes">Second-hit description (optional)</label>
+                    <textarea id="reg-second-hit-notes" name="second_hit_notes" placeholder="If a later event seemed to worsen or unmask your symptoms, please describe what happened and when. Approximate timing is fine."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 8. Current Status & Open Narrative -->
+              <div class="acc-item" id="acc8">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc8')" aria-expanded="false">
+                  <span><span class="acc-num">8</span> Current Status &amp; Open Narrative</span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="form-group">
+                    <label for="reg-current-status">Current overall status</label>
+                    <select id="reg-current-status" name="current_status">
+                      <option value="">Select…</option>
+                      <option value="improving">Improving</option>
+                      <option value="stable">Stable — not worsening</option>
+                      <option value="slowly-worsening">Slowly worsening</option>
+                      <option value="significantly-worsening">Significantly worsening</option>
+                      <option value="fluctuating">Fluctuating</option>
+                      <option value="fully-recovered">Fully recovered</option>
+                      <option value="unsure">Unsure / hard to characterize</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-narrative">Your narrative (optional)</label>
+                    <textarea id="reg-narrative" name="narrative" placeholder="Use this space to describe anything not captured above — your overall experience, what has helped or worsened symptoms, what you wish clinicians understood, or anything else you want the registry team to know. Please do not include your name, date of birth, address, or other personal identifiers." style="min-height:120px;"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="reg-clinician-awareness">Were your clinicians aware of the possible fluoroquinolone connection? (optional)</label>
+                    <select id="reg-clinician-awareness" name="clinician_awareness">
+                      <option value="">Select…</option>
+                      <option value="yes-acknowledged">Yes — they acknowledged it</option>
+                      <option value="yes-dismissed">Yes — but they dismissed it</option>
+                      <option value="no-not-mentioned">No — I raised it but it was not documented</option>
+                      <option value="no-unaware">No — clinicians were unaware of the connection</option>
+                      <option value="mixed">Mixed responses across providers</option>
+                      <option value="unsure">Unsure</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 9. Consent & Data Use -->
+              <div class="acc-item acc-item-consent" id="acc9">
+                <button type="button" class="acc-header" onclick="toggleAcc('acc9')" aria-expanded="false">
+                  <span><span class="acc-num">9</span> Consent &amp; Data Use <span class="req" style="font-size:0.70rem;margin-left:4px;">Required</span></span>
+                  <i class="fas fa-plus acc-icon"></i>
+                </button>
+                <div class="acc-body">
+                  <div class="consent-block">
+                    <div class="consent-label"><i class="fas fa-shield-halved"></i> Consent Required to Submit</div>
+                    <div class="form-check consent-check">
+                      <input type="checkbox" id="reg-consent" name="consent" value="yes" required>
+                      <label for="reg-consent">
+                        <strong>Consent *</strong><br>
+                        By submitting this form, I understand that my responses are patient-reported and do not replace medical evaluation or advice. I consent to the use of my de-identified responses in aggregate for research, education, public awareness, advocacy, and policy-related purposes. I understand that no identifying information is required and that I should not include personal identifiers in my responses.
+                      </label>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-submit" id="submitBtn">
+                    <i class="fas fa-users"></i> Submit Phase 1 Registry Intake
+                  </button>
+                </div>
+              </div>
 
             </form>
 
@@ -815,7 +1122,7 @@
     <!-- CTA -->
     <div class="registry-cta">
       <h2>Every Record Is a Voice the System Must Count</h2>
-      <p>The registry does not replace clinical research — it builds the foundation that makes clinical research possible. Join it, share it, and help make the invisible visible.</p>
+      <p>The registry does not replace clinical research — it builds the foundation that makes clinical research possible. Participate, share it, and help make the invisible visible.</p>
       <div class="cta-btns">
         <a href="action.html" class="btn-primary"><i class="fas fa-file-contract"></i> Read the FDA Petition</a>
         <a href="evidence.html" class="btn-outline">View the Evidence</a>
@@ -869,19 +1176,35 @@
 
   <!-- FLOATING MITOCHONDRIA + FORM HANDLER -->
   <script>
-  // Registry form handler — Formspree submission
-  // ADMIN: Replace YOUR_FORMSPREE_ENDPOINT_HERE in the form action above with your Formspree URL
+  // Accordion toggle
+  function toggleAcc(id) {
+    var item = document.getElementById(id);
+    var header = item.querySelector('.acc-header');
+    var body = item.querySelector('.acc-body');
+    var isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    header.setAttribute('aria-expanded', !isOpen);
+  }
+
+  // Open first section by default
+  document.addEventListener('DOMContentLoaded', function() {
+    toggleAcc('acc1');
+  });
+
+  // Registry form validation and submission
   document.getElementById('registryForm').addEventListener('submit', function(e) {
     var consent = document.getElementById('reg-consent');
     var role = document.getElementById('reg-role');
     if (!consent.checked) {
       e.preventDefault();
-      alert('Please check the consent acknowledgment before submitting.');
+      toggleAcc('acc9');
+      alert('Please read and check the consent acknowledgment in Section 9 before submitting.');
       return;
     }
     if (!role.value) {
       e.preventDefault();
-      alert('Please select your role before submitting.');
+      toggleAcc('acc1');
+      alert('Please select your role in Section 1 before submitting.');
       return;
     }
     var btn = document.getElementById('submitBtn');
