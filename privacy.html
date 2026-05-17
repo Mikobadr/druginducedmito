@@ -58,6 +58,20 @@
     footer a:hover{color:var(--t2);border:none;}
 
     @media(max-width:680px){.nav-links{display:none;}main{padding:3rem 1.5rem 4rem;}}
+
+    /* ══ HAMBURGER MOBILE NAV ══ */
+    .hamburger { display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:44px; height:44px; background:none; border:1px solid rgba(42,122,86,0.30); border-radius:8px; cursor:pointer; padding:8px; flex-shrink:0; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--t2); border-radius:2px; transition:all 0.25s; transform-origin:center; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display:none; position:absolute; top:70px; left:0; right:0; background:rgba(8,20,14,0.98); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); padding:0.8rem 0; z-index:999; flex-direction:column; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { display:block; padding:0.75rem 2rem; color:var(--t2); text-decoration:none; font-size:1rem; font-weight:500; border-bottom:1px solid rgba(30,92,62,0.08); transition:color 0.2s, background 0.2s; }
+    .mobile-nav a:last-child { border-bottom:none; }
+    .mobile-nav a:hover, .mobile-nav a:active { color:var(--t1); background:rgba(42,122,86,0.07); }
+    .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
+    @media (max-width:680px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
   </style>
 </head>
 <body>
@@ -79,6 +93,18 @@
         <li><a href="about.html">About</a></li>
         <li><a href="registry.html" class="nav-cta">Registry</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile nav drawer -->
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <a href="science.html">The Science</a>
+      <a href="fqad.html">FQAD</a>
+      <a href="action.html">Take Action</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="about.html">About</a>
+      <a href="registry.html" class="mobile-nav-cta">Registry</a>
     </div>
   </nav>
 
