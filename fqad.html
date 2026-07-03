@@ -84,6 +84,8 @@
     .page-hero h1 em { font-style:italic; color:var(--e1); display:inline; }
     .page-hero-sub { font-size:1.05rem; line-height:1.72; color:var(--t2); max-width:700px; font-weight:300; animation:fadeUp 0.8s 0.1s ease both; }
     .page-hero-sub strong { color:var(--t1); font-weight:500; }
+    .hero-standing { font-size:0.86rem; color:var(--t3); font-weight:400; margin-top:0.9rem; animation:fadeUp 0.8s 0.1s ease both; }
+    .hero-cta-row { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.8rem; animation:fadeUp 0.8s 0.15s ease both; }
     .hero-badges { display:flex; flex-wrap:wrap; gap:10px; margin-top:2rem; animation:fadeUp 0.8s 0.2s ease both; }
     .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(42,122,86,0.07); border:1px solid rgba(42,122,86,0.18); border-radius:12px; padding:8px 16px; font-size:0.82rem; color:var(--t2); }
     .hero-badge i { color:var(--e2); font-size:0.78rem; }
@@ -273,6 +275,32 @@
     .btn-outline { border:1.5px solid rgba(42,122,86,0.30); color:var(--t2); padding:14px 32px; border-radius:9999px; font-weight:500; font-size:0.97rem; text-decoration:none; transition:all 0.3s; }
     .btn-outline:hover { background:rgba(42,122,86,0.07); border-color:rgba(42,122,86,0.48); color:var(--t1); }
 
+    /* ══ CLINICIAN PACKET ══ */
+    .packet-section {
+      background:
+        radial-gradient(ellipse at 90% 10%, rgba(61,158,114,0.06) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 100%);
+    }
+    .packet-card {
+      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
+      border:1px solid rgba(61,158,114,0.22);
+      border-radius:18px; padding:2.2rem 2.4rem;
+    }
+    .packet-card .dc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e1); margin-bottom:0.6rem; }
+    .packet-card h3 { font-family:'DM Serif Display',serif; font-size:1.5rem; color:var(--t1); margin-bottom:0.5rem; letter-spacing:-0.01em; }
+    .packet-card .packet-sub { color:var(--t2); font-size:0.95rem; line-height:1.6; font-weight:300; max-width:560px; margin-bottom:1.7rem; }
+    .packet-tiers { display:flex; flex-direction:column; gap:0.8rem; }
+    .packet-tier { display:flex; align-items:center; gap:1rem; background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:12px; padding:1rem 1.3rem; text-decoration:none; transition:border-color 0.3s, transform 0.2s; }
+    .packet-tier:hover { border-color:var(--e3-border-lift); transform:translateX(3px); }
+    .packet-tier-num { flex-shrink:0; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'DM Serif Display',serif; font-size:1rem; font-style:italic; }
+    .packet-tier:nth-child(1) .packet-tier-num { background:rgba(61,158,114,0.18); color:var(--e1); border:1px solid rgba(61,158,114,0.35); }
+    .packet-tier:nth-child(2) .packet-tier-num { background:rgba(42,122,86,0.16); color:var(--e2-text); border:1px solid rgba(42,122,86,0.32); }
+    .packet-tier:nth-child(3) .packet-tier-num { background:rgba(26,92,62,0.16); color:var(--t2); border:1px solid rgba(26,92,62,0.30); }
+    .packet-tier-info { flex:1; min-width:0; }
+    .packet-tier-info h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.15rem; }
+    .packet-tier-info p { font-size:0.82rem; color:var(--t3); font-weight:300; }
+    .packet-tier-dl { flex-shrink:0; color:var(--e2-text); font-size:0.95rem; }
+
     /* ══ FOOTER ══ */
     footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
     .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
@@ -326,6 +354,11 @@
       .reg-badge p { font-size:0.80rem; }
       /* Hero badges */
       .hero-badges { flex-direction:column; }
+      .hero-cta-row { flex-direction:column; align-items:stretch; }
+      .hero-cta-row .btn-primary, .hero-cta-row .btn-outline { justify-content:center; }
+      /* Packet card */
+      .packet-card { padding:1.6rem 1.4rem; }
+      .packet-tier { padding:0.85rem 1rem; }
       /* CTA */
       .cta-btns { flex-direction:column; align-items:stretch; }
       .btn-primary,.btn-outline { justify-content:center; }
@@ -408,6 +441,11 @@
         <p class="page-hero-sub">
           FQAD is the <strong>prototype subtype of DIMD</strong> — regulatorily documented, molecularly confirmed, and the most extensively studied example of drug-induced mitochondrial injury producing delayed, persistent, multisystem disability.
         </p>
+        <p class="hero-standing">Johanna Ihli, BSN — former ER/trauma/critical care RN · independent researcher, DIMD Initiative</p>
+        <div class="hero-cta-row">
+          <a href="#clinician-packet" class="btn-primary"><i class="fas fa-file-arrow-down"></i> Download Clinician Packet</a>
+          <a href="https://doi.org/10.5281/zenodo.20128765" class="btn-outline" target="_blank" rel="noopener">Submit FDA Comment</a>
+        </div>
         <div class="hero-badges">
           <div class="hero-badge">
             <i class="fas fa-file-contract"></i>
@@ -420,6 +458,43 @@
         </div>
       </div>
     </div>
+
+    <!-- CLINICIAN PACKET -->
+    <section class="packet-section" id="clinician-packet">
+      <div class="section-inner">
+        <div class="packet-card">
+          <div class="dc-label">For Prescribers</div>
+          <h3>Download the Clinician Education Packet</h3>
+          <p class="packet-sub">Three tiers, from a one-page leave-behind to full reference tables — built for the time you actually have.</p>
+          <div class="packet-tiers">
+            <a href="downloads/FQAD-Clinician-Briefing-Tier1.pdf" class="packet-tier" target="_blank" rel="noopener">
+              <div class="packet-tier-num">1</div>
+              <div class="packet-tier-info">
+                <h4>One-Page Briefing</h4>
+                <p>For the visit itself</p>
+              </div>
+              <div class="packet-tier-dl"><i class="fas fa-download"></i></div>
+            </a>
+            <a href="downloads/FQAD-Evidence-Brief-Tier2.pdf" class="packet-tier" target="_blank" rel="noopener">
+              <div class="packet-tier-num">2</div>
+              <div class="packet-tier-info">
+                <h4>Evidence Brief</h4>
+                <p>Mechanism &amp; the informed-consent gap</p>
+              </div>
+              <div class="packet-tier-dl"><i class="fas fa-download"></i></div>
+            </a>
+            <a href="downloads/FQAD-Reference-Context-Tier3.pdf" class="packet-tier" target="_blank" rel="noopener">
+              <div class="packet-tier-num">3</div>
+              <div class="packet-tier-info">
+                <h4>Reference &amp; Context</h4>
+                <p>Quick-reference tables</p>
+              </div>
+              <div class="packet-tier-dl"><i class="fas fa-download"></i></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- WHAT IS FQAD -->
     <section class="what-fqad">
