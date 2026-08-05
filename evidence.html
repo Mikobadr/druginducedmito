@@ -201,6 +201,50 @@
     .org-note p { font-size:0.86rem; color:var(--t3); line-height:1.62; font-style:italic; }
     .org-note p strong { color:var(--t2); font-style:normal; }
 
+    /* ══ 2026 LITERATURE UPDATE ══ */
+    .lit2026-intro { margin-bottom:2.5rem; }
+    .lit2026-group { margin-bottom:3.2rem; }
+    .lit2026-group:last-child { margin-bottom:0; }
+    .lit2026-card {
+      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
+      border:1px solid var(--e3-border); border-radius:16px;
+      padding:1.7rem 2rem; margin-bottom:1.1rem; transition:border-color 0.3s;
+    }
+    .lit2026-card:hover { border-color:var(--e3-border-lift); }
+    .lit2026-card:last-child { margin-bottom:0; }
+    .l26-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:0.7rem; }
+    .l26-type { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; background:rgba(42,122,86,0.12); border:1px solid rgba(42,122,86,0.26); color:var(--e2-text); border-radius:9999px; padding:4px 12px; }
+    .l26-year { font-size:0.78rem; color:var(--t3); font-weight:300; }
+    .l26-title { font-family:'DM Serif Display',serif; font-size:1.03rem; color:var(--t1); line-height:1.4; margin-bottom:0.4rem; font-style:italic; }
+    .l26-meta { font-size:0.80rem; color:var(--t3); font-weight:300; margin-bottom:1rem; overflow-wrap:anywhere; }
+    .l26-block { margin-bottom:0.9rem; }
+    .l26-block:last-of-type { margin-bottom:0; }
+    .l26-block-label { display:block; font-size:0.66rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e2); margin-bottom:0.35rem; }
+    .l26-block p { font-size:0.89rem; color:var(--t2); line-height:1.66; font-weight:300; }
+    .l26-block p strong { color:var(--t1); font-weight:500; }
+    .l26-strength { display:flex; gap:9px; align-items:flex-start; margin-top:1rem; padding-top:0.9rem; border-top:1px solid rgba(42,122,86,0.14); font-size:0.82rem; color:var(--e2-text); line-height:1.6; font-style:italic; }
+    .l26-strength i { margin-top:3px; flex-shrink:0; color:var(--e2); }
+    .l26-doi { display:flex; align-items:flex-start; gap:7px; font-size:0.76rem; color:var(--t3); margin-top:0.8rem; font-family:'DM Sans',monospace; overflow-wrap:anywhere; }
+    .lit2026-callout {
+      background:rgba(10,28,18,0.55); border:1px dashed rgba(42,122,86,0.28);
+      border-radius:14px; padding:1.3rem 1.6rem; margin-bottom:1.1rem;
+    }
+    .lit2026-callout h4 { font-family:'DM Serif Display',serif; font-size:0.98rem; color:var(--t1); margin-bottom:0.5rem; font-style:italic; }
+    .lit2026-callout p { font-size:0.87rem; color:var(--t2); line-height:1.65; font-weight:300; }
+    /* Mechanistic boundary card gets a distinct amber-leaning accent to signal "tests/challenges", not "confirms" */
+    .lit2026-card.boundary { border-color:rgba(196,164,90,0.28); }
+    .lit2026-card.boundary:hover { border-color:rgba(196,164,90,0.42); }
+    .lit2026-card.boundary .l26-type { background:rgba(196,164,90,0.12); border-color:rgba(196,164,90,0.30); color:#D9BE86; }
+    .lit2026-card.boundary .l26-strength { color:#D9BE86; }
+    .lit2026-card.boundary .l26-strength i { color:#C4A45A; }
+    /* Featured hypothesis/framework card — visually distinct from confirmed human/experimental data */
+    .lit2026-card.featured { border-color:rgba(61,158,114,0.32); background:linear-gradient(135deg,rgba(18,52,34,0.60),rgba(12,36,24,0.72)); }
+    .lit2026-card.featured:hover { border-color:rgba(61,158,114,0.46); }
+    .lit2026-card.featured .l26-type { background:rgba(61,158,114,0.14); border-color:rgba(61,158,114,0.32); color:var(--e1); }
+    .lit2026-subhead { display:flex; align-items:center; gap:9px; margin:1.6rem 0 1rem; padding-top:1.2rem; border-top:1px solid rgba(42,122,86,0.10); }
+    .lit2026-subhead span { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2-text); }
+    .lit2026-subhead i { color:var(--e2); font-size:0.78rem; }
+
     /* ══ CTA ══ */
     .evidence-cta { background:radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%), linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78)); border-top:1px solid rgba(42,122,86,0.13); padding:4rem 2.5rem; text-align:center; }
     .evidence-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
@@ -223,7 +267,69 @@
     .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
     .footer-bottom a:hover { color:var(--t2); }
 
+    /* ══ ON-THIS-PAGE STICKY NAV + BACK TO TOP ══ */
+    main section[id], main div[id="pn-action"] { scroll-margin-top:96px; }
+    .page-nav {
+      position:fixed; top:0; left:0; right:0; width:100vw; z-index:900;
+      background:rgba(8,20,14,0.97); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--e3-border);
+      transform:translateY(-120%); opacity:0;
+      transition:transform 0.3s ease, opacity 0.3s ease;
+    }
+    .page-nav.visible { transform:translateY(0); opacity:1; }
+    .page-nav-inner { max-width:none; width:100%; margin:0; padding-left:16px; padding-right:16px; }
+    .page-nav-toggle {
+      display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+      background:none; border:none; cursor:pointer; padding:12px 0;
+      font-family:'DM Sans',sans-serif; font-size:0.86rem; color:var(--t2);
+    }
+    .page-nav-toggle:hover { color:var(--t1); }
+    .page-nav-toggle:focus-visible { outline:2px solid var(--e1); outline-offset:3px; border-radius:6px; }
+    .page-nav-label strong { color:var(--t1); font-weight:500; }
+    .page-nav-chevron { font-size:0.68rem; color:var(--e2); transition:transform 0.25s; margin-left:1px; }
+    .page-nav-toggle[aria-expanded="true"] .page-nav-chevron { transform:rotate(180deg); }
+    .page-nav-menu {
+      position:fixed; top:50px; left:16px; right:auto;
+      width:min(320px, calc(100vw - 32px)); transform:none; margin:0;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 20px 44px rgba(0,0,0,0.55); padding:0.5rem;
+      display:flex; flex-direction:column; gap:2px; max-height:70vh; overflow-y:auto;
+      z-index:900;
+    }
+    .page-nav-menu[hidden] { display:none; }
+    .page-nav-link {
+      display:block; padding:10px 14px; border-radius:8px;
+      font-size:0.85rem; color:var(--t2); text-decoration:none;
+      transition:background 0.2s, color 0.2s;
+    }
+    .page-nav-link:hover { background:rgba(42,122,86,0.10); color:var(--t1); }
+    .page-nav-link:focus-visible { outline:2px solid var(--e1); outline-offset:-2px; }
+    .page-nav-link.active { background:rgba(61,158,114,0.14); color:var(--e1); font-weight:500; }
+
+    .back-to-top {
+      position:fixed; bottom:28px; right:28px; z-index:900;
+      width:46px; height:46px; border-radius:50%;
+      background:rgba(16,46,30,0.92); border:1px solid var(--e3-border);
+      color:var(--t2); display:flex; align-items:center; justify-content:center;
+      cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px);
+      transition:opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s;
+      backdrop-filter:blur(10px); font-size:0.95rem;
+    }
+    .back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .back-to-top:hover { border-color:var(--e3-border-lift); color:var(--t1); }
+    .back-to-top:focus-visible { outline:2px solid var(--e1); outline-offset:3px; }
+
+    @media (max-width:860px) {
+      main section[id], main div[id="pn-action"] { scroll-margin-top:84px; }
+      .page-nav-toggle { padding:13px 0; font-size:0.83rem; }
+      .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
+      .page-nav-link { padding:12px 14px; font-size:0.86rem; }
+      .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
+    }
+
     /* ══ RESPONSIVE ══ */
+
     @media (max-width:1024px) {
       .pub-featured-grid { grid-template-columns:1fr; }
       .pub-card-reg { grid-template-columns:1fr; }
@@ -244,6 +350,9 @@
       .pub-card-featured .pcf-desc { font-size:0.84rem; }
       /* Reference entries */
       .ref-entry { padding:0.9rem 1rem; }
+      /* 2026 literature cards */
+      .lit2026-card { padding:1.3rem 1.4rem; }
+      .l26-title { font-size:0.95rem; }
       .ref-authors { font-size:0.84rem; }
       .ref-title { font-size:0.86rem; }
       .ref-journal { font-size:0.76rem; }
@@ -280,7 +389,7 @@
     .mobile-nav a:last-child { border-bottom:none; }
     .mobile-nav a:hover, .mobile-nav a:active { color:var(--t1); background:rgba(42,122,86,0.07); }
     .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
-    @media (max-width:680px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
+    @media (max-width:860px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
   </style>
 </head>
 <body>
@@ -322,6 +431,22 @@
     </div>
   </nav>
 
+  <!-- ON-THIS-PAGE STICKY NAV -->
+  <div class="page-nav" id="pageNav">
+    <div class="page-nav-inner">
+      <button class="page-nav-toggle" id="pageNavToggle" type="button" aria-expanded="false" aria-controls="pageNavMenu">
+        <span class="page-nav-label">On this page: <strong id="pageNavCurrent"></strong></span>
+        <i class="fas fa-chevron-down page-nav-chevron" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="page-nav-menu" id="pageNavMenu" hidden></div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <main>
 
     <!-- PAGE HERO -->
@@ -356,7 +481,7 @@
     </div>
 
     <!-- FEATURED PUBLICATIONS -->
-    <section class="featured-pubs">
+    <section class="featured-pubs" id="pn-featured">
       <div class="section-inner">
         <div class="section-label">Published Work — DIMD Initiative</div>
         <h2 class="section-title">Open-Access Publications &amp; Regulatory Filings</h2>
@@ -415,7 +540,7 @@
     </section>
 
     <!-- REFERENCE LIBRARY -->
-    <section class="ref-library">
+    <section class="ref-library" id="pn-corelit">
       <div class="section-inner">
         <div class="section-label">Reference Library</div>
         <h2 class="section-title">Peer-Reviewed Literature by Mechanism</h2>
@@ -434,6 +559,7 @@
           <a class="ref-nav-btn" href="#sec-clinical"><i class="fas fa-chart-line"></i> Delayed &amp; Progressive Injury</a>
           <a class="ref-nav-btn" href="#sec-topo"><i class="fas fa-circle-nodes"></i> Topoisomerase &amp; Crosswalk</a>
           <a class="ref-nav-btn" href="#sec-broader"><i class="fas fa-globe"></i> Broader DIMD Framework</a>
+          <a class="ref-nav-btn" href="#sec-lit2026"><i class="fas fa-newspaper"></i> 2026 Literature Update</a>
         </div>
 
         <!-- SECTION I -->
@@ -673,6 +799,334 @@
       </div>
     </section>
 
+    <!-- 2026 LITERATURE UPDATE -->
+    <section class="lit2026-section" id="sec-lit2026">
+      <div class="section-inner">
+        <div class="section-label">2026 Literature Update</div>
+        <h2 class="section-title">New Evidence, Organized by Evidence Type</h2>
+        <div class="section-divider"></div>
+
+        <div class="org-note lit2026-intro">
+          <i class="fas fa-circle-info"></i>
+          <p><strong>Organization note:</strong> This set is organized by <strong>evidence type</strong> rather than mechanism. Human epidemiology, FAERS pharmacovigilance signals, single case reports, laboratory/experimental models, hypothesis-and-theory frameworks, and regulatory or clinical-reference documents do not carry equal evidentiary weight, and the site aims to be explicit about that rather than presenting all citations as equivalent. Each entry below states its evidence-strength (or document-type) label plainly.</p>
+        </div>
+
+        <div class="ref-nav">
+          <a class="ref-nav-btn" href="#sec-lit-human"><i class="fas fa-users"></i> Human Population Evidence</a>
+          <a class="ref-nav-btn" href="#sec-lit-signals"><i class="fas fa-chart-simple"></i> Postmarketing Signals &amp; Clinical Case Evidence</a>
+          <a class="ref-nav-btn" href="#sec-lit-cell"><i class="fas fa-vial"></i> Human Cell &amp; Tissue Models</a>
+          <a class="ref-nav-btn" href="#sec-lit-boundary"><i class="fas fa-scale-unbalanced"></i> Mechanistic Boundaries</a>
+          <a class="ref-nav-btn" href="#sec-lit-frameworks"><i class="fas fa-lightbulb"></i> Hypotheses &amp; Research Frameworks</a>
+          <a class="ref-nav-btn" href="#sec-lit-regulatory"><i class="fas fa-landmark"></i> Regulatory &amp; Clinical Resources</a>
+        </div>
+
+        <!-- Human Population Evidence -->
+        <div class="ref-section lit2026-group" id="sec-lit-human">
+          <div class="ref-section-header">
+            <div class="ref-section-icon"><i class="fas fa-users"></i></div>
+            <div>
+              <h3>Human Population Evidence</h3>
+              <p>Large-scale, real-world human data — the strongest evidentiary tier in this update, including studies that do not confirm a suspected association</p>
+            </div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">Human claims-based cohort</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <div class="l26-title">Fluoroquinolone-Associated Peripheral and Central Nervous System-Related Disorders: A Large German Claims-Based Cohort Study</div>
+            <div class="l26-meta">Wicherski et al. · 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>In a German insurance-claims cohort spanning roughly <strong>10.7–14.3 million antibiotic treatment episodes</strong>, fluoroquinolone use was associated with modestly elevated overall risk of neurological and neuropsychiatric outcomes compared with reference antibiotics (adjusted relative risks approximately 1.04–1.10, comparator-dependent). Drug-induced polyneuropathy showed a stronger association — <strong>adjusted hazard ratio of 1.68</strong> — with excess risk concentrated in the first 92 days after exposure.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Population-scale human evidence, not a case series or a spontaneous-report signal, that fluoroquinolone exposure carries measurable, timing-specific neurological risk — giving the FQAD framework a concrete, citable human number.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Human claims-based cohort. Describes post-exposure neurological/neuropsychiatric risk and timing within the study's observation window — not proof of long-delayed FQAD latency extending months or years beyond that window.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">Human nationwide cohort — negative/null finding</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <div class="l26-title">Oral Fluoroquinolones and Heart-Valve Regurgitation</div>
+            <!-- TODO: Insert verified citation/link -->
+            <div class="l26-meta">Nationwide cohort study · 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>A 2026 nationwide cohort study evaluated whether oral fluoroquinolone exposure was associated with aortic or mitral valve regurgitation. <strong>The study did not find statistical support for an increased risk attributable to fluoroquinolone exposure.</strong></p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Important balanced evidence. A scientifically credible evidence library includes well-designed studies that do not confirm a suspected association, not only positive findings.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Human observational cohort — negative/null finding. Did not support an association with aortic or mitral valve regurgitation; this finding does not address other established or suspected fluoroquinolone adverse effects.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+        </div>
+
+        <!-- Postmarketing Signals & Clinical Case Evidence -->
+        <div class="ref-section lit2026-group" id="sec-lit-signals">
+          <div class="ref-section-header">
+            <div class="ref-section-icon"><i class="fas fa-chart-simple"></i></div>
+            <div>
+              <h3>Postmarketing Signals &amp; Clinical Case Evidence</h3>
+              <p>Pharmacovigilance disproportionality analyses and individual case reports — signals and plausibility, not incidence or causal proof</p>
+            </div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">FAERS pharmacovigilance signal</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <div class="l26-title">Disproportionality Analysis of Fluoroquinolone-Associated Peripheral Neuropathy in the FAERS Database (2007–2024)</div>
+            <div class="l26-meta">Shamim et al. · 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>Positive disproportionality signals for several peripheral-neuropathy manifestations linked to ciprofloxacin, levofloxacin, moxifloxacin, and ofloxacin, with additional signals for gemifloxacin — plus demographic and outcome-pattern differences across agents.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Broadens the peripheral-neuropathy signal beyond any single fluoroquinolone, indicating a class-wide reporting pattern rather than an isolated-drug issue.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> FAERS pharmacovigilance signal — does not establish incidence or causality.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">Systematic review + spontaneous-report analysis</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <div class="l26-title">Fluoroquinolones and the Risk of Panic Attacks</div>
+            <div class="l26-meta">Raguram et al. · 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>A systematic review identified 12 studies (4 trials, 11 case reports) linking fluoroquinolone use to panic attacks. An active-comparator FAERS analysis found reporting rates roughly <strong>sixfold higher than azithromycin</strong> and <strong>twelvefold higher than trimethoprim-sulfamethoxazole</strong>. The authors explicitly caution that spontaneous-report data cannot establish causality.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Extends the neuropsychiatric signal into an underrecognized symptom domain — acute panic and anxiety — with the authors modeling exactly the careful causality language this site aims to use.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Systematic review plus spontaneous-report analysis — signal requiring controlled confirmation, not causal proof.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">FAERS psychiatric and ocular safety signals</span>
+              <span class="l26-year">2026 journal issue · online Dec 2025</span>
+            </div>
+            <!-- TODO: Insert verified citation/link -->
+            <div class="l26-title">Psychiatric and Ocular Adverse Events Associated With Fluoroquinolones: A FAERS Disproportionality Analysis</div>
+            <div class="l26-meta">Chau et al. · <em>Pharmacology Research &amp; Perspectives</em> · 2026 journal issue; first published online December 2025</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>Analysis of FAERS reports identified disproportionate reporting signals involving psychiatric outcomes such as anxiety, panic, delirium, hallucinations, insomnia, and suicidal ideation. The analysis also identified notable ocular signals, particularly with moxifloxacin, including iris-transillumination and pigment-dispersion abnormalities.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Broadens the documented postmarketing safety pattern beyond tendons and peripheral nerves, identifying psychiatric and ocular event categories that may otherwise be separated across specialties or overlooked as part of a drug-related pattern.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> FAERS disproportionality analysis — detects reporting signals but cannot establish incidence, absolute risk, or causality.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+
+          <div class="lit2026-subhead"><i class="fas fa-file-medical"></i> <span>Clinical Case Evidence</span></div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">Single-patient case report — inhaled exposure</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <!-- TODO: Insert verified citation/link -->
+            <div class="l26-title">Recurrent Musculoskeletal Symptoms During Inhaled Levofloxacin Treatment</div>
+            <div class="l26-meta">Case report · 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>A patient with cystic fibrosis developed recurrent muscle and joint pain associated with inhaled levofloxacin treatment cycles. Symptoms followed the treatment pattern and resolved after discontinuation.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>The repeated temporal association and improvement after withdrawal provide a clinically meaningful dechallenge pattern, and support the need to consider non-oral routes of fluoroquinolone exposure when evaluating suspected adverse effects.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Single case report. Supports clinical plausibility and temporal association but cannot estimate frequency or establish general causality — not proof of FQAD, mitochondrial injury, or a class-wide incidence estimate.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+        </div>
+
+        <!-- Human Cell & Tissue Models -->
+        <div class="ref-section lit2026-group" id="sec-lit-cell">
+          <div class="ref-section-header">
+            <div class="ref-section-icon"><i class="fas fa-vial"></i></div>
+            <div>
+              <h3>Human Cell &amp; Tissue Models</h3>
+              <p>Mechanistic plausibility at the human-tissue level, across two distinct injury pathways</p>
+            </div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">Human cortical-organoid model</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <div class="l26-title">Ciprofloxacin Exposure Impairs Neurogenesis and E/I Balance in Human Cortical Organoids</div>
+            <div class="l26-meta">Liu et al. · 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>Two weeks of low-dose ciprofloxacin exposure in human cortical organoids increased reactive oxygen species, reduced mitochondrial membrane potential, disrupted cortical development and GABAergic network formation, altered neuronal firing patterns, and implicated dysregulation of the transcription factor FOXG1.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Direct evidence in human neural tissue — not animal models — linking fluoroquinolone exposure to the same mitochondrial disturbance (ROS increase, membrane potential loss) proposed in the DIMD framework, with downstream effects on network-level neuronal function.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Human cortical-organoid model — developmental experimental evidence, not an adult clinical FQAD study.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">Experimental tendon-cell study</span>
+              <span class="l26-year">2026 · early/unedited version</span>
+            </div>
+            <div class="l26-title">Effects of Fluoroquinolone Antibiotics on Extracellular Matrix-Related Phenotypes in Tendon Cells</div>
+            <div class="l26-meta">Anand et al. · 2026 (early/unedited version)</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>In mouse tendon cells, fluoroquinolone exposure reduced type I collagen production and assembly, hydroxyproline and fibronectin levels, lysyl oxidase activity, collagen-fibril stiffness and diameter, and active β1-integrin expression. The authors propose disrupted cell-matrix adhesion — and possibly anoikis — as part of the tendon-injury mechanism.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Establishes tendon injury as a parallel fluoroquinolone-toxicity pathway operating through extracellular-matrix and cell-adhesion disruption. This is <strong>not forced into the four-strike mitochondrial model</strong> — it is presented as a distinct, potentially interacting mechanism.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Experimental (in vitro) study. Carries the publisher's early, unedited-version notice.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+
+          <div class="lit2026-callout">
+            <h4>Tendon and Extracellular-Matrix Injury: A Parallel and Potentially Interacting Pathway</h4>
+            <p>Fluoroquinolone toxicity is not limited to a single intracellular pathway. Mitochondrial injury remains central to the DIMD framework, but tendon injury may involve additional, parallel mechanisms — disrupted collagen production, ECM organization, and integrin signaling — that interact with, amplify, or occur independently of mitochondrial dysfunction. This is not presented as a separate DIMD subtype.</p>
+          </div>
+        </div>
+
+        <!-- Mechanistic Boundaries & Competing Hypotheses -->
+        <div class="ref-section lit2026-group" id="sec-lit-boundary">
+          <div class="ref-section-header">
+            <div class="ref-section-icon"><i class="fas fa-scale-unbalanced"></i></div>
+            <div>
+              <h3>Mechanistic Boundaries &amp; Competing Hypotheses</h3>
+              <p>Where the field's simplest alternative explanations fail to fully account for FQAD — engaged directly, not omitted</p>
+            </div>
+          </div>
+
+          <div class="lit2026-card boundary">
+            <div class="l26-top">
+              <span class="l26-type">Computational mechanistic analysis</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <div class="l26-title">Fluoroquinolones and Their Complexes with Metal Ions, Studied with Density Functional Theory</div>
+            <div class="l26-meta">Friedman · 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>Using density functional theory, this study modeled fluoroquinolone binding to biologically relevant metal ions. Ciprofloxacin bound several ions, but tetracycline was calculated to bind most of the same ions <strong>even more strongly</strong> — despite tetracyclines not producing the FQAD phenotype.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Rules out a competing single-cause explanation (metal-ion chelation alone) rather than undermining the DIMD framework. If chelation strength alone were sufficient, tetracycline would be expected to produce a similar or greater effect — it does not. This strengthens the case that FQAD's distinctive phenotype requires a fluoroquinolone-specific mechanism.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Computational mechanistic analysis — challenges metal-ion binding as a sufficient standalone explanation for FQAD.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
+          </div>
+        </div>
+
+        <!-- Hypotheses, Disease Models & Research Frameworks -->
+        <div class="ref-section lit2026-group" id="sec-lit-frameworks">
+          <div class="ref-section-header">
+            <div class="ref-section-icon"><i class="fas fa-lightbulb"></i></div>
+            <div>
+              <h3>Hypotheses, Disease Models &amp; Research Frameworks</h3>
+              <p>Peer-reviewed theoretical frameworks that generate testable predictions — not clinical validation</p>
+            </div>
+          </div>
+
+          <div class="lit2026-card featured">
+            <div class="l26-top">
+              <span class="l26-type">Hypothesis and Theory article — testable framework</span>
+              <span class="l26-year">2026</span>
+            </div>
+            <div class="l26-title">Depleted Before the Dose: The Mitochondrial Vulnerability Threshold Hypothesis for Fluoroquinolone-Associated Multisystem Toxicity</div>
+            <div class="l26-meta">Sewell &amp; Jensen · <em>Frontiers in Pharmacology</em> · 2026 · DOI: 10.3389/fphar.2026.1905942</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>The authors propose that clinically significant fluoroquinolone-associated multisystem toxicity may depend not only on dose, but on whether a patient's pre-existing mitochondrial reserve can absorb the biological stress of exposure. Under this model, therapeutic exposure may cross a vulnerability threshold in patients whose bioenergetic reserve has already been reduced by genetic, metabolic, pharmacological, infectious, or physiological factors. The paper discusses potential contributing stressors, proposes a research Mitochondrial Vulnerability Score, and outlines falsifiable predictions that could be tested prospectively.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>An independent, peer-reviewed articulation of a reduced-reserve or threshold model that closely parallels the proposed DIMD framework. Its value lies in generating testable research questions concerning susceptibility, cumulative stress, repeat exposure, and disproportionate clinical responses.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Peer-reviewed Hypothesis and Theory article. Provides a testable explanatory framework — not clinical validation, a diagnostic tool, or proof that mitochondrial reserve determines every case. The proposed Mitochondrial Vulnerability Score is a research concept, not a validated or clinically ready instrument.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> DOI: 10.3389/fphar.2026.1905942 <!-- TODO: Confirm publication status (accepted/early-online vs. fully formatted) --></div>
+          </div>
+        </div>
+
+        <!-- Regulatory Guidance & Clinical Resources -->
+        <div class="ref-section lit2026-group" id="sec-lit-regulatory">
+          <div class="ref-section-header">
+            <div class="ref-section-icon"><i class="fas fa-landmark"></i></div>
+            <div>
+              <h3>Regulatory Guidance &amp; Clinical Resources</h3>
+              <p>Official guidance-development initiatives and clinician-oriented reference material — distinct from peer-reviewed primary research</p>
+            </div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">National health-authority guidance initiative</span>
+              <span class="l26-year">January 2026</span>
+            </div>
+            <div class="l26-title">Prise en charge des effets indésirables des fluoroquinolones — Note de cadrage</div>
+            <div class="l26-meta">Haute Autorité de Santé · France · January 2026</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>France's Haute Autorité de Santé initiated formal work to develop recommendations for the clinical management of serious fluoroquinolone adverse effects. The initiative followed a request involving patient representatives and addresses persistent, multisystem presentations associated with fluoroquinolone exposure.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>Marks movement beyond warnings and prescribing restrictions toward the unresolved clinical question of how affected patients should be recognized, evaluated, and managed.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Official national guidance-development document — not a completed clinical guideline, prevalence study, or treatment trial.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified citation/link --> Source pending verification</div>
+          </div>
+
+          <div class="lit2026-card">
+            <div class="l26-top">
+              <span class="l26-type">Clinical reference book — not primary research</span>
+              <span class="l26-year">2026 · 2nd revised English ed.</span>
+            </div>
+            <div class="l26-title">Fluoroquinolone-Associated Disability FQAD: Side-Effects of Fluoroquinolones</div>
+            <div class="l26-meta">Stefan Pieper · Springer · Second revised English edition · 2026 · DOI: 10.1007/978-3-662-72123-0</div>
+            <div class="l26-block">
+              <span class="l26-block-label">Finding</span>
+              <p>The revised edition provides a practical clinical overview of fluoroquinolone-associated disability, including proposed pathogenesis, diagnostic evaluation, clinical criteria, and management approaches developed from the author's experience treating affected patients.</p>
+            </div>
+            <div class="l26-block">
+              <span class="l26-block-label">Why it matters</span>
+              <p>One of the few clinician-oriented resources devoted specifically to persistent fluoroquinolone adverse effects, offering a structured approach in an area where formal evidence-based clinical pathways remain limited.</p>
+            </div>
+            <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Clinical reference and expert synthesis. Not a randomized trial, formal guideline, or substitute for validated diagnostic and treatment research.</div>
+            <div class="l26-doi"><i class="fas fa-link"></i> DOI: 10.1007/978-3-662-72123-0</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- CTA -->
     <div class="evidence-cta">
       <h2>The Evidence Is Here. The Gap Is Documented. Now We Act.</h2>
@@ -810,6 +1264,98 @@
     });
   });
   </script>
+  <script>
+  (function(){
+    var SECTIONS = [{"id": "pn-featured", "label": "Featured Publications"}, {"id": "pn-corelit", "label": "Core Literature"}, {"id": "sec-lit-human", "label": "Human Population Evidence"}, {"id": "sec-lit-signals", "label": "Postmarketing Signals & Cases"}, {"id": "sec-lit-cell", "label": "Cell & Tissue Models"}, {"id": "sec-lit-boundary", "label": "Mechanistic Boundaries"}, {"id": "sec-lit-frameworks", "label": "Hypotheses & Frameworks"}, {"id": "sec-lit-regulatory", "label": "Regulatory Guidance & Resources"}];
+
+    var pageNav = document.getElementById('pageNav');
+    var toggle = document.getElementById('pageNavToggle');
+    var menu = document.getElementById('pageNavMenu');
+    var currentLabel = document.getElementById('pageNavCurrent');
+    var backToTop = document.getElementById('backToTop');
+    if (!pageNav || !toggle || !menu) return;
+
+    SECTIONS.forEach(function(s){
+      var el = document.getElementById(s.id);
+      if (!el) return;
+      var a = document.createElement('a');
+      a.href = '#' + s.id;
+      a.className = 'page-nav-link';
+      a.textContent = s.label;
+      a.dataset.target = s.id;
+      menu.appendChild(a);
+    });
+    var links = menu.querySelectorAll('.page-nav-link');
+    if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
+
+    function openMenu(){
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded','true');
+      document.addEventListener('click', onDocClick);
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(focusToggle){
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onKeydown);
+      if (focusToggle) toggle.focus();
+    }
+    function onDocClick(e){
+      if (!pageNav.contains(e.target) && !menu.contains(e.target)) closeMenu(false);
+    }
+    function onKeydown(e){
+      if (e.key === 'Escape') closeMenu(true);
+    }
+    toggle.addEventListener('click', function(){
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(false); else openMenu();
+    });
+    links.forEach(function(link){
+      link.addEventListener('click', function(){ closeMenu(false); });
+    });
+
+    var heroEl = document.querySelector('.page-hero');
+    var heroThreshold = heroEl ? Math.max(heroEl.offsetHeight - 40, 260) : 400;
+    function onScroll(){
+      if (window.scrollY > heroThreshold) pageNav.classList.add('visible');
+      else { pageNav.classList.remove('visible'); closeMenu(false); }
+      if (backToTop) {
+        if (window.scrollY > 900) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+
+    if (backToTop) {
+      backToTop.addEventListener('click', function(){
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    function setActive(id){
+      var match = null;
+      for (var i=0;i<SECTIONS.length;i++){ if (SECTIONS[i].id === id){ match = SECTIONS[i]; break; } }
+      if (!match) return;
+      if (currentLabel) currentLabel.textContent = match.label;
+      links.forEach(function(link){
+        link.classList.toggle('active', link.dataset.target === id);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var sectionEls = SECTIONS.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-140px 0px -70% 0px', threshold: 0 });
+      sectionEls.forEach(function(el){ observer.observe(el); });
+    }
+  })();
+  </script>
 <script defer src="/_vercel/insights/script.js"></script>
+
 </body>
 </html>

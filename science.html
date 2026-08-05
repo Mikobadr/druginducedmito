@@ -320,7 +320,7 @@
     .citation-card:hover { border-color:var(--e3-border-lift); }
     .citation-card .cit-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.7rem; }
     .citation-card .cit-title { font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--t1); line-height:1.38; margin-bottom:0.6rem; font-style:italic; }
-    .citation-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; }
+    .citation-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; overflow-wrap:anywhere; }
     .citation-card .cit-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
     .citation-card .cit-finding strong { color:var(--t1); font-weight:500; }
     .citation-card .cit-why {
@@ -346,6 +346,43 @@
       transition:color 0.2s; font-weight:500;
     }
     .preprint-card a:hover { color:var(--e1); }
+
+    /* ══ MECHANISTIC BOUNDARY CALLOUT (2026 addition) ══ */
+    .boundary-card {
+      background:linear-gradient(135deg,rgba(46,40,20,0.42),rgba(28,24,12,0.58));
+      border:1px solid rgba(196,164,90,0.28);
+      border-radius:16px; padding:1.8rem 2rem;
+      margin-top:1.2rem; transition:border-color 0.3s;
+    }
+    .boundary-card:hover { border-color:rgba(196,164,90,0.42); }
+    .boundary-card .bc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#D9BE86; margin-bottom:0.5rem; }
+    .boundary-card .bc-heading { font-family:'DM Serif Display',serif; font-size:1.08rem; color:var(--t1); line-height:1.35; margin-bottom:0.7rem; font-style:italic; }
+    .boundary-card .bc-title { font-size:0.86rem; color:var(--t3); font-weight:300; margin-bottom:0.9rem; }
+    .boundary-card .bc-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; margin-bottom:0.9rem; }
+    .boundary-card .bc-finding strong { color:var(--t1); font-weight:500; }
+    .boundary-card .bc-note { font-size:0.82rem; color:#D9BE86; line-height:1.6; font-style:italic; padding-top:0.8rem; border-top:1px solid rgba(196,164,90,0.18); margin-bottom:0.8rem; }
+    .boundary-card a { display:inline-flex; align-items:center; gap:7px; font-size:0.82rem; color:var(--t3); text-decoration:none; border-bottom:1px solid rgba(196,164,90,0.22); transition:color 0.2s; }
+    .boundary-card a:hover { color:#D9BE86; }
+
+    /* ══ FRAMEWORK CONVERGENCE CARD (2026 addition — hypothesis, not proof) ══ */
+    .framework-card {
+      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
+      border:1px solid rgba(61,158,114,0.30);
+      border-radius:16px; padding:1.8rem 2rem;
+      margin-top:1.2rem; transition:border-color 0.3s;
+    }
+    .framework-card:hover { border-color:rgba(61,158,114,0.46); }
+    .framework-card .fc-badge { display:inline-block; font-size:0.64rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; background:rgba(61,158,114,0.12); border:1px solid rgba(61,158,114,0.28); color:var(--e1); border-radius:9999px; padding:3px 11px; margin-bottom:0.8rem; }
+    .framework-card .cit-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.5rem; }
+    .framework-card .cit-title { font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--t1); line-height:1.38; margin-bottom:0.6rem; font-style:italic; }
+    .framework-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; overflow-wrap:anywhere; }
+    .framework-card .cit-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
+    .framework-card .cit-finding strong { color:var(--t1); font-weight:500; }
+    .framework-card .cit-why { margin-top:0.9rem; padding-top:0.9rem; border-top:1px solid rgba(42,122,86,0.12); font-size:0.82rem; color:var(--e2-text); line-height:1.58; font-style:italic; }
+    .fw-boundary-intro { margin-top:2.4rem; padding-top:2rem; border-top:1px solid rgba(42,122,86,0.12); max-width:760px; }
+    .fw-boundary-intro h3 { font-family:'DM Serif Display',serif; font-size:1.2rem; color:var(--t1); font-style:italic; margin-bottom:0.6rem; }
+    .framework-boundary-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-top:1.4rem; }
+    .framework-boundary-grid .framework-card, .framework-boundary-grid .boundary-card { margin-top:0; height:100%; }
 
     /* ══ WHY FRAMEWORKS HAVEN'T KEPT UP ══ */
     .gap-section {
@@ -395,9 +432,71 @@
     .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
     .footer-bottom a:hover { color:var(--t2); }
 
+    /* ══ ON-THIS-PAGE STICKY NAV + BACK TO TOP ══ */
+    main section[id], main div[id="pn-action"] { scroll-margin-top:96px; }
+    .page-nav {
+      position:fixed; top:0; left:0; right:0; width:100vw; z-index:900;
+      background:rgba(8,20,14,0.97); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--e3-border);
+      transform:translateY(-120%); opacity:0;
+      transition:transform 0.3s ease, opacity 0.3s ease;
+    }
+    .page-nav.visible { transform:translateY(0); opacity:1; }
+    .page-nav-inner { max-width:none; width:100%; margin:0; padding-left:16px; padding-right:16px; }
+    .page-nav-toggle {
+      display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+      background:none; border:none; cursor:pointer; padding:12px 0;
+      font-family:'DM Sans',sans-serif; font-size:0.86rem; color:var(--t2);
+    }
+    .page-nav-toggle:hover { color:var(--t1); }
+    .page-nav-toggle:focus-visible { outline:2px solid var(--e1); outline-offset:3px; border-radius:6px; }
+    .page-nav-label strong { color:var(--t1); font-weight:500; }
+    .page-nav-chevron { font-size:0.68rem; color:var(--e2); transition:transform 0.25s; margin-left:1px; }
+    .page-nav-toggle[aria-expanded="true"] .page-nav-chevron { transform:rotate(180deg); }
+    .page-nav-menu {
+      position:fixed; top:50px; left:16px; right:auto;
+      width:min(320px, calc(100vw - 32px)); transform:none; margin:0;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 20px 44px rgba(0,0,0,0.55); padding:0.5rem;
+      display:flex; flex-direction:column; gap:2px; max-height:70vh; overflow-y:auto;
+      z-index:900;
+    }
+    .page-nav-menu[hidden] { display:none; }
+    .page-nav-link {
+      display:block; padding:10px 14px; border-radius:8px;
+      font-size:0.85rem; color:var(--t2); text-decoration:none;
+      transition:background 0.2s, color 0.2s;
+    }
+    .page-nav-link:hover { background:rgba(42,122,86,0.10); color:var(--t1); }
+    .page-nav-link:focus-visible { outline:2px solid var(--e1); outline-offset:-2px; }
+    .page-nav-link.active { background:rgba(61,158,114,0.14); color:var(--e1); font-weight:500; }
+
+    .back-to-top {
+      position:fixed; bottom:28px; right:28px; z-index:900;
+      width:46px; height:46px; border-radius:50%;
+      background:rgba(16,46,30,0.92); border:1px solid var(--e3-border);
+      color:var(--t2); display:flex; align-items:center; justify-content:center;
+      cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px);
+      transition:opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s;
+      backdrop-filter:blur(10px); font-size:0.95rem;
+    }
+    .back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .back-to-top:hover { border-color:var(--e3-border-lift); color:var(--t1); }
+    .back-to-top:focus-visible { outline:2px solid var(--e1); outline-offset:3px; }
+
+    @media (max-width:860px) {
+      main section[id], main div[id="pn-action"] { scroll-margin-top:84px; }
+      .page-nav-toggle { padding:13px 0; font-size:0.83rem; }
+      .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
+      .page-nav-link { padding:12px 14px; font-size:0.86rem; }
+      .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
+    }
+
     /* ══ RESPONSIVE ══ */
+
     @media (max-width:1024px) {
-      .intro-grid, .signaling-grid, .mismatch-grid, .validation-grid, .gap-grid { grid-template-columns:1fr; gap:3rem; }
+      .intro-grid, .signaling-grid, .mismatch-grid, .validation-grid, .gap-grid, .framework-boundary-grid { grid-template-columns:1fr; gap:3rem; }
       .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
     }
     @media (max-width:680px) {
@@ -453,7 +552,7 @@
     .mobile-nav a:last-child { border-bottom:none; }
     .mobile-nav a:hover, .mobile-nav a:active { color:var(--t1); background:rgba(42,122,86,0.07); }
     .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
-    @media (max-width:680px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
+    @media (max-width:860px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
   </style>
 </head>
 <body>
@@ -495,6 +594,22 @@
     </div>
   </nav>
 
+  <!-- ON-THIS-PAGE STICKY NAV -->
+  <div class="page-nav" id="pageNav">
+    <div class="page-nav-inner">
+      <button class="page-nav-toggle" id="pageNavToggle" type="button" aria-expanded="false" aria-controls="pageNavMenu">
+        <span class="page-nav-label">On this page: <strong id="pageNavCurrent"></strong></span>
+        <i class="fas fa-chevron-down page-nav-chevron" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="page-nav-menu" id="pageNavMenu" hidden></div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <main>
 
     <!-- PAGE HERO -->
@@ -524,7 +639,7 @@
     </div>
 
     <!-- WHAT IS DIMD -->
-    <section class="what-dimd">
+    <section class="what-dimd" id="pn-whatdimd">
       <div class="section-inner">
         <div class="intro-grid">
           <div>
@@ -576,7 +691,7 @@
     </section>
 
     <!-- MITOCHONDRIA AS SIGNALING HUB -->
-    <section class="signaling-section">
+    <section class="signaling-section" id="pn-signaling">
       <div class="section-inner">
         <div class="signaling-grid">
           <div>
@@ -630,7 +745,7 @@
     </section>
 
     <!-- FIVE-STEP MECHANISM -->
-    <section class="five-steps">
+    <section class="five-steps" id="pn-fivesteps">
       <div class="section-inner">
         <div class="section-label">Mechanism</div>
         <h2 class="section-title">A Five-Step Framework for Fluoroquinolone-Associated Delayed, Progressive Toxicity</h2>
@@ -713,7 +828,7 @@
     </section>
 
     <!-- PK-CLINICAL MISMATCH -->
-    <section class="pk-mismatch">
+    <section class="pk-mismatch" id="pn-pkmismatch">
       <div class="section-inner">
         <div class="mismatch-grid">
           <div>
@@ -766,7 +881,7 @@
     </section>
 
     <!-- EXTERNAL VALIDATION -->
-    <section class="validation-section">
+    <section class="validation-section" id="pn-validation">
       <div class="section-inner">
         <div class="section-label">External Validation</div>
         <h2 class="section-title">Independent Science Supporting the Framework</h2>
@@ -833,11 +948,36 @@
             </div>
           </div>
         </div>
+
+        <div class="fw-boundary-intro">
+          <h3>Framework Convergence &amp; Mechanistic Boundaries</h3>
+          <p class="body-text">Two more 2026 additions round out the picture — one an independent theoretical framework that converges with DIMD, the other a finding that tests and narrows a competing explanation. Neither outranks the direct mechanistic evidence above.</p>
+        </div>
+        <div class="framework-boundary-grid">
+          <div class="framework-card">
+            <span class="fc-badge">Hypothesis and Theory · Testable Framework · Not Clinical Validation</span>
+            <div class="cit-label">Independent Threshold Model · Frontiers in Pharmacology · 2026</div>
+            <div class="cit-title">Depleted Before the Dose: The Mitochondrial Vulnerability Threshold Hypothesis for Fluoroquinolone-Associated Multisystem Toxicity</div>
+            <div class="cit-meta">Sewell &amp; Jensen · <em>Frontiers in Pharmacology</em> · 2026 · DOI: 10.3389/fphar.2026.1905942</div>
+            <div class="cit-finding">Sewell and Jensen proposed that therapeutic fluoroquinolone exposure may produce persistent multisystem toxicity when it pushes a biologically vulnerable patient beyond available mitochondrial reserve. Their 2026 framework emphasizes susceptibility, cumulative metabolic stress, repeat exposure, and testable vulnerability thresholds.</div>
+            <div class="cit-why">Independently converges with the DIMD framework's central proposition: toxicity cannot always be understood through dose alone when cellular compensation and bioenergetic reserve differ between patients. This is independent framework convergence, not proof of mechanism.</div>
+            <a href="evidence.html#sec-lit-frameworks" style="display:inline-flex;align-items:center;gap:7px;font-size:0.82rem;color:var(--e2-text);text-decoration:none;border-bottom:1px solid rgba(42,122,86,0.28);margin-top:0.9rem;"><i class="fas fa-arrow-up-right-from-square"></i> Read the full evidence entry</a>
+          </div>
+
+          <div class="boundary-card">
+            <div class="bc-label">Mechanistic Boundary · 2026</div>
+            <div class="bc-heading">What the Evidence Does Not Yet Support</div>
+            <div class="bc-title">Fluoroquinolones and Their Complexes with Metal Ions, Studied with Density Functional Theory — Friedman, 2026</div>
+            <div class="bc-finding">Fluoroquinolones can bind metal ions, but a 2026 computational comparison using density functional theory found that <strong>tetracycline binds several of the same biologically relevant ions even more strongly</strong> than ciprofloxacin — despite tetracyclines not producing the FQAD phenotype.</div>
+            <div class="bc-note">Suggests metal-ion binding alone is unlikely to explain FQAD's distinctive presentation. Tests and narrows the field's simplest alternative explanation rather than serving as a primary mechanism finding. Reinhardt, Hangas, Lawrence, and the mitochondrial mechanisms above remain the principal anchors of this framework.</div>
+            <a href="evidence.html#sec-lit-boundary"><i class="fas fa-arrow-up-right-from-square"></i> Read the full evidence entry</a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- WHY FRAMEWORKS HAVEN'T CAUGHT UP -->
-    <section class="gap-section">
+    <section class="gap-section" id="pn-gap">
       <div class="section-inner">
         <div class="gap-grid">
           <div>
@@ -1035,6 +1175,98 @@
     });
   });
   </script>
+  <script>
+  (function(){
+    var SECTIONS = [{"id": "pn-whatdimd", "label": "What DIMD Is"}, {"id": "pn-signaling", "label": "Mitochondria as Cellular Systems"}, {"id": "pn-fivesteps", "label": "Five-Step Framework"}, {"id": "pn-pkmismatch", "label": "Pharmacokinetic–Clinical Mismatch"}, {"id": "pn-validation", "label": "Independent Supporting Science"}, {"id": "pn-gap", "label": "Drug-Safety Gaps"}];
+
+    var pageNav = document.getElementById('pageNav');
+    var toggle = document.getElementById('pageNavToggle');
+    var menu = document.getElementById('pageNavMenu');
+    var currentLabel = document.getElementById('pageNavCurrent');
+    var backToTop = document.getElementById('backToTop');
+    if (!pageNav || !toggle || !menu) return;
+
+    SECTIONS.forEach(function(s){
+      var el = document.getElementById(s.id);
+      if (!el) return;
+      var a = document.createElement('a');
+      a.href = '#' + s.id;
+      a.className = 'page-nav-link';
+      a.textContent = s.label;
+      a.dataset.target = s.id;
+      menu.appendChild(a);
+    });
+    var links = menu.querySelectorAll('.page-nav-link');
+    if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
+
+    function openMenu(){
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded','true');
+      document.addEventListener('click', onDocClick);
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(focusToggle){
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onKeydown);
+      if (focusToggle) toggle.focus();
+    }
+    function onDocClick(e){
+      if (!pageNav.contains(e.target) && !menu.contains(e.target)) closeMenu(false);
+    }
+    function onKeydown(e){
+      if (e.key === 'Escape') closeMenu(true);
+    }
+    toggle.addEventListener('click', function(){
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(false); else openMenu();
+    });
+    links.forEach(function(link){
+      link.addEventListener('click', function(){ closeMenu(false); });
+    });
+
+    var heroEl = document.querySelector('.page-hero');
+    var heroThreshold = heroEl ? Math.max(heroEl.offsetHeight - 40, 260) : 400;
+    function onScroll(){
+      if (window.scrollY > heroThreshold) pageNav.classList.add('visible');
+      else { pageNav.classList.remove('visible'); closeMenu(false); }
+      if (backToTop) {
+        if (window.scrollY > 900) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+
+    if (backToTop) {
+      backToTop.addEventListener('click', function(){
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    function setActive(id){
+      var match = null;
+      for (var i=0;i<SECTIONS.length;i++){ if (SECTIONS[i].id === id){ match = SECTIONS[i]; break; } }
+      if (!match) return;
+      if (currentLabel) currentLabel.textContent = match.label;
+      links.forEach(function(link){
+        link.classList.toggle('active', link.dataset.target === id);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var sectionEls = SECTIONS.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-140px 0px -70% 0px', threshold: 0 });
+      sectionEls.forEach(function(el){ observer.observe(el); });
+    }
+  })();
+  </script>
 <script defer src="/_vercel/insights/script.js"></script>
+
 </body>
 </html>

@@ -106,6 +106,49 @@
     .pull-quote { background:linear-gradient(135deg,rgba(22,60,42,0.42),rgba(12,36,24,0.52)); border-left:3px solid var(--e2); border-radius:0 12px 12px 0; padding:1.6rem 1.8rem; margin:1.8rem 0; }
     .pull-quote p { font-family:'DM Serif Display',serif; font-size:1.28rem; font-style:italic; color:var(--t1); line-height:1.45; }
 
+    /* ══ ESTABLISHED / UNDER INVESTIGATION STATUS BOX (2026 addition) ══ */
+    .status-box-wrap { padding-top:2.5rem; padding-bottom:0; }
+    .status-box {
+      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
+      border:1px solid var(--e3-border); border-radius:18px;
+      padding:2rem 2.2rem; display:grid; grid-template-columns:1fr 1fr; gap:2.2rem; align-items:start;
+    }
+    .status-col.unknown { border-left:1px solid var(--e3-border); padding-left:2.2rem; }
+    .status-col-label { display:flex; align-items:center; gap:9px; font-size:0.72rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; margin-bottom:1rem; }
+    .status-col-label.established { color:var(--e1); }
+    .status-col-label.unknown { color:#D9BE86; }
+    .status-col ul { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+    .status-col li { display:flex; align-items:flex-start; gap:9px; font-size:0.86rem; color:var(--t2); line-height:1.55; font-weight:300; }
+    .status-col li i { margin-top:3px; flex-shrink:0; font-size:0.78rem; }
+    .status-col.established li i { color:var(--e2); }
+    .status-col.unknown li i { color:#D9BE86; }
+    .status-col li strong { color:var(--t1); font-weight:500; }
+
+    /* ══ COMPACT EVIDENCE HIGHLIGHTS (2026 addition — human/experimental studies) ══ */
+    .lit-highlight-section { padding-top:3rem; padding-bottom:3rem; }
+    .lit-highlight-intro { margin-bottom:1.8rem; }
+    .lit-readmore { display:inline-flex; align-items:center; gap:7px; font-size:0.80rem; color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); transition:color 0.2s; margin-top:0.7rem; }
+    .lit-readmore:hover { color:var(--e1); }
+    .exp-subhead { margin-top:2.4rem; padding-top:2.2rem; border-top:1px solid rgba(42,122,86,0.12); }
+    .exp-subhead h3 { font-family:'DM Serif Display',serif; font-size:1.2rem; color:var(--t1); font-style:italic; margin-bottom:0.6rem; }
+    .exp-subhead > p { color:var(--t2); font-size:0.92rem; line-height:1.7; font-weight:300; margin-bottom:1.4rem; max-width:760px; }
+    .exp-subhead .citation-card { margin-bottom:1rem; }
+    .exp-subhead .citation-card:last-child { margin-bottom:0; }
+
+    /* ══ WHAT WE STILL DO NOT KNOW (2026 addition) ══ */
+    .unknown-section {
+      background:
+        radial-gradient(ellipse at 90% 30%, rgba(196,164,90,0.035) 0%, transparent 46%),
+        linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 100%);
+    }
+    .unknown-list { display:flex; flex-direction:column; gap:0.9rem; margin:1.6rem 0 1.8rem; }
+    .unknown-item { display:flex; align-items:flex-start; gap:12px; background:rgba(10,28,18,0.50); border:1px solid rgba(196,164,90,0.16); border-radius:12px; padding:1rem 1.3rem; }
+    .unknown-item i { color:#D9BE86; margin-top:3px; flex-shrink:0; font-size:0.85rem; }
+    .unknown-item p { font-size:0.90rem; color:var(--t2); line-height:1.6; font-weight:300; }
+    .unknown-item p strong { color:var(--t1); font-weight:500; }
+    .unknown-close { font-size:0.95rem; color:var(--t2); line-height:1.8; font-weight:300; font-style:italic; max-width:820px; }
+    .unknown-close strong { color:var(--t1); font-weight:500; font-style:normal; }
+
     /* ══ WHAT IS FQAD ══ */
     .what-fqad {
       background:
@@ -169,7 +212,7 @@
     .citation-card:hover { border-color:var(--e3-border-lift); }
     .citation-card .cit-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.7rem; }
     .citation-card .cit-title { font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--t1); line-height:1.38; margin-bottom:0.6rem; font-style:italic; }
-    .citation-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; }
+    .citation-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; overflow-wrap:anywhere; }
     .citation-card .cit-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
     .citation-card .cit-finding strong { color:var(--t1); font-weight:500; }
     .citation-card .cit-why { margin-top:0.9rem; padding-top:0.9rem; border-top:1px solid rgba(42,122,86,0.12); font-size:0.82rem; color:var(--e2-text); line-height:1.58; font-style:italic; }
@@ -313,9 +356,72 @@
     .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
     .footer-bottom a:hover { color:var(--t2); }
 
+    /* ══ ON-THIS-PAGE STICKY NAV + BACK TO TOP ══ */
+    main section[id], main div[id="pn-action"] { scroll-margin-top:96px; }
+    .page-nav {
+      position:fixed; top:0; left:0; right:0; width:100vw; z-index:900;
+      background:rgba(8,20,14,0.97); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--e3-border);
+      transform:translateY(-120%); opacity:0;
+      transition:transform 0.3s ease, opacity 0.3s ease;
+    }
+    .page-nav.visible { transform:translateY(0); opacity:1; }
+    .page-nav-inner { max-width:none; width:100%; margin:0; padding-left:16px; padding-right:16px; }
+    .page-nav-toggle {
+      display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+      background:none; border:none; cursor:pointer; padding:12px 0;
+      font-family:'DM Sans',sans-serif; font-size:0.86rem; color:var(--t2);
+    }
+    .page-nav-toggle:hover { color:var(--t1); }
+    .page-nav-toggle:focus-visible { outline:2px solid var(--e1); outline-offset:3px; border-radius:6px; }
+    .page-nav-label strong { color:var(--t1); font-weight:500; }
+    .page-nav-chevron { font-size:0.68rem; color:var(--e2); transition:transform 0.25s; margin-left:1px; }
+    .page-nav-toggle[aria-expanded="true"] .page-nav-chevron { transform:rotate(180deg); }
+    .page-nav-menu {
+      position:fixed; top:50px; left:16px; right:auto;
+      width:min(320px, calc(100vw - 32px)); transform:none; margin:0;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 20px 44px rgba(0,0,0,0.55); padding:0.5rem;
+      display:flex; flex-direction:column; gap:2px; max-height:70vh; overflow-y:auto;
+      z-index:900;
+    }
+    .page-nav-menu[hidden] { display:none; }
+    .page-nav-link {
+      display:block; padding:10px 14px; border-radius:8px;
+      font-size:0.85rem; color:var(--t2); text-decoration:none;
+      transition:background 0.2s, color 0.2s;
+    }
+    .page-nav-link:hover { background:rgba(42,122,86,0.10); color:var(--t1); }
+    .page-nav-link:focus-visible { outline:2px solid var(--e1); outline-offset:-2px; }
+    .page-nav-link.active { background:rgba(61,158,114,0.14); color:var(--e1); font-weight:500; }
+
+    .back-to-top {
+      position:fixed; bottom:28px; right:28px; z-index:900;
+      width:46px; height:46px; border-radius:50%;
+      background:rgba(16,46,30,0.92); border:1px solid var(--e3-border);
+      color:var(--t2); display:flex; align-items:center; justify-content:center;
+      cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px);
+      transition:opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s;
+      backdrop-filter:blur(10px); font-size:0.95rem;
+    }
+    .back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .back-to-top:hover { border-color:var(--e3-border-lift); color:var(--t1); }
+    .back-to-top:focus-visible { outline:2px solid var(--e1); outline-offset:3px; }
+
+    @media (max-width:860px) {
+      main section[id], main div[id="pn-action"] { scroll-margin-top:84px; }
+      .page-nav-toggle { padding:13px 0; font-size:0.83rem; }
+      .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
+      .page-nav-link { padding:12px 14px; font-size:0.86rem; }
+      .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
+    }
+
     /* ══ RESPONSIVE ══ */
+
     @media (max-width:1024px) {
-      .what-grid,.mol-grid,.hit-grid,.icd-grid { grid-template-columns:1fr; gap:3rem; }
+      .what-grid,.mol-grid,.hit-grid,.icd-grid,.status-box { grid-template-columns:1fr; gap:1.6rem; }
+      .status-col.unknown { border-left:none; padding-left:0; border-top:1px solid var(--e3-border); padding-top:1.6rem; }
       .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
       .rtimeline::before { left:90px; }
       .rt-item { grid-template-columns:90px 1fr; }
@@ -383,7 +489,7 @@
     .mobile-nav a:last-child { border-bottom:none; }
     .mobile-nav a:hover, .mobile-nav a:active { color:var(--t1); background:rgba(42,122,86,0.07); }
     .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
-    @media (max-width:680px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
+    @media (max-width:860px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
   </style>
 </head>
 <body>
@@ -425,6 +531,22 @@
     </div>
   </nav>
 
+  <!-- ON-THIS-PAGE STICKY NAV -->
+  <div class="page-nav" id="pageNav">
+    <div class="page-nav-inner">
+      <button class="page-nav-toggle" id="pageNavToggle" type="button" aria-expanded="false" aria-controls="pageNavMenu">
+        <span class="page-nav-label">On this page: <strong id="pageNavCurrent"></strong></span>
+        <i class="fas fa-chevron-down page-nav-chevron" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="page-nav-menu" id="pageNavMenu" hidden></div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <main>
 
     <!-- PAGE HERO -->
@@ -459,13 +581,42 @@
       </div>
     </div>
 
+    <!-- ESTABLISHED / UNDER INVESTIGATION STATUS BOX -->
+    <section class="status-box-wrap">
+      <div class="section-inner">
+        <div class="status-box">
+          <div class="status-col established">
+            <div class="status-col-label established"><i class="fas fa-circle-check"></i> What Is Established</div>
+            <ul>
+              <li><i class="fas fa-check"></i><p><strong>Regulatory recognition:</strong> FDA and European regulators recognize that fluoroquinolones can cause disabling, long-lasting, and potentially permanent adverse effects involving multiple body systems. In 2026, France's Haute Autorité de Santé also initiated formal work on clinical guidance for managing serious fluoroquinolone adverse effects.</p></li>
+              <li><i class="fas fa-check"></i><p><strong>Human clinical evidence:</strong> Tendon injury, tendon rupture, and peripheral neuropathy are supported by regulatory findings and human epidemiological evidence. Newer population research also identifies measurable neurological and neuropsychiatric risk after exposure.</p></li>
+              <li><i class="fas fa-check"></i><p><strong>Experimental mechanisms:</strong> Laboratory studies demonstrate that fluoroquinolones can disrupt mitochondrial DNA topology and replication, increase oxidative stress, impair mitochondrial function, and disturb tendon extracellular-matrix biology.</p></li>
+              <li><i class="fas fa-check"></i><p><strong>Confirmed human-cell off-targets:</strong> Chemical proteomics has identified AIFM1 and IDH2 as direct fluoroquinolone off-targets in human-cell systems, with downstream effects involving mitochondrial Complexes I and IV.</p></li>
+              <li><i class="fas fa-check"></i><p><strong>Clinical documentation exists:</strong> Fluoroquinolone-specific ICD-10-CM adverse-effect codes now allow these reactions and their sequelae to be documented longitudinally.</p></li>
+            </ul>
+          </div>
+          <div class="status-col unknown">
+            <div class="status-col-label unknown"><i class="fas fa-circle-question"></i> What Remains Under Investigation</div>
+            <ul>
+              <li><i class="fas fa-question"></i><p><strong>Population burden:</strong> The true incidence, prevalence, long-term disability burden, and recovery rate remain unknown because no dedicated longitudinal surveillance system exists.</p></li>
+              <li><i class="fas fa-question"></i><p><strong>Individual susceptibility:</strong> We do not yet know why similar exposures produce no apparent injury in some patients and profound multisystem disability in others.</p></li>
+              <li><i class="fas fa-question"></i><p><strong>Pathway interaction:</strong> The relative contributions and interactions of mitochondrial injury, neurological injury, extracellular-matrix disruption, connective-tissue injury, and other pathways remain incompletely defined in human FQAD.</p></li>
+              <li><i class="fas fa-question"></i><p><strong>Clinical identification:</strong> Validated biomarkers, broadly accepted diagnostic criteria, and reliable methods for identifying reduced bioenergetic reserve are still lacking.</p></li>
+              <li><i class="fas fa-question"></i><p><strong>Natural history:</strong> Relapse, recovery, delayed progression, re-exposure risk, and the proposed reduced-reserve or second-hit model require prospective human study.</p></li>
+              <li><i class="fas fa-question"></i><p><strong>Treatment:</strong> No established evidence-based treatment pathway currently exists for persistent multisystem fluoroquinolone injury.</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- WHAT IS FQAD -->
-    <section class="what-fqad">
+    <section class="what-fqad" id="pn-regulatory">
       <div class="section-inner">
         <div class="what-grid">
           <div>
             <div class="section-label">Definition</div>
-            <h2 class="section-title">Not a Controversy — A Reality</h2>
+            <h2 class="section-title">The Harm Is Recognized. The Population Is Not Yet Measured.</h2>
             <div class="section-divider"></div>
 
             <div class="definition-card">
@@ -623,7 +774,7 @@
 
           <!-- 2026 -->
           <div class="dt-row">
-            <div class="dt-left"><div class="dt-card dt-card-key"><h4>FDA Petition FDA-2026-P-5116 accepted</h4><p>Citizen Petition requesting enhanced informed consent for systemic fluoroquinolones accepted for filing. Open for public comment. The regulatory record and the molecular science are finally being brought into alignment.</p><span class="dt-tag dt-tag-key">Petition filed · Now</span></div></div>
+            <div class="dt-left dt-left-multi"><div class="dt-card dt-card-key"><h4>FDA Petition FDA-2026-P-5116 accepted</h4><p>Citizen Petition requesting enhanced informed consent for systemic fluoroquinolones accepted for filing. Open for public comment. The regulatory record and the molecular science are finally being brought into alignment.</p><span class="dt-tag dt-tag-key">Petition filed · Now</span></div><div class="dt-card"><h4>French HAS begins formal guidance development</h4><p>France's Haute Autorité de Santé initiated work on recommendations for the clinical management of serious fluoroquinolone adverse effects, following a request involving patient representatives. This is guidance development, not a completed final guideline.</p><span class="dt-tag">Guidance initiative · Jan 2026</span></div></div>
             <div class="dt-center"><div class="dt-year">2026</div><div class="dt-dot dt-dot-both dt-dot-landmark"></div></div>
             <div class="dt-right"><div class="dt-card dt-card-sci dt-card-key expandable" data-id="m2026"><div class="dt-card-top"><h4>Mitochondrial vulnerability confirmed independently — cardiac</h4><span class="expand-icon"><i class="fas fa-plus"></i></span></div><p>Mori et al. (Nature Communications, 2026) demonstrate that subclinical mitochondrial vulnerability — clinically silent at baseline — can be unmasked by biological stress, triggering cardiac dysfunction through mitochondrial ROS and necroptosis.</p><span class="dt-tag dt-tag-key">★ Independent validation</span><div class="dt-expand" id="m2026"><div class="dt-expand-inner"><p><strong>Why it matters for DIMD:</strong> Mori 2026 comes from a completely independent research group studying a completely different exposure and arrives at the same conclusion: pre-existing mitochondrial vulnerability is a real, measurable risk factor that standard safety evaluation does not account for. Subclinical dysfunction, compensated at baseline, was unmasked under stress and produced organ damage. This is the second-hit phenomenon in a different context — and when two independent groups using different methods studying different exposures converge on the same mechanism, the scientific argument becomes substantially stronger.</p><p><strong>Key reference:</strong> Mori G, et al. Mitochondrial vulnerability underlies myocarditis from COVID-19 mRNA vaccine. <em>Nature Communications.</em> 2026. DOI: 10.1038/s41467-026-71295-1.</p></div></div></div></div>
           </div>
@@ -648,6 +799,7 @@
     .dual-track::before { content:''; position:absolute; left:50%; transform:translateX(-50%); top:0; bottom:0; width:1px; background:linear-gradient(to bottom, transparent 0%, rgba(42,122,86,0.20) 4%, rgba(42,122,86,0.20) 96%, transparent 100%); }
     .dt-row { display:grid; grid-template-columns:1fr 80px 1fr; gap:0 1rem; margin-bottom:1.2rem; position:relative; align-items:flex-start; }
     .dt-left { padding-right:0.5rem; display:flex; justify-content:flex-end; }
+    .dt-left.dt-left-multi { flex-direction:column; align-items:flex-end; gap:0.8rem; }
     .dt-right { padding-left:0.5rem; }
     .dt-center { display:flex; flex-direction:column; align-items:center; padding-top:1rem; gap:4px; position:relative; z-index:2; }
     .dt-year { font-family:'DM Serif Display',serif; font-size:0.82rem; color:var(--e2-text); font-style:italic; white-space:nowrap; background:var(--bg-mid); padding:2px 4px; text-align:center; line-height:1.2; }
@@ -691,6 +843,7 @@
       .dt-row { grid-template-columns:1fr; gap:0.5rem; margin-bottom:1.5rem; }
       .dt-center { flex-direction:row; padding-top:0; justify-content:flex-start; gap:8px; margin-bottom:0.2rem; }
       .dt-left { justify-content:flex-start; padding-right:0; }
+      .dt-left.dt-left-multi { align-items:stretch; }
       .dt-right { padding-left:0; }
       .dt-year { font-size:0.88rem; background:transparent; }
       .dt-card { padding:0.85rem 1rem; }
@@ -721,8 +874,29 @@
     });
     </script>
 
+    <!-- WHAT HUMAN STUDIES SHOW -->
+    <section class="lit-highlight-section" id="pn-human">
+      <div class="section-inner">
+        <div class="section-label">Human Evidence</div>
+        <h2 class="section-title">What Human Studies Show</h2>
+        <div class="section-divider"></div>
+        <p class="body-text lit-highlight-intro">
+          The regulatory record above reflects decades of accumulating clinical signal. More recent population-scale research adds a concrete, quantified picture of post-exposure neurological risk and its timing.
+        </p>
+
+        <div class="citation-card">
+          <div class="cit-label">Human Claims-Based Cohort · 2026</div>
+          <div class="cit-title">Fluoroquinolone-Associated Peripheral and Central Nervous System-Related Disorders: A Large German Claims-Based Cohort Study</div>
+          <div class="cit-meta">Wicherski et al. · 2026</div>
+          <div class="cit-finding">In a German insurance-claims cohort spanning roughly <strong>10.7–14.3 million antibiotic treatment episodes</strong>, fluoroquinolone use was associated with modestly elevated overall risk of neurological and neuropsychiatric outcomes versus reference antibiotics. Drug-induced polyneuropathy showed a stronger association — <strong>adjusted hazard ratio of 1.68</strong> — with excess risk concentrated in the first 92 days after exposure.</div>
+          <div class="cit-why">This describes post-exposure neurological and neuropsychiatric risk and its timing within the study's observation window — it is not evidence of long-delayed FQAD latency extending months or years beyond that window.</div>
+        </div>
+        <a href="evidence.html#sec-lit-human" class="lit-readmore"><i class="fas fa-arrow-up-right-from-square"></i> Read the full evidence entry</a>
+      </div>
+    </section>
+
     <!-- MOLECULAR MECHANISMS -->
-    <section class="molecular">
+    <section class="molecular" id="pn-experimental">
       <div class="section-inner">
         <div class="mol-grid">
           <div>
@@ -783,11 +957,34 @@
             </div>
           </div>
         </div>
+
+        <div class="exp-subhead">
+          <h3>Experimental Evidence Beyond the Four-Strike Model</h3>
+          <p>The four strikes above describe the confirmed mitochondrial mechanism. Newer experimental work — in human neural tissue and in tendon cells — extends the picture of what fluoroquinolone exposure disrupts at the cellular level, including at least one pathway that operates independently of, or alongside, mitochondrial injury.</p>
+
+          <div class="citation-card">
+            <div class="cit-label">Experimental Tendon-Cell Study · 2026 · Early/Unedited Version</div>
+            <div class="cit-title">Effects of Fluoroquinolone Antibiotics on Extracellular Matrix-Related Phenotypes in Tendon Cells</div>
+            <div class="cit-meta">Anand et al. · 2026 (early/unedited version)</div>
+            <div class="cit-finding">In mouse tendon cells, fluoroquinolone exposure reduced collagen production and assembly, hydroxyproline and fibronectin levels, lysyl oxidase activity, and active β1-integrin expression — pointing to disrupted cell-matrix adhesion as part of the tendon-injury mechanism.</div>
+            <div class="cit-why">Presented as a <strong>parallel extracellular-matrix and cell-adhesion pathway</strong> that may interact with, amplify, or occur independently of mitochondrial dysfunction — not forced into the four-strike model above, and not framed as a separate DIMD subtype.</div>
+          </div>
+
+          <div class="citation-card">
+            <div class="cit-label">Human Cortical-Organoid Model · 2026</div>
+            <div class="cit-title">Ciprofloxacin Exposure Impairs Neurogenesis and E/I Balance in Human Cortical Organoids</div>
+            <div class="cit-meta">Liu et al. · 2026</div>
+            <div class="cit-finding">Two weeks of low-dose ciprofloxacin exposure in human cortical organoids increased oxidative stress, reduced mitochondrial membrane potential, and disrupted cortical development, GABAergic network formation, and neuronal firing.</div>
+            <div class="cit-why">Direct evidence in human neural tissue linking fluoroquinolone exposure to the same mitochondrial disturbance described above — but this is a <strong>developmental experimental model</strong>, not a direct study of adult clinical FQAD.</div>
+          </div>
+
+          <a href="evidence.html#sec-lit-cell" class="lit-readmore"><i class="fas fa-arrow-up-right-from-square"></i> Read the full evidence entries</a>
+        </div>
       </div>
     </section>
 
     <!-- MULTISYSTEM PHENOTYPE -->
-    <section class="phenotype">
+    <section class="phenotype" id="pn-multisystem">
       <div class="section-inner">
         <div class="section-label">Clinical Pattern</div>
         <h2 class="section-title">The Multisystem Phenotype — and Why It Gets Misattributed</h2>
@@ -854,13 +1051,16 @@
     </section>
 
     <!-- SECOND HIT -->
-    <section class="second-hit">
+    <section class="second-hit" id="pn-secondhit">
       <div class="section-inner">
         <div class="hit-grid">
           <div>
-            <div class="section-label">The Second-Hit Phenomenon</div>
+            <div class="section-label">Proposed Explanatory Model — Not Yet Clinically Validated</div>
             <h2 class="section-title">When a Primed System Meets Another Exposure</h2>
             <div class="section-divider"></div>
+            <p class="body-text" style="font-size:0.88rem; font-style:italic; color:var(--t3);">
+              The reduced-reserve and second-hit model below is a proposed explanatory framework grounded in mitochondrial population dynamics — not a mechanism directly validated in human longitudinal studies. It is offered as a plausible explanation for a recurring clinical pattern, and is one of the open questions listed later on this page.
+            </p>
             <p class="body-text">
               One of the most clinically important — and least recognized — aspects of FQAD is what happens when a patient with prior fluoroquinolone exposure receives a second course. Or a different mitochondria-impairing medication. Or undergoes significant physiological stress.
             </p>
@@ -876,6 +1076,15 @@
             <p class="body-text" style="font-size:0.88rem; font-style:italic; margin-top:1.5rem;">
               Currently, no prescribing system flags prior fluoroquinolone adverse effects when a new prescription is written. No electronic health record alerts a clinician that this patient has a history suggestive of FQAD before a second course is initiated. This is the gap the DIMD framework and the FDA petition exist to address.
             </p>
+
+            <div class="citation-card" style="margin-top:1.6rem;">
+              <div class="cit-label">Independent Framework Convergence · 2026</div>
+              <div class="cit-title">Depleted Before the Dose: The Mitochondrial Vulnerability Threshold Hypothesis for Fluoroquinolone-Associated Multisystem Toxicity</div>
+              <div class="cit-meta">Sewell &amp; Jensen · <em>Frontiers in Pharmacology</em> · 2026 · Hypothesis and Theory article</div>
+              <div class="cit-finding">Sewell and Jensen's 2026 Hypothesis and Theory article proposes that fluoroquinolone-associated multisystem toxicity may emerge when therapeutic exposure exceeds a patient's pre-existing mitochondrial reserve. The model emphasizes vulnerability thresholds, cumulative biological stress, and testable differences in susceptibility rather than dose alone.</div>
+              <div class="cit-why">This is a peer-reviewed, hypothesis-generating framework — not prospective human validation of the second-hit model or a clinically validated vulnerability score.</div>
+            </div>
+            <a href="evidence.html#sec-lit-frameworks" class="lit-readmore"><i class="fas fa-arrow-up-right-from-square"></i> Read the full evidence entry</a>
           </div>
           <div>
             <div class="exposure-chain">
@@ -899,6 +1108,42 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE STILL DO NOT KNOW -->
+    <section class="unknown-section" id="pn-unknown">
+      <div class="section-inner">
+        <div class="section-label">Research &amp; Surveillance Gaps</div>
+        <h2 class="section-title">What We Still Do Not Know — Because It Has Not Been Measured</h2>
+        <div class="section-divider"></div>
+
+        <div class="unknown-list">
+          <div class="unknown-item">
+            <i class="fas fa-circle-question"></i>
+            <p><strong>No reliable incidence, prevalence, or long-term disability estimates.</strong> Without dedicated longitudinal surveillance, the true population burden of FQAD is unknown.</p>
+          </div>
+          <div class="unknown-item">
+            <i class="fas fa-circle-question"></i>
+            <p><strong>No dedicated prospective natural-history cohort or longitudinal registry.</strong> Existing evidence is built from claims data, case reports, and pharmacovigilance signals — not a cohort followed forward specifically to observe FQAD's course.</p>
+          </div>
+          <div class="unknown-item">
+            <i class="fas fa-circle-question"></i>
+            <p><strong>No validated biomarker or broadly accepted diagnostic pathway.</strong> Clinicians currently have no reliable way to confirm reduced bioenergetic reserve or distinguish FQAD from its commonly misattributed look-alikes.</p>
+          </div>
+          <div class="unknown-item">
+            <i class="fas fa-circle-question"></i>
+            <p><strong>Incomplete understanding of susceptibility, recovery, relapse, progression, and re-exposure.</strong> Why some patients recover and others do not — and what determines the second-hit trajectory described above — remains an open question requiring prospective human study.</p>
+          </div>
+          <div class="unknown-item">
+            <i class="fas fa-circle-question"></i>
+            <p><strong>No established evidence-based treatment pathway.</strong> There is currently no validated, evidence-based approach to managing persistent multisystem fluoroquinolone injury.</p>
+          </div>
+        </div>
+
+        <p class="unknown-close">
+          These are gaps in <strong>measurement</strong>, not evidence that the harm is rare or resolved. A condition without a surveillance system will always look smaller than it is — because the system that would count it was never built. Closing that gap is the purpose of the registry and the FDA petition below.
+        </p>
       </div>
     </section>
 
@@ -1036,7 +1281,7 @@
     </section>
 
     <!-- CTA -->
-    <div class="fqad-cta">
+    <div class="fqad-cta" id="pn-action">
       <h2>The Evidence Exists. The Framework Exists. Now We Build the Record.</h2>
       <p>Every patient who submits a registry record, every clinician who codes correctly, every policymaker who reads the petition — that is how the evidence base grows.</p>
       <div class="cta-btns">
@@ -1172,6 +1417,98 @@
     });
   });
   </script>
+  <script>
+  (function(){
+    var SECTIONS = [{"id": "pn-regulatory", "label": "Regulatory Recognition"}, {"id": "pn-human", "label": "Human Evidence"}, {"id": "pn-experimental", "label": "Experimental Evidence"}, {"id": "pn-multisystem", "label": "Multisystem Clinical Pattern"}, {"id": "pn-secondhit", "label": "Proposed Reduced-Reserve Model"}, {"id": "pn-unknown", "label": "What Remains Unknown"}, {"id": "clinician-packet", "label": "Clinical Documentation"}, {"id": "pn-action", "label": "Registry, Petition & Action"}];
+
+    var pageNav = document.getElementById('pageNav');
+    var toggle = document.getElementById('pageNavToggle');
+    var menu = document.getElementById('pageNavMenu');
+    var currentLabel = document.getElementById('pageNavCurrent');
+    var backToTop = document.getElementById('backToTop');
+    if (!pageNav || !toggle || !menu) return;
+
+    SECTIONS.forEach(function(s){
+      var el = document.getElementById(s.id);
+      if (!el) return;
+      var a = document.createElement('a');
+      a.href = '#' + s.id;
+      a.className = 'page-nav-link';
+      a.textContent = s.label;
+      a.dataset.target = s.id;
+      menu.appendChild(a);
+    });
+    var links = menu.querySelectorAll('.page-nav-link');
+    if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
+
+    function openMenu(){
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded','true');
+      document.addEventListener('click', onDocClick);
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(focusToggle){
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onKeydown);
+      if (focusToggle) toggle.focus();
+    }
+    function onDocClick(e){
+      if (!pageNav.contains(e.target) && !menu.contains(e.target)) closeMenu(false);
+    }
+    function onKeydown(e){
+      if (e.key === 'Escape') closeMenu(true);
+    }
+    toggle.addEventListener('click', function(){
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(false); else openMenu();
+    });
+    links.forEach(function(link){
+      link.addEventListener('click', function(){ closeMenu(false); });
+    });
+
+    var heroEl = document.querySelector('.page-hero');
+    var heroThreshold = heroEl ? Math.max(heroEl.offsetHeight - 40, 260) : 400;
+    function onScroll(){
+      if (window.scrollY > heroThreshold) pageNav.classList.add('visible');
+      else { pageNav.classList.remove('visible'); closeMenu(false); }
+      if (backToTop) {
+        if (window.scrollY > 900) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+
+    if (backToTop) {
+      backToTop.addEventListener('click', function(){
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    function setActive(id){
+      var match = null;
+      for (var i=0;i<SECTIONS.length;i++){ if (SECTIONS[i].id === id){ match = SECTIONS[i]; break; } }
+      if (!match) return;
+      if (currentLabel) currentLabel.textContent = match.label;
+      links.forEach(function(link){
+        link.classList.toggle('active', link.dataset.target === id);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var sectionEls = SECTIONS.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-140px 0px -70% 0px', threshold: 0 });
+      sectionEls.forEach(function(el){ observer.observe(el); });
+    }
+  })();
+  </script>
 <script defer src="/_vercel/insights/script.js"></script>
+
 </body>
 </html>
