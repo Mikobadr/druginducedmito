@@ -311,6 +311,29 @@
     .page-nav-link:focus-visible { outline:2px solid var(--e1); outline-offset:-2px; }
     .page-nav-link.active { background:rgba(61,158,114,0.14); color:var(--e1); font-weight:500; }
 
+    .page-toc-wrap { max-width:1060px; margin:2.4rem auto 0; padding:0 2.5rem; }
+    .page-toc {
+      max-width:400px;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.30); padding:1.1rem 1.3rem;
+    }
+    .page-toc-header {
+      display:flex; align-items:center; gap:8px;
+      font-size:0.70rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase;
+      color:var(--e2-text); margin-bottom:0.6rem;
+    }
+    .page-toc-links { display:flex; flex-direction:column; gap:2px; }
+
+    /* Desktop left-rail placement — wide screens only; below this, panel stays in its current stacked position */
+    @media (min-width:1700px) {
+      .page-hero { overflow:visible; }
+      .page-toc-wrap {
+        position:absolute; top:5rem; left:calc(50% - 770px);
+        width:300px; max-width:none; margin:0; padding:0; z-index:3;
+      }
+    }
+
     .back-to-top {
       position:fixed; bottom:28px; right:28px; z-index:900;
       width:46px; height:46px; border-radius:50%;
@@ -330,6 +353,8 @@
       .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
       .page-nav-link { padding:12px 14px; font-size:0.86rem; }
       .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
+      .page-toc-wrap { padding:0 1.2rem; margin-top:1.6rem; }
+      .page-toc { max-width:none; width:100%; padding:1rem 1.1rem; }
     }
 
     /* ══ RESPONSIVE ══ */
@@ -480,6 +505,13 @@
             <i class="fas fa-file-contract"></i>
             <span>FDA Docket <strong>FDA-2026-P-5116</strong> on record</span>
           </div>
+        </div>
+      </div>
+
+      <div class="page-toc-wrap">
+        <div class="page-toc" id="pageToc">
+          <div class="page-toc-header"><i class="fas fa-list-ul"></i> On this page</div>
+          <div class="page-toc-links" id="pageTocLinks"></div>
         </div>
       </div>
     </div>
@@ -840,7 +872,7 @@
               <span class="l26-year">2026</span>
             </div>
             <div class="l26-title">Fluoroquinolone-Associated Peripheral and Central Nervous System-Related Disorders: A Large German Claims-Based Cohort Study</div>
-            <div class="l26-meta">Wicherski J, Peltner J, Becker C, et al. “Fluoroquinolone-Associated Peripheral and Central Nervous System-Related Disorders: A Large German Claims-Based Cohort Study.” European Journal of Neurology. 2026;33(4):e70585.</div>
+            <div class="l26-meta">Wicherski et al. · 2026</div>
             <div class="l26-block">
               <span class="l26-block-label">Finding</span>
               <p>In a German insurance-claims cohort spanning roughly <strong>10.7–14.3 million antibiotic treatment episodes</strong>, fluoroquinolone use was associated with modestly elevated overall risk of neurological and neuropsychiatric outcomes compared with reference antibiotics (adjusted relative risks approximately 1.04–1.10, comparator-dependent). Drug-induced polyneuropathy showed a stronger association — <strong>adjusted hazard ratio of 1.68</strong> — with excess risk concentrated in the first 92 days after exposure.</p>
@@ -850,9 +882,7 @@
               <p>Population-scale human evidence, not a case series or a spontaneous-report signal, that fluoroquinolone exposure carries measurable, timing-specific neurological risk — giving the FQAD framework a concrete, citable human number.</p>
             </div>
             <div class="l26-strength"><i class="fas fa-scale-balanced"></i> Human claims-based cohort. Describes post-exposure neurological/neuropsychiatric risk and timing within the study's observation window — not proof of long-delayed FQAD latency extending months or years beyond that window.</div>
-            <div class="l26-doi"><i class="fas fa-link"></i> <a href="https://doi.org/10.1111/ene.70585" target="_blank" rel="noopener noreferrer">
-  DOI: 10.1111/ene.70585
-</a></div>
+            <div class="l26-doi"><i class="fas fa-link"></i> <!-- TODO: Insert verified DOI/link --> DOI/link pending verification</div>
           </div>
 
           <div class="lit2026-card">
@@ -1279,20 +1309,29 @@
     var menu = document.getElementById('pageNavMenu');
     var currentLabel = document.getElementById('pageNavCurrent');
     var backToTop = document.getElementById('backToTop');
+    var toc = document.getElementById('pageToc');
+    var tocLinks = document.getElementById('pageTocLinks');
     if (!pageNav || !toggle || !menu) return;
 
-    SECTIONS.forEach(function(s){
-      var el = document.getElementById(s.id);
-      if (!el) return;
-      var a = document.createElement('a');
-      a.href = '#' + s.id;
-      a.className = 'page-nav-link';
-      a.textContent = s.label;
-      a.dataset.target = s.id;
-      menu.appendChild(a);
-    });
-    var links = menu.querySelectorAll('.page-nav-link');
+    function buildLinks(container){
+      if (!container) return;
+      SECTIONS.forEach(function(s){
+        var el = document.getElementById(s.id);
+        if (!el) return;
+        var a = document.createElement('a');
+        a.href = '#' + s.id;
+        a.className = 'page-nav-link';
+        a.textContent = s.label;
+        a.dataset.target = s.id;
+        container.appendChild(a);
+      });
+    }
+    buildLinks(menu);
+    buildLinks(tocLinks);
+
+    var links = document.querySelectorAll('.page-nav-link');
     if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
+    if (links.length) links[0].classList.add('active');
 
     function openMenu(){
       menu.hidden = false;
@@ -1321,18 +1360,14 @@
       link.addEventListener('click', function(){ closeMenu(false); });
     });
 
-    var heroEl = document.querySelector('.page-hero');
-    var heroThreshold = heroEl ? Math.max(heroEl.offsetHeight - 40, 260) : 400;
-    function onScroll(){
-      if (window.scrollY > heroThreshold) pageNav.classList.add('visible');
-      else { pageNav.classList.remove('visible'); closeMenu(false); }
+    function onBackToTopScroll(){
       if (backToTop) {
         if (window.scrollY > 900) backToTop.classList.add('visible');
         else backToTop.classList.remove('visible');
       }
     }
-    window.addEventListener('scroll', onScroll, { passive:true });
-    onScroll();
+    window.addEventListener('scroll', onBackToTopScroll, { passive:true });
+    onBackToTopScroll();
 
     if (backToTop) {
       backToTop.addEventListener('click', function(){
@@ -1352,12 +1387,28 @@
 
     if ('IntersectionObserver' in window) {
       var sectionEls = SECTIONS.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
-      var observer = new IntersectionObserver(function(entries){
+      var sectionObserver = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
           if (entry.isIntersecting) setActive(entry.target.id);
         });
       }, { rootMargin: '-140px 0px -70% 0px', threshold: 0 });
-      sectionEls.forEach(function(el){ observer.observe(el); });
+      sectionEls.forEach(function(el){ sectionObserver.observe(el); });
+
+      if (toc) {
+        var tocObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (entry.isIntersecting) { pageNav.classList.remove('visible'); closeMenu(false); }
+            else { pageNav.classList.add('visible'); }
+          });
+        }, { rootMargin: '-70px 0px 0px 0px', threshold: 0 });
+        tocObserver.observe(toc);
+      }
+    } else if (toc) {
+      var tocFallbackThreshold = Math.max(toc.offsetTop + toc.offsetHeight - 40, 260);
+      window.addEventListener('scroll', function(){
+        if (window.scrollY > tocFallbackThreshold) pageNav.classList.add('visible');
+        else { pageNav.classList.remove('visible'); closeMenu(false); }
+      }, { passive:true });
     }
   })();
   </script>
