@@ -96,7 +96,7 @@
         inset 160px 0 200px rgba(5,12,9,0.52),
         inset -160px 0 200px rgba(5,12,9,0.52);
     }
-    nav,main,footer,.petition-banner,.ticker { position:relative; z-index:10; }
+    nav,main,footer,.petition-banner,.framing-banner { position:relative; z-index:10; }
 
     /* ══ NAV ══ */
     nav {
@@ -141,20 +141,20 @@
     .nav-cta::after { display:none !important; }
     .nav-cta:hover { opacity:0.88; }
 
-    /* ══ TICKER ══ */
-    .ticker {
-      background:rgba(12,30,20,0.80);
-      border-bottom:1px solid rgba(30,92,62,0.10);
-      padding:0.58rem 0; overflow:hidden;
+    /* ══ FRAMING BANNER (static — replaces the former scrolling ticker) ══ */
+    .framing-banner {
+      background:linear-gradient(90deg, rgba(14,36,25,0.88), rgba(21,54,38,0.88), rgba(14,36,25,0.88));
+      border-top:1px solid var(--e3-border);
+      border-bottom:1px solid var(--e3-border-lift);
+      padding:0.95rem 2.5rem;
     }
-    .ticker-track {
-      display:flex; gap:4rem;
-      animation:ticker 34s linear infinite;
-      white-space:nowrap; width:max-content;
+    .framing-banner-inner {
+      max-width:920px; margin:0 auto; text-align:center;
     }
-    .ticker-track span { font-size:0.82rem; color:var(--t3); display:flex; align-items:center; gap:8px; }
-    .ticker-track span i { color:var(--e2); font-size:0.70rem; }
-    @keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    .framing-banner p {
+      font-size:0.96rem; font-weight:400; line-height:1.62;
+      color:var(--t1); letter-spacing:0.005em;
+    }
 
     /* ══ HERO ══ */
     .hero {
@@ -379,6 +379,65 @@
     .impact-statement p { font-family:'DM Serif Display',serif; font-size:1.16rem; font-style:italic; color:var(--t1); line-height:1.52; margin-bottom:0.75rem; }
     .impact-statement small { font-size:0.76rem; color:var(--e2); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; }
 
+    /* ══ SYSTEM GAP PANEL ══ */
+    .system-gap-panel {
+      margin-top:2.6rem;
+      background:linear-gradient(155deg, rgba(18,50,34,0.60), rgba(10,28,18,0.74));
+      border:1px solid var(--e3-border-lift);
+      border-left:3px solid var(--e2);
+      border-radius:16px;
+      padding:2.2rem 2.1rem;
+    }
+    .system-gap-eyebrow {
+      font-size:0.68rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase;
+      color:var(--e2-text); margin-bottom:0.9rem;
+    }
+    .system-gap-heading {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(1.5rem,2.6vw,1.9rem);
+      color:var(--t1); letter-spacing:-0.01em; line-height:1.18;
+      margin-bottom:0.4rem;
+    }
+    .system-gap-subheading {
+      font-size:1rem; font-weight:500; color:var(--e2-text);
+      margin-bottom:1.5rem;
+    }
+    .system-gap-text {
+      color:var(--t2); font-size:0.94rem; line-height:1.78; font-weight:300;
+      margin-bottom:1rem; overflow-wrap:break-word; word-break:break-word;
+    }
+    .system-gap-text strong { color:var(--t1); font-weight:600; }
+    .system-gap-questions-label {
+      font-size:0.86rem; font-weight:600; color:var(--t1);
+      margin:1.7rem 0 0.9rem;
+    }
+    .system-gap-questions { display:flex; flex-direction:column; gap:0.65rem; margin-bottom:1.9rem; }
+    .system-gap-q {
+      background:rgba(42,122,86,0.07);
+      border:1px solid var(--e3-border);
+      border-radius:10px;
+      padding:0.8rem 1.05rem;
+      font-size:0.88rem; color:var(--t2); font-weight:300; line-height:1.5;
+    }
+    .system-gap-conclusion {
+      background:linear-gradient(135deg, rgba(16,46,30,0.65), rgba(10,30,20,0.76));
+      border:1px solid var(--e3-border);
+      border-radius:13px;
+      padding:1.4rem 1.5rem;
+      margin-top:0.3rem;
+    }
+    .system-gap-conclusion p {
+      font-family:'DM Serif Display',serif;
+      font-style:italic; font-size:1.02rem; color:var(--t1); line-height:1.5;
+    }
+    @media (max-width:680px) {
+      .system-gap-panel { padding:1.5rem 1.3rem; margin-top:2rem; }
+      .system-gap-heading { font-size:1.4rem; }
+      .system-gap-subheading { font-size:0.92rem; }
+      .system-gap-text { font-size:0.9rem; }
+      .system-gap-conclusion p { font-size:0.94rem; }
+    }
+
     /* ══ CARDS ══ */
     .navigate {
       background:
@@ -474,6 +533,8 @@
       .hero-eyebrow { font-size:0.70rem; padding:5px 14px; }
       .hero-title { font-size:clamp(2.2rem,9vw,3rem); }
       .hero-sub { font-size:0.95rem; }
+      .framing-banner { padding:1rem 1.2rem; }
+      .framing-banner p { font-size:0.87rem; line-height:1.55; }
       .petition-banner { padding:1.6rem 1.2rem; }
       .petition-icon { width:42px; height:42px; font-size:1.1rem; }
       .petition-title { font-size:1.05rem; }
@@ -571,19 +632,10 @@
     </div>
   </nav>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
-      <span><i class="fas fa-flask"></i> Manuscript submitted for journal consideration</span>
-      <span><i class="fas fa-users"></i> DIMD Registry now open for participation</span>
-      <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
-      <span><i class="fas fa-circle-check"></i> New case studies being added</span>
-      <span><i class="fas fa-circle-check"></i> FDA Citizen Petition Accepted — Docket FDA-2026-P-5116</span>
-      <span><i class="fas fa-flask"></i> Manuscript submitted for journal consideration</span>
-      <span><i class="fas fa-users"></i> DIMD Registry now open for participation</span>
-      <span><i class="fas fa-dna"></i> 400+ medications carry FDA boxed warnings linked to mitochondrial mechanisms</span>
-      <span><i class="fas fa-circle-check"></i> New case studies being added</span>
+  <!-- FRAMING BANNER -->
+  <div class="framing-banner">
+    <div class="framing-banner-inner">
+      <p>We now understand more about mitochondrial biology. Why haven't drug safety systems evolved to investigate its long-term implications?</p>
     </div>
   </div>
 
@@ -711,7 +763,7 @@
               <p>"It's not so rare when it happens to you."</p>
             </div>
             <p class="body-text">The potential scale is substantial: <strong>tens of millions of Americans may be exposed to mitochondria-impairing medications</strong> — and that estimate does not account for repeat exposures, polypharmacy, age-related mitochondrial decline, or delayed clinical manifestations.</p>
-            <p class="body-text">Mitochondria are maternally inherited — passed from mother to child across generations — and play a central role in cellular energy, repair, and resilience. Emerging research, including recent work exploring how pre-existing mitochondrial vulnerability can be unmasked by biological stress, raises important questions about individual and inherited differences in mitochondrial susceptibility. These findings do not establish causation or demonstrate intergenerational harm, but they do underscore how much remains unknown about inherited mitochondrial resilience, mitochondrial quality control across the lifespan, and the long-term biological effects of repeated mitochondrial stressors. Current pharmacovigilance systems were not designed to ask — or answer — these kinds of longitudinal, systems-level questions.</p>
+            <p class="body-text">Mitochondria are maternally inherited — passed from mother to child across generations — and play a central role in cellular energy, repair, and resilience. Emerging research, including recent work exploring how pre-existing mitochondrial vulnerability can be unmasked by biological stress, raises important questions about individual and inherited differences in mitochondrial susceptibility. These findings do not establish causation or demonstrate intergenerational harm, but they do underscore how much remains unknown about inherited mitochondrial resilience, mitochondrial quality control across the lifespan, and the long-term biological effects of repeated mitochondrial stressors.</p>
             <p class="body-text">We are building the <strong>missing bridge</strong> between drug exposure and delayed, multi-system disease — across molecular biology, clinical medicine, advocacy, and policy.</p>
           </div>
           <div>
@@ -728,6 +780,27 @@
               <small>— druginducedmito.org</small>
             </div>
             <p class="body-text" style="margin-top:1.8rem;">This gap is not due to malice or neglect — it's <strong>structural and educational.</strong> Modern medicine is simply not yet equipped to routinely recognize and address it.</p>
+
+            <!-- SYSTEM GAP PANEL -->
+            <div class="system-gap-panel">
+              <div class="system-gap-eyebrow">The System Gap</div>
+              <h3 class="system-gap-heading">Biochemistry Has Caught Up.</h3>
+              <div class="system-gap-subheading">Why Haven't Regulation and Pharmacovigilance?</div>
+              <p class="system-gap-text">In the 1970s and 80s, it was understandable that many of these connections were missed. We did not have today's tools or understanding of mitochondrial biology.</p>
+              <p class="system-gap-text"><strong>We do now.</strong></p>
+              <p class="system-gap-text">Yet much of modern pharmacovigilance still depends on recognizable adverse events, temporal association, diagnostic coding, spontaneous reporting, and population-level safety signals.</p>
+              <p class="system-gap-text">That creates a serious blind spot when an injury may be multisystem, delayed, cumulative, individually variable, or initially compensated. If mitochondrial dysfunction is never investigated, its downstream manifestations may instead be recorded as fatigue, neuropathy, dysautonomia, cognitive changes, tendon disease, psychiatric symptoms, or entirely separate diagnoses.</p>
+              <div class="system-gap-questions-label">Our safety systems rarely ask:</div>
+              <div class="system-gap-questions">
+                <div class="system-gap-q">What happens to people with reduced mitochondrial reserve?</div>
+                <div class="system-gap-q">What happens after repeated exposure to multiple mitochondrial stressors over decades?</div>
+                <div class="system-gap-q">What happens five or ten years later?</div>
+                <div class="system-gap-q">What happens when injury is cumulative rather than immediately clinically obvious?</div>
+              </div>
+              <div class="system-gap-conclusion">
+                <p>Biochemistry has caught up. Our regulatory framework has not. We are still surveilling 21st-century medicines with pharmacovigilance systems that were never designed to detect chronic, cumulative, or delayed mitochondrial injury.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
