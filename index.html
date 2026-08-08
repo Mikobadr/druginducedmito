@@ -141,20 +141,28 @@
     .nav-cta::after { display:none !important; }
     .nav-cta:hover { opacity:0.88; }
 
-    /* ══ FRAMING BANNER (static — replaces the former scrolling ticker) ══ */
+    /* ══ FRAMING BANNER (static thesis banner — sits directly beneath nav) ══ */
     .framing-banner {
       background:linear-gradient(90deg, rgba(14,36,25,0.88), rgba(21,54,38,0.88), rgba(14,36,25,0.88));
       border-top:1px solid var(--e3-border);
       border-bottom:1px solid var(--e3-border-lift);
-      padding:0.95rem 2.5rem;
+      padding:2.6rem 2.5rem;
     }
     .framing-banner-inner {
-      max-width:920px; margin:0 auto; text-align:center;
+      max-width:1100px; margin:0 auto; text-align:center;
     }
-    .framing-banner p {
-      font-size:0.96rem; font-weight:400; line-height:1.62;
-      color:var(--t1); letter-spacing:0.005em;
+    .framing-eyebrow {
+      font-size:0.78rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--e2-text); margin-bottom:1rem;
     }
+    .framing-question {
+      font-family:'DM Sans',sans-serif;
+      font-size:clamp(1.7rem,2.2vw,2rem);
+      line-height:1.38; font-weight:400;
+      color:var(--t1);
+      max-width:1080px; margin:0 auto;
+    }
+    .framing-question strong { color:var(--e1); font-weight:500; }
 
     /* ══ HERO ══ */
     .hero {
@@ -533,8 +541,9 @@
       .hero-eyebrow { font-size:0.70rem; padding:5px 14px; }
       .hero-title { font-size:clamp(2.2rem,9vw,3rem); }
       .hero-sub { font-size:0.95rem; }
-      .framing-banner { padding:1rem 1.2rem; }
-      .framing-banner p { font-size:0.87rem; line-height:1.55; }
+      .framing-banner { padding:1.9rem 1.3rem; }
+      .framing-eyebrow { font-size:0.68rem; margin-bottom:0.8rem; }
+      .framing-question { font-size:clamp(1.3rem,5vw,1.5rem); line-height:1.42; }
       .petition-banner { padding:1.6rem 1.2rem; }
       .petition-icon { width:42px; height:42px; font-size:1.1rem; }
       .petition-title { font-size:1.05rem; }
@@ -635,7 +644,8 @@
   <!-- FRAMING BANNER -->
   <div class="framing-banner">
     <div class="framing-banner-inner">
-      <p>We now understand more about mitochondrial biology. Why haven't drug safety systems evolved to investigate its long-term implications?</p>
+      <div class="framing-eyebrow">A Question Drug Safety Must Answer</div>
+      <p class="framing-question">If we never <strong>measure mitochondrial function</strong> <strong>before or during drug exposure</strong>, how can we know whether drug-induced mitochondrial dysfunction contributed to the <strong>disease that followed</strong>?</p>
     </div>
   </div>
 
@@ -653,7 +663,7 @@
       </h1>
       <p class="hero-sub">
         Medications can disrupt the body's energy system — sometimes with delayed, multisystem effects.
-        <strong>If our understanding of energy biology and mitochondria has advanced, shouldn't our safety models for medications evolve with it?</strong>
+        <strong>Drug-Induced Mitochondrial Dysfunction asks us to examine what happens when those effects are not recognized, measured, or followed over time.</strong>
       </p>
       <div class="hero-actions">
         <a href="science.html" class="btn-primary"><i class="fas fa-dna"></i> Understand DIMD</a>

@@ -438,7 +438,14 @@
       .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
       .page-nav-link { padding:12px 14px; font-size:0.86rem; }
       .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
-      .page-toc-wrap { padding:0 1.2rem; margin-top:1.6rem; }
+      /* Static desktop "On This Page" box: visually hidden on mobile (not display:none) so the
+         existing tocObserver (which watches #pageToc's position to trigger the sticky bar) keeps
+         functioning correctly — it just no longer renders or takes up layout space here. */
+      .page-toc-wrap {
+        position:absolute; width:1px; height:1px;
+        padding:0; margin:0; border:0; overflow:hidden;
+        clip:rect(0,0,0,0); clip-path:inset(50%); white-space:nowrap;
+      }
       .page-toc { max-width:none; width:100%; padding:1rem 1.1rem; }
     }
 
