@@ -150,6 +150,31 @@
     .request-card h4 { font-size:0.90rem; font-weight:600; color:var(--t1); margin-bottom:0.25rem; }
     .request-card p { font-size:0.84rem; color:var(--t2); line-height:1.58; font-weight:300; }
 
+    /* Petition supplements accordion */
+    .supplements-accordion { background:linear-gradient(135deg,rgba(16,44,30,0.42),rgba(10,30,20,0.55)); border:1px solid var(--e3-border); border-radius:16px; margin-bottom:2.5rem; overflow:hidden; }
+    .supplements-summary { list-style:none; cursor:pointer; padding:1.1rem 1.6rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .supplements-summary::-webkit-details-marker { display:none; }
+    .supplements-summary-text .ss-title { font-size:0.95rem; font-weight:600; color:var(--t1); margin-bottom:0.15rem; }
+    .supplements-summary-text .ss-sub { font-size:0.78rem; color:var(--t3); font-weight:300; }
+    .supplements-chevron { flex-shrink:0; width:28px; height:28px; border-radius:50%; background:rgba(42,122,86,0.10); border:1px solid rgba(42,122,86,0.20); display:flex; align-items:center; justify-content:center; color:var(--e2); font-size:0.72rem; transition:transform 0.3s ease; }
+    .supplements-accordion[open] .supplements-chevron { transform:rotate(180deg); }
+    .supplements-accordion[open] .supplements-summary { border-bottom:1px solid var(--e3-border); }
+    .supplements-body { padding:0.4rem 1.6rem 1.4rem; }
+    .supplement-entry { padding:1.1rem 0; border-top:1px solid var(--e3-border); }
+    .supplement-entry:first-child { border-top:none; padding-top:0.6rem; }
+    .supplement-entry-meta { font-size:0.70rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--e2); margin-bottom:0.35rem; }
+    .supplement-entry h4 { font-size:0.92rem; font-weight:600; color:var(--t1); line-height:1.42; margin-bottom:0.4rem; overflow-wrap:anywhere; }
+    .supplement-entry p { font-size:0.84rem; color:var(--t2); line-height:1.62; font-weight:300; margin-bottom:0.7rem; }
+    .supplement-entry-footer { display:flex; flex-wrap:wrap; align-items:center; gap:0.4rem 1rem; font-size:0.78rem; }
+    .supplement-doi { color:var(--t3); overflow-wrap:anywhere; word-break:break-word; }
+    .supplement-doi strong { color:var(--e2-text); font-weight:600; }
+    .supplement-entry-footer a { color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); font-weight:500; transition:color 0.2s; white-space:nowrap; }
+    .supplement-entry-footer a:hover { color:var(--e1); }
+    @media (max-width:680px) {
+      .supplements-summary { padding:1rem 1.2rem; }
+      .supplements-body { padding:0.4rem 1.2rem 1.2rem; }
+    }
+
     /* ══ PUBLIC COMMENT ══ */
     .public-comment {
       background:
@@ -418,6 +443,69 @@
             </div>
           </div>
         </div>
+
+        <details class="supplements-accordion">
+          <summary class="supplements-summary">
+            <div class="supplements-summary-text">
+              <div class="ss-title">Petition Supplements &amp; Supporting Evidence</div>
+              <div class="ss-sub">Filed additions to FDA Docket FDA-2026-P-5116</div>
+            </div>
+            <span class="supplements-chevron"><i class="fas fa-chevron-down"></i></span>
+          </summary>
+          <div class="supplements-body">
+
+            <div class="supplement-entry">
+              <div class="supplement-entry-meta">Supplement #5 · Filed August 12, 2026</div>
+              <h4>New Comparative Evidence on Fluoroquinolone Risk-Communication Effectiveness: Persistent Exposure, Clinician Education, and Longitudinal Research</h4>
+              <p>Presents newly published comparative prescribing evidence questioning whether the decline in fluoroquinolone use after 2016 can be attributed specifically to FDA warnings rather than broader antimicrobial-stewardship trends. Reinforces the need for meaningful informed consent, clinician education, improved recognition and documentation, longitudinal surveillance, and research.</p>
+              <div class="supplement-entry-footer">
+                <span class="supplement-doi">DOI: <strong>10.5281/zenodo.21910199</strong></span>
+                <a href="https://doi.org/10.5281/zenodo.21910199" target="_blank" rel="noopener">Read Supplement →</a>
+              </div>
+            </div>
+
+            <div class="supplement-entry">
+              <div class="supplement-entry-meta">Supplement #4 · Filed July 8, 2026</div>
+              <h4>Federally Prescribed and Prophylactic Fluoroquinolone Exposure in Military and Veteran Populations: A Known, Trackable Cohort the Federal Government Is Not Following</h4>
+              <p>Addresses fluoroquinolone exposure among military personnel and veterans through prophylactic, deployment-related, VA, Community Care, and preparedness pathways. Calls for improved exposure documentation, EHR safeguards, informed consent, and longitudinal federal surveillance of these unusually trackable populations.</p>
+              <div class="supplement-entry-footer">
+                <span class="supplement-doi">DOI: <strong>10.5281/zenodo.21910053</strong></span>
+                <a href="https://doi.org/10.5281/zenodo.21910053" target="_blank" rel="noopener">Read Supplement →</a>
+              </div>
+            </div>
+
+            <div class="supplement-entry">
+              <div class="supplement-entry-meta">Supplement #3 · Filed June 22, 2026</div>
+              <h4>The Temporal Disconnect: How Advance Fluoroquinolone Provision Bypasses the Clinical Safeguards Assumed by FDA Labeling</h4>
+              <p>Examines emergency, preparedness, and travel medication kits that place fluoroquinolones into consumer possession before a defined clinical need exists. Addresses how later self-administration may occur without contemporaneous diagnosis, medication review, individualized risk-benefit assessment, pharmacist interaction, or meaningful informed consent.</p>
+              <div class="supplement-entry-footer">
+                <span class="supplement-doi">DOI: <strong>10.5281/zenodo.21910010</strong></span>
+                <a href="https://doi.org/10.5281/zenodo.21910010" target="_blank" rel="noopener">Read Supplement →</a>
+              </div>
+            </div>
+
+            <div class="supplement-entry">
+              <div class="supplement-entry-meta">Supplement #2 · Filed June 4, 2026</div>
+              <h4>The Post-Diagnosis Infrastructure Gap in Fluoroquinolone-Associated Disability (FQAD)</h4>
+              <p>Documents recurring problems patients encounter after fluoroquinolone-associated injury is recognized, including limited clinician education, rehabilitation uncertainty, barriers to specialty care, inconsistent patient guidance, and inadequate disability-support pathways. Calls for post-diagnosis clinical infrastructure, referral pathways, registries, and longitudinal tracking.</p>
+              <div class="supplement-entry-footer">
+                <span class="supplement-doi">DOI: <strong>10.5281/zenodo.21909939</strong></span>
+                <a href="https://doi.org/10.5281/zenodo.21909939" target="_blank" rel="noopener">Read Supplement →</a>
+              </div>
+            </div>
+
+            <div class="supplement-entry">
+              <div class="supplement-entry-meta">Supplement #1 · Filed May 27, 2026</div>
+              <h4>Supplemental Comment Supporting Citizen Petition: Commercial Growth Forecasts for Fluoroquinolones Conflict with FDA Risk-Minimization Messaging and Demonstrate the Need for Clinician Education and Prescribing Oversight</h4>
+              <p>Compares FDA risk-minimization and restricted-use guidance with commercial forecasts projecting continued fluoroquinolone market growth. Argues that persistent commercial expansion expectations reinforce the need for clinician education, patient counseling, prescribing oversight, and postmarket surveillance.</p>
+              <div class="supplement-entry-footer">
+                <span class="supplement-doi">DOI: <strong>10.5281/zenodo.21909813</strong></span>
+                <a href="https://doi.org/10.5281/zenodo.21909813" target="_blank" rel="noopener">Read Supplement →</a>
+              </div>
+            </div>
+
+          </div>
+        </details>
 
         <div class="section-label" style="margin-top:0.5rem;">What the Petition Requests</div>
         <div class="petition-requests">
