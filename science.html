@@ -202,71 +202,12 @@
     .hub-card h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.28rem; }
     .hub-card p { font-size:0.87rem; color:var(--t2); line-height:1.58; font-weight:300; }
 
-    /* ══ FIVE STEPS ══ */
-    .five-steps {
+    /* ══ ALT BACKGROUND 1 (reused across several rebuilt sections) ══ */
+    .alt-bg-1 {
       background:
         radial-gradient(ellipse at 8% 40%, rgba(42,122,86,0.050) 0%, transparent 48%),
         linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%);
     }
-    .steps-intro { max-width:660px; margin-bottom:3rem; }
-    .steps-intro p { color:var(--t2); font-size:0.95rem; line-height:1.72; font-weight:300; }
-
-    .steps-grid { display:flex; flex-direction:column; gap:0; position:relative; max-width:880px; }
-    /* Vertical connector line */
-    .steps-grid::before {
-      content:''; position:absolute;
-      left:28px; top:28px; bottom:28px; width:1px;
-      background:linear-gradient(to bottom,
-        transparent 0%,
-        rgba(42,122,86,0.22) 8%,
-        rgba(42,122,86,0.22) 92%,
-        transparent 100%);
-    }
-    .step-item {
-      display:grid; grid-template-columns:60px 1fr;
-      gap:0 1.8rem; margin-bottom:0.6rem; position:relative;
-    }
-    .step-item:last-child { margin-bottom:0; }
-    .step-num-col { display:flex; flex-direction:column; align-items:center; padding-top:1.2rem; }
-    .step-num {
-      width:56px; height:56px; border-radius:50%; flex-shrink:0;
-      background:rgba(16,44,30,0.95);
-      border:1.5px solid var(--e2);
-      display:flex; align-items:center; justify-content:center;
-      font-family:'DM Serif Display',serif; font-size:1.3rem;
-      color:var(--e2-text); font-style:italic;
-      position:relative; z-index:2;
-      transition:background 0.3s, border-color 0.3s;
-    }
-    .step-item:hover .step-num { background:rgba(42,122,86,0.15); border-color:var(--e1); }
-    .step-body {
-      background:linear-gradient(135deg,rgba(16,40,28,0.88),rgba(12,30,20,0.92));
-      border:1px solid var(--e3-border);
-      border-radius:14px; padding:1.4rem 1.6rem; margin-bottom:0.6rem;
-      transition:border-color 0.3s;
-    }
-    .step-item:hover .step-body { border-color:var(--e3-border-lift); }
-    .step-body h4 {
-      font-size:1rem; font-weight:600; color:var(--t1); margin-bottom:0.5rem;
-      display:flex; align-items:center; gap:10px;
-    }
-    .step-body h4 .step-tag {
-      font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:700;
-      letter-spacing:0.10em; text-transform:uppercase;
-      color:var(--e2); background:rgba(42,122,86,0.10);
-      border:1px solid rgba(42,122,86,0.18); border-radius:9999px;
-      padding:2px 9px; font-style:normal;
-    }
-    .step-body p { font-size:0.90rem; color:var(--t2); line-height:1.68; font-weight:300; }
-    .step-body p strong { color:var(--t1); font-weight:500; }
-    .step-body .detail-list { list-style:none; margin-top:0.7rem; display:flex; flex-direction:column; gap:0.35rem; }
-    .step-body .detail-list li { font-size:0.86rem; color:var(--t3); display:flex; align-items:flex-start; gap:8px; line-height:1.52; }
-    .step-body .detail-list li::before { content:'→'; color:var(--e2); flex-shrink:0; font-size:0.78rem; margin-top:2px; }
-
-    .step-highlight { background:rgba(61,158,114,0.06); border-color:rgba(61,158,114,0.22); }
-    .step-item:hover .step-highlight { border-color:rgba(61,158,114,0.36); }
-    .step-highlight h4 .step-tag { color:var(--e1); background:rgba(61,158,114,0.10); border-color:rgba(61,158,114,0.24); }
-    .step-item:hover .step-highlight .step-num { background:rgba(61,158,114,0.14); border-color:var(--e1); }
 
     /* Hypothesis disclaimer */
     .hypothesis-note {
@@ -279,38 +220,43 @@
     .hypothesis-note p { font-size:0.84rem; color:var(--t3); line-height:1.62; font-style:italic; }
     .hypothesis-note p strong { color:var(--t2); font-style:normal; }
 
-    /* ══ PK MISMATCH ══ */
-    .pk-mismatch {
+    /* ══ ALT BACKGROUND 2 (reused across several rebuilt sections) ══ */
+    .alt-bg-2 {
       background:
         radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.050) 0%, transparent 46%),
         linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%);
     }
-    .pk-mismatch::before {
+    .alt-bg-2::before {
       content:''; position:absolute; top:0; left:0; right:0; height:1px;
       background:linear-gradient(90deg, transparent, rgba(42,122,86,0.09), transparent);
       pointer-events:none; z-index:1;
     }
-    .mismatch-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:start; }
-    .mismatch-visual {
-      display:grid; grid-template-columns:1fr 1fr; gap:1rem;
-    }
-    .mismatch-card {
-      background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95));
-      border:1px solid var(--e3-border); border-radius:13px; padding:1.3rem;
-      transition:border-color 0.3s;
-    }
-    .mismatch-card:hover { border-color:var(--e3-border-lift); }
-    .mismatch-card .mc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--e2); margin-bottom:0.5rem; }
-    .mismatch-card .mc-value { font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--t1); line-height:1.1; margin-bottom:0.3rem; font-style:italic; }
-    .mismatch-card .mc-desc { font-size:0.82rem; color:var(--t2); line-height:1.55; font-weight:300; }
-    .mismatch-card.contrast { background:linear-gradient(135deg,rgba(20,52,36,0.55),rgba(14,38,26,0.65)); border-color:rgba(42,122,86,0.22); }
-    .mismatch-card.contrast .mc-value { color:var(--e1); }
-    .vs-divider {
-      grid-column:1/-1; display:flex; align-items:center; gap:12px;
-      margin:0.2rem 0;
-    }
-    .vs-divider::before,.vs-divider::after { content:''; flex:1; height:1px; background:rgba(42,122,86,0.15); }
-    .vs-divider span { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--t3); }
+
+    /* ══ SUB-HEADING LEAD-IN (reused from prior "framework convergence" block) ══ */
+    .fw-boundary-intro { margin-top:2rem; padding-top:1.8rem; border-top:1px solid rgba(42,122,86,0.12); }
+    .fw-boundary-intro h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; color:var(--t1); font-style:italic; margin-bottom:0.6rem; }
+
+    /* ══ EVIDENCE-LEVEL BADGES (2026 rebuild) ══ */
+    .evd-badge { display:inline-flex; align-items:center; gap:6px; font-size:0.64rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; border-radius:9999px; padding:3px 11px; margin-bottom:0.7rem; background:rgba(61,158,114,0.12); border:1px solid rgba(61,158,114,0.28); color:var(--e1); }
+    .evd-badge.emerging { background:rgba(42,122,86,0.10); border-color:rgba(42,122,86,0.22); color:var(--e2-text); }
+    .evd-badge.hypothesis { background:rgba(196,164,90,0.10); border-color:rgba(196,164,90,0.26); color:#D9BE86; }
+
+    /* ══ DRUG-CLASS CARDS (Different Drugs — Different Effects) ══ */
+    .drug-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:0.5rem; }
+    .drug-card { background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68)); border:1px solid var(--e3-border); border-radius:16px; padding:1.6rem 1.7rem; transition:border-color 0.3s; display:flex; flex-direction:column; }
+    .drug-card:hover { border-color:var(--e3-border-lift); }
+    .drug-card h3 { font-family:'DM Serif Display',serif; font-size:1.15rem; color:var(--t1); margin-bottom:0.6rem; font-style:italic; }
+    .drug-card .drug-lead { font-size:0.78rem; color:var(--t3); text-transform:uppercase; letter-spacing:0.06em; font-weight:600; margin-bottom:0.6rem; }
+    .drug-card .drug-targets { list-style:none; display:flex; flex-direction:column; gap:0.45rem; margin:0 0 1rem; }
+    .drug-card .drug-targets li { font-size:0.84rem; color:var(--t2); display:flex; align-items:flex-start; gap:8px; line-height:1.5; font-weight:300; }
+    .drug-card .drug-targets li::before { content:'→'; color:var(--e2); flex-shrink:0; font-size:0.76rem; margin-top:2px; }
+    .drug-card p.drug-note { font-size:0.85rem; color:var(--t2); line-height:1.6; font-weight:300; margin-top:auto; padding-top:0.8rem; }
+    .drug-card p.drug-note strong { color:var(--t1); font-weight:500; }
+    .drug-card .drug-link { display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); margin-top:0.9rem; transition:color 0.2s; }
+    .drug-card .drug-link:hover { color:var(--e1); }
+
+    /* ══ SHARED MITOCHONDRIAL SYSTEMS GRID ══ */
+    .systems-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0.9rem; margin-top:0.5rem; }
 
     /* ══ VALIDATION / EXTERNAL EVIDENCE ══ */
     .validation-section {
@@ -354,43 +300,6 @@
       transition:color 0.2s; font-weight:500;
     }
     .preprint-card a:hover { color:var(--e1); }
-
-    /* ══ MECHANISTIC BOUNDARY CALLOUT (2026 addition) ══ */
-    .boundary-card {
-      background:linear-gradient(135deg,rgba(46,40,20,0.42),rgba(28,24,12,0.58));
-      border:1px solid rgba(196,164,90,0.28);
-      border-radius:16px; padding:1.8rem 2rem;
-      margin-top:1.2rem; transition:border-color 0.3s;
-    }
-    .boundary-card:hover { border-color:rgba(196,164,90,0.42); }
-    .boundary-card .bc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#D9BE86; margin-bottom:0.5rem; }
-    .boundary-card .bc-heading { font-family:'DM Serif Display',serif; font-size:1.08rem; color:var(--t1); line-height:1.35; margin-bottom:0.7rem; font-style:italic; }
-    .boundary-card .bc-title { font-size:0.86rem; color:var(--t3); font-weight:300; margin-bottom:0.9rem; }
-    .boundary-card .bc-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; margin-bottom:0.9rem; }
-    .boundary-card .bc-finding strong { color:var(--t1); font-weight:500; }
-    .boundary-card .bc-note { font-size:0.82rem; color:#D9BE86; line-height:1.6; font-style:italic; padding-top:0.8rem; border-top:1px solid rgba(196,164,90,0.18); margin-bottom:0.8rem; }
-    .boundary-card a { display:inline-flex; align-items:center; gap:7px; font-size:0.82rem; color:var(--t3); text-decoration:none; border-bottom:1px solid rgba(196,164,90,0.22); transition:color 0.2s; }
-    .boundary-card a:hover { color:#D9BE86; }
-
-    /* ══ FRAMEWORK CONVERGENCE CARD (2026 addition — hypothesis, not proof) ══ */
-    .framework-card {
-      background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68));
-      border:1px solid rgba(61,158,114,0.30);
-      border-radius:16px; padding:1.8rem 2rem;
-      margin-top:1.2rem; transition:border-color 0.3s;
-    }
-    .framework-card:hover { border-color:rgba(61,158,114,0.46); }
-    .framework-card .fc-badge { display:inline-block; font-size:0.64rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; background:rgba(61,158,114,0.12); border:1px solid rgba(61,158,114,0.28); color:var(--e1); border-radius:9999px; padding:3px 11px; margin-bottom:0.8rem; }
-    .framework-card .cit-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.5rem; }
-    .framework-card .cit-title { font-family:'DM Serif Display',serif; font-size:1.05rem; color:var(--t1); line-height:1.38; margin-bottom:0.6rem; font-style:italic; }
-    .framework-card .cit-meta { font-size:0.80rem; color:var(--t3); margin-bottom:1rem; font-weight:300; overflow-wrap:anywhere; }
-    .framework-card .cit-finding { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
-    .framework-card .cit-finding strong { color:var(--t1); font-weight:500; }
-    .framework-card .cit-why { margin-top:0.9rem; padding-top:0.9rem; border-top:1px solid rgba(42,122,86,0.12); font-size:0.82rem; color:var(--e2-text); line-height:1.58; font-style:italic; }
-    .fw-boundary-intro { margin-top:2.4rem; padding-top:2rem; border-top:1px solid rgba(42,122,86,0.12); max-width:760px; }
-    .fw-boundary-intro h3 { font-family:'DM Serif Display',serif; font-size:1.2rem; color:var(--t1); font-style:italic; margin-bottom:0.6rem; }
-    .framework-boundary-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-top:1.4rem; }
-    .framework-boundary-grid .framework-card, .framework-boundary-grid .boundary-card { margin-top:0; height:100%; }
 
     /* ══ WHY FRAMEWORKS HAVEN'T KEPT UP ══ */
     .gap-section {
@@ -536,7 +445,9 @@
     /* ══ RESPONSIVE ══ */
 
     @media (max-width:1024px) {
-      .intro-grid, .signaling-grid, .mismatch-grid, .validation-grid, .gap-grid, .framework-boundary-grid { grid-template-columns:1fr; gap:3rem; }
+      .intro-grid, .signaling-grid, .validation-grid, .gap-grid { grid-template-columns:1fr; gap:3rem; }
+      .drug-grid { grid-template-columns:1fr 1fr; }
+      .systems-grid { grid-template-columns:1fr 1fr; }
       .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
     }
     @media (max-width:680px) {
@@ -544,18 +455,10 @@
       .footer-inner { grid-template-columns:1fr; }
       section { padding:3rem 1.2rem; }
       .page-hero { padding:3rem 1.2rem 2.5rem; }
-      /* Steps */
-      .steps-grid::before { display:none; }
-      .step-item { grid-template-columns:1fr; }
-      .step-num-col { flex-direction:row; padding-top:0; margin-bottom:0.6rem; }
-      .step-num { width:44px; height:44px; font-size:1.1rem; }
-      .step-body { padding-top:0; padding-bottom:1rem; }
-      .step-body h4 { font-size:0.92rem; }
-      .step-body p { font-size:0.84rem; }
-      .step-body .detail-list li { font-size:0.82rem; }
-      /* Mismatch visual */
-      .mismatch-visual { grid-template-columns:1fr; }
-      .vs-divider { margin:0.3rem 0; }
+      /* Drug / systems grids */
+      .drug-grid { grid-template-columns:1fr; }
+      .systems-grid { grid-template-columns:1fr; }
+      .drug-card { padding:1.3rem 1.4rem; }
       /* Hub cards */
       .hub-card { padding:0.9rem 1rem; }
       .hub-card h4 { font-size:0.88rem; }
@@ -664,6 +567,7 @@
         <p class="page-hero-sub">
           Medications can disrupt the body's energy system at the cellular level — sometimes with effects that are
           <strong>delayed, progressive, and multisystem.</strong> Understanding why requires a framework that goes beyond organ-based medicine.
+          Drug-Induced Mitochondrial Dysfunction (DIMD) is that broader framework — <strong>Fluoroquinolone-Associated Disability is one important example within it, not the whole picture.</strong>
         </p>
         <div class="hero-badges">
           <div class="hero-badge">
@@ -672,7 +576,7 @@
           </div>
           <div class="hero-badge">
             <i class="fas fa-flask"></i>
-            <span><strong>Manuscript submitted for journal consideration</span>
+            <span><strong>Manuscript submitted for journal consideration</strong></span>
           </div>
         </div>
       </div>
@@ -706,8 +610,12 @@
               Current pharmacovigilance systems are organized around organ systems and short-term adverse events. But mitochondria are present in virtually every cell of the body. When they are injured by a medication, the downstream effects do not respect organ boundaries — and they may not appear for weeks, months, or even years after the drug has cleared the system.
             </p>
             <p class="body-text">
-              Fluoroquinolone-Associated Disability (FQAD) — the condition the FDA itself named and operationally defined for its pharmacovigilance case review — is the clearest real-world example the DIMD framework is built to explain, and is the focus of the FDA Citizen Petition currently on file as Docket FDA-2026-P-5116. FQAD is an established, regulator-documented condition; DIMD is the broader framework <strong>proposed</strong> to explain it.
+              Fluoroquinolone-Associated Disability (FQAD) — the condition the FDA itself named and defined for its pharmacovigilance case review — is the clearest real-world example the DIMD framework is built to explain, and is the focus of the FDA Citizen Petition currently on file as Docket FDA-2026-P-5116. FQAD is an established, regulator-documented condition; DIMD is the broader framework <strong>proposed</strong> to explain it.
             </p>
+            <div class="hypothesis-note">
+              <i class="fas fa-scale-balanced"></i>
+              <p><strong>Two boundaries worth stating plainly:</strong> DIMD does not mean that every chronic multisystem illness is medication-induced. And DIMD does not mean acquired, drug-induced mitochondrial injury is identical to inherited mitochondrial disease — the two involve different origins and different genetics, and are not interchangeable.</p>
+            </div>
           </div>
 
           <div>
@@ -782,7 +690,7 @@
                 <div class="hub-card-icon"><i class="fas fa-recycle"></i></div>
                 <div>
                   <h4>Mitochondrial Quality Control (MQC)</h4>
-                  <p>Cells continuously clear damaged mitochondria via mitophagy and replace them through biogenesis. When drug-induced injury exceeds MQC capacity, damaged mitochondria accumulate and perpetuate dysfunction.</p>
+                  <p>Cells continuously clear damaged mitochondria via mitophagy and replace them through biogenesis. When drug-induced injury exceeds MQC capacity, damaged mitochondria accumulate and perpetuate dysfunction. In patient-derived cells carrying the m.3243A&gt;G mtDNA mutation, restoring mitophagy capacity progressively reduced the mutant mtDNA burden — mechanistic evidence, independent of any drug exposure, that quality-control activity can itself shift mitochondrial population dynamics over time (Chung et al. 2025).</p>
                 </div>
               </div>
             </div>
@@ -791,234 +699,204 @@
       </div>
     </section>
 
-    <!-- FIVE-STEP MECHANISM -->
-    <section class="five-steps" id="pn-fivesteps">
+    <!-- WE ALREADY KNOW DRUGS CAN INJURE MITOCHONDRIA -->
+    <section class="alt-bg-1" id="pn-established">
       <div class="section-inner">
-        <div class="section-label">Mechanism</div>
-        <h2 class="section-title">A Five-Step Framework for Fluoroquinolone-Associated Delayed, Progressive Toxicity</h2>
+        <div class="evd-badge established"><i class="fas fa-circle-check"></i> Established</div>
+        <div class="section-label">The Starting Point</div>
+        <h2 class="section-title">We Already Know Drugs Can Injure Mitochondria</h2>
         <div class="section-divider"></div>
+        <p class="body-text" style="max-width:760px;">
+          Long before FQAD had a name, pharmacology already recognized that some medications can damage mitochondria directly. This is not a fringe hypothesis — it is documented, mechanistic, and in some cases decades old. The two examples below are not exhaustive; they simply illustrate how differently two long-established drug classes can reach the same organelle.
+        </p>
 
-        <div class="steps-intro">
-          <p>How can a short-course fluoroquinolone exposure initiate biological effects that remain silent, appear mild or transient, or progress into persistent multisystem symptoms years after the drug is gone? The following framework proposes a plausible mechanistic pathway — from initial fluoroquinolone exposure to delayed, self-sustaining mitochondrial injury. This is a hypothesis-generating model grounded in converging biological evidence, not a fully validated clinical mechanism.</p>
+        <div class="validation-grid" style="margin-top:2rem;">
+          <div class="citation-card">
+            <div class="cit-label">Established Mechanism · Oncology Pharmacology</div>
+            <div class="cit-title">Anthracycline Cardiotoxicity Is a Mitochondrial Injury Model</div>
+            <div class="cit-meta">Well-characterized pharmacology, studied extensively since the 1970s–80s</div>
+            <div class="cit-finding">Doxorubicin and related anthracycline chemotherapies generate mitochondrial reactive oxygen species and induce mitochondrial DNA mutations through oxidative damage, producing cumulative, dose-related cardiac injury. This is one of the best-established examples of drug-induced mitochondrial toxicity in modern medicine — well known to oncologists, and monitored for accordingly.</div>
+            <div class="cit-why">Not every established mitochondrial-toxic drug produces an FQAD-like pattern. Anthracycline injury is dose-cumulative and concentrated mainly in cardiac tissue — a different clinical shape from the same underlying organelle damage.</div>
+          </div>
+          <div class="citation-card">
+            <div class="cit-label">Established Mechanism · Antimicrobial Pharmacology</div>
+            <div class="cit-title">Aminoglycosides and Mitochondrial Ribosomal Vulnerability</div>
+            <div class="cit-meta">Well-characterized pharmacology, studied extensively since the 1990s</div>
+            <div class="cit-finding">Aminoglycoside antibiotics can impair mitochondrial protein synthesis because mitochondrial ribosomes retain bacterial-like features. This vulnerability is sharply increased in people carrying the mitochondrial <strong>m.1555A&gt;G</strong> variant, who can develop irreversible hearing loss from doses otherwise considered safe.</div>
+            <div class="cit-why">A clear, decades-old example of inherited mitochondrial variation changing an individual's response to a drug — through a completely different route into the organelle than fluoroquinolones use.</div>
+          </div>
         </div>
+        <p class="body-text" style="margin-top:1.6rem; font-style:italic; color:var(--t3); max-width:760px;">Different drug, different target, same organelle. This is the pattern DIMD exists to track.</p>
+      </div>
+    </section>
 
-        <div class="steps-grid">
+    <!-- DIFFERENT DRUGS, DIFFERENT MITOCHONDRIAL EFFECTS -->
+    <section class="alt-bg-2" id="pn-drugclasses">
+      <div class="section-inner">
+        <div class="section-label">Mechanistic Diversity</div>
+        <h2 class="section-title">Different Drugs — Different Mitochondrial Effects</h2>
+        <div class="section-divider"></div>
+        <p class="body-text" style="max-width:760px;">
+          Not all mitochondrial injury looks the same. The same organelle can be reached through DNA topology, protein import, or genome replication, depending on the drug. Three well-studied examples illustrate the range.
+        </p>
 
-          <div class="step-item">
-            <div class="step-num-col">
-              <div class="step-num">1</div>
-            </div>
-            <div class="step-body">
-              <h4>Transient Drug Exposure <span class="step-tag">Entry Point</span></h4>
-              <p>A medication with a short plasma half-life clears rapidly from the bloodstream — but not before sufficient cellular interaction has occurred to trigger lasting downstream consequences. <strong>Drug clearance does not equal biological clearance.</strong></p>
-            </div>
+        <div class="drug-grid">
+          <div class="drug-card">
+            <div class="evd-badge established">Established · Human Cells</div>
+            <h3>Fluoroquinolones</h3>
+            <div class="drug-lead">Possible mitochondrial targets/effects</div>
+            <ul class="drug-targets">
+              <li>mtDNA replication &amp; topology (TOP2β)</li>
+              <li>AIFM1 — Complex I / IV biogenesis</li>
+              <li>IDH2 — antioxidant capacity</li>
+              <li>ROS surge / oxidative stress</li>
+            </ul>
+            <p class="drug-note">Confirmed in human-cell systems (Reinhardt et al. 2025). A 2025 comparison of clinically relevant antibiotics found gentamicin and ciprofloxacin altered mitochondrial respiration while amoxicillin did not in the same experimental system — reinforcing that this is a drug-specific effect, not a blanket antibiotic-class property (Sailer et al. 2025). This is the best-characterized DIMD example — and has its own dedicated deep dive.</p>
+            <a href="fqad.html" class="drug-link"><i class="fas fa-arrow-right"></i> Explore FQAD &amp; the five-step mechanism</a>
           </div>
 
-          <div class="step-item">
-            <div class="step-num-col">
-              <div class="step-num">2</div>
-            </div>
-            <div class="step-body">
-              <h4>Initial Mitochondrial Injury — The Point of No Return <span class="step-tag">Multi-Hit Insult</span></h4>
-              <p>A multi-hit insult to the mitochondrial system occurs simultaneously or in rapid succession:</p>
-              <ul class="detail-list">
-                <li><strong>TOP2β inhibition</strong> — disrupts mtDNA topology and replication integrity</li>
-                <li><strong>AIFM1 binding</strong> — impairs biogenesis of Complexes I and IV (validated in Reinhardt et al. 2025)</li>
-                <li><strong>IDH2 inhibition</strong> — reduces NADPH production and antioxidant capacity (validated in Reinhardt et al. 2025)</li>
-                <li>Reactive oxygen species (ROS) surge and rapid mitochondrial DNA copy number (mtCN) depletion</li>
-              </ul>
-            </div>
+          <div class="drug-card">
+            <div class="evd-badge established">Established + Emerging</div>
+            <h3>Statins</h3>
+            <div class="drug-lead">Documented mitochondrial effects</div>
+            <ul class="drug-targets">
+              <li>Mevalonate pathway → reduced CoQ10 synthesis (classical mechanism)</li>
+              <li>Reduced Complex II–linked mitochondrial respiration in muscle</li>
+              <li>TOMM40 / TOMM22 downregulation — impaired mitochondrial protein import</li>
+              <li>Altered mitochondrial dynamics, increased mitophagy &amp; superoxide production</li>
+            </ul>
+            <p class="drug-note">Confirmed in skeletal myotubes (Yang et al. 2025) — effects partially reversed by restoring TOMM40/TOMM22, evidence the import pathway is directly involved. A related 2026 astrocyte study found statin-induced CoQ loss drives active mitochondrial remodeling, not just energy failure (Wojcicki et al. 2026). This does <strong>not</strong> mean every statin user develops mitochondrial dysfunction — most tolerate treatment without issue.</p>
           </div>
 
-          <div class="step-item">
-            <div class="step-num-col">
-              <div class="step-num">3</div>
-            </div>
-            <div class="step-body">
-              <h4>System Imbalance and MQC Overload <span class="step-tag">Cascade</span></h4>
-              <p>Mitochondrial quality control systems — PINK1/Parkin mitophagy, fission/fusion dynamics, proteostasis networks, LONP1 protease activity — are overwhelmed. ER-mitochondria contact sites (MAMs) become dysregulated. Incomplete clearance of damaged mitochondria sets the stage for persistent dysfunction.</p>
-            </div>
+          <div class="drug-card">
+            <div class="evd-badge established">Established</div>
+            <h3>NRTIs</h3>
+            <div class="drug-lead">Documented mitochondrial effects</div>
+            <ul class="drug-targets">
+              <li>POLG inhibition — impaired mtDNA polymerase</li>
+              <li>mtDNA depletion</li>
+              <li>Directional shifts in mtDNA population dynamics (heteroplasmy)</li>
+            </ul>
+            <p class="drug-note">One of the earliest-recognized examples of a drug directly targeting mitochondrial genome replication — historically linked to lipodystrophy, myopathy, and peripheral neuropathy in long-term antiretroviral therapy.</p>
           </div>
-
-          <div class="step-item">
-            <div class="step-num-col">
-              <div class="step-num">4</div>
-            </div>
-            <div class="step-body step-highlight">
-              <h4>Propagation Through Selection Dynamics <span class="step-tag">Mechanistic Model</span></h4>
-              <p>This is the proposed mechanism for <strong>why injury persists and progresses after drug clearance.</strong> The hypothesis: the stress-response transcription factor ATFS-1 (C. elegans) / ATF5 (mammals) accumulates preferentially in dysfunctional mitochondria, where it evades LONP1-mediated degradation and recruits mitochondrial DNA polymerase (POLG) to damaged or mutant mtDNA templates — conferring replicative advantage to damaged mitochondrial genomes. Self-amplifying loop (more ROS → more stress → more bias).</p>
-              <ul class="detail-list">
-                <li>This creates a self-sustaining propagation loop independent of ongoing drug exposure</li>
-                <li>Rising heteroplasmy elevates ROS, which further reinforces the ATF5/POLG loop</li>
-                <li>Explains the "pharmacokinetic–clinical mismatch": drug is gone, symptoms persist and progress</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="step-item">
-            <div class="step-num-col">
-              <div class="step-num">5</div>
-            </div>
-            <div class="step-body">
-              <h4>Delayed and Progressive Clinical Manifestation <span class="step-tag">Clinical Expression</span></h4>
-              <p>Tissues with <strong>high energy demand and low cellular turnover</strong> — peripheral nerves, tendons, skeletal muscle, cardiac tissue, CNS — are most vulnerable. Symptoms emerge or worsen weeks to decades after initial exposure. A subsequent drug exposure can act as a <strong>"second-hit"</strong> in a mitochondrially primed system, triggering disproportionate escalation.</p>
-            </div>
-          </div>
-
         </div>
+        <p class="body-text" style="margin-top:1.8rem; font-style:italic; color:var(--t3); max-width:760px;">Three drug classes, three different points of entry into the same organelle. The convergence happens downstream — which is the subject of the next section.</p>
+      </div>
+    </section>
 
-        <div class="hypothesis-note">
+    <!-- SHARED MITOCHONDRIAL SYSTEMS -->
+    <section class="signaling-section" id="pn-sharedsystems">
+      <div class="section-inner">
+        <div class="section-label">Convergence</div>
+        <h2 class="section-title">Different Doors, Same House</h2>
+        <div class="section-divider"></div>
+        <p class="body-text" style="max-width:760px; margin-bottom:2rem;">
+          Whatever the entry point, mitochondrial injury tends to converge on a shared set of systems. Damage to any one of these can ripple into the others — part of why drug-induced mitochondrial injury rarely stays contained to a single symptom or organ.
+        </p>
+        <div class="systems-grid">
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-bolt"></i></div>
+            <div><h4>ETC / Oxidative Phosphorylation</h4><p>Complexes I–V generate ATP. Impairment here reduces bioenergetic capacity directly.</p></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-dna"></i></div>
+            <div><h4>mtDNA Maintenance</h4><p>Replication, repair, and copy-number regulation of the mitochondrial genome — vulnerable because mtDNA has limited repair capacity.</p></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-door-open"></i></div>
+            <div><h4>Protein Import &amp; Proteostasis</h4><p>Nuclear-encoded proteins must be imported and folded correctly; import failure compounds injury from other pathways.</p></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-triangle-exclamation"></i></div>
+            <div><h4>Redox Balance</h4><p>The antioxidant system that keeps reactive oxygen species in check; when overwhelmed, ROS becomes self-amplifying.</p></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-wave-square"></i></div>
+            <div><h4>Calcium Handling</h4><p>Mitochondria buffer intracellular calcium; disrupted handling affects neuronal signaling, muscle contraction, and cell survival.</p></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-share-nodes"></i></div>
+            <div><h4>Fusion &amp; Fission</h4><p>Network-shaping machinery (MFN1/2, OPA1, DRP1) that isolates damaged mitochondria from healthy ones.</p></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-recycle"></i></div>
+            <div><h4>Mitophagy / Quality Control</h4><p>The clearance system (PINK1/Parkin) that removes damaged mitochondria before they accumulate.</p></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-icon"><i class="fas fa-flask"></i></div>
+            <div><h4>Metabolism</h4><p>Mitochondria contribute to fatty-acid oxidation, the TCA cycle, and amino-acid metabolism beyond ATP alone.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY SOME PEOPLE MAY RESPOND DIFFERENTLY -->
+    <section class="gap-section" id="pn-vulnerability">
+      <div class="section-inner">
+        <div class="evd-badge hypothesis"><i class="fas fa-circle-question"></i> Concept — Not Yet Measurable</div>
+        <div class="section-label">Individual Variation</div>
+        <h2 class="section-title">Why Some People May Respond Differently</h2>
+        <div class="section-divider"></div>
+        <div class="pull-quote">
+          <p>Could the same exposure affect people differently if their mitochondria are already struggling?</p>
+        </div>
+        <p class="body-text" style="max-width:760px;">
+          Mitochondrial function is not identical from person to person. Age, genetics, prior illness, other medications, and cumulative life exposures can all affect how much bioenergetic reserve a person has going into any new drug exposure. A person with ample reserve may absorb an insult and recover. A person operating closer to their limit may not.
+        </p>
+        <p class="body-text" style="max-width:760px;">
+          This is sometimes described as <strong>mitochondrial vulnerability</strong> or <strong>reduced reserve</strong> — the idea that some mitochondrial systems are already working harder to stay compensated, with less room to absorb an additional hit.
+        </p>
+        <div class="hypothesis-note" style="max-width:760px;">
           <i class="fas fa-circle-info"></i>
-          <p><strong>Important scientific note:</strong> Direct longitudinal evidence linking specific drug exposures to ATF5-mediated replicative bias in human tissues is currently limited. The mechanism described in Steps 3 and 4 is biologically plausible and grounded in converging evidence, but has not yet been directly validated in human drug-induced injury models. This framework is presented as hypothesis-generating — not as established clinical mechanism. The preprint and manuscript submitted for journal consideration distinguish clearly between what is established and what is proposed.</p>
+          <p>We cannot currently identify every person who is vulnerable before they are exposed. This is a plausible, biologically grounded explanation for variable responses to the same drug — not a validated predictive test, and not a claim about how common vulnerability is in the general population.</p>
         </div>
       </div>
     </section>
 
-    <!-- PK-CLINICAL MISMATCH -->
-    <section class="pk-mismatch" id="pn-pkmismatch">
+    <!-- FQAD AS AN IMPORTANT DIMD EXAMPLE -->
+    <section class="alt-bg-1" id="pn-fqadexample">
       <div class="section-inner">
-        <div class="mismatch-grid">
-          <div>
-            <div class="section-label">The Central Clinical Puzzle</div>
-            <h2 class="section-title">The Pharmacokinetic–Clinical Mismatch</h2>
-            <div class="section-divider"></div>
-            <p class="body-text">
-              Traditional adverse event frameworks assume a relatively direct relationship between drug presence and drug effect. If a drug causes harm, the harm should appear while the drug is present — or shortly after.
-            </p>
-            <p class="body-text">
-              But mitochondrial injury does not follow this model. The pharmacokinetic profile of a drug (its plasma half-life, tissue distribution, clearance rate) tells us almost nothing about the biological timeline of the injury it may have initiated at the cellular level.
-            </p>
-            <p class="body-text">
-              This mismatch is not idiosyncratic or mysterious. It is an <strong>expected outcome of mitochondrial population dynamics under stress.</strong> When a self-sustaining propagation loop is established — as described in Step 4 — the clinical trajectory becomes decoupled from the pharmacokinetic one.
-            </p>
-            <p class="body-text">
-              This is why patients who report worsening symptoms months or years after a medication course are not being dramatic or confused about causality. <strong>They are describing the correct biology.</strong>
-            </p>
-            <p class="body-text">
-              Later physiologic stressors — including infection, surgery, corticosteroids, intense exertion, additional mitochondrial-toxic medications, or metabolic stress — may act as a second hit, amplifying or revealing a mitochondrial injury state that began with the original fluoroquinolone exposure.
-            </p>
-          </div>
-          <div>
-            <div class="mismatch-visual">
-              <div class="mismatch-card">
-                <div class="mc-label">Drug Plasma Half-Life</div>
-                <div class="mc-value">Hours</div>
-                <div class="mc-desc">Fluoroquinolones clear the bloodstream within hours to days after the last dose.</div>
-              </div>
-              <div class="mismatch-card contrast">
-                <div class="mc-label">Symptom Trajectory</div>
-                <div class="mc-value">Months–Years</div>
-                <div class="mc-desc">Clinical deterioration can continue, emerge, or escalate long after drug clearance.</div>
-              </div>
-              <div class="vs-divider"><span>The Mismatch</span></div>
-              <div class="mismatch-card">
-                <div class="mc-label">What Safety Models Expect</div>
-                <div class="mc-value">Concurrent</div>
-                <div class="mc-desc">Adverse events should appear while the drug is present or soon after.</div>
-              </div>
-              <div class="mismatch-card contrast">
-                <div class="mc-label">What DIMD Produces</div>
-                <div class="mc-value">Decoupled</div>
-                <div class="mc-desc">Biological injury can be self-sustaining, producing delayed and progressive effects.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXTERNAL VALIDATION -->
-    <section class="validation-section" id="pn-validation">
-      <div class="section-inner">
-        <div class="section-label">External Validation</div>
-        <h2 class="section-title">Independent Science Supporting the Framework</h2>
+        <div class="section-label">Case in Point</div>
+        <h2 class="section-title">FQAD: An Important Example Within DIMD</h2>
         <div class="section-divider"></div>
+        <p class="body-text" style="max-width:760px;">
+          Fluoroquinolone-Associated Disability (FQAD) did not become the focus of this framework by accident. It shows the DIMD pattern in its most legible form:
+        </p>
+        <ul class="gap-list" style="max-width:760px;">
+          <li><i class="fas fa-circle-dot"></i><span>Exposure can be short — a standard antibiotic course, often just days</span></li>
+          <li><i class="fas fa-circle-dot"></i><span>Symptoms can involve multiple systems at once — tendons, nerves, cognition, energy</span></li>
+          <li><i class="fas fa-circle-dot"></i><span>Symptoms may appear, persist, or worsen after the drug is gone</span></li>
+          <li><i class="fas fa-circle-dot"></i><span>The drug itself does not need to remain present for the clinical problem to continue</span></li>
+        </ul>
+        <p class="body-text" style="max-width:760px; margin-top:1.2rem;">
+          FQAD is a real, FDA-recognized condition in its own right — it does not depend on the DIMD hypothesis to exist. What DIMD offers is a possible explanation for why it behaves the way it does.
+        </p>
+        <a href="fqad.html" class="btn-primary" style="margin-top:1rem;"><i class="fas fa-dna"></i> Explore FQAD &amp; the Proposed Five-Step Mechanism</a>
+      </div>
+    </section>
 
-        <div class="validation-grid">
-          <div>
-            <p class="body-text">The DIMD framework does not rest on a single study or a single research group. Independent lines of evidence — from chemical proteomics, clinical pharmacology, and mitochondrial biology — converge on the same conclusion: <strong>mitochondrial vulnerability is a real, measurable, and clinically relevant risk factor that current safety models do not adequately capture.</strong></p>
+    <!-- EMERGING QUESTION — MITOCHONDRIAL VULNERABILITY AND mRNA PLATFORMS -->
+    <section class="validation-section" id="pn-emerging">
+      <div class="section-inner">
+        <div class="evd-badge hypothesis"><i class="fas fa-circle-question"></i> Emerging Research — Not Established</div>
+        <div class="section-label">A Different Kind of Question</div>
+        <h2 class="section-title">Mitochondrial Vulnerability and mRNA Platforms</h2>
+        <div class="section-divider"></div>
+        <p class="body-text" style="max-width:800px;">
+          More than 200 medications have been associated with effects on mitochondrial function through a range of mechanisms. That raises a different safety question: how many people may already be living with reduced mitochondrial reserve or acquired mitochondrial dysfunction when they receive a new intervention? As mRNA/LNP technologies deliver synthetic genetic instructions into cells to drive protein production, should we not be measuring mitochondrial function and vulnerability more deliberately — before, during, and after exposure? <strong>The question is not whether mRNA technology universally damages mitochondria. It is whether a mitochondrially vulnerable person may respond differently, and whether current safety frameworks are designed to detect that difference.</strong>
+        </p>
 
-            <div class="citation-card" style="margin-top:1.5rem;">
-              <div class="cit-label">Chemical Proteomics · 2025</div>
-              <div class="cit-title">Chemical proteomics reveals human off-targets of fluoroquinolone-induced mitochondrial toxicity</div>
-              <div class="cit-meta">Reinhardt et al. · <em>Angewandte Chemie International Edition</em> · 2025;64(18):e202421424</div>
-              <div class="cit-finding">Using chemical proteomics in human cells, this study identified <strong>AIFM1</strong> (Assembly Factor for NADH Dehydrogenase) and <strong>IDH2</strong> (Isocitrate Dehydrogenase 2) as direct, validated molecular off-targets of fluoroquinolone binding — and confirmed downstream downregulation of mitochondrial <strong>Complexes I and IV.</strong></div>
-              <div class="cit-why">This is not a theoretical mechanism. These are empirically confirmed molecular interactions in human cells. It directly validates two of the multi-hit insults described in Step 2 of the DIMD framework.</div>
-            </div>
-
-            <div class="citation-card" style="margin-top:1.2rem;">
-              <div class="cit-label">Mitochondrial Biology · 2026 · Article in Press</div>
-              <div class="cit-title">Mitochondrial vulnerability underlies myocarditis from COVID-19 mRNA vaccine</div>
-              <div class="cit-meta">Mori et al. · <em>Nature Communications</em> · 2026 (accepted March 18, 2026) · DOI: 10.1038/s41467-026-71295-1</div>
-              <div class="cit-finding">An independent research group (University of Tsukuba, Japan) demonstrated that <strong>subclinical mitochondrial vulnerability</strong> — compensated and clinically silent at baseline — can be unmasked by biological stress, triggering cardiac dysfunction through mitochondrial ROS and necroptosis.</div>
-              <div class="cit-why">A completely separate research group, studying a completely different exposure, confirming the same principle: pre-existing mitochondrial vulnerability is a hidden risk factor that standard safety evaluation does not account for. This is precisely the systemic gap the DIMD framework addresses.</div>
-            </div>
-          </div>
-
-          <div>
-            <p class="body-text" style="margin-bottom:1.5rem;">The published work underpinning this initiative is open-access and publicly available. The preprint represents the full systems-level framework and is the basis for the manuscript currently submitted for journal consideration.</p>
-
-            <div class="preprint-card">
-              <div class="pc-label">Open-Access Preprint · Zenodo</div>
-              <div class="pc-title">A Systems-Level Disease Model of Drug-Induced Mitochondrial Dysfunction (DIMD): Integrating Delayed Multisystem Toxicity Through Modern Mitochondrial Biology and Pharmacovigilance</div>
-              <div class="pc-meta">Johanna Ihli, BSN · Published May 26, 2026 (v3) · CC BY 4.0 · Submitted for journal consideration</div>
-              <a href="https://doi.org/10.5281/zenodo.20399689" target="_blank" rel="noopener">
-                <i class="fas fa-arrow-up-right-from-square"></i>
-                Read the Framework · DOI 10.5281/zenodo.20399689
-              </a>
-            </div>
-
-            <div class="preprint-card" style="margin-top:1.2rem;">
-              <div class="pc-label">Open-Access Preprint · Zenodo</div>
-              <div class="pc-title">Drug-Induced Mitochondrial Dysfunction: A Systems-Level Framework for Understanding Delayed and Multisystem Drug Effects</div>
-              <div class="pc-meta">Johanna Ihli, BSN · Published May 3, 2026 (v2) · CC BY 4.0 · Submitted for journal consideration</div>
-              <a href="https://doi.org/10.5281/zenodo.20015205" target="_blank" rel="noopener">
-                <i class="fas fa-arrow-up-right-from-square"></i>
-                Read the Framework · DOI 10.5281/zenodo.20015205
-              </a>
-            </div>
-
-            <div class="preprint-card" style="margin-top:1.2rem;">
-              <div class="pc-label">Open-Access Publication · Zenodo</div>
-              <div class="pc-title">Drug-Induced Mitochondrial Dysfunction: Mechanisms, Persistence, and Challenges for Pharmacovigilance</div>
-              <div class="pc-meta">Johanna Ihli, BSN · Published March 25, 2026 · CC BY 4.0</div>
-              <a href="https://doi.org/10.5281/zenodo.19224996" target="_blank" rel="noopener">
-                <i class="fas fa-arrow-up-right-from-square"></i>
-                Read · DOI 10.5281/zenodo.19224996
-              </a>
-            </div>
-
-            <div style="margin-top:1.8rem;">
-              <p class="body-text" style="font-size:0.88rem;">
-                The clinical overlap between DIMD/FQAD and commonly misattributed diagnostic categories — including fibromyalgia-like syndromes, ME/CFS-like presentations, peripheral neuropathy, dysautonomia, cognitive dysfunction syndromes, and connective tissue disorders — is documented in the systems-level framework. Each overlap reflects a distinct mitochondrial mechanism, not coincidental similarity.
-              </p>
-            </div>
-          </div>
+        <div class="citation-card" style="margin-top:1.2rem; max-width:800px;">
+          <div class="cit-label">Mitochondrial Biology · Nature Communications · 2026</div>
+          <div class="cit-title">Mitochondrial vulnerability underlies myocarditis from COVID-19 mRNA vaccine</div>
+          <div class="cit-meta">Mori et al. · <em>Nature Communications</em> · 2026 · DOI: 10.1038/s41467-026-71295-1</div>
+          <div class="cit-finding">Using mice carrying a pre-existing mitochondrial DNA polymerase defect (<em>Polg</em> mutant), researchers found that subclinical mitochondrial vulnerability — compensated and clinically silent at baseline — could be unmasked by mRNA/LNP exposure, triggering cardiac injury through mitochondrial ROS and necroptosis. A small human case-control comparison (six myocarditis patients) also showed abnormal mitochondrial morphology.</div>
+          <div class="cit-why">This is evidence that pre-existing mitochondrial vulnerability can change how an individual responds to a specific mRNA/LNP exposure in an experimental model — not evidence that mRNA vaccination broadly causes chronic mitochondrial injury in the general population.</div>
         </div>
 
-        <div class="fw-boundary-intro">
-          <h3>Framework Convergence &amp; Mechanistic Boundaries</h3>
-          <p class="body-text">Two more 2026 additions round out the picture — one an independent theoretical framework that converges with DIMD, the other a finding that tests and narrows a competing explanation. Neither outranks the direct mechanistic evidence above.</p>
-        </div>
-        <div class="framework-boundary-grid">
-          <div class="framework-card">
-            <span class="fc-badge">Hypothesis and Theory · Testable Framework · Not Clinical Validation</span>
-            <div class="cit-label">Independent Threshold Model · Frontiers in Pharmacology · 2026</div>
-            <div class="cit-title">Depleted Before the Dose: The Mitochondrial Vulnerability Threshold Hypothesis for Fluoroquinolone-Associated Multisystem Toxicity</div>
-            <div class="cit-meta">Sewell &amp; Jensen · <em>Frontiers in Pharmacology</em> · 2026 · DOI: 10.3389/fphar.2026.1905942</div>
-            <div class="cit-finding">Sewell and Jensen proposed that therapeutic fluoroquinolone exposure may produce persistent multisystem toxicity when it pushes a biologically vulnerable patient beyond available mitochondrial reserve. Their 2026 framework emphasizes susceptibility, cumulative metabolic stress, repeat exposure, and testable vulnerability thresholds.</div>
-            <div class="cit-why">Independently converges with the DIMD framework's central proposition: toxicity cannot always be understood through dose alone when cellular compensation and bioenergetic reserve differ between patients. This is independent framework convergence, not proof of mechanism.</div>
-            <a href="evidence.html#sec-lit-frameworks" style="display:inline-flex;align-items:center;gap:7px;font-size:0.82rem;color:var(--e2-text);text-decoration:none;border-bottom:1px solid rgba(42,122,86,0.28);margin-top:0.9rem;"><i class="fas fa-arrow-up-right-from-square"></i> Read the full evidence entry</a>
-          </div>
-
-          <div class="boundary-card">
-            <div class="bc-label">Mechanistic Boundary · 2026</div>
-            <div class="bc-heading">What the Evidence Does Not Yet Support</div>
-            <div class="bc-title">Fluoroquinolones and Their Complexes with Metal Ions, Studied with Density Functional Theory — Friedman, 2026</div>
-            <div class="bc-finding">Fluoroquinolones can bind metal ions, but a 2026 computational comparison using density functional theory found that <strong>tetracycline binds several of the same biologically relevant ions even more strongly</strong> than ciprofloxacin — despite tetracyclines not producing the FQAD phenotype.</div>
-            <div class="bc-note">Suggests metal-ion binding alone is unlikely to explain FQAD's distinctive presentation. Tests and narrows the field's simplest alternative explanation rather than serving as a primary mechanism finding. Reinhardt, Hangas, Lawrence, and the mitochondrial mechanisms above remain the principal anchors of this framework.</div>
-            <a href="evidence.html#sec-lit-boundary"><i class="fas fa-arrow-up-right-from-square"></i> Read the full evidence entry</a>
-          </div>
+        <div class="fw-boundary-intro" style="max-width:800px;">
+          <h3>Why This Question Matters Now</h3>
+          <p class="body-text">mRNA technology is expanding well beyond its original use. In 2026, the first mRNA-based influenza vaccine received FDA approval, extending the platform to a much larger population, including older adults. As mRNA and lipid-nanoparticle platforms are used more broadly, the question of who is more biologically vulnerable to any given intervention becomes more relevant, not less. This is a call for appropriate mitochondrial-endpoint measurement and surveillance — not a conclusion about safety in either direction.</p>
         </div>
       </div>
     </section>
@@ -1040,21 +918,21 @@
 
             <ul class="gap-list">
               <li><i class="fas fa-circle-dot"></i><span><strong>Organ-based pharmacovigilance</strong> fragments what is actually a coherent multisystem pattern into separate specialty diagnoses</span></li>
-              <li><i class="fas fa-circle-dot"></i><span><strong>Short-window adverse event reporting</strong> misses delayed toxicity that emerges months to years after drug clearance</span></li>
-              <li><i class="fas fa-circle-dot"></i><span><strong>No mitochondrial safety endpoints</strong> exist in standard preclinical or post-market drug evaluation for most drug classes</span></li>
-              <li><i class="fas fa-circle-dot"></i><span><strong>No longitudinal tracking systems</strong> follow patients for delayed, cumulative mitochondrial effects after drug exposure</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>Short-window adverse event reporting</strong> misses delayed toxicity that emerges months to years after exposure</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>No mitochondrial safety endpoints</strong> exist in standard preclinical or post-market evaluation for most drugs — or for emerging biologic and genetic interventions</span></li>
+              <li><i class="fas fa-circle-dot"></i><span><strong>No longitudinal follow-up systems</strong> track patients for delayed, cumulative mitochondrial effects after exposure</span></li>
               <li><i class="fas fa-circle-dot"></i><span><strong>Repeat exposures</strong> to mitochondria-impairing drugs occur in already-primed patients without any screening or flagging mechanism</span></li>
               <li><i class="fas fa-circle-dot"></i><span><strong>Informed consent frameworks</strong> do not reflect the possibility of delayed, multisystem, or persistent adverse effects</span></li>
             </ul>
           </div>
           <div>
             <div class="mission-statement">
-              <p>"If our understanding of energy biology and mitochondria has advanced, shouldn't our safety models for medications evolve with it?"</p>
-              <cite>— Core framing, DIMD Initiative</cite>
+              <p>"Could the same exposure affect people differently if their mitochondria are already struggling?"</p>
+              <cite>— The question at the center of DIMD</cite>
             </div>
 
             <p class="body-text" style="margin-top:1.8rem;">
-              The DIMD framework proposes concrete, achievable changes to address this structural gap:
+              Answering it well touches drug safety, biologic safety, longitudinal follow-up, mitochondrial endpoints, and future research. The DIMD framework proposes concrete, achievable starting points:
             </p>
 
             <div style="display:flex; flex-direction:column; gap:0.85rem; margin-top:1.2rem;">
@@ -1062,14 +940,14 @@
                 <div class="hub-card-icon"><i class="fas fa-vial"></i></div>
                 <div>
                   <h4>Mitochondrial Safety Endpoints</h4>
-                  <p>Integration of mtDNA copy number, OXPHOS complex activity, and mitochondrial membrane potential into preclinical and post-market safety evaluation for implicated drug classes.</p>
+                  <p>Integration of mtDNA copy number, OXPHOS complex activity, and mitochondrial membrane potential into preclinical and post-market safety evaluation for implicated drugs and biologics alike.</p>
                 </div>
               </div>
               <div class="hub-card">
                 <div class="hub-card-icon"><i class="fas fa-clock-rotate-left"></i></div>
                 <div>
                   <h4>Systems-Level Pharmacovigilance</h4>
-                  <p>Longitudinal adverse-event tracking that follows patients over years, not days — with exposure-linked registries that can detect delayed and cumulative injury patterns.</p>
+                  <p>Longitudinal follow-up that tracks patients over years, not days — with exposure-linked registries that can detect delayed and cumulative injury patterns.</p>
                 </div>
               </div>
               <div class="hub-card">
@@ -1224,7 +1102,7 @@
   </script>
   <script>
   (function(){
-    var SECTIONS = [{"id": "pn-whatdimd", "label": "What DIMD Is"}, {"id": "pn-signaling", "label": "Mitochondria as Cellular Systems"}, {"id": "pn-fivesteps", "label": "Five-Step Framework"}, {"id": "pn-pkmismatch", "label": "Pharmacokinetic–Clinical Mismatch"}, {"id": "pn-validation", "label": "Independent Supporting Science"}, {"id": "pn-gap", "label": "Drug-Safety Gaps"}];
+    var SECTIONS = [{"id": "pn-whatdimd", "label": "What DIMD Is"}, {"id": "pn-signaling", "label": "Mitochondria as Cellular Systems"}, {"id": "pn-established", "label": "Drugs Already Linked to Injury"}, {"id": "pn-drugclasses", "label": "Different Drugs, Different Effects"}, {"id": "pn-sharedsystems", "label": "Shared Mitochondrial Systems"}, {"id": "pn-vulnerability", "label": "Why Responses May Differ"}, {"id": "pn-fqadexample", "label": "FQAD: A Key Example"}, {"id": "pn-emerging", "label": "Emerging Question: mRNA Platforms"}, {"id": "pn-gap", "label": "Drug-Safety Gaps"}];
 
     var pageNav = document.getElementById('pageNav');
     var toggle = document.getElementById('pageNavToggle');
