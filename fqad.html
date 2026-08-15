@@ -1164,20 +1164,20 @@
       var prevBtn = document.getElementById('msPrev');
       var nextBtn = document.getElementById('msNext');
 
-      function render(){
+      function render(userInitiated){
         track.style.transform = 'translateX(-' + (idx * 100) + '%)';
         counterEl.textContent = (idx + 1) + ' / ' + total;
         prevBtn.disabled = idx === 0;
         nextBtn.disabled = idx === total - 1;
         yearBtns.forEach(function(b, i){ b.classList.toggle('active', i === idx); });
         var activeBtn = yearBtns[idx];
-        if(activeBtn && activeBtn.scrollIntoView){
+        if(userInitiated && activeBtn && activeBtn.scrollIntoView){
           activeBtn.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
         }
       }
       function goTo(i){
         idx = Math.max(0, Math.min(total - 1, i));
-        render();
+        render(true);
       }
 
       prevBtn.addEventListener('click', function(){ goTo(idx - 1); });
@@ -1411,12 +1411,12 @@
         btn.textContent = d.label;
         btn.setAttribute('role', 'tab');
         btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-        btn.addEventListener('click', function(){ select(i); });
+        btn.addEventListener('click', function(){ select(i, true); });
         chipsWrap.appendChild(btn);
         chips.push(btn);
       });
 
-      function select(i){
+      function select(i, userInitiated){
         chips.forEach(function(c, ci){
           c.classList.toggle('active', ci === i);
           c.setAttribute('aria-selected', ci === i ? 'true' : 'false');
@@ -1430,7 +1430,7 @@
           hub.classList.add('mdx-pulse');
           setTimeout(function(){ hub.classList.remove('mdx-pulse'); }, 500);
         }
-        if(chips[i].scrollIntoView){ chips[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); }
+        if(userInitiated && chips[i].scrollIntoView){ chips[i].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); }
       }
 
       select(0);
