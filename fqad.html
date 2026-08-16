@@ -285,6 +285,7 @@
     .mdx-hub-inner i { font-size:0.9rem; }
     .mdx-hub-inner.mdx-pulse { box-shadow:0 0 0 7px rgba(61,158,114,0.12); transform:scale(1.03); }
     .mdx-connector { width:1px; height:28px; background:linear-gradient(to bottom, var(--e3-border-lift), rgba(61,158,114,0.04)); margin:0 auto 0.7rem; }
+    .mdx-swipe-cue { display:none; }
     .mdx-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:0.55rem; margin-bottom:1.8rem; }
     .mdx-chip { font-size:0.78rem; font-weight:500; color:var(--t2); background:rgba(16,40,28,0.6); border:1px solid var(--e3-border); border-radius:9999px; padding:0.55rem 1.1rem; cursor:pointer; transition:background 0.25s, border-color 0.25s, color 0.25s; }
     .mdx-chip:hover { border-color:var(--e3-border-lift); color:var(--t1); }
@@ -619,6 +620,7 @@
       .overlap-table tbody td { font-size:0.80rem; padding:0.6rem 0.7rem; }
       /* Misdiagnosis Explorer — mobile: scroll-snap chip selector, not a shrunk desktop layout */
       .mdx-tagline { font-size:1.1rem; }
+      .mdx-swipe-cue { display:flex; align-items:center; justify-content:center; gap:5px; font-size:0.72rem; color:var(--t3); font-weight:300; font-style:italic; letter-spacing:0.01em; margin:0 0 0.6rem; }
       .mdx-chips { flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start; gap:0.5rem; padding:0.2rem 0.2rem 0.7rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; margin-bottom:1.4rem; }
       .mdx-chips::-webkit-scrollbar { height:4px; }
       .mdx-chip { flex:0 0 auto; scroll-snap-align:start; white-space:nowrap; }
@@ -1081,7 +1083,7 @@
       .dth-right { justify-content:flex-start; }
       .dual-track::before { display:none; }
       .dt-row { grid-template-columns:1fr; gap:0.5rem; margin-bottom:1.5rem; }
-      .dt-center { flex-direction:row; padding-top:0; justify-content:flex-start; gap:8px; margin-bottom:0.2rem; }
+      .dt-center { flex-direction:row; padding-top:0; justify-content:center; gap:8px; margin-bottom:0.2rem; }
       .dt-left { justify-content:flex-start; padding-right:0; }
       .dt-left.dt-left-multi { align-items:stretch; }
       .dt-right { padding-left:0; }
@@ -1116,6 +1118,14 @@
       .ms-viewport .dual-track .dt-row { padding:0 2px; }
       .ms-yearstrip { display:none; }
       .ms-controls { margin-top:1.2rem; gap:1rem; }
+      /* Prevent each paired slide (a flex item) from stretching to match the
+         tallest of all 11 slides — without this, shorter pairs render at the
+         tallest slide's height and their content (card/year/card) spreads out
+         to fill it, producing large empty gaps. */
+      .ms-viewport .dual-track { align-items:flex-start; }
+      /* Height is set inline via JS to match the active slide's true content
+         height only, so the controls below sit directly under the visible pair. */
+      .ms-viewport { transition:height 0.3s ease; }
     }
     </style>
 
@@ -1164,6 +1174,20 @@
       var prevBtn = document.getElementById('msPrev');
       var nextBtn = document.getElementById('msNext');
 
+      // On mobile, each paired slide sits in the same flex row (for the sliding
+      // animation), so the row's natural height defaults to the tallest of all
+      // 11 slides — leaving large empty gaps under shorter pairs. Explicitly
+      // size the viewport to the active slide's own content height instead.
+      var mobileMQ = window.matchMedia('(max-width:760px)');
+      function updateViewportHeight(){
+        if(mobileMQ.matches){
+          var active = slides[idx];
+          if(active){ viewport.style.height = active.offsetHeight + 'px'; }
+        } else {
+          viewport.style.height = '';
+        }
+      }
+
       function render(userInitiated){
         track.style.transform = 'translateX(-' + (idx * 100) + '%)';
         counterEl.textContent = (idx + 1) + ' / ' + total;
@@ -1174,6 +1198,7 @@
         if(userInitiated && activeBtn && activeBtn.scrollIntoView){
           activeBtn.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
         }
+        updateViewportHeight();
       }
       function goTo(i){
         idx = Math.max(0, Math.min(total - 1, i));
@@ -1201,6 +1226,16 @@
         }
         touchStartX = null;
       }, { passive: true });
+
+      // Recompute the active slide's height whenever its content changes size
+      // (e.g. the "+" expand/collapse animation) or the viewport is resized.
+      if('ResizeObserver' in window){
+        var msResizeObserver = new ResizeObserver(function(){ updateViewportHeight(); });
+        slides.forEach(function(s){ msResizeObserver.observe(s); });
+      }
+      window.addEventListener('resize', updateViewportHeight, { passive: true });
+      if(mobileMQ.addEventListener){ mobileMQ.addEventListener('change', updateViewportHeight); }
+      else if(mobileMQ.addListener){ mobileMQ.addListener(updateViewportHeight); }
 
       render();
     })();
@@ -1253,6 +1288,8 @@
             </div>
           </div>
           <div class="mdx-connector" aria-hidden="true"></div>
+
+          <p class="mdx-swipe-cue">Swipe to explore diagnoses →</p>
 
           <div class="mdx-chips" id="mdxChips" role="tablist" aria-label="Select a common misdiagnosis"></div>
 
@@ -1500,7 +1537,7 @@
               <div class="step-num-col"><div class="step-num">1</div></div>
               <div class="step-body">
                 <h4>Transient Drug Exposure <span class="step-tag">Entry Point</span></h4>
-                <p>Fluoroquinolones have short plasma half-lives and clear rapidly from the bloodstream — but not before sufficient cellular interaction has occurred to trigger lasting downstream consequences. <strong>Drug clearance does not equal biological clearance.</strong></p>
+                <p>A medication with a short plasma half-life clears rapidly from the bloodstream — but not before sufficient cellular interaction has occurred to trigger lasting downstream consequences. <strong>Drug clearance does not equal biological clearance.</strong></p>
               </div>
             </div>
 
@@ -2116,12 +2153,28 @@
         container.appendChild(a);
       });
     }
+    function makeTopLink(){
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'page-nav-link';
+      a.textContent = 'Top of Page';
+      a.dataset.target = '__top';
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        window.scrollTo({ top:0, behavior:'smooth' });
+        closeMenu(false);
+      });
+      return a;
+    }
+    if (menu) menu.appendChild(makeTopLink());
     buildLinks(menu);
+    if (tocLinks) tocLinks.appendChild(makeTopLink());
     buildLinks(tocLinks);
 
     var links = document.querySelectorAll('.page-nav-link');
     if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
-    if (links.length) links[0].classList.add('active');
+    var firstSectionLink = SECTIONS.length ? document.querySelector('.page-nav-link[data-target="' + SECTIONS[0].id + '"]') : null;
+    if (firstSectionLink) firstSectionLink.classList.add('active');
 
     function openMenu(){
       menu.hidden = false;
