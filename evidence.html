@@ -1656,12 +1656,28 @@
         container.appendChild(a);
       });
     }
+    function makeTopLink(){
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'page-nav-link';
+      a.textContent = 'Top of Page';
+      a.dataset.target = '__top';
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        window.scrollTo({ top:0, behavior:'smooth' });
+        closeMenu(false);
+      });
+      return a;
+    }
+    if (menu) menu.appendChild(makeTopLink());
     buildLinks(menu);
+    if (tocLinks) tocLinks.appendChild(makeTopLink());
     buildLinks(tocLinks);
 
     var links = document.querySelectorAll('.page-nav-link');
     if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
-    if (links.length) links[0].classList.add('active');
+    var firstSectionLink = SECTIONS.length ? document.querySelector('.page-nav-link[data-target="' + SECTIONS[0].id + '"]') : null;
+    if (firstSectionLink) firstSectionLink.classList.add('active');
 
     function openMenu(){
       menu.hidden = false;
