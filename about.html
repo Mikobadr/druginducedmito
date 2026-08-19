@@ -192,18 +192,70 @@
     .timeline {
       position:relative;
       max-width:800px;
+      display:flex;
+      flex-direction:column;
+      gap:3rem;
     }
-    /* Vertical line */
-    .timeline::before {
+
+    /* Chapter header — subtle break between narrative chapters */
+    .timeline-chapter-header {
+      display:flex;
+      align-items:baseline;
+      gap:1.1rem;
+      margin-bottom:1.6rem;
+      padding-bottom:0.9rem;
+      border-bottom:1px solid rgba(42,122,86,0.14);
+      flex-wrap:wrap;
+    }
+    .timeline-chapter-num {
+      font-family:'DM Serif Display',serif;
+      font-style:italic;
+      font-size:1.7rem;
+      color:var(--e2);
+      opacity:0.55;
+      line-height:1;
+      flex-shrink:0;
+    }
+    .timeline-chapter-titlewrap { flex:1; min-width:180px; }
+    .timeline-chapter-title {
+      font-family:'DM Serif Display',serif;
+      font-size:1.14rem;
+      color:var(--t1);
+      letter-spacing:-0.01em;
+      line-height:1.3;
+      margin-bottom:0.2rem;
+    }
+    .timeline-chapter-era {
+      font-size:0.74rem;
+      color:var(--t3);
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+      font-weight:500;
+    }
+    .timeline-chapter-cue {
+      font-size:0.64rem;
+      font-weight:700;
+      letter-spacing:0.13em;
+      text-transform:uppercase;
+      color:var(--e2-text);
+      opacity:0.68;
+      white-space:nowrap;
+      align-self:flex-end;
+      padding-bottom:2px;
+    }
+
+    /* Items within a chapter */
+    .timeline-chapter-items { position:relative; }
+    .timeline-chapter-items::before {
       content:'';
       position:absolute;
       left:120px;
-      top:0; bottom:0;
+      top:6px; bottom:6px;
       width:1px;
       background:linear-gradient(to bottom,
         transparent 0%,
-        rgba(42,122,86,0.25) 8%,
-        rgba(42,122,86,0.25) 92%,
+        rgba(42,122,86,0.25) 6%,
+        rgba(42,122,86,0.25) 94%,
         transparent 100%);
     }
 
@@ -241,8 +293,6 @@
       transition:border-color 0.3s, background 0.3s;
     }
     .timeline-item:hover::after { background:var(--e2); }
-    /* Highlight the 2025 item */
-    .timeline-item.highlight::after { background:var(--e1); border-color:var(--e1); box-shadow:0 0 10px rgba(61,158,114,0.35); }
 
     .timeline-content {
       padding-left:0.5rem;
@@ -254,6 +304,7 @@
     .timeline-content p {
       font-size:0.88rem; color:var(--t2); line-height:1.62; font-weight:300;
     }
+    .timeline-content p + p { margin-top:0.7rem; }
     .timeline-content .tag {
       display:inline-block;
       background:rgba(42,122,86,0.10);
@@ -265,7 +316,25 @@
       letter-spacing:0.04em;
       margin-top:0.5rem;
     }
-    .timeline-item.highlight .timeline-content .tag {
+
+    /* Anchor events — five milestones given slightly greater visual weight.
+       Larger/brighter node with understated glow + a thin left border on
+       the content, echoing the site's existing pull-quote/mission-statement
+       border-accent motif. No card, no size change to the text block. */
+    .timeline-item.anchor::after {
+      left:112.5px; top:8.5px;
+      width:16px; height:16px;
+      background:var(--e1); border-color:var(--e1);
+      box-shadow:0 0 0 4px rgba(61,158,114,0.09), 0 0 12px rgba(61,158,114,0.40);
+    }
+    .timeline-item.anchor .timeline-content {
+      border-left:2px solid rgba(61,158,114,0.36);
+      padding-left:1rem;
+    }
+    .timeline-item.anchor .timeline-content h4 {
+      font-weight:700;
+    }
+    .timeline-item.anchor .timeline-content .tag {
       background:rgba(61,158,114,0.12);
       border-color:rgba(61,158,114,0.28);
       color:var(--e1);
@@ -356,6 +425,99 @@
     .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
     .footer-bottom a:hover { color:var(--t2); }
 
+    /* ══ ON-THIS-PAGE STICKY NAV + BACK TO TOP ══ */
+    main section[id], main div[id="sec-origin-how"], main div[id="sec-origin-lenses"] { scroll-margin-top:96px; }
+    .page-nav {
+      position:fixed; top:0; left:0; right:0; width:100vw; z-index:900;
+      background:rgba(8,20,14,0.97); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--e3-border);
+      transform:translateY(-120%); opacity:0;
+      transition:transform 0.3s ease, opacity 0.3s ease;
+    }
+    .page-nav.visible { transform:translateY(0); opacity:1; }
+    .page-nav-inner { max-width:none; width:100%; margin:0; padding-left:16px; padding-right:16px; }
+    .page-nav-toggle {
+      display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+      background:none; border:none; cursor:pointer; padding:12px 0;
+      font-family:'DM Sans',sans-serif; font-size:0.86rem; color:var(--t2);
+    }
+    .page-nav-toggle:hover { color:var(--t1); }
+    .page-nav-toggle:focus-visible { outline:2px solid var(--e1); outline-offset:3px; border-radius:6px; }
+    .page-nav-label strong { color:var(--t1); font-weight:500; }
+    .page-nav-chevron { font-size:0.68rem; color:var(--e2); transition:transform 0.25s; margin-left:1px; }
+    .page-nav-toggle[aria-expanded="true"] .page-nav-chevron { transform:rotate(180deg); }
+    .page-nav-menu {
+      position:fixed; top:50px; left:16px; right:auto;
+      width:min(320px, calc(100vw - 32px)); transform:none; margin:0;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 20px 44px rgba(0,0,0,0.55); padding:0.5rem;
+      display:flex; flex-direction:column; gap:2px; max-height:70vh; overflow-y:auto;
+      z-index:900;
+    }
+    .page-nav-menu[hidden] { display:none; }
+    .page-nav-link {
+      display:block; padding:10px 14px; border-radius:8px;
+      font-size:0.85rem; color:var(--t2); text-decoration:none;
+      transition:background 0.2s, color 0.2s;
+    }
+    .page-nav-link:hover { background:rgba(42,122,86,0.10); color:var(--t1); }
+    .page-nav-link:focus-visible { outline:2px solid var(--e1); outline-offset:-2px; }
+    .page-nav-link.active { background:rgba(61,158,114,0.14); color:var(--e1); font-weight:500; }
+
+    .page-toc-wrap { max-width:1060px; margin:2.4rem auto 0; padding:0 2.5rem; }
+    .page-toc {
+      max-width:400px;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.30); padding:1.1rem 1.3rem;
+    }
+    .page-toc-header {
+      display:flex; align-items:center; gap:8px;
+      font-size:0.70rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase;
+      color:var(--e2-text); margin-bottom:0.6rem;
+    }
+    .page-toc-links { display:flex; flex-direction:column; gap:2px; }
+
+    /* Desktop left-rail placement — wide screens only; below this, panel stays in its current stacked position */
+    @media (min-width:1700px) {
+      .page-hero { overflow:visible; }
+      .page-toc-wrap {
+        position:absolute; top:5rem; left:calc(50% - 770px);
+        width:300px; max-width:none; margin:0; padding:0; z-index:3;
+      }
+    }
+
+    .back-to-top {
+      position:fixed; bottom:28px; right:28px; z-index:900;
+      width:46px; height:46px; border-radius:50%;
+      background:rgba(16,46,30,0.92); border:1px solid var(--e3-border);
+      color:var(--t2); display:flex; align-items:center; justify-content:center;
+      cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px);
+      transition:opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s;
+      backdrop-filter:blur(10px); font-size:0.95rem;
+    }
+    .back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .back-to-top:hover { border-color:var(--e3-border-lift); color:var(--t1); }
+    .back-to-top:focus-visible { outline:2px solid var(--e1); outline-offset:3px; }
+
+    @media (max-width:860px) {
+      main section[id], main div[id="sec-origin-how"], main div[id="sec-origin-lenses"] { scroll-margin-top:84px; }
+      .page-nav-toggle { padding:13px 0; font-size:0.83rem; }
+      .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
+      .page-nav-link { padding:12px 14px; font-size:0.86rem; }
+      .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
+      /* Static desktop "On This Page" box: visually hidden on mobile (not display:none) so the
+         existing tocObserver (which watches #pageToc's position to trigger the sticky bar) keeps
+         functioning correctly — it just no longer renders or takes up layout space here. */
+      .page-toc-wrap {
+        position:absolute; width:1px; height:1px;
+        padding:0; margin:0; border:0; overflow:hidden;
+        clip:rect(0,0,0,0); clip-path:inset(50%); white-space:nowrap;
+      }
+      .page-toc { max-width:none; width:100%; padding:1rem 1.1rem; }
+    }
+
     /* ══ RESPONSIVE ══ */
     @media (max-width:1024px) {
       .origin-grid, .work-grid { grid-template-columns:1fr; gap:3rem; }
@@ -367,13 +529,19 @@
       section { padding:3rem 1.2rem; }
       .page-hero { padding:3rem 1.2rem 2.5rem; }
       /* Timeline — tighter column on small screens */
-      .timeline::before { left:72px; }
+      .timeline-chapter-items::before { left:72px; }
       .timeline-item { grid-template-columns:72px 1fr; gap:0 1rem; }
       .timeline-item::after { left:66px; }
+      .timeline-item.anchor::after { left:64.5px; }
       .timeline-era { font-size:0.76rem; padding-right:0.8rem; }
       .timeline-content h4 { font-size:0.88rem; }
       .timeline-content p { font-size:0.83rem; }
       .timeline-content .tag { font-size:0.66rem; }
+      /* Timeline chapter headers — tighter on small screens */
+      .timeline-chapter-header { gap:0.7rem; margin-bottom:1.2rem; padding-bottom:0.7rem; }
+      .timeline-chapter-num { font-size:1.35rem; }
+      .timeline-chapter-title { font-size:1.0rem; }
+      .timeline-chapter-cue { font-size:0.6rem; }
       /* Perspective cards */
       .perspective-card { padding:1rem 1.1rem; }
       .perspective-card h4 { font-size:0.88rem; }
@@ -389,11 +557,12 @@
       .footer-bottom a { margin-left:0; margin-right:0.8rem; }
     }
     @media (max-width:420px) {
-      .timeline::before { display:none; }
+      .timeline-chapter-items::before { display:none; }
       .timeline-item { grid-template-columns:1fr; gap:0.3rem; }
       .timeline-item::after { display:none; }
       .timeline-era { text-align:left; padding-right:0; font-size:0.80rem; color:var(--e1); }
       .section-title { font-size:1.5rem; }
+      .timeline-item.anchor .timeline-content { padding-left:0.7rem; }
     }
 
     /* ══ HAMBURGER MOBILE NAV ══ */
@@ -450,6 +619,22 @@
     </div>
   </nav>
 
+  <!-- ON-THIS-PAGE STICKY NAV -->
+  <div class="page-nav" id="pageNav">
+    <div class="page-nav-inner">
+      <button class="page-nav-toggle" id="pageNavToggle" type="button" aria-expanded="false" aria-controls="pageNavMenu">
+        <span class="page-nav-label">On this page: <strong id="pageNavCurrent"></strong></span>
+        <i class="fas fa-chevron-down page-nav-chevron" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="page-nav-menu" id="pageNavMenu" hidden></div>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <main>
 
     <!-- PAGE HERO -->
@@ -474,13 +659,20 @@
           </span>
         </div>
       </div>
+
+      <div class="page-toc-wrap">
+        <div class="page-toc" id="pageToc">
+          <div class="page-toc-header"><i class="fas fa-list-ul"></i> On this page</div>
+          <div class="page-toc-links" id="pageTocLinks"></div>
+        </div>
+      </div>
     </div>
 
     <!-- ORIGIN SECTION -->
     <section class="origin">
       <div class="section-inner">
         <div class="origin-grid">
-          <div>
+          <div id="sec-origin-how">
             <div class="section-label">Origin</div>
             <h2 class="section-title">How This Work Began</h2>
             <div class="section-divider"></div>
@@ -505,7 +697,7 @@
             </p>
           </div>
 
-          <div>
+          <div id="sec-origin-lenses">
             <div class="section-label">Perspective</div>
             <h2 class="section-title">Two Lenses on the Same Problem</h2>
             <div class="section-divider"></div>
@@ -545,7 +737,7 @@
     </section>
 
     <!-- TIMELINE -->
-    <section class="timeline-section">
+    <section class="timeline-section" id="sec-timeline">
       <div class="section-inner">
         <div class="section-label">Trajectory</div>
         <h2 class="section-title">A Four-Decade Arc</h2>
@@ -557,129 +749,197 @@
 
         <div class="timeline">
 
-          <div class="timeline-item">
-            <div class="timeline-era">Late<br>1980s</div>
-            <div class="timeline-content">
-              <h4>First Ciprofloxacin Exposure</h4>
-              <p>First remembered exposure to ciprofloxacin occurred in the late 1980s for an ear infection.</p>
+          <!-- CHAPTER I — Early Signals -->
+          <div class="timeline-chapter">
+            <div class="timeline-chapter-header">
+              <div class="timeline-chapter-num">01</div>
+              <div class="timeline-chapter-titlewrap">
+                <div class="timeline-chapter-title">Early Signals</div>
+                <div class="timeline-chapter-era">Late 1980s–1990s</div>
+              </div>
+              <div class="timeline-chapter-cue">Unexplained</div>
+            </div>
+            <div class="timeline-chapter-items">
+
+              <div class="timeline-item anchor">
+                <div class="timeline-era">Late<br>1980s</div>
+                <div class="timeline-content">
+                  <h4>First Ciprofloxacin Exposure</h4>
+                  <p>First remembered exposure to ciprofloxacin occurred in the late 1980s for an ear infection.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">1994–<br>1996</div>
+                <div class="timeline-content">
+                  <h4>Early Voice and Cardiac Symptoms</h4>
+                  <p>Voice symptoms developed in the mid-1990s and were eventually diagnosed as spasmodic dysphonia around 1996. Around this same period, a significant PSVT/SVT episode occurred that required adenosine for conversion.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">1997–<br>1998</div>
+                <div class="timeline-content">
+                  <h4>GBS-Like Neurologic Episode</h4>
+                  <p>After graduating with a BSN in December 1997 and beginning emergency nursing work, lower-extremity numbness and tingling developed, beginning in the feet and gradually ascending but stopping around the knees. Symptoms progressed to stumbling and foot drop, requiring braces for ambulation. Neurologic evaluation at a major academic medical center included diagnostic workup and nerve biopsy. The best clinical impression was Guillain-Barré syndrome or a demyelination/regeneration process. Symptoms improved over several months, but the episode remained without a fully unifying explanation.</p>
+                  <span class="tag">Neurologic Episode</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-era">1994–<br>1996</div>
-            <div class="timeline-content">
-              <h4>Early Voice and Cardiac Symptoms</h4>
-              <p>Voice symptoms developed in the mid-1990s and were eventually diagnosed as spasmodic dysphonia around 1996. Around this same period, a significant PSVT/SVT episode occurred that required adenosine for conversion.</p>
+          <!-- CHAPTER II — Injury & Loss -->
+          <div class="timeline-chapter">
+            <div class="timeline-chapter-header">
+              <div class="timeline-chapter-num">02</div>
+              <div class="timeline-chapter-titlewrap">
+                <div class="timeline-chapter-title">Injury &amp; Loss</div>
+                <div class="timeline-chapter-era">2000–2012</div>
+              </div>
+              <div class="timeline-chapter-cue">Injury</div>
+            </div>
+            <div class="timeline-chapter-items">
+
+              <div class="timeline-item">
+                <div class="timeline-era">2002</div>
+                <div class="timeline-content">
+                  <h4>Left ACL Tear</h4>
+                  <p>A left ACL tear occurred during the early musculoskeletal injury period and required surgical repair.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item anchor">
+                <div class="timeline-era">2007</div>
+                <div class="timeline-content">
+                  <h4>Second Ciprofloxacin Exposure and Left Achilles/Gastrocnemius Injury</h4>
+                  <p>In 2007, after taking a single oral dose of ciprofloxacin, I suffered a spontaneous rupture of the left Achilles tendon/gastrocnemius complex. The injury occurred within approximately 24 hours of exposure and in the absence of any significant traumatic event. The rupture was severe enough to require prolonged immobilization and marked the beginning of a cascade of subsequent musculoskeletal complications.</p>
+                  <span class="tag">Exposure Event</span>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">2008</div>
+                <div class="timeline-content">
+                  <h4>Right Achilles/Gastrocnemius Injury</h4>
+                  <p>A similar right-sided Achilles/gastrocnemius injury occurred the following year while transferring a patient in the ICU.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">2008–<br>2009</div>
+                <div class="timeline-content">
+                  <h4>Progressive Tendon and Connective-Tissue Injury</h4>
+                  <p>Following the bilateral lower-leg tendon injuries, additional musculoskeletal problems developed — including left hip labral, ligament, and tendon involvement after altered gait and boot use — along with worsening back, SI, and hip pain, and recurrent tendon and connective-tissue symptoms. Because the fluoroquinolone-associated pattern was not recognized at the time, treatment continued through conventional musculoskeletal pathways, including repeated hip injections, a lumbar epidural, NSAIDs, and corticosteroid exposure — interventions now commonly cautioned against in FQAD contexts due to their potential to worsen symptoms.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">2009</div>
+                <div class="timeline-content">
+                  <h4>Hysterectomy and Pelvic Disease</h4>
+                  <p>A total hysterectomy was performed after severe pelvic and back pain had been attributed to endometriosis. Operative findings included severe endometriosis and polycystic ovaries despite no prior history of PCOS. During recovery from anesthesia, there was difficulty reversing or awakening from surgery, and the anesthesiologist was present at bedside when I woke. In retrospect, this perioperative event became another data point in the broader pattern of medication sensitivity and possible mitochondrial vulnerability.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item anchor">
+                <div class="timeline-era">2010–<br>2012</div>
+                <div class="timeline-content">
+                  <h4>Disability and Loss of Clinical Career</h4>
+                  <p>Multisystem symptoms progressed, including worsening pain, fatigue, neurologic symptoms, autonomic and cardiac symptoms, medication sensitivity, and recurrent musculoskeletal problems. By approximately 2010, nursing work was no longer sustainable, and by 2012 permanent disability had been established.</p>
+                  <span class="tag">Career End</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-era">1997–<br>1998</div>
-            <div class="timeline-content">
-              <h4>GBS-Like Neurologic Episode</h4>
-              <p>After graduating with a BSN in December 1997 and beginning emergency nursing work, lower-extremity numbness and tingling developed, beginning in the feet and gradually ascending but stopping around the knees. Symptoms progressed to stumbling and foot drop, requiring braces for ambulation. Neurologic evaluation at a major academic medical center included diagnostic workup and nerve biopsy. The best clinical impression was Guillain-Barré syndrome or a demyelination/regeneration process. Symptoms improved over several months, but the episode remained without a fully unifying explanation.</p>
-              <span class="tag">Neurologic Episode</span>
+          <!-- CHAPTER III — The Unexplained Years -->
+          <div class="timeline-chapter">
+            <div class="timeline-chapter-header">
+              <div class="timeline-chapter-num">03</div>
+              <div class="timeline-chapter-titlewrap">
+                <div class="timeline-chapter-title">The Unexplained Years</div>
+                <div class="timeline-chapter-era">2012–2024</div>
+              </div>
+              <div class="timeline-chapter-cue">Persistence</div>
+            </div>
+            <div class="timeline-chapter-items">
+
+              <div class="timeline-item">
+                <div class="timeline-era">2012–<br>2019</div>
+                <div class="timeline-content">
+                  <h4>Chronic Unexplained Multisystem Illness</h4>
+                  <p>Persistent symptoms continued without a unifying diagnosis — including neuropathic pain, vibration sensations, tendon and ligament pain, sleep disruption, medication sensitivity, temperature and autonomic symptoms, and post-exertional worsening. Later symptom logs documented the persistence and fluctuation of this pattern.</p>
+                  <p>The multisystem pattern was not limited to isolated episodes. Throughout these years, longstanding symptoms continued to wax and wane while becoming more frequent, prolonged, or severe. These included recurrent painful pedal spasms with sustained inward turning of the feet, recurrent bladder stones, autonomic/POTS-type symptoms, neuropathic pain, sleep disruption, medication sensitivity, and connective-tissue problems. Rather than having clear individual onset dates, these manifestations formed part of a persistent and evolving illness pattern.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">2022</div>
+                <div class="timeline-content">
+                  <h4>Recurrent Tendon Flares</h4>
+                  <p>Recurrent tendon, adductor, hamstring, and groin pain continued, along with difficulty walking, edema around the left ankle, calf, and thigh, Baker's cyst history, and persistent tendon-related limitations.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">~2022</div>
+                <div class="timeline-content">
+                  <h4>Spontaneous Tendon Ruptures During Sleep</h4>
+                  <p>Four spontaneous tendon ruptures occurred during sleep, part of a larger cluster of recurrent tendon ruptures documented during this period.</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-era">2023</div>
+                <div class="timeline-content">
+                  <h4>Delayed Recognition of Longstanding Neuropathic Symptoms</h4>
+                  <p>Right upper-thigh symptoms that had been present for years were formally diagnosed as meralgia paresthetica in 2023 — illustrating the long delay between symptom onset and clinical labeling that is characteristic of this type of multisystem pattern.</p>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <div class="timeline-item">
-            <div class="timeline-era">2002</div>
-            <div class="timeline-content">
-              <h4>Left ACL Tear</h4>
-              <p>A left ACL tear occurred during the early musculoskeletal injury period and required surgical repair.</p>
+          <!-- CHAPTER IV — Recognition → Evidence → Action -->
+          <div class="timeline-chapter">
+            <div class="timeline-chapter-header">
+              <div class="timeline-chapter-num">04</div>
+              <div class="timeline-chapter-titlewrap">
+                <div class="timeline-chapter-title">Recognition → Evidence → Action</div>
+                <div class="timeline-chapter-era">2024–2026</div>
+              </div>
             </div>
-          </div>
+            <div class="timeline-chapter-items">
 
-          <div class="timeline-item">
-            <div class="timeline-era">2007</div>
-            <div class="timeline-content">
-              <h4>Second Ciprofloxacin Exposure and Left Achilles/Gastrocnemius Injury</h4>
-              <p>In 2007, after taking a single oral dose of ciprofloxacin, I suffered a spontaneous rupture of the left Achilles tendon/gastrocnemius complex. The injury occurred within approximately 24 hours of exposure and in the absence of any significant traumatic event. The rupture was severe enough to require prolonged immobilization and marked the beginning of a cascade of subsequent musculoskeletal complications.</p>
-              <span class="tag">Exposure Event</span>
-            </div>
-          </div>
+              <div class="timeline-item anchor">
+                <div class="timeline-era">2024</div>
+                <div class="timeline-content">
+                  <h4>Recognition of a Possible DIMD/FQAD Framework</h4>
+                  <p>The long clinical pattern began to be reconsidered through the lens of fluoroquinolone-associated disability and drug-induced mitochondrial dysfunction. This was not a pre-formed theory; it emerged after years of documented symptoms, fragmented evaluations, and later research into mitochondrial biology and fluoroquinolone mechanisms.</p>
+                  <span class="tag">Framework Recognition</span>
+                </div>
+              </div>
 
-          <div class="timeline-item">
-            <div class="timeline-era">2008</div>
-            <div class="timeline-content">
-              <h4>Right Achilles/Gastrocnemius Injury</h4>
-              <p>A similar right-sided Achilles/gastrocnemius injury occurred the following year while transferring a patient in the ICU.</p>
-            </div>
-          </div>
+              <div class="timeline-item anchor">
+                <div class="timeline-era">2025</div>
+                <div class="timeline-content">
+                  <h4>Objective Mitochondrial Finding</h4>
+                  <p>MitoSwab testing showed severe isolated Complex I deficiency in buccal cells. This objective mitochondrial finding became an important biological anchor for re-examining the prior decades-long clinical trajectory through the lens of DIMD/FQAD.</p>
+                  <span class="tag">Complex I Deficiency · Objective Finding</span>
+                </div>
+              </div>
 
-          <div class="timeline-item">
-            <div class="timeline-era">2008–<br>2009</div>
-            <div class="timeline-content">
-              <h4>Progressive Tendon and Connective-Tissue Injury</h4>
-              <p>Following the bilateral lower-leg tendon injuries, additional musculoskeletal problems developed — including left hip labral, ligament, and tendon involvement after altered gait and boot use — along with worsening back, SI, and hip pain, and recurrent tendon and connective-tissue symptoms. Because the fluoroquinolone-associated pattern was not recognized at the time, treatment continued through conventional musculoskeletal pathways, including repeated hip injections, a lumbar epidural, NSAIDs, and corticosteroid exposure — interventions now commonly cautioned against in FQAD contexts due to their potential to worsen symptoms.</p>
-            </div>
-          </div>
+              <div class="timeline-item">
+                <div class="timeline-era">2026</div>
+                <div class="timeline-content">
+                  <h4>Research, Registry, and Advocacy Phase</h4>
+                  <p>The personal clinical trajectory became part of a broader research and advocacy effort focused on delayed multisystem drug injury, mitochondrial vulnerability, patient-reported outcomes, and gaps in pharmacovigilance. This work now includes the DIMD Registry, FDA Citizen Petition activity (Docket FDA-2026-P-5116), website development, and public education around mitochondrial safety.</p>
+                  <span class="tag">FDA Petition · Registry · Advocacy</span>
+                </div>
+              </div>
 
-          <div class="timeline-item">
-            <div class="timeline-era">2009</div>
-            <div class="timeline-content">
-              <h4>Hysterectomy and Pelvic Disease</h4>
-              <p>A total hysterectomy was performed after severe pelvic and back pain had been attributed to endometriosis. Operative findings included severe endometriosis and polycystic ovaries despite no prior history of PCOS. During recovery from anesthesia, there was difficulty reversing or awakening from surgery, and the anesthesiologist was present at bedside when I woke. In retrospect, this perioperative event became another data point in the broader pattern of medication sensitivity and possible mitochondrial vulnerability.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-era">2010–<br>2012</div>
-            <div class="timeline-content">
-              <h4>Disability and Loss of Clinical Career</h4>
-              <p>Multisystem symptoms progressed, including worsening pain, fatigue, neurologic symptoms, autonomic and cardiac symptoms, medication sensitivity, and recurrent musculoskeletal problems. By approximately 2010, nursing work was no longer sustainable, and by 2012 permanent disability had been established.</p>
-              <span class="tag">Career End</span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-era">2012–<br>2019</div>
-            <div class="timeline-content">
-              <h4>Chronic Unexplained Multisystem Illness</h4>
-              <p>Persistent symptoms continued without a unifying diagnosis — including neuropathic pain, vibration sensations, tendon and ligament pain, sleep disruption, medication sensitivity, temperature and autonomic symptoms, and post-exertional worsening. Later symptom logs documented the persistence and fluctuation of this pattern.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-era">2022</div>
-            <div class="timeline-content">
-              <h4>Recurrent Tendon Flares</h4>
-              <p>Recurrent tendon, adductor, hamstring, and groin pain continued, along with difficulty walking, edema around the left ankle, calf, and thigh, Baker's cyst history, and persistent tendon-related limitations.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-era">2023</div>
-            <div class="timeline-content">
-              <h4>Delayed Recognition of Longstanding Neuropathic Symptoms</h4>
-              <p>Right upper-thigh symptoms that had been present for years were formally diagnosed as meralgia paresthetica in 2023 — illustrating the long delay between symptom onset and clinical labeling that is characteristic of this type of multisystem pattern.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="timeline-era">2024</div>
-            <div class="timeline-content">
-              <h4>Recognition of a Possible DIMD/FQAD Framework</h4>
-              <p>The long clinical pattern began to be reconsidered through the lens of fluoroquinolone-associated disability and drug-induced mitochondrial dysfunction. This was not a pre-formed theory; it emerged after years of documented symptoms, fragmented evaluations, and later research into mitochondrial biology and fluoroquinolone mechanisms.</p>
-              <span class="tag">Framework Recognition</span>
-            </div>
-          </div>
-
-          <div class="timeline-item highlight">
-            <div class="timeline-era">2025</div>
-            <div class="timeline-content">
-              <h4>Objective Mitochondrial Finding</h4>
-              <p>MitoSwab testing showed severe isolated Complex I deficiency in buccal cells. This objective mitochondrial finding became an important biological anchor for re-examining the prior decades-long clinical trajectory through the lens of DIMD/FQAD.</p>
-              <span class="tag">Complex I Deficiency · Objective Finding</span>
-            </div>
-          </div>
-
-          <div class="timeline-item highlight">
-            <div class="timeline-era">2026</div>
-            <div class="timeline-content">
-              <h4>Research, Registry, and Advocacy Phase</h4>
-              <p>The personal clinical trajectory became part of a broader research and advocacy effort focused on delayed multisystem drug injury, mitochondrial vulnerability, patient-reported outcomes, and gaps in pharmacovigilance. This work now includes the DIMD Registry, FDA Citizen Petition activity (Docket FDA-2026-P-5116), website development, and public education around mitochondrial safety.</p>
-              <span class="tag">FDA Petition · Registry · Advocacy</span>
             </div>
           </div>
 
@@ -691,7 +951,7 @@
     </section>
 
     <!-- THE WORK -->
-    <section class="the-work">
+    <section class="the-work" id="sec-work">
       <div class="section-inner">
         <div class="work-grid">
           <div>
@@ -877,6 +1137,134 @@
       });
     });
   });
+  </script>
+  <script>
+  (function(){
+    var SECTIONS = [{"id": "sec-origin-how", "label": "How This Work Began"}, {"id": "sec-origin-lenses", "label": "Two Lenses on the Same Problem"}, {"id": "sec-timeline", "label": "A Four-Decade Arc"}, {"id": "sec-work", "label": "What This Initiative Is Building"}];
+
+    var pageNav = document.getElementById('pageNav');
+    var toggle = document.getElementById('pageNavToggle');
+    var menu = document.getElementById('pageNavMenu');
+    var currentLabel = document.getElementById('pageNavCurrent');
+    var backToTop = document.getElementById('backToTop');
+    var toc = document.getElementById('pageToc');
+    var tocLinks = document.getElementById('pageTocLinks');
+    if (!pageNav || !toggle || !menu) return;
+
+    function buildLinks(container){
+      if (!container) return;
+      SECTIONS.forEach(function(s){
+        var el = document.getElementById(s.id);
+        if (!el) return;
+        var a = document.createElement('a');
+        a.href = '#' + s.id;
+        a.className = 'page-nav-link';
+        a.textContent = s.label;
+        a.dataset.target = s.id;
+        container.appendChild(a);
+      });
+    }
+    function makeTopLink(){
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'page-nav-link';
+      a.textContent = 'Top of Page';
+      a.dataset.target = '__top';
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        window.scrollTo({ top:0, behavior:'smooth' });
+        closeMenu(false);
+      });
+      return a;
+    }
+    if (menu) menu.appendChild(makeTopLink());
+    buildLinks(menu);
+    if (tocLinks) tocLinks.appendChild(makeTopLink());
+    buildLinks(tocLinks);
+
+    var links = document.querySelectorAll('.page-nav-link');
+    if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
+    var firstSectionLink = SECTIONS.length ? document.querySelector('.page-nav-link[data-target="' + SECTIONS[0].id + '"]') : null;
+    if (firstSectionLink) firstSectionLink.classList.add('active');
+
+    function openMenu(){
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded','true');
+      document.addEventListener('click', onDocClick);
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(focusToggle){
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onKeydown);
+      if (focusToggle) toggle.focus();
+    }
+    function onDocClick(e){
+      if (!pageNav.contains(e.target) && !menu.contains(e.target)) closeMenu(false);
+    }
+    function onKeydown(e){
+      if (e.key === 'Escape') closeMenu(true);
+    }
+    toggle.addEventListener('click', function(){
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(false); else openMenu();
+    });
+    links.forEach(function(link){
+      link.addEventListener('click', function(){ closeMenu(false); });
+    });
+
+    function onBackToTopScroll(){
+      if (backToTop) {
+        if (window.scrollY > 900) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', onBackToTopScroll, { passive:true });
+    onBackToTopScroll();
+
+    if (backToTop) {
+      backToTop.addEventListener('click', function(){
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    function setActive(id){
+      var match = null;
+      for (var i=0;i<SECTIONS.length;i++){ if (SECTIONS[i].id === id){ match = SECTIONS[i]; break; } }
+      if (!match) return;
+      if (currentLabel) currentLabel.textContent = match.label;
+      links.forEach(function(link){
+        link.classList.toggle('active', link.dataset.target === id);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var sectionEls = SECTIONS.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
+      var sectionObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-140px 0px -70% 0px', threshold: 0 });
+      sectionEls.forEach(function(el){ sectionObserver.observe(el); });
+
+      if (toc) {
+        var tocObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (entry.isIntersecting) { pageNav.classList.remove('visible'); closeMenu(false); }
+            else { pageNav.classList.add('visible'); }
+          });
+        }, { rootMargin: '-70px 0px 0px 0px', threshold: 0 });
+        tocObserver.observe(toc);
+      }
+    } else if (toc) {
+      var tocFallbackThreshold = Math.max(toc.offsetTop + toc.offsetHeight - 40, 260);
+      window.addEventListener('scroll', function(){
+        if (window.scrollY > tocFallbackThreshold) pageNav.classList.add('visible');
+        else { pageNav.classList.remove('visible'); closeMenu(false); }
+      }, { passive:true });
+    }
+  })();
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
