@@ -482,7 +482,6 @@
         <a href="#" class="btn-primary" id="collabEmail" data-u="jmihli" data-d="proton.me"><i class="fas fa-envelope"></i> Get in touch</a>
         <a href="fqad.html" class="btn-outline">Learn about FQAD</a>
       </div>
-      <p class="email-plain" id="collabEmailText"><noscript>Email: jmihli [at] proton [dot] me</noscript></p>
       <p class="clinician-note">
         <strong>Clinicians:</strong> ask about fluoroquinolone exposure, document reactions to prevent re-exposure, and report suspected cases (MedWatch in the US; in Europe, your national medicines regulator, which feeds EudraVigilance; the Yellow Card scheme in the UK). In the US, code suspected reactions with the fluoroquinolone-specific ICD-10-CM adverse-effect codes, so they can be counted and followed.
       </p>
@@ -623,7 +622,7 @@
     if (a) {
       var addr = a.getAttribute('data-u') + '@' + a.getAttribute('data-d');
       a.href = 'mailto:' + addr + '?subject=' + encodeURIComponent('FQAD collaboration (BMJ Future Health 2026)');
-      if (t) t.textContent = addr;
+      a.title = addr;
     }
     var b = document.getElementById('backToTop');
     if (b) {
