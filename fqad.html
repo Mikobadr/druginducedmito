@@ -198,7 +198,7 @@
     .reg-badges { display:flex; flex-direction:column; gap:0.8rem; margin-top:0.5rem; }
     .reg-badge { display:flex; align-items:flex-start; gap:12px; background:linear-gradient(135deg,rgba(16,40,28,0.90),rgba(12,30,20,0.95)); border:1px solid var(--e3-border); border-radius:12px; padding:1rem 1.2rem; transition:border-color 0.3s; }
     .reg-badge:hover { border-color:var(--e3-border-lift); }
-    .reg-badge-year { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--e2-text); font-style:italic; flex-shrink:0; min-width:46px; margin-top:1px; }
+    .reg-badge-year, .reg-year { font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--e2-text); font-style:italic; flex-shrink:0; min-width:46px; margin-top:1px; }
     .reg-badge h4 { font-size:0.90rem; font-weight:600; color:var(--t1); margin-bottom:0.22rem; }
     .reg-badge p { font-size:0.84rem; color:var(--t2); line-height:1.55; font-weight:300; }
 
@@ -485,6 +485,22 @@
     .packet-tier-info h4 { font-size:0.92rem; font-weight:600; color:var(--t1); margin-bottom:0.15rem; }
     .packet-tier-info p { font-size:0.82rem; color:var(--t3); font-weight:300; }
     .packet-tier-dl { flex-shrink:0; color:var(--e2-text); font-size:0.95rem; }
+
+    /* ══ BMJ 2026 ANNOUNCEMENT BANNER ══ */
+    .bmj-banner-wrap { padding-top:2.5rem; padding-bottom:0; }
+    .bmj-banner { display:flex; align-items:center; gap:1.6rem; text-decoration:none; background:linear-gradient(135deg,rgba(20,56,38,0.62),rgba(12,36,24,0.72)); border:1px solid rgba(61,158,114,0.34); border-radius:18px; padding:1.5rem 1.9rem; transition:border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+    .bmj-banner:hover { border-color:rgba(61,158,114,0.60); transform:translateY(-2px); box-shadow:0 14px 34px rgba(0,0,0,0.28); }
+    .bmj-banner-icon { width:48px; height:48px; flex-shrink:0; border-radius:12px; background:rgba(61,158,114,0.14); border:1px solid rgba(61,158,114,0.30); display:flex; align-items:center; justify-content:center; color:var(--e1); font-size:1.15rem; }
+    .bmj-banner-body { flex:1; min-width:0; }
+    .bmj-banner-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e1); margin-bottom:0.35rem; }
+    .bmj-banner-title { font-family:'DM Serif Display',serif; font-size:1.35rem; color:var(--t1); line-height:1.25; margin-bottom:0.3rem; }
+    .bmj-banner-text { font-size:0.88rem; color:var(--t2); line-height:1.55; font-weight:300; }
+    .bmj-banner-go { flex-shrink:0; display:inline-flex; align-items:center; gap:8px; font-size:0.88rem; font-weight:600; color:var(--e2-text); white-space:nowrap; }
+    .bmj-banner:hover .bmj-banner-go { color:var(--e1); }
+    @media (max-width:680px) {
+      .bmj-banner { flex-direction:column; align-items:flex-start; gap:0.9rem; padding:1.3rem 1.3rem; }
+      .bmj-banner-title { font-size:1.18rem; }
+    }
 
     /* ══ FOOTER ══ */
     footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
@@ -796,6 +812,21 @@
         </div>
       </div>
     </div>
+
+    <!-- BMJ 2026 ANNOUNCEMENT BANNER -->
+    <section class="bmj-banner-wrap">
+      <div class="section-inner">
+        <a href="bmj-2026.html" class="bmj-banner">
+          <div class="bmj-banner-icon"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
+          <div class="bmj-banner-body">
+            <div class="bmj-banner-label">BMJ Future Health Europe 2026</div>
+            <div class="bmj-banner-title">Missed. Untracked. Uncounted.</div>
+            <div class="bmj-banner-text">ePoster and video at BMJ Future Health Europe, 29–30 October, London. Abstract to be published in BMJ Innovations. We are looking for partners to help build an FQAD registry.</div>
+          </div>
+          <div class="bmj-banner-go">See the ePoster <i class="fas fa-arrow-right" aria-hidden="true"></i></div>
+        </a>
+      </div>
+    </section>
 
     <!-- ESTABLISHED / UNDER INVESTIGATION STATUS BOX -->
     <section class="status-box-wrap">
@@ -1333,7 +1364,7 @@
               <tr>
                 <td>Fibromyalgia-like syndrome</td>
                 <td>Widespread musculoskeletal pain, fatigue, tender points, sleep disruption</td>
-                <td>Bioenergetic dysfunction, oxidatFive stress, mitochondrial quality control impairment</td>
+                <td>Bioenergetic dysfunction, oxidative stress, mitochondrial quality control impairment</td>
               </tr>
               <tr>
                 <td>ME/CFS-like syndrome</td>

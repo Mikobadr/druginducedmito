@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RR7LJXTMPM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RR7LJXTMPM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Missed. Untracked. Uncounted. An ePoster on fluoroquinolone-associated disability (FQAD) at BMJ Future Health Europe 2026, and an invitation to help build the registry and long-term studies these patients need.">
+  <meta property="og:title" content="Missed. Untracked. Uncounted. | FQAD at BMJ Future Health Europe 2026">
+  <meta property="og:description" content="No health system systematically identifies, registers or follows patients with fluoroquinolone-associated disability. An invitation to collaborate.">
+  <meta property="og:image" content="https://www.druginducedmito.org/images/bmj-2026-eposter.jpg">
+  <meta property="og:type" content="article">
+  <title>BMJ Future Health Europe 2026 | DIMD — Drug-Induced Mitochondrial Dysfunction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg-floor:    #071410;
+      --bg-deep:     #0A1C14;
+      --bg-mid:      #0E2318;
+      --bg-lift:     #122B1E;
+      --e1:          #3D9E72;
+      --e1-btn:      #2E8A60;
+      --e2:          #2A7A56;
+      --e2-text:     #7AAF95;
+      --e3:          #1A5C3E;
+      --e3-border:   rgba(30,92,62,0.18);
+      --e3-border-lift: rgba(42,122,86,0.28);
+      --t1:   #D4E8DC;
+      --t2:   #B0CCBF;
+      --t3:   #8AA89A;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; overflow-x:hidden; }
+    body {
+      font-family:'DM Sans', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 18% 8%,  rgba(26,92,62,0.13) 0%, transparent 52%),
+        radial-gradient(ellipse at 82% 92%, rgba(18,78,48,0.10) 0%, transparent 48%),
+        linear-gradient(168deg, #0C1F16 0%, #091A12 40%, #071410 70%, #0A1A12 100%);
+      background-attachment:fixed;
+      color:var(--t1); min-height:100vh; overflow-x:hidden; word-wrap:break-word;
+    }
+    #mito-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.32; }
+    #atmosphere { position:fixed; inset:0; pointer-events:none; z-index:1;
+      background: radial-gradient(ellipse at 15% 25%, rgba(42,122,86,0.048) 0%, transparent 44%),
+        radial-gradient(ellipse at 85% 70%, rgba(26,92,62,0.036) 0%, transparent 40%); }
+    #vignette { position:fixed; inset:0; pointer-events:none; z-index:2;
+      box-shadow: inset 0 0 200px rgba(5,12,9,0.72), inset 160px 0 200px rgba(5,12,9,0.52), inset -160px 0 200px rgba(5,12,9,0.52); }
+    nav,main,footer { position:relative; z-index:10; }
+
+    /* ══ NAV (unchanged from site) ══ */
+    nav { position:sticky; top:0; z-index:1000; background:rgba(8,20,14,0.95); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); }
+    .nav-inner { max-width:1340px; margin:0 auto; padding:0 2.5rem; height:70px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#163C28,#1A5C3E); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+    .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
+    .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+    .nav-links a { color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--e2); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
+    .nav-links a:hover { color:var(--t1); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-cta { background:linear-gradient(90deg,#163C28,var(--e2)) !important; color:var(--t1) !important; padding:8px 22px; border-radius:9999px; font-weight:600 !important; box-shadow:0 3px 12px rgba(42,122,86,0.20); }
+    .nav-cta::after { display:none !important; }
+
+    /* ══ PAGE HERO (site pattern) ══ */
+    .page-hero { padding:5rem 2.5rem 3.5rem; position:relative; overflow:hidden;
+      background: radial-gradient(ellipse at 50% 60%, rgba(61,158,114,0.07) 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, rgba(42,122,86,0.05) 0%, transparent 44%); }
+    .page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:120px; background:linear-gradient(to bottom, transparent, rgba(10,28,20,0.50)); pointer-events:none; }
+    .page-hero-inner { max-width:860px; margin:0 auto; position:relative; z-index:2; }
+    .page-breadcrumb { display:inline-flex; align-items:center; gap:8px; font-size:0.76rem; color:var(--t3); letter-spacing:0.08em; text-transform:uppercase; font-weight:500; margin-bottom:1.8rem; flex-wrap:wrap; }
+    .page-breadcrumb a { color:var(--t3); text-decoration:none; transition:color 0.2s; }
+    .page-breadcrumb a:hover { color:var(--t2); }
+    .page-breadcrumb span { color:var(--e2); }
+    .hero-kicker { font-size:0.74rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e1); margin-bottom:1rem; animation:fadeUp 0.8s ease both; }
+    .page-hero h1 { font-family:'DM Serif Display',serif; font-size:clamp(2.2rem,6vw,4.4rem); line-height:1.08; letter-spacing:-0.02em; color:var(--t1); margin-bottom:1.1rem; animation:fadeUp 0.8s ease both; }
+    .page-hero h1 em { font-style:italic; color:var(--e1); }
+    .page-hero-sub { font-size:1.05rem; line-height:1.72; color:var(--t2); max-width:700px; font-weight:300; animation:fadeUp 0.8s 0.1s ease both; }
+    .page-hero-sub strong { color:var(--t1); font-weight:500; }
+    .hero-standing { font-size:0.86rem; color:var(--t3); font-weight:400; margin-top:0.9rem; animation:fadeUp 0.8s 0.1s ease both; }
+    .hero-cta-row { display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.8rem; animation:fadeUp 0.8s 0.15s ease both; }
+    .hero-badges { display:flex; flex-wrap:wrap; gap:10px; margin-top:2rem; animation:fadeUp 0.8s 0.2s ease both; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(42,122,86,0.07); border:1px solid rgba(42,122,86,0.18); border-radius:12px; padding:8px 16px; font-size:0.82rem; color:var(--t2); }
+    .hero-badge i { color:var(--e2); font-size:0.78rem; }
+    .hero-badge strong { color:var(--t1); font-weight:500; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+
+    /* ══ SHARED (site pattern) ══ */
+    section { padding:4.5rem 2.5rem; position:relative; overflow:hidden; }
+    .section-inner { max-width:1060px; margin:0 auto; position:relative; z-index:2; }
+    .section-label { font-size:0.70rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--e2); margin-bottom:0.8rem; }
+    .section-title { font-family:'DM Serif Display',serif; font-size:clamp(1.7rem,3.5vw,2.5rem); line-height:1.14; color:var(--t1); letter-spacing:-0.02em; margin-bottom:1.1rem; }
+    .section-divider { width:38px; height:2px; background:linear-gradient(90deg,var(--e3),transparent); border-radius:2px; margin-bottom:1.8rem; }
+    .body-text { color:var(--t2); line-height:1.86; font-size:1rem; font-weight:300; margin-bottom:1.15rem; }
+    .body-text strong { color:var(--t1); font-weight:500; }
+    .body-text a, .inline-link { color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.30); transition:color 0.2s; }
+    .body-text a:hover, .inline-link:hover { color:var(--e1); }
+    .pull-quote { background:linear-gradient(135deg,rgba(22,60,42,0.42),rgba(12,36,24,0.52)); border-left:3px solid var(--e2); border-radius:0 12px 12px 0; padding:1.6rem 1.8rem; margin:1.8rem 0; }
+    .pull-quote p { font-family:'DM Serif Display',serif; font-size:1.28rem; font-style:italic; color:var(--t1); line-height:1.45; }
+    .alt-bg-1 { background: radial-gradient(ellipse at 8% 40%, rgba(42,122,86,0.050) 0%, transparent 48%), linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-floor) 60%, var(--bg-deep) 100%); }
+    .alt-bg-2 { background: radial-gradient(ellipse at 88% 38%, rgba(42,122,86,0.050) 0%, transparent 46%), linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-lift) 50%, var(--bg-mid) 100%); }
+    .alt-bg-2::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(42,122,86,0.09), transparent); pointer-events:none; z-index:1; }
+
+    .btn-primary { background:linear-gradient(90deg,var(--e1-btn),var(--e1)); color:#081A10; padding:14px 32px; border-radius:9999px; font-weight:600; font-size:0.97rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 20px rgba(61,158,114,0.20); transition:all 0.3s; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(61,158,114,0.28); }
+    .btn-outline { border:1.5px solid rgba(42,122,86,0.30); color:var(--t2); padding:14px 32px; border-radius:9999px; font-weight:500; font-size:0.97rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all 0.3s; }
+    .btn-outline:hover { background:rgba(42,122,86,0.07); border-color:rgba(42,122,86,0.48); color:var(--t1); }
+
+    /* ══ BMJ PAGE — STAT ROW ══ */
+    .bmj-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0.9rem; margin-bottom:1.4rem; }
+    .bmj-stat { background:linear-gradient(135deg, rgba(16,40,28,0.92), rgba(12,30,20,0.96)); border:1px solid var(--e3-border); border-radius:14px; padding:1.3rem 1.2rem; text-align:center; }
+    .bmj-stat-num { font-family:'DM Serif Display',serif; font-size:2.3rem; color:var(--e2-text); line-height:1; margin-bottom:0.5rem; }
+    .bmj-stat-desc { font-size:0.84rem; color:var(--t2); line-height:1.5; font-weight:300; }
+    .bmj-headline { font-family:'DM Serif Display',serif; font-size:clamp(1.2rem,2.4vw,1.55rem); color:var(--t1); line-height:1.4; max-width:880px; }
+    .bmj-footnote { font-size:0.76rem; color:var(--t3); font-style:italic; margin-top:1rem; line-height:1.55; }
+
+    /* ══ BMJ PAGE — POSTER ══ */
+    .poster-grid { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:3.5rem; align-items:start; }
+    .poster-frame { display:block; background:rgba(10,28,18,0.6); border:1px solid var(--e3-border-lift); border-radius:16px; padding:0.8rem; transition:border-color 0.3s, transform 0.3s; }
+    .poster-frame:hover { border-color:rgba(61,158,114,0.45); transform:translateY(-2px); }
+    .poster-frame img { display:block; width:100%; height:auto; border-radius:8px; }
+    .poster-caption { font-size:0.78rem; color:var(--t3); margin-top:0.7rem; text-align:center; font-style:italic; }
+    .poster-actions { display:flex; flex-direction:column; gap:0.8rem; margin-top:1.6rem; align-items:flex-start; }
+    .facts-list { list-style:none; display:flex; flex-direction:column; gap:0.75rem; margin-top:0.4rem; }
+    .facts-list li { display:flex; gap:12px; align-items:flex-start; font-size:0.93rem; color:var(--t2); line-height:1.58; font-weight:300; }
+    .facts-list li i { color:var(--e2); margin-top:4px; flex-shrink:0; width:16px; text-align:center; }
+    .facts-list li strong { color:var(--t1); font-weight:500; }
+    .status-pill { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; border-radius:9999px; padding:2px 9px; margin-left:4px; background:rgba(196,164,90,0.12); border:1px solid rgba(196,164,90,0.28); color:#D9BE86; vertical-align:2px; }
+
+    /* ══ BMJ PAGE — THREE PROBLEM CARDS ══ */
+    .three-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+    .problem-card { background:linear-gradient(135deg,rgba(16,40,28,0.88),rgba(12,30,20,0.92)); border:1px solid var(--e3-border); border-radius:16px; padding:1.6rem 1.6rem 1.5rem; transition:border-color 0.3s; }
+    .problem-card:hover { border-color:var(--e3-border-lift); }
+    .problem-word { font-family:'DM Serif Display',serif; font-size:1.6rem; font-style:italic; color:var(--e1); margin-bottom:0.6rem; }
+    .problem-card p { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
+    .problem-card p strong { color:var(--t1); font-weight:500; }
+
+    /* ══ BMJ PAGE — WHAT IS NEEDED (step flow) ══ */
+    .need-flow { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:0.8rem; align-items:stretch; margin-bottom:1.6rem; }
+    .need-card { background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68)); border:1px solid rgba(61,158,114,0.22); border-radius:16px; padding:1.5rem 1.5rem; }
+    .need-icon { width:40px; height:40px; border-radius:10px; background:rgba(42,122,86,0.12); border:1px solid rgba(42,122,86,0.22); display:flex; align-items:center; justify-content:center; color:var(--e1); margin-bottom:0.9rem; }
+    .need-card h4 { font-size:0.80rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--t1); margin-bottom:0.5rem; }
+    .need-card p { font-size:0.88rem; color:var(--t2); line-height:1.62; font-weight:300; }
+    .need-arrow { display:flex; align-items:center; color:var(--e2); font-size:0.9rem; }
+
+    /* ══ BMJ PAGE — REGISTRY DISTINCTION ══ */
+    .reg-compare { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-top:0.6rem; }
+    .reg-col { border-radius:16px; padding:1.6rem 1.7rem; }
+    .reg-col h4 { font-size:0.72rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; margin-bottom:0.6rem; display:flex; align-items:center; gap:8px; }
+    .reg-col p { font-size:0.92rem; color:var(--t2); line-height:1.68; font-weight:300; }
+    .reg-col p strong { color:var(--t1); font-weight:500; }
+    .reg-now { background:linear-gradient(135deg,rgba(16,40,28,0.88),rgba(12,30,20,0.92)); border:1px solid var(--e3-border); }
+    .reg-now h4 { color:var(--e2-text); }
+    .reg-need { background:linear-gradient(135deg,rgba(46,40,20,0.42),rgba(28,24,12,0.58)); border:1px solid rgba(196,164,90,0.28); }
+    .reg-need h4 { color:#D9BE86; }
+
+    /* ══ BMJ PAGE — CLINIC + ABSTRACT CARDS ══ */
+    .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+    .info-card { background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68)); border:1px solid var(--e3-border); border-radius:16px; padding:1.7rem 1.8rem; }
+    .info-card .ic-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e1); margin-bottom:0.6rem; display:flex; align-items:center; gap:8px; }
+    .info-card h3 { font-family:'DM Serif Display',serif; font-size:1.3rem; color:var(--t1); line-height:1.3; margin-bottom:0.7rem; }
+    .info-card p { font-size:0.90rem; color:var(--t2); line-height:1.68; font-weight:300; margin-bottom:0.7rem; }
+    .info-card p:last-child { margin-bottom:0; }
+    .info-card p strong { color:var(--t1); font-weight:500; }
+    .info-card .ic-meta { font-size:0.80rem; color:var(--t3); font-style:italic; }
+
+    /* ══ BMJ PAGE — COLLABORATE CTA ══ */
+    .collab-cta { background: radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%), linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78)); border-top:1px solid rgba(42,122,86,0.13); padding:4.2rem 2.5rem; text-align:center; }
+    .collab-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.3rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
+    .collab-cta > p { color:var(--t2); font-size:1rem; line-height:1.72; max-width:640px; margin:0 auto 1.4rem; font-weight:300; }
+    .collab-roles { display:flex; flex-wrap:wrap; justify-content:center; gap:0.55rem; max-width:760px; margin:0 auto 1.6rem; }
+    .collab-role { font-size:0.80rem; color:var(--t2); background:rgba(16,40,28,0.6); border:1px solid var(--e3-border); border-radius:9999px; padding:0.45rem 1rem; }
+    .collab-asks { list-style:none; max-width:620px; margin:0 auto 1.9rem; display:flex; flex-direction:column; gap:0.55rem; text-align:left; }
+    .collab-asks li { display:flex; gap:10px; align-items:flex-start; font-size:0.92rem; color:var(--t2); line-height:1.55; font-weight:300; }
+    .collab-asks li i { color:var(--e1); margin-top:5px; font-size:0.72rem; flex-shrink:0; }
+    .cta-btns { display:flex; gap:1.1rem; justify-content:center; flex-wrap:wrap; }
+    .email-plain { margin-top:1.1rem; font-size:0.84rem; color:var(--t3); }
+    .clinician-note { max-width:700px; margin:2.2rem auto 0; padding-top:1.6rem; border-top:1px solid rgba(42,122,86,0.14); font-size:0.88rem; color:var(--t3); line-height:1.65; font-style:italic; }
+    .clinician-note strong { color:var(--t2); font-style:normal; font-weight:500; }
+
+    /* ══ FOOTER (unchanged from site) ══ */
+    footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
+    .footer-brand p { color:rgba(106,144,128,0.52);font-size:0.85rem;line-height:1.74;margin-top:1rem;font-weight:300; }
+    .footer-col h4 { font-size:0.72rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--e2);margin-bottom:0.9rem; }
+    .footer-col a { display:block;color:rgba(106,144,128,0.45);text-decoration:none;font-size:0.86rem;font-weight:300;margin-bottom:0.46rem;transition:color 0.2s; }
+    .footer-col a:hover { color:var(--t1); }
+    .footer-bottom { max-width:1100px;margin:0 auto;padding-top:1.2rem;border-top:1px solid rgba(30,92,62,0.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem; }
+    .footer-bottom p { font-size:0.77rem;color:rgba(106,144,128,0.26); }
+    .footer-bottom a { color:rgba(106,144,128,0.26);text-decoration:none;font-size:0.77rem;margin-left:1.3rem;transition:color 0.2s; }
+    .footer-bottom a:hover { color:var(--t2); }
+
+    /* ══ BACK TO TOP (site pattern) ══ */
+    .back-to-top { position:fixed; bottom:28px; right:28px; z-index:900; width:46px; height:46px; border-radius:50%; background:rgba(16,46,30,0.92); border:1px solid var(--e3-border); color:var(--t2); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px); transition:opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s; backdrop-filter:blur(10px); font-size:0.95rem; }
+    .back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .back-to-top:hover { border-color:var(--e3-border-lift); color:var(--t1); }
+    .back-to-top:focus-visible { outline:2px solid var(--e1); outline-offset:3px; }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:1024px) {
+      .poster-grid { grid-template-columns:1fr; gap:2.4rem; }
+      .poster-frame { max-width:620px; margin:0 auto; }
+      .bmj-stats { grid-template-columns:repeat(2,1fr); }
+      .three-grid { grid-template-columns:1fr; }
+      .need-flow { grid-template-columns:1fr; }
+      .need-arrow { justify-content:center; transform:rotate(90deg); }
+      .reg-compare, .info-grid { grid-template-columns:1fr; }
+      .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
+    }
+    @media (max-width:680px) {
+      section { padding:3rem 1.2rem; }
+      .page-hero { padding:3rem 1.2rem 2.5rem; }
+      .collab-cta { padding:3.2rem 1.2rem; }
+      .hero-badges { flex-direction:column; }
+      .hero-cta-row, .cta-btns { flex-direction:column; align-items:stretch; }
+      .btn-primary, .btn-outline { justify-content:center; }
+      .bmj-stat-num { font-size:1.9rem; }
+      .footer-inner { grid-template-columns:1fr; }
+      .footer-bottom { flex-direction:column; align-items:flex-start; gap:0.5rem; }
+      .footer-bottom a { margin-left:0; margin-right:0.8rem; }
+      .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
+    }
+    @media (max-width:420px) {
+      .bmj-stats { grid-template-columns:1fr; }
+      .section-title { font-size:1.5rem; }
+    }
+
+    /* ══ HAMBURGER MOBILE NAV (unchanged from site) ══ */
+    .hamburger { display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px; width:44px; height:44px; background:none; border:1px solid rgba(42,122,86,0.30); border-radius:8px; cursor:pointer; padding:8px; flex-shrink:0; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--t2); border-radius:2px; transition:all 0.25s; transform-origin:center; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display:none; position:absolute; top:70px; left:0; right:0; background:rgba(8,20,14,0.98); backdrop-filter:blur(22px); border-bottom:1px solid var(--e3-border); padding:0.8rem 0; z-index:999; flex-direction:column; }
+    .mobile-nav.open { display:flex; }
+    .mobile-nav a { display:block; padding:0.75rem 2rem; color:var(--t2); text-decoration:none; font-size:1rem; font-weight:500; border-bottom:1px solid rgba(30,92,62,0.08); transition:color 0.2s, background 0.2s; }
+    .mobile-nav a:last-child { border-bottom:none; }
+    .mobile-nav a:hover, .mobile-nav a:active { color:var(--t1); background:rgba(42,122,86,0.07); }
+    .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
+    @media (max-width:860px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
+  </style>
+</head>
+<body>
+
+  <canvas id="mito-canvas"></canvas>
+  <div id="atmosphere"></div>
+  <div id="vignette"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon">🧬</div>
+        <div>
+          <div class="nav-logo-text">DIMD</div>
+          <div class="nav-logo-sub">Science · Evidence · Policy</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="science.html">The Science</a></li>
+        <li><a href="fqad.html">FQAD</a></li>
+        <li><a href="action.html">Take Action</a></li>
+        <li><a href="evidence.html">Evidence</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="registry.html" class="nav-cta">Registry</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <a href="science.html">The Science</a>
+      <a href="fqad.html">FQAD</a>
+      <a href="action.html">Take Action</a>
+      <a href="evidence.html">Evidence</a>
+      <a href="about.html">About</a>
+      <a href="registry.html" class="mobile-nav-cta">Registry</a>
+    </div>
+  </nav>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <a href="fqad.html">FQAD</a>
+          <i class="fas fa-chevron-right" style="font-size:0.6rem;"></i>
+          <span>BMJ Future Health Europe 2026</span>
+        </div>
+        <div class="hero-kicker">BMJ Future Health Europe 2026 · Call for Problems</div>
+        <h1>Missed. Untracked. <em>Uncounted.</em></h1>
+        <p class="page-hero-sub">
+          Patients with persistent <strong>fluoroquinolone-associated disability (FQAD)</strong> are often unrecognised, undocumented and untracked. That leaves people without coordinated care, and health systems without reliable data on how many are affected.
+        </p>
+        <p class="hero-standing">Johanna Ihli, BSN — former ER/trauma/critical care RN · independent researcher, DIMD Initiative</p>
+        <div class="hero-cta-row">
+          <a href="#poster" class="btn-primary"><i class="fas fa-image"></i> View the ePoster</a>
+          <a href="#collaborate" class="btn-outline"><i class="fas fa-handshake"></i> Collaborate</a>
+        </div>
+        <div class="hero-badges">
+          <div class="hero-badge"><i class="fas fa-circle-check"></i><span>Problem statement <strong>accepted</strong></span></div>
+          <div class="hero-badge"><i class="fas fa-location-dot"></i><span>ePoster &amp; video · <strong>29–30 October 2026</strong>, London</span></div>
+          <div class="hero-badge"><i class="fas fa-book-open"></i><span>Abstract to be published in <strong>BMJ Innovations</strong>, November 2026</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE GAP IN NUMBERS -->
+    <section class="alt-bg-1" id="gap">
+      <div class="section-inner">
+        <div class="section-label">The Gap</div>
+        <h2 class="section-title">Recognised by Regulators. Not Yet Counted.</h2>
+        <div class="section-divider"></div>
+        <div class="bmj-stats">
+          <div class="bmj-stat"><div class="bmj-stat-num">&gt;1 billion</div><div class="bmj-stat-desc">fluoroquinolone courses in US and EU/EEA community care since 1987*</div></div>
+          <div class="bmj-stat"><div class="bmj-stat-num">0</div><div class="bmj-stat-desc">registries for patients with FQAD</div></div>
+          <div class="bmj-stat"><div class="bmj-stat-num">0</div><div class="bmj-stat-desc">long-term studies following patients with FQAD</div></div>
+          <div class="bmj-stat"><div class="bmj-stat-num">Millions?</div><div class="bmj-stat-desc">people affected. No one has counted.</div></div>
+        </div>
+        <p class="bmj-headline">A decade after the FDA (2016) and the European Medicines Agency (2018–19) warned of disabling, long-lasting and potentially permanent effects, no health system systematically identifies, registers or longitudinally follows these patients.</p>
+        <p class="bmj-footnote">*Conservative lower bound from published US prescribing and ECDC consumption data, 1987–2025. Counts courses, not people. Excludes hospital and military use.</p>
+      </div>
+    </section>
+
+    <!-- THE POSTER -->
+    <section class="alt-bg-2" id="poster">
+      <div class="section-inner">
+        <div class="poster-grid">
+          <div>
+            <a href="downloads/Ihli_FQAD_ePoster_BMJ-Future-Health-Europe-2026.pdf" class="poster-frame" target="_blank" rel="noopener" aria-label="Open the full ePoster (PDF)">
+              <img src="images/bmj-2026-eposter.jpg" width="1600" height="2263" loading="lazy"
+                   alt="ePoster: Missed. Untracked. Uncounted. Fluoroquinolone-associated disability (FQAD), by Johanna Ihli, BSN. Sections: the problem, the impact, what is needed now, and a call to action.">
+            </a>
+            <p class="poster-caption">Tap the poster to open the full-resolution PDF.</p>
+          </div>
+          <div>
+            <div class="section-label">The ePoster</div>
+            <h2 class="section-title">BMJ Future Health Europe 2026</h2>
+            <div class="section-divider"></div>
+            <p class="body-text">
+              This problem statement was accepted through BMJ Future Health's <strong>Call for Problems</strong>, which invites patients, clinicians and others to bring real-world healthcare problems to people who can help solve them.
+            </p>
+            <ul class="facts-list">
+              <li><i class="fas fa-image"></i><span><strong>ePoster and video presentation</strong> at BMJ Future Health Europe, 29–30 October 2026, The Brewery, London.</span></li>
+              <li><i class="fas fa-book-open"></i><span><strong>Abstract</strong> to be published in <em>BMJ Innovations</em>, November 2026. <span class="status-pill">Pending</span></span></li>
+              <li><i class="fas fa-video"></i><span><strong>Virtual Problem Clinic</strong> hosted by BMJ Future Health, November 2026. <span class="status-pill">Date TBC</span></span></li>
+            </ul>
+            <div class="poster-actions">
+              <a href="downloads/Ihli_FQAD_ePoster_BMJ-Future-Health-Europe-2026.pdf" class="btn-primary" target="_blank" rel="noopener"><i class="fas fa-file-arrow-down"></i> Download the ePoster (PDF)</a>
+              <a href="https://futurehealth.bmj.com/bmj-future-health-europe" class="inline-link" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i> About BMJ Future Health Europe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSED / UNTRACKED / UNCOUNTED -->
+    <section class="alt-bg-1" id="problem">
+      <div class="section-inner">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">Three Gaps, One Pattern</h2>
+        <div class="section-divider"></div>
+        <div class="three-grid">
+          <div class="problem-card">
+            <div class="problem-word">Missed.</div>
+            <p>FQAD can affect tendons, muscles, joints, nerves, cognition and mental health, and symptoms may begin or worsen after the drug is stopped. Care is organised by specialty, so patients are often <strong>evaluated one organ system at a time</strong>. Patients report labels such as fibromyalgia, ME/CFS and dystonia. The fluoroquinolone link is rarely made.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-word">Untracked.</div>
+            <p>There is <strong>no registry, standard case definition or long-term follow-up</strong> for persistent FQAD. Reactions are not consistently documented, so patients can be re-exposed because an earlier reaction was never recorded.</p>
+          </div>
+          <div class="problem-card">
+            <div class="problem-word">Uncounted.</div>
+            <p>Spontaneous reporting systems capture only a fraction of adverse reactions. Without a denominator, the injury stays labelled "rare." <strong>It's not rare. It's rarely counted.</strong></p>
+          </div>
+        </div>
+        <div class="pull-quote">
+          <p>The barrier is not a lack of knowledge or data systems. It is the failure to connect and consistently use what already exists.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IS NEEDED -->
+    <section class="alt-bg-2" id="needed">
+      <div class="section-inner">
+        <div class="section-label">What Is Needed Now</div>
+        <h2 class="section-title">You Can't Treat What You Don't Count</h2>
+        <div class="section-divider"></div>
+        <div class="need-flow">
+          <div class="need-card">
+            <div class="need-icon"><i class="fas fa-users"></i></div>
+            <h4>Identify &amp; Count</h4>
+            <p>Adopt a standard case definition, then use existing data networks and a registry to measure incidence and prevalence.</p>
+          </div>
+          <div class="need-arrow" aria-hidden="true"><i class="fas fa-chevron-right"></i></div>
+          <div class="need-card">
+            <div class="need-icon"><i class="fas fa-flask"></i></div>
+            <h4>Research &amp; Treatment</h4>
+            <p>Study mechanisms and test treatments, so care is based on evidence, not guesswork.</p>
+          </div>
+          <div class="need-arrow" aria-hidden="true"><i class="fas fa-chevron-right"></i></div>
+          <div class="need-card">
+            <div class="need-icon"><i class="fas fa-chart-line"></i></div>
+            <h4>Follow</h4>
+            <p>Track treatments tried, recovery, disability and long-term outcomes at fixed intervals.</p>
+          </div>
+        </div>
+
+        <div class="reg-compare">
+          <div class="reg-col reg-now">
+            <h4><i class="fas fa-seedling"></i> What exists today</h4>
+            <p>The <a href="registry.html" class="inline-link">DIMD Registry</a> is an <strong>early, de-identified patient-reporting initiative</strong>. It gives patients a place to be counted now, but it is not a clinical or research-grade registry.</p>
+          </div>
+          <div class="reg-col reg-need">
+            <h4><i class="fas fa-building-columns"></i> What needs to be built</h4>
+            <p>A <strong>research-grade registry with an institutional home</strong>: a standard case definition, clinical data and patient-reported outcomes, and longitudinal follow-up at fixed intervals. This is the infrastructure we are looking for partners to help build.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLINIC + ABSTRACT -->
+    <section class="alt-bg-1" id="clinic">
+      <div class="section-inner">
+        <div class="section-label">What Comes Next</div>
+        <h2 class="section-title">November 2026</h2>
+        <div class="section-divider"></div>
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="ic-label"><i class="fas fa-video"></i> Virtual Problem Clinic</div>
+            <h3>Hosted by BMJ Future Health</h3>
+            <p>A virtual Problem Clinic webinar on the FQAD surveillance gap will follow the conference in November 2026, with other speakers sharing lived experience of the healthcare system as patients and carers.</p>
+            <p class="ic-meta">Date and details to follow.</p>
+          </div>
+          <div class="info-card">
+            <div class="ic-label"><i class="fas fa-book-open"></i> Abstract</div>
+            <h3>BMJ Innovations</h3>
+            <p>The full abstract, including the proposed care pathway and references, will be published in <em>BMJ Innovations</em> in November 2026. A link will be added here once it is published.</p>
+            <p class="ic-meta">Publication pending.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLABORATE -->
+    <div class="collab-cta" id="collaborate">
+      <div class="section-label">Call to Action</div>
+      <h2>Researchers. Doctors. Nurses. We Need You.</h2>
+      <p>We invite collaboration to help build the infrastructure needed to identify, count and longitudinally follow patients with FQAD.</p>
+      <div class="collab-roles">
+        <span class="collab-role">Clinicians</span>
+        <span class="collab-role">Epidemiologists</span>
+        <span class="collab-role">Pharmacovigilance experts</span>
+        <span class="collab-role">Regulators</span>
+        <span class="collab-role">Registry &amp; data partners</span>
+        <span class="collab-role">Academic institutions</span>
+        <span class="collab-role">Research funders</span>
+      </div>
+      <ul class="collab-asks">
+        <li><i class="fas fa-circle"></i><span>An academic or institutional home for a research-grade registry</span></li>
+        <li><i class="fas fa-circle"></i><span>Methods advice on case definitions, study design and outcome measures</span></li>
+        <li><i class="fas fa-circle"></i><span>Access to existing data networks to estimate incidence and prevalence</span></li>
+        <li><i class="fas fa-circle"></i><span>Introductions to people who can fund or host a pilot</span></li>
+      </ul>
+      <div class="cta-btns">
+        <a href="#" class="btn-primary" id="collabEmail" data-u="jmihli" data-d="proton.me"><i class="fas fa-envelope"></i> Get in touch</a>
+        <a href="fqad.html" class="btn-outline">Learn about FQAD</a>
+      </div>
+      <p class="email-plain" id="collabEmailText"><noscript>Email: jmihli [at] proton [dot] me</noscript></p>
+      <p class="clinician-note">
+        <strong>Clinicians:</strong> ask about fluoroquinolone exposure, document reactions to prevent re-exposure, and report suspected cases (MedWatch in the US; in Europe, your national medicines regulator, which feeds EudraVigilance; the Yellow Card scheme in the UK).
+      </p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="text-decoration:none;">
+          <div class="nav-logo-icon">🧬</div>
+          <div style="margin-left:10px;">
+            <div class="nav-logo-text">DIMD</div>
+            <div class="nav-logo-sub">Science · Evidence · Policy</div>
+          </div>
+        </a>
+        <p>Patient-led · Evidence-focused · Science-driven.<br>
+        This site is for educational and advocacy purposes only and does not provide medical advice.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="science.html">Understanding DIMD</a>
+        <a href="fqad.html">FQAD</a>
+        <a href="evidence.html">Evidence &amp; References</a>
+      </div>
+      <div class="footer-col">
+        <h4>Act</h4>
+        <a href="registry.html">DIMD Registry</a>
+        <a href="action.html">Take Action</a>
+        <a href="https://doi.org/10.5281/zenodo.20128765" target="_blank" rel="noopener">FDA Petition</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="about.html">The Researcher</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:admin-dimd@proton.me">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 DIMD Initiative — Johanna Ihli, BSN &nbsp;·&nbsp; ORCID: 0009-0008-1486-7242</p>
+      <div>
+        <a href="privacy.html">Privacy</a>
+        <a href="evidence.html">References</a>
+        <a href="mailto:admin-dimd@proton.me">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING MITOCHONDRIA (unchanged from site) -->
+  <script>
+  (function(){
+    const canvas=document.getElementById('mito-canvas');
+    const ctx=canvas.getContext('2d');
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+    resize(); window.addEventListener('resize',resize);
+    function drawMito(ctx,x,y,rx,ry,angle,alpha){
+      ctx.save(); ctx.globalAlpha=alpha; ctx.translate(x,y); ctx.rotate(angle);
+      const c='#1A5C3E';
+      ctx.beginPath(); ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.6; ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(0,0,rx*.68,ry*.68,0,0,Math.PI*2); ctx.strokeStyle=c; ctx.lineWidth=1.0; ctx.stroke();
+      const folds=Math.max(2,Math.round(rx/11)), step=(ry*1.2)/(folds+1);
+      ctx.lineWidth=0.72;
+      for(let i=1;i<=folds;i++){
+        const fy=(-ry*.55)+(i*step),amp=rx*.23;
+        ctx.beginPath(); ctx.moveTo(-rx*.50,fy); ctx.bezierCurveTo(-rx*.16,fy-amp,rx*.16,fy+amp,rx*.50,fy); ctx.stroke();
+      }
+      [0.25,0.5,0.75,1.0,1.5,1.75].forEach(t=>{
+        const a2=t*Math.PI*2;
+        ctx.beginPath(); ctx.arc(Math.cos(a2)*rx*.68,Math.sin(a2)*ry*.68,rx*.036,0,Math.PI*2); ctx.fillStyle=c; ctx.fill();
+      });
+      ctx.restore();
+    }
+    const COUNT=22; const P=[];
+    function rp(edge){
+      const rx=14+Math.random()*42,ry=rx*(.34+Math.random()*.24);
+      const speed=.08+Math.random()*.16,dir=Math.random()*Math.PI*2;
+      let x,y;
+      if(edge){
+        const e=Math.floor(Math.random()*4);
+        if(e===0){x=Math.random()*canvas.width;y=-rx*2;}
+        else if(e===1){x=canvas.width+rx*2;y=Math.random()*canvas.height;}
+        else if(e===2){x=Math.random()*canvas.width;y=canvas.height+rx*2;}
+        else{x=-rx*2;y=Math.random()*canvas.height;}
+      }else{x=Math.random()*canvas.width;y=Math.random()*canvas.height;}
+      return{x,y,rx,ry,angle:Math.random()*Math.PI*2,drift:(Math.random()-.5)*.0025,alpha:.05+Math.random()*.20,vx:Math.cos(dir)*speed,vy:Math.sin(dir)*speed};
+    }
+    for(let i=0;i<COUNT;i++)P.push(rp(false));
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<P.length;i++){
+        const p=P[i];p.x+=p.vx;p.y+=p.vy;p.angle+=p.drift;
+        const pad=p.rx*2.5;
+        if(p.x<-pad||p.x>canvas.width+pad||p.y<-pad||p.y>canvas.height+pad){P[i]=rp(true);continue;}
+        drawMito(ctx,p.x,p.y,p.rx,p.ry,p.angle,p.alpha);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+  </script>
+
+  <!-- MOBILE NAV (unchanged from site) -->
+  <script>
+  function toggleMobileNav() {
+    var nav = document.getElementById("mobileNav");
+    var btn = document.getElementById("hamburger");
+    if (!nav || !btn) return;
+    var isOpen = nav.classList.contains("open");
+    nav.classList.toggle("open", !isOpen);
+    btn.classList.toggle("open", !isOpen);
+    btn.setAttribute("aria-expanded", String(!isOpen));
+    nav.setAttribute("aria-hidden", String(isOpen));
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    var hamburgerBtn = document.getElementById("hamburger");
+    if (hamburgerBtn) hamburgerBtn.addEventListener("click", function() { toggleMobileNav(); });
+    document.querySelectorAll(".mobile-nav a").forEach(function(link) {
+      link.addEventListener("click", function() {
+        var nav = document.getElementById("mobileNav");
+        var btn = document.getElementById("hamburger");
+        if (nav) nav.classList.remove("open");
+        if (btn) { btn.classList.remove("open"); btn.setAttribute("aria-expanded","false"); }
+      });
+    });
+  });
+  </script>
+
+  <!-- EMAIL (assembled in the browser so the address isn't plain text in the source) + BACK TO TOP -->
+  <script>
+  (function(){
+    var a = document.getElementById('collabEmail');
+    var t = document.getElementById('collabEmailText');
+    if (a) {
+      var addr = a.getAttribute('data-u') + '@' + a.getAttribute('data-d');
+      a.href = 'mailto:' + addr + '?subject=' + encodeURIComponent('FQAD collaboration (BMJ Future Health 2026)');
+      if (t) t.textContent = addr;
+    }
+    var b = document.getElementById('backToTop');
+    if (b) {
+      var onScroll = function(){ b.classList.toggle('visible', window.scrollY > 900); };
+      window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
+      b.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
+    }
+  })();
+  </script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+</body>
+</html>
