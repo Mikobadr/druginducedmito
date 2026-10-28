@@ -14,7 +14,7 @@
   <meta name="description" content="Missed. Untracked. Uncounted. An ePoster on fluoroquinolone-associated disability (FQAD) at BMJ Future Health Europe 2026, and an invitation to help build the registry and long-term studies these patients need.">
   <meta property="og:title" content="Missed. Untracked. Uncounted. | FQAD at BMJ Future Health Europe 2026">
   <meta property="og:description" content="No health system systematically identifies, registers or follows patients with fluoroquinolone-associated disability. An invitation to collaborate.">
-  <meta property="og:image" content="https://www.druginducedmito.org/images/bmj-2026-eposter.jpg">
+  <meta property="og:image" content="https://www.druginducedmito.org/images/bmj-2026-eposter-final.jpg">
   <meta property="og:type" content="article">
   <title>BMJ Future Health Europe 2026 | DIMD — Drug-Induced Mitochondrial Dysfunction</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -187,6 +187,23 @@
     .clinician-note { max-width:700px; margin:2.2rem auto 0; padding-top:1.6rem; border-top:1px solid rgba(42,122,86,0.14); font-size:0.88rem; color:var(--t3); line-height:1.65; font-style:italic; }
     .clinician-note strong { color:var(--t2); font-style:normal; font-weight:500; }
 
+    /* ══ BMJ PAGE — REGISTRATION + CLINIC DETAILS ══ */
+    .register-invite { display:flex; align-items:center; justify-content:space-between; gap:1.4rem; flex-wrap:wrap; background:linear-gradient(135deg,rgba(20,56,38,0.62),rgba(12,36,24,0.72)); border:1px solid rgba(61,158,114,0.34); border-radius:16px; padding:1.4rem 1.7rem; margin-bottom:1.4rem; }
+    .register-invite p { font-family:'DM Serif Display',serif; font-size:clamp(1.1rem,2.2vw,1.35rem); color:var(--t1); line-height:1.35; flex:1 1 320px; }
+    .clinic-details { list-style:none; display:flex; flex-direction:column; gap:0.45rem; margin:0.2rem 0 1rem; padding:0.9rem 1.1rem; background:rgba(10,28,18,0.45); border:1px solid var(--e3-border); border-radius:12px; }
+    .clinic-details li { display:flex; gap:10px; font-size:0.88rem; color:var(--t2); line-height:1.5; font-weight:300; }
+    .clinic-details li span:first-child { flex:0 0 78px; font-size:0.70rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--e2-text); padding-top:2px; }
+    .clinic-details li strong { color:var(--t1); font-weight:500; }
+    .info-card .btn-primary { margin-top:0.4rem; }
+
+    /* ══ BMJ PAGE — FDA PETITION CARD ══ */
+    .petition-card { display:flex; align-items:center; gap:1.6rem; flex-wrap:wrap; margin-top:1.8rem; background:linear-gradient(135deg,rgba(16,46,30,0.55),rgba(10,30,20,0.68)); border:1px solid var(--e3-border); border-left:3px solid var(--e2); border-radius:0 16px 16px 0; padding:1.5rem 1.8rem; }
+    .petition-card-body { flex:1 1 360px; }
+    .petition-card .pc-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--e2); margin-bottom:0.45rem; }
+    .petition-card h3 { font-family:'DM Serif Display',serif; font-size:1.2rem; color:var(--t1); line-height:1.3; margin-bottom:0.45rem; }
+    .petition-card p { font-size:0.90rem; color:var(--t2); line-height:1.65; font-weight:300; }
+    .petition-card .status-pill { margin-left:0; }
+
     /* ══ FOOTER (unchanged from site) ══ */
     footer { background:radial-gradient(ellipse at 28% 0%,rgba(42,122,86,0.035) 0%,transparent 48%),linear-gradient(180deg,var(--bg-floor) 0%,#060F0B 100%); border-top:1px solid rgba(30,92,62,0.10); padding:3rem 2.5rem 1.8rem; }
     .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.4rem; }
@@ -228,6 +245,12 @@
       .footer-bottom { flex-direction:column; align-items:flex-start; gap:0.5rem; }
       .footer-bottom a { margin-left:0; margin-right:0.8rem; }
       .back-to-top { bottom:18px; right:18px; width:44px; height:44px; }
+      .register-invite { padding:1.2rem 1.2rem; }
+      .register-invite .btn-primary, .petition-card .btn-outline, .info-card .btn-primary { width:100%; }
+      .register-invite .btn-primary, .info-card .btn-primary { padding:14px 18px; }
+      .petition-card { padding:1.3rem 1.2rem; }
+      .clinic-details li { flex-direction:column; gap:1px; }
+      .clinic-details li span:first-child { flex:none; }
     }
     @media (max-width:420px) {
       .bmj-stats { grid-template-columns:1fr; }
@@ -312,11 +335,13 @@
         <div class="hero-cta-row">
           <a href="#poster" class="btn-primary"><i class="fas fa-image"></i> View the ePoster</a>
           <a href="#collaborate" class="btn-outline"><i class="fas fa-handshake"></i> Collaborate</a>
+          <a href="https://futurehealth.bmj.com/problemsubmitter" class="btn-outline" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> Register for the Problem Clinic</a>
         </div>
         <div class="hero-badges">
           <div class="hero-badge"><i class="fas fa-circle-check"></i><span>Problem statement <strong>accepted</strong></span></div>
           <div class="hero-badge"><i class="fas fa-location-dot"></i><span>ePoster &amp; video · <strong>29–30 October 2026</strong>, London</span></div>
-          <div class="hero-badge"><i class="fas fa-book-open"></i><span>Abstract to be published in <strong>BMJ Innovations</strong>, November 2026</span></div>
+          <div class="hero-badge"><i class="fas fa-video"></i><span>Virtual Problem Clinic · <strong>17 November 2026</strong></span></div>
+          <div class="hero-badge"><i class="fas fa-book-open"></i><span>Abstract scheduled for publication in <strong>BMJ Innovations</strong>, 25 November 2026</span></div>
         </div>
       </div>
     </div>
@@ -335,6 +360,15 @@
         </div>
         <p class="bmj-headline">A decade after the FDA (2016) and the European Medicines Agency (2018–19) warned of disabling, long-lasting and potentially permanent effects, no health system systematically identifies, registers or longitudinally follows these patients.</p>
         <p class="bmj-footnote">*Conservative lower bound from published US prescribing and ECDC consumption data, 1987–2025. Counts courses, not people. Excludes hospital and military use.</p>
+
+        <div class="petition-card">
+          <div class="petition-card-body">
+            <div class="pc-label">Docket FDA-2026-P-5116 · <span class="status-pill">Under FDA review</span></div>
+            <h3>FDA Citizen Petition: Fluoroquinolone Patient Safety</h3>
+            <p>A formal petition requesting improvements in informed consent, clinician education, adverse-reaction documentation, and long-term surveillance of patients exposed to fluoroquinolones.</p>
+          </div>
+          <a href="https://www.regulations.gov/docket/FDA-2026-P-5116" class="btn-outline" target="_blank" rel="noopener"><i class="fas fa-file-contract"></i> View FDA Citizen Petition</a>
+        </div>
       </div>
     </section>
 
@@ -343,11 +377,11 @@
       <div class="section-inner">
         <div class="poster-grid">
           <div>
-            <a href="downloads/Ihli_FQAD_ePoster_BMJ-Future-Health-Europe-2026.pdf" class="poster-frame" target="_blank" rel="noopener" aria-label="Open the full ePoster (PDF)">
-              <img src="images/bmj-2026-eposter.jpg" width="1600" height="2263" loading="lazy"
+            <a href="downloads/Ihli_FQAD_ePoster_final.pdf" class="poster-frame" target="_blank" rel="noopener" aria-label="Open the full ePoster (PDF)">
+              <img src="images/bmj-2026-eposter-final.jpg" width="1600" height="2262" loading="lazy"
                    alt="ePoster: Missed. Untracked. Uncounted. Fluoroquinolone-associated disability (FQAD), by Johanna Ihli, BSN. Sections: the problem, the impact, what is needed now, and a call to action.">
             </a>
-            <p class="poster-caption">Tap the poster to open the full-resolution PDF.</p>
+            <p class="poster-caption">Tap the poster to open the full-resolution PDF. Scan the QR code to register for the virtual Problem Clinic.</p>
           </div>
           <div>
             <div class="section-label">The ePoster</div>
@@ -358,11 +392,11 @@
             </p>
             <ul class="facts-list">
               <li><i class="fas fa-image"></i><span><strong>ePoster and video presentation</strong> at BMJ Future Health Europe, 29–30 October 2026, The Brewery, London.</span></li>
-              <li><i class="fas fa-book-open"></i><span><strong>Abstract</strong> to be published in <em>BMJ Innovations</em>, November 2026. <span class="status-pill">Pending</span></span></li>
-              <li><i class="fas fa-video"></i><span><strong>Virtual Problem Clinic</strong> hosted by BMJ Future Health, November 2026. <span class="status-pill">Date TBC</span></span></li>
+              <li><i class="fas fa-book-open"></i><span><strong>Abstract</strong> scheduled for publication in <em>BMJ Innovations</em>, 25 November 2026. <span class="status-pill">Pending</span></span></li>
+              <li><i class="fas fa-video"></i><span><strong>Virtual Problem Clinic</strong> hosted by BMJ Future Health, Tuesday 17 November 2026, 2:00 PM UK / 3:00 PM CET / 8:00 AM US Central.</span></li>
             </ul>
             <div class="poster-actions">
-              <a href="downloads/Ihli_FQAD_ePoster_BMJ-Future-Health-Europe-2026.pdf" class="btn-primary" target="_blank" rel="noopener"><i class="fas fa-file-arrow-down"></i> Download the ePoster (PDF)</a>
+              <a href="downloads/Ihli_FQAD_ePoster_final.pdf" class="btn-primary" target="_blank" rel="noopener"><i class="fas fa-file-arrow-down"></i> Download the ePoster (PDF)</a>
               <a href="https://futurehealth.bmj.com/bmj-future-health-europe" class="inline-link" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i> About BMJ Future Health Europe</a>
             </div>
           </div>
@@ -439,19 +473,31 @@
     <section class="alt-bg-1" id="clinic">
       <div class="section-inner">
         <div class="section-label">What Comes Next</div>
-        <h2 class="section-title">November 2026</h2>
+        <h2 class="section-title">Virtual Problem Clinic · 17 November 2026</h2>
         <div class="section-divider"></div>
+        <div class="register-invite">
+          <p>Join the conversation at the virtual BMJ Problem Clinic on 17 November 2026.</p>
+          <a href="https://futurehealth.bmj.com/problemsubmitter" class="btn-primary" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> Register for the Problem Clinic</a>
+        </div>
         <div class="info-grid">
           <div class="info-card">
             <div class="ic-label"><i class="fas fa-video"></i> Virtual Problem Clinic</div>
             <h3>Hosted by BMJ Future Health</h3>
-            <p>A virtual Problem Clinic webinar on the FQAD surveillance gap will follow the conference in November 2026, with other speakers sharing lived experience of the healthcare system as patients and carers.</p>
-            <p class="ic-meta">Date and details to follow.</p>
+            <p>A 45-minute collaborative discussion on why patients with persistent fluoroquinolone-associated disability are <strong>missed, untracked and uncounted</strong>.</p>
+            <ul class="clinic-details">
+              <li><span>Date</span><span><strong>Tuesday 17 November 2026</strong></span></li>
+              <li><span>Time</span><span>2:00 PM UK / 3:00 PM CET / 8:00 AM US Central</span></li>
+              <li><span>Duration</span><span>45 minutes</span></li>
+              <li><span>Format</span><span>Virtual, interactive discussion</span></li>
+              <li><span>Zoom</span><span>Zoom details will be provided by BMJ</span></li>
+            </ul>
+            <p>Clinicians, researchers, academic institutions, patient advocates, and potential research and funding partners are invited to take part. The aim is to identify opportunities for collaboration, improve patient recognition and documentation, and develop stronger patient registries and longitudinal research.</p>
+            <a href="https://futurehealth.bmj.com/problemsubmitter" class="btn-primary" target="_blank" rel="noopener"><i class="fas fa-calendar-check"></i> Register for the Problem Clinic</a>
           </div>
           <div class="info-card">
             <div class="ic-label"><i class="fas fa-book-open"></i> Abstract</div>
             <h3>BMJ Innovations</h3>
-            <p>The full abstract, including the proposed care pathway and references, will be published in <em>BMJ Innovations</em> in November 2026. A link will be added here once it is published.</p>
+            <p>Abstract scheduled for publication in <em>BMJ Innovations</em> on 25 November 2026, including the proposed care pathway and references. A link will be added here once it is available online.</p>
             <p class="ic-meta">Publication pending.</p>
           </div>
         </div>

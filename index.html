@@ -306,6 +306,26 @@
     }
     .petition-btn:hover { background:var(--e1); color:#081A10; transform:translateY(-2px); }
 
+    /* ══ BMJ 2026 ANNOUNCEMENT (sibling of petition banner) ══ */
+    .bmj-announce {
+      background:
+        radial-gradient(ellipse at 100% 50%, rgba(61,158,114,0.08) 0%, transparent 55%),
+        linear-gradient(135deg, rgba(16,48,30,0.62), rgba(10,30,20,0.72));
+      border-top:1px solid var(--e3-border-lift);
+      padding:2.4rem 2.5rem;
+    }
+    .bmj-announce-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:2rem; }
+    .bmj-announce-icon {
+      width:54px; height:54px; background:rgba(61,158,114,0.10); border:1px solid rgba(61,158,114,0.26);
+      border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; color:var(--e1); flex-shrink:0;
+    }
+    .bmj-announce-label { font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--e2-text); margin-bottom:0.32rem; }
+    .bmj-announce-title { font-family:'DM Serif Display',serif; font-weight:400; font-size:1.55rem; color:var(--t1); line-height:1.2; margin-bottom:0.3rem; }
+    .bmj-announce-date { font-size:0.88rem; font-weight:600; color:var(--e1); margin-bottom:0.55rem; }
+    .bmj-announce-text { font-size:0.88rem; color:var(--t2); line-height:1.6; font-weight:300; max-width:680px; }
+    .bmj-announce-text strong { color:var(--t1); font-weight:500; }
+    .bmj-announce .btn-primary { padding:12px 28px; font-size:0.92rem; white-space:nowrap; }
+
     /* ══ SHARED SECTIONS ══ */
     section { padding:5.5rem 2.5rem; position:relative; overflow:hidden; }
     .section-inner { max-width:1100px; margin:0 auto; position:relative; z-index:2; overflow-x:hidden; box-sizing:border-box; }
@@ -532,6 +552,8 @@
       .cards-grid { grid-template-columns:repeat(2,1fr); }
       .petition-inner { grid-template-columns:auto 1fr; }
       .petition-btn { grid-column:1/-1; }
+      .bmj-announce-inner { grid-template-columns:auto 1fr; }
+      .bmj-announce .btn-primary { grid-column:1/-1; justify-self:start; }
       .footer-inner { grid-template-columns:1fr 1fr; gap:2rem; }
     }
     @media (max-width:680px) {
@@ -539,6 +561,11 @@
       .nav-links { display:none; }
       .footer-inner { grid-template-columns:1fr; }
       .petition-inner { grid-template-columns:1fr; }
+      .bmj-announce { padding:1.8rem 1.2rem; }
+      .bmj-announce-inner { grid-template-columns:1fr; gap:1rem; }
+      .bmj-announce-icon { width:42px; height:42px; font-size:1rem; }
+      .bmj-announce-title { font-size:1.25rem; }
+      .bmj-announce .btn-primary { justify-self:stretch; justify-content:center; white-space:normal; }
       section { padding:3rem 1rem; overflow:hidden; }
       .section-inner { padding:0; width:100%; max-width:100%; overflow:hidden; }
       .what-grid, .not-rare-grid { grid-template-columns:1fr; gap:2rem; width:100%; overflow:hidden; }
@@ -685,6 +712,20 @@
         <i class="fas fa-chevron-down"></i>
       </div>
     </section>
+
+    <!-- BMJ FUTURE HEALTH EUROPE 2026 ANNOUNCEMENT -->
+    <div class="bmj-announce">
+      <div class="bmj-announce-inner">
+        <div class="bmj-announce-icon"><i class="fas fa-video" aria-hidden="true"></i></div>
+        <div>
+          <div class="bmj-announce-label">BMJ Future Health Europe 2026</div>
+          <h2 class="bmj-announce-title">Missed. Untracked. Uncounted.</h2>
+          <div class="bmj-announce-date">Virtual Problem Clinic | November 17, 2026</div>
+          <p class="bmj-announce-text">A collaborative discussion addressing three critical questions surrounding fluoroquinolone-associated disability (FQAD) and fluoroquinolone toxicity: Why are patients missed, why are they not tracked, and why do they remain uncounted? <strong>Join the conversation at the virtual BMJ Problem Clinic on November 17, 2026.</strong></p>
+        </div>
+        <a href="bmj-2026.html" class="btn-primary">Learn More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
 
     <!-- PETITION BANNER -->
     <div class="petition-banner">
@@ -962,7 +1003,7 @@
         <h4>Act</h4>
         <a href="registry.html">DIMD Registry</a>
         <a href="action.html">Take Action</a>
-        <a href="#">FDA Petition</a>
+        <a href="https://www.regulations.gov/docket/FDA-2026-P-5116" target="_blank" rel="noopener">FDA Petition</a>
       </div>
       <div class="footer-col">
         <h4>About</h4>
