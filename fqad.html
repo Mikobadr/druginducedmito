@@ -471,6 +471,18 @@
     .petition-callout a { display:inline-flex; align-items:center; gap:7px; font-size:0.88rem; color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.28); transition:color 0.2s; font-weight:500; }
     .petition-callout a:hover { color:var(--e1); }
 
+    /* Diagnosis-code call-out */
+    .dx-callout { background:linear-gradient(135deg,rgba(46,40,20,0.42),rgba(28,24,12,0.58)); border:1px solid rgba(196,164,90,0.30); border-radius:16px; padding:1.6rem 1.8rem; margin-top:1.6rem; }
+    .dx-callout .dx-label { font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#D9BE86; margin-bottom:0.55rem; }
+    .dx-callout .dx-title { font-family:'DM Serif Display',serif; font-size:1.18rem; color:var(--t1); line-height:1.35; margin-bottom:0.7rem; }
+    .dx-callout p { font-size:0.90rem; color:var(--t2); line-height:1.68; font-weight:300; margin-bottom:0.75rem; }
+    .dx-callout p strong { color:var(--t1); font-weight:500; }
+    .dx-callout a { display:inline-flex; align-items:center; gap:7px; font-size:0.88rem; font-weight:500; color:#D9BE86; text-decoration:none; border-bottom:1px solid rgba(196,164,90,0.30); transition:color 0.2s; }
+    .dx-callout a:hover { color:var(--t1); }
+    .dx-callout.dx-wide { margin-top:2.4rem; }
+    .dx-callout.dx-wide p { max-width:860px; }
+    @media (max-width:680px) { .dx-callout { padding:1.3rem 1.2rem; } .dx-callout .dx-title { font-size:1.06rem; } }
+
     /* ══ CTA ══ */
     .fqad-cta { background: radial-gradient(ellipse at 50% 0%, rgba(61,158,114,0.07) 0%, transparent 50%), linear-gradient(135deg,rgba(16,48,30,0.68),rgba(10,28,18,0.78)); border-top:1px solid rgba(42,122,86,0.13); padding:4rem 2.5rem; text-align:center; }
     .fqad-cta h2 { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); color:var(--t1); letter-spacing:-0.02em; margin-bottom:0.8rem; }
@@ -1980,6 +1992,7 @@
                 effects is accurate clinical documentation. It is not an assignment of legal blame.
               </p>
             </div>
+
           </div>
 
           <div>
@@ -2033,6 +2046,25 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="dx-callout dx-wide">
+          <div class="dx-label">The Missing Code</div>
+          <div class="dx-title">FQAD needs a diagnosis code, not just a cause code.</div>
+          <p>
+            The T36.AX5- codes record that a fluoroquinolone caused an adverse effect. They do
+            <strong>not name FQAD itself</strong>. Each manifestation (the neuropathy, the
+            tendinopathy, the dysautonomia) is still coded separately, so the multisystem
+            syndrome stays fragmented across the medical record, just as it is fragmented
+            across specialties.
+          </p>
+          <p>
+            A <strong>diagnosis-level code</strong> would let FQAD be recorded as one condition:
+            counted, followed over time, and studied. The DIMD Initiative supports pursuing one
+            through ICD-10-CM in the United States and, internationally, through a coordinated
+            proposal to the World Health Organization for ICD-11.
+          </p>
+          <a href="mailto:jmihli@proton.me?subject=FQAD%20diagnosis%20code"><i class="fas fa-envelope" aria-hidden="true"></i> Clinicians and organizations: help build the case</a>
         </div>
       </div>
     </section>
