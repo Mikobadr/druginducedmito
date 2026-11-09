@@ -923,15 +923,6 @@
             </div>
 
             <p class="body-text">
-              FQAD is not a patient-invented diagnosis. The FDA itself named Fluoroquinolone-Associated Disability (FQAD) and <strong>defined it for its own pharmacovigilance case review</strong>, requiring: substantial disability or disruption of normal life functions; adverse events involving <strong>two or more body systems</strong>; and adverse effects lasting <strong>at least 30 days</strong> after fluoroquinolone discontinuation. These were FDA's own pharmacovigilance case-review criteria, not a formal clinical diagnostic definition — formal clinical classification and diagnostic criteria for FQAD have since been published by <a href="evidence.html#sec-fq" style="color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.30); transition:color 0.2s;">Stefan Pieper</a>.
-            </p>
-            <p class="body-text">
-              What distinguishes FQAD from other drug adverse effects is its <strong>multisystem nature, delayed onset, and persistence</strong> long after the antibiotic has cleared the body. Symptoms may emerge or worsen after the course is finished, and disabling effects can persist for months or years.
-            </p>
-            <div class="pull-quote">
-              <p>"The drug is gone. The injury may not be."</p>
-            </div>
-            <p class="body-text">
               Fluoroquinolones are among the most widely prescribed antibiotic classes in the world. Ciprofloxacin, levofloxacin, and moxifloxacin are routinely used for urinary tract infections, respiratory infections, and a broad range of indications — often in patients who were previously healthy and had no warning that a standard course of antibiotics could produce lasting disability.
             </p>
           </div>
@@ -977,6 +968,17 @@
                 </div>
               </div>
             </div>
+            <div style="margin-top:2rem;">
+            <p class="body-text">
+              FQAD is not a patient-invented diagnosis. The FDA itself named Fluoroquinolone-Associated Disability (FQAD) and <strong>defined it for its own pharmacovigilance case review</strong>, requiring: substantial disability or disruption of normal life functions; adverse events involving <strong>two or more body systems</strong>; and adverse effects lasting <strong>at least 30 days</strong> after fluoroquinolone discontinuation. These were FDA's own pharmacovigilance case-review criteria, not a formal clinical diagnostic definition — formal clinical classification and diagnostic criteria for FQAD have since been published by <a href="evidence.html#sec-fq" style="color:var(--e2-text); text-decoration:none; border-bottom:1px solid rgba(42,122,86,0.30); transition:color 0.2s;">Stefan Pieper</a>.
+            </p>
+            <p class="body-text">
+              What distinguishes FQAD from other drug adverse effects is its <strong>multisystem nature, delayed onset, and persistence</strong> long after the antibiotic has cleared the body. Symptoms may emerge or worsen after the course is finished, and disabling effects can persist for months or years.
+            </p>
+            <div class="pull-quote">
+              <p>"The drug is gone. The injury may not be."</p>
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -990,6 +992,20 @@
         <div class="section-divider"></div>
         <div class="timeline-intro">
           <p>Mitochondrial science advanced dramatically from the 1960s onward — confirming mechanisms, mapping pathways, and accumulating evidence of drug-induced energy system injury. Fluoroquinolone safety frameworks moved far more slowly. The gap between what biology knew and what regulation reflected is the structural problem this initiative exists to close. <em>Click any science milestone to expand the mechanistic detail.</em></p>
+        </div>
+
+        <div class="gap-callout" style="margin-top:0; margin-bottom:2rem;">
+          <i class="fas fa-circle-exclamation"></i>
+          <div><strong>The gap this initiative exists to close:</strong> Mitochondrial science confirmed the mechanism decades before safety frameworks reflected it. From Lawrence 1996 to Reinhardt 2025, the evidence accumulated. The regulatory response lagged at every step. That ends now — with a petition on file, a manuscript under review, and a registry building the evidence base.</div>
+        </div>
+
+        <div class="ms-nav-top">
+          <div class="ms-yearstrip" id="msYearStrip"></div>
+          <div class="ms-controls">
+            <button type="button" class="ms-btn" id="msPrev" aria-label="Previous milestone"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <span class="ms-counter" id="msCounter">1 / 11</span>
+            <button type="button" class="ms-btn" id="msNext" aria-label="Next milestone"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
         </div>
 
         <div class="dual-track-headers">
@@ -1081,17 +1097,6 @@
 
         </div>
           </div>
-          <div class="ms-controls">
-            <button type="button" class="ms-btn" id="msPrev" aria-label="Previous milestone"><i class="fas fa-chevron-left"></i></button>
-            <span class="ms-counter" id="msCounter">1 / 11</span>
-            <button type="button" class="ms-btn" id="msNext" aria-label="Next milestone"><i class="fas fa-chevron-right"></i></button>
-          </div>
-          <div class="ms-yearstrip" id="msYearStrip"></div>
-        </div>
-
-        <div class="gap-callout">
-          <i class="fas fa-circle-exclamation"></i>
-          <div><strong>The gap this initiative exists to close:</strong> Mitochondrial science confirmed the mechanism decades before safety frameworks reflected it. From Lawrence 1996 to Reinhardt 2025, the evidence accumulated. The regulatory response lagged at every step. That ends now — with a petition on file, a manuscript under review, and a registry building the evidence base.</div>
         </div>
 
       </div>
@@ -1167,7 +1172,8 @@
 
     /* Paired milestone slider */
     .ms-slider { position:relative; outline:none; }
-    .ms-viewport { overflow:hidden; }
+    .ms-viewport { overflow:hidden; transition:height 0.3s ease; }
+    .ms-viewport .dual-track { align-items:flex-start; }
     .ms-viewport .dual-track { display:flex; flex-direction:row; flex-wrap:nowrap; gap:0; transition:transform 0.45s cubic-bezier(.65,.05,.36,1); will-change:transform; }
     .ms-viewport .dual-track::before { display:none; }
     .ms-viewport .dual-track .dt-row { flex:0 0 100%; max-width:100%; margin-bottom:0; box-sizing:border-box; padding:0 6px; }
@@ -1180,10 +1186,15 @@
     .ms-year-btn { font-family:'DM Serif Display',serif; font-style:italic; font-size:0.76rem; color:var(--t3); background:transparent; border:none; border-bottom:2px solid transparent; padding:4px 8px; cursor:pointer; transition:color 0.2s, border-color 0.2s; }
     .ms-year-btn:hover { color:var(--e2-text); }
     .ms-year-btn.active { color:var(--e1); border-bottom-color:var(--e1); }
+    .ms-nav-top { margin-bottom:1.6rem; }
+    .ms-nav-top .ms-yearstrip { margin-top:0; padding-top:0; border-top:none; padding-bottom:1rem; border-bottom:1px solid var(--e3-border); }
+    .ms-nav-top .ms-controls { margin-top:1rem; }
     @media (max-width:760px) {
       .ms-viewport .dual-track .dt-row { padding:0 2px; }
       .ms-yearstrip { display:none; }
       .ms-controls { margin-top:1.2rem; gap:1rem; }
+      .ms-nav-top .ms-controls { margin-top:0; }
+      .ms-nav-top { margin-bottom:1.2rem; }
       /* Prevent each paired slide (a flex item) from stretching to match the
          tallest of all 11 slides — without this, shorter pairs render at the
          tallest slide's height and their content (card/year/card) spreads out
@@ -1246,12 +1257,8 @@
       // size the viewport to the active slide's own content height instead.
       var mobileMQ = window.matchMedia('(max-width:760px)');
       function updateViewportHeight(){
-        if(mobileMQ.matches){
-          var active = slides[idx];
-          if(active){ viewport.style.height = active.offsetHeight + 'px'; }
-        } else {
-          viewport.style.height = '';
-        }
+        var active = slides[idx];
+        if(active){ viewport.style.height = active.offsetHeight + 'px'; }
       }
 
       function render(userInitiated){
