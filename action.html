@@ -65,6 +65,8 @@
     .nav-logo-icon { width:36px; height:36px; background:linear-gradient(135deg,#163C28,#1A5C3E); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
     .nav-logo-text { font-family:'DM Serif Display',serif; font-size:1.5rem; letter-spacing:-0.02em; color:var(--t1); line-height:1; }
     .nav-logo-sub { font-size:0.62rem; color:var(--e2-text); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-top:2px; }
+    .nav-logo-img { height:58px; width:auto; display:block; }
+    .footer-brand .nav-logo-img { height:64px; }
     .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
     .nav-links a { color:var(--t2); text-decoration:none; font-size:0.93rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
     .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1px; background:var(--e2); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
@@ -362,11 +364,7 @@
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon">🧬</div>
-        <div>
-          <div class="nav-logo-text">DIMD</div>
-          <div class="nav-logo-sub">Science · Evidence · Policy</div>
-        </div>
+        <img src="images/dimd-logo.png" alt="DIMD — Drug-Induced Mitochondrial Dysfunction" class="nav-logo-img" width="396" height="192">
       </a>
       <ul class="nav-links">
         <li><a href="science.html">The Science</a></li>
@@ -862,12 +860,9 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo" style="text-decoration:none;">
-          <div class="nav-logo-icon">🧬</div>
-          <div style="margin-left:10px;">
-            <div class="nav-logo-text">DIMD</div>
-            <div class="nav-logo-sub">Science · Evidence · Policy</div>
-          </div>
+        <a href="index.html" class="nav-logo" style="text-decoration:none; display:block;">
+          <img src="images/dimd-logo.png" alt="DIMD — Drug-Induced Mitochondrial Dysfunction" class="nav-logo-img" width="396" height="192">
+          <div class="nav-logo-sub" style="margin-top:8px;">Science · Evidence · Policy</div>
         </a>
         <p>Patient-led · Evidence-focused · Science-driven.<br>
         This site is for educational and advocacy purposes only and does not provide medical advice.</p>
