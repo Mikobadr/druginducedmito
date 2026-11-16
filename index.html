@@ -175,6 +175,18 @@
       max-width:1080px; margin:0 auto;
     }
     .framing-question strong { color:var(--e1); font-weight:500; }
+    .framing-headline {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(2.6rem,5.2vw,4.6rem);
+      line-height:1.08; letter-spacing:-0.02em;
+      color:var(--t1); margin:0 auto 1.1rem;
+    }
+    .framing-headline em { font-style:italic; color:var(--e1); }
+    .framing-sub {
+      font-size:clamp(0.95rem,1.3vw,1.05rem);
+      line-height:1.6; font-weight:300;
+      color:var(--t2); max-width:720px; margin:0.9rem auto 0;
+    }
 
     /* ══ HERO ══ */
     .hero {
@@ -583,6 +595,8 @@
       .framing-banner { padding:1.9rem 1.3rem; }
       .framing-eyebrow { font-size:0.68rem; margin-bottom:0.8rem; }
       .framing-question { font-size:clamp(1.3rem,5vw,1.5rem); line-height:1.42; }
+      .framing-headline { font-size:clamp(2rem,9vw,2.7rem); margin-bottom:0.9rem; }
+      .framing-sub { font-size:0.9rem; }
       .petition-banner { padding:1.6rem 1.2rem; }
       .petition-icon { width:42px; height:42px; font-size:1.1rem; }
       .petition-title { font-size:1.05rem; }
@@ -683,8 +697,9 @@
   <!-- FRAMING BANNER -->
   <div class="framing-banner">
     <div class="framing-banner-inner">
-      <div class="framing-eyebrow">A Question Drug Safety Must Answer</div>
-      <p class="framing-question">If we never <strong>measure mitochondrial function</strong> <strong>during drug development or post-market surveillance</strong>, how can we know whether drug-induced mitochondrial dysfunction contributed to the <strong>disease that follows</strong>?</p>
+      <p class="framing-headline">It's the <em>Mitochondria</em>, stupid!</p>
+      <p class="framing-question">What do seemingly unrelated diseases have in common?</p>
+      <p class="framing-sub">Exploring mitochondrial dysfunction as a shared mechanism of disease, including acquired, drug-induced injury.</p>
     </div>
   </div>
 
