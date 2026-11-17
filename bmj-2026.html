@@ -221,6 +221,77 @@
     .footer-bottom a:hover { color:var(--t2); }
 
     /* ══ BACK TO TOP (site pattern) ══ */
+    /* ══ ON-THIS-PAGE (copied from fqad.html) ══ */
+    .page-nav {
+      position:fixed; top:0; left:0; right:0; width:100vw; z-index:900;
+      background:rgba(8,20,14,0.97); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--e3-border);
+      transform:translateY(-120%); opacity:0;
+      transition:transform 0.3s ease, opacity 0.3s ease;
+    }
+    .page-nav.visible { transform:translateY(0); opacity:1; }
+    .page-nav-inner { max-width:none; width:100%; margin:0; padding-left:16px; padding-right:16px; }
+    .page-nav-toggle {
+      display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+      background:none; border:none; cursor:pointer; padding:12px 0;
+      font-family:'DM Sans',sans-serif; font-size:0.86rem; color:var(--t2);
+    }
+    .page-nav-toggle:hover { color:var(--t1); }
+    .page-nav-toggle:focus-visible { outline:2px solid var(--e1); outline-offset:3px; border-radius:6px; }
+    .page-nav-label strong { color:var(--t1); font-weight:500; }
+    .page-nav-chevron { font-size:0.68rem; color:var(--e2); transition:transform 0.25s; margin-left:1px; }
+    .page-nav-toggle[aria-expanded="true"] .page-nav-chevron { transform:rotate(180deg); }
+    .page-nav-menu {
+      position:fixed; top:50px; left:16px; right:auto;
+      width:min(320px, calc(100vw - 32px)); transform:none; margin:0;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 20px 44px rgba(0,0,0,0.55); padding:0.5rem;
+      display:flex; flex-direction:column; gap:2px; max-height:70vh; overflow-y:auto;
+      z-index:900;
+    }
+    .page-nav-menu[hidden] { display:none; }
+    .page-nav-link {
+      display:block; padding:10px 14px; border-radius:8px;
+      font-size:0.85rem; color:var(--t2); text-decoration:none;
+      transition:background 0.2s, color 0.2s;
+    }
+    .page-nav-link:hover { background:rgba(42,122,86,0.10); color:var(--t1); }
+    .page-nav-link:focus-visible { outline:2px solid var(--e1); outline-offset:-2px; }
+    .page-nav-link.active { background:rgba(61,158,114,0.14); color:var(--e1); font-weight:500; }
+
+    .page-toc-wrap { max-width:1060px; margin:2.4rem auto 0; padding:0 2.5rem; }
+    .page-toc {
+      max-width:400px;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.30); padding:1.1rem 1.3rem;
+    }
+    .page-toc-header {
+      display:flex; align-items:center; gap:8px;
+      font-size:0.70rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase;
+      color:var(--e2-text); margin-bottom:0.6rem;
+    }
+    .page-toc-links { display:flex; flex-direction:column; gap:2px; }
+
+    /* Desktop left-rail placement — wide screens only; below this, panel stays in its current stacked position */
+    @media (min-width:1700px) {
+      .page-hero { overflow:visible; }
+      .page-toc-wrap {
+        position:absolute; top:5rem; left:calc(50% - 770px);
+        width:300px; max-width:none; margin:0; padding:0; z-index:3;
+      }
+    }
+
+    main section[id], main div[id], main h3[id] { scroll-margin-top:96px; }
+    @media (max-width:860px) {
+      main section[id], main div[id], main h3[id] { scroll-margin-top:84px; }
+      .page-nav-toggle { padding:13px 0; font-size:0.83rem; }
+      .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
+      .page-nav-link { padding:12px 14px; font-size:0.86rem; }
+      .page-toc-wrap { position:absolute; width:1px; height:1px; padding:0; margin:0; border:0; overflow:hidden; clip:rect(0,0,0,0); clip-path:inset(50%); white-space:nowrap; }
+      .page-toc { max-width:none; width:100%; padding:1rem 1.1rem; }
+    }
     .back-to-top { position:fixed; bottom:28px; right:28px; z-index:900; width:46px; height:46px; border-radius:50%; background:rgba(16,46,30,0.92); border:1px solid var(--e3-border); color:var(--t2); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px); transition:opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s; backdrop-filter:blur(10px); font-size:0.95rem; }
     .back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
     .back-to-top:hover { border-color:var(--e3-border-lift); color:var(--t1); }
@@ -293,7 +364,8 @@
     .mobile-nav a:hover, .mobile-nav a:active { color:var(--t1); background:rgba(42,122,86,0.07); }
     .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
     @media (max-width:860px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
-  </style>
+      @media (max-width:930px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } } /* nav collapse: room for BMJ 2026 link */
+</style>
 </head>
 <body>
 
@@ -313,6 +385,7 @@
         <li><a href="action.html">Take Action</a></li>
         <li><a href="evidence.html">Evidence</a></li>
         <li><a href="about.html">About</a></li>
+        <li><a href="bmj-2026.html" class="active">BMJ 2026</a></li>
         <li><a href="registry.html" class="nav-cta">Registry</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
@@ -325,9 +398,21 @@
       <a href="action.html">Take Action</a>
       <a href="evidence.html">Evidence</a>
       <a href="about.html">About</a>
+      <a href="bmj-2026.html">BMJ 2026</a>
       <a href="registry.html" class="mobile-nav-cta">Registry</a>
     </div>
   </nav>
+
+  <!-- ON-THIS-PAGE STICKY NAV -->
+  <div class="page-nav" id="pageNav">
+    <div class="page-nav-inner">
+      <button class="page-nav-toggle" id="pageNavToggle" type="button" aria-expanded="false" aria-controls="pageNavMenu">
+        <span class="page-nav-label">On this page: <strong id="pageNavCurrent"></strong></span>
+        <i class="fas fa-chevron-down page-nav-chevron" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="page-nav-menu" id="pageNavMenu" hidden></div>
 
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
@@ -363,6 +448,12 @@
           <div class="hero-badge"><i class="fas fa-book-open"></i><span>Abstract scheduled for publication in <strong>BMJ Innovations</strong>, 25 November 2026</span></div>
         </div>
       </div>
+      <div class="page-toc-wrap">
+        <div class="page-toc" id="pageToc">
+          <div class="page-toc-header"><i class="fas fa-list-ul"></i> On this page</div>
+          <div class="page-toc-links" id="pageTocLinks"></div>
+        </div>
+      </div>
     </div>
 
     <!-- CLINIC RECAP + ABSTRACT -->
@@ -380,7 +471,7 @@
           <a href="#collaborate" class="btn-primary"><i class="fas fa-handshake"></i> Partner with us</a>
         </div>
 
-        <h3 class="recap-subhead">My presentation</h3>
+        <h3 class="recap-subhead" id="presentation">My presentation</h3>
         <p class="body-text voice-note"><strong>A note on my voice:</strong> I have spasmodic dysphonia, a neurological voice disorder that is one piece of my own fluoroquinolone puzzle. If my voice strains or breaks, the slides below carry the same content.</p>
         <div class="video-grid">
           <figure class="video-card">
@@ -399,7 +490,7 @@
           </figure>
         </div>
 
-        <h3 class="recap-subhead">Presentation slides</h3>
+        <h3 class="recap-subhead" id="slides">Presentation slides</h3>
         <div class="slide-grid">
           <a href="images/bmj-2026-clinic-slide-1.jpg" class="slide-thumb" target="_blank" rel="noopener">
             <img src="images/bmj-2026-clinic-slide-1.jpg" width="1280" height="720" loading="lazy" alt="Slide: From Recognition to Measurable Evidence. A practical path forward for FQAD in three parts: identify and count, longitudinal follow-up, and partnerships and action.">
@@ -422,7 +513,7 @@
           <a href="downloads/Ihli_FQAD_Problem-Clinic-Slides_BMJ-2026-11-17.pdf" class="btn-outline" target="_blank" rel="noopener"><i class="fas fa-file-arrow-down"></i> Download the slides (PDF)</a>
         </div>
 
-        <h3 class="recap-subhead">Featured: Hélène Mastrodicasa</h3>
+        <h3 class="recap-subhead" id="helene">Featured: Hélène Mastrodicasa</h3>
         <div class="info-card guest-card">
           <div class="ic-label"><i class="fas fa-film"></i> Documentary in support</div>
           <h3><em>It Was the Quinolones</em></h3>
@@ -749,5 +840,133 @@
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
 
+  <script>
+  (function(){
+    var SECTIONS = [{"id": "clinic", "label": "Problem Clinic Recap"}, {"id": "presentation", "label": "My Presentation"}, {"id": "slides", "label": "Presentation Slides"}, {"id": "helene", "label": "Hélène Mastrodicasa"}, {"id": "gap", "label": "The Gap"}, {"id": "poster", "label": "The ePoster"}, {"id": "problem", "label": "The Problem"}, {"id": "needed", "label": "What Is Needed Now"}, {"id": "collaborate", "label": "Partner With Us"}];
+
+    var pageNav = document.getElementById('pageNav');
+    var toggle = document.getElementById('pageNavToggle');
+    var menu = document.getElementById('pageNavMenu');
+    var currentLabel = document.getElementById('pageNavCurrent');
+    var backToTop = null; /* handled by this page's own back-to-top script */
+    var toc = document.getElementById('pageToc');
+    var tocLinks = document.getElementById('pageTocLinks');
+    if (!pageNav || !toggle || !menu) return;
+
+    function buildLinks(container){
+      if (!container) return;
+      SECTIONS.forEach(function(s){
+        var el = document.getElementById(s.id);
+        if (!el) return;
+        var a = document.createElement('a');
+        a.href = '#' + s.id;
+        a.className = 'page-nav-link';
+        a.textContent = s.label;
+        a.dataset.target = s.id;
+        container.appendChild(a);
+      });
+    }
+    function makeTopLink(){
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'page-nav-link';
+      a.textContent = 'Top of Page';
+      a.dataset.target = '__top';
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        window.scrollTo({ top:0, behavior:'smooth' });
+        closeMenu(false);
+      });
+      return a;
+    }
+    if (menu) menu.appendChild(makeTopLink());
+    buildLinks(menu);
+    if (tocLinks) tocLinks.appendChild(makeTopLink());
+    buildLinks(tocLinks);
+
+    var links = document.querySelectorAll('.page-nav-link');
+    if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
+    var firstSectionLink = SECTIONS.length ? document.querySelector('.page-nav-link[data-target="' + SECTIONS[0].id + '"]') : null;
+    if (firstSectionLink) firstSectionLink.classList.add('active');
+
+    function openMenu(){
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded','true');
+      document.addEventListener('click', onDocClick);
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(focusToggle){
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onKeydown);
+      if (focusToggle) toggle.focus();
+    }
+    function onDocClick(e){
+      if (!pageNav.contains(e.target) && !menu.contains(e.target)) closeMenu(false);
+    }
+    function onKeydown(e){
+      if (e.key === 'Escape') closeMenu(true);
+    }
+    toggle.addEventListener('click', function(){
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(false); else openMenu();
+    });
+    links.forEach(function(link){
+      link.addEventListener('click', function(){ closeMenu(false); });
+    });
+
+    function onBackToTopScroll(){
+      if (backToTop) {
+        if (window.scrollY > 900) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', onBackToTopScroll, { passive:true });
+    onBackToTopScroll();
+
+    if (backToTop) {
+      backToTop.addEventListener('click', function(){
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    function setActive(id){
+      var match = null;
+      for (var i=0;i<SECTIONS.length;i++){ if (SECTIONS[i].id === id){ match = SECTIONS[i]; break; } }
+      if (!match) return;
+      if (currentLabel) currentLabel.textContent = match.label;
+      links.forEach(function(link){
+        link.classList.toggle('active', link.dataset.target === id);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var sectionEls = SECTIONS.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
+      var sectionObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-140px 0px -70% 0px', threshold: 0 });
+      sectionEls.forEach(function(el){ sectionObserver.observe(el); });
+
+      if (toc) {
+        var tocObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (entry.isIntersecting) { pageNav.classList.remove('visible'); closeMenu(false); }
+            else { pageNav.classList.add('visible'); }
+          });
+        }, { rootMargin: '-70px 0px 0px 0px', threshold: 0 });
+        tocObserver.observe(toc);
+      }
+    } else if (toc) {
+      var tocFallbackThreshold = Math.max(toc.offsetTop + toc.offsetHeight - 40, 260);
+      window.addEventListener('scroll', function(){
+        if (window.scrollY > tocFallbackThreshold) pageNav.classList.add('visible');
+        else { pageNav.classList.remove('visible'); closeMenu(false); }
+      }, { passive:true });
+    }
+  })();
+  </script>
 </body>
 </html>
