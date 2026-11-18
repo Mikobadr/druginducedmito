@@ -310,6 +310,16 @@
     .overlap-table tbody td:first-child { color:var(--t1); font-weight:500; font-size:0.90rem; }
     .overlap-table tbody td:last-child { color:var(--e2-text); font-style:italic; font-size:0.84rem; }
     .table-wrapper { background:linear-gradient(135deg,rgba(12,32,22,0.75),rgba(8,22,14,0.85)); border:1px solid var(--e3-border); border-radius:14px; overflow:hidden; }
+    .agency-section { position:relative; }
+    .agency-section .section-inner { max-width:1060px; }
+    .agency-lead { font-size:1.02rem; color:var(--t2); line-height:1.75; font-weight:300; max-width:820px; margin-bottom:1.8rem; }
+    .agency-lead strong { color:var(--t1); font-weight:600; }
+    .agency-question { font-family:'DM Serif Display',serif; font-style:italic; font-size:clamp(1.15rem,2.2vw,1.45rem); color:var(--e2-text); line-height:1.4; max-width:820px; margin:-0.4rem 0 1.4rem; }
+    .agency-table td a { color:var(--e2-text); text-decoration:underline; text-decoration-color:rgba(61,158,114,0.45); text-underline-offset:3px; }
+    .agency-table td a:hover { color:var(--t1); }
+    .agency-table td.agency-year { color:var(--t1); font-weight:500; white-space:nowrap; }
+    .agency-close { margin-top:1.8rem; font-size:1.02rem; color:var(--t2); line-height:1.75; font-weight:300; max-width:820px; }
+    .agency-close strong { color:var(--t1); font-weight:600; }
     .table-caption { padding:0.6rem 1.1rem; font-size:0.74rem; color:var(--t3); background:rgba(10,28,18,0.50); border-top:1px solid rgba(30,92,62,0.10); font-style:italic; }
 
     /* Misdiagnosis Explorer */
@@ -1975,6 +1985,71 @@
       </div>
     </section>
 
+    <!-- INTERNATIONAL REGULATORY RECOGNITION -->
+    <section class="alt-bg-1 agency-section" id="pn-agencies">
+      <div class="section-inner">
+        <div class="section-label">International Regulatory Recognition</div>
+        <h2 class="section-title">How Many Agencies Does It Take?</h2>
+        <p class="agency-question">Why aren't these patients offered the same regulatory benefit as other drug-induced, severe, multisystem disabling diseases?</p>
+        <div class="section-divider"></div>
+
+        <p class="agency-lead">
+          The term <strong>fluoroquinolone-associated disability (FQAD)</strong> has appeared in official publications or proceedings of at least
+          <strong>five medicines regulatory authorities</strong> across North America and Europe. Yet a dedicated ICD-10-CM diagnosis code remains absent.
+        </p>
+
+        <div class="table-wrapper">
+          <table class="overlap-table agency-table">
+            <thead>
+              <tr>
+                <th>Regulatory Authority</th>
+                <th>Year</th>
+                <th>Where FQAD Appears</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>U.S. Food and Drug Administration (FDA)<br><span style="font-weight:300;color:var(--t3);font-size:0.80rem;">United States</span></td>
+                <td class="agency-year">2015</td>
+                <td>Joint advisory committee meeting, November 5, 2015: FDA's review of <a href="https://www.fda.gov/media/104060/download" target="_blank" rel="noopener">Fluoroquinolone-Associated Disability cases</a> and its FQAD case definition</td>
+              </tr>
+              <tr>
+                <td>Health Canada<br><span style="font-weight:300;color:var(--t3);font-size:0.80rem;">Canada</span></td>
+                <td class="agency-year">2016</td>
+                <td>Scientific Advisory Panel on Anti-Infective Therapies, <a href="https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/scientific-expert-advisory-panels/anti-infective-therapies/meeting-2016-10-06.html" target="_blank" rel="noopener">Record of Proceedings, October 6, 2016</a>: references the FDA's "Fluoroquinolone Associated Disability" definition</td>
+              </tr>
+              <tr>
+                <td>European Medicines Agency (EMA)<br><span style="font-weight:300;color:var(--t3);font-size:0.80rem;">European Union</span></td>
+                <td class="agency-year">2018</td>
+                <td>Article 31 referral, <a href="https://www.ema.europa.eu/en/documents/variation-report/quinsair-h-31-1452-epar-assessment-report_en.pdf" target="_blank" rel="noopener">PRAC assessment report (EMA/818158/2018)</a>: discusses disabling symptoms referred to as FQAD</td>
+              </tr>
+              <tr>
+                <td>Medicines and Healthcare products Regulatory Agency (MHRA)<br><span style="font-weight:300;color:var(--t3);font-size:0.80rem;">United Kingdom</span></td>
+                <td class="agency-year">2025</td>
+                <td><a href="https://assets.publishing.service.gov.uk/media/685d0272cc61c2e4bb04de3d/Fluoroquinolones_PAR_for_publication.pdf" target="_blank" rel="noopener">Public Assessment Report, June 2025</a>: includes FQAD in its literature review and its Yellow Card search methodology</td>
+              </tr>
+              <tr>
+                <td>Swissmedic<br><span style="font-weight:300;color:var(--t3);font-size:0.80rem;">Switzerland</span></td>
+                <td class="agency-year">2025</td>
+                <td><a href="https://www.swissmedic.ch/swissmedic/en/home/humanarzneimittel/marktueberwachung/pharmacovigilance/vigilance-news/vigilance-news/vigilance-news-35.html" target="_blank" rel="noopener">Vigilance-News, Edition 35, November 2025</a>: article titled "Fluoroquinolone-associated disability," concluding FQAD must be acknowledged as a real clinical entity</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table-caption">Each entry links to the authority's own published document or proceedings.</div>
+        </div>
+
+        <p class="agency-close" style="font-family:'DM Serif Display',serif;font-size:clamp(1.25rem,2.4vw,1.6rem);color:var(--t1);line-height:1.35;">
+          2015 to 2025. <em style="color:var(--e2-text);">Ten years. One decade.</em> Five regulators. Still no diagnosis code.
+        </p>
+
+        <p class="agency-close" style="margin-top:0.9rem;">
+          Other drug-induced neuromuscular and autoimmune conditions have their own diagnosis codes. FQAD has been
+          <strong>named, recognized, written about and talked about</strong> by regulators on two continents, but it has never been counted.
+          These patients are not rare. <strong>They are rarely counted.</strong>
+        </p>
+      </div>
+    </section>
+
        <!-- ICD-10 CODES -->
     <section class="icd-section" id="icd10">
       <div class="section-inner">
@@ -2268,7 +2343,7 @@
   </script>
   <script>
   (function(){
-    var SECTIONS = [{"id": "pn-regulatory", "label": "FDA Recognition"}, {"id": "pn-human", "label": "Human Evidence"}, {"id": "pn-multisystem", "label": "Multisystem Pattern"}, {"id": "pn-mechanism", "label": "Five-Step Mechanism"}, {"id": "pn-whatweknow", "label": "What We Know vs. Proposed"}, {"id": "pn-secondhit", "label": "Second-Hit Model"}, {"id": "pn-missed", "label": "Why It Gets Missed"}, {"id": "pn-pkmismatch", "label": "PK–Clinical Mismatch"}, {"id": "pn-unknown", "label": "What Remains Unknown"}, {"id": "clinician-packet", "label": "Clinical Documentation"}, {"id": "pn-action", "label": "Registry, Petition & Action"}];
+    var SECTIONS = [{"id": "pn-regulatory", "label": "FDA Recognition"}, {"id": "pn-human", "label": "Human Evidence"}, {"id": "pn-multisystem", "label": "Multisystem Pattern"}, {"id": "pn-mechanism", "label": "Five-Step Mechanism"}, {"id": "pn-whatweknow", "label": "What We Know vs. Proposed"}, {"id": "pn-secondhit", "label": "Second-Hit Model"}, {"id": "pn-missed", "label": "Why It Gets Missed"}, {"id": "pn-pkmismatch", "label": "PK–Clinical Mismatch"}, {"id": "pn-unknown", "label": "What Remains Unknown"}, {"id": "clinician-packet", "label": "Clinical Documentation"}, {"id": "pn-agencies", "label": "Five Regulators"}, {"id": "pn-action", "label": "Registry, Petition & Action"}];
 
     var pageNav = document.getElementById('pageNav');
     var toggle = document.getElementById('pageNavToggle');
