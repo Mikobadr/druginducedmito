@@ -317,6 +317,8 @@
     .video-card figcaption { display:flex; justify-content:space-between; font-size:0.84rem; color:var(--t2); padding:0.6rem 0.3rem 0.15rem; }
     .video-card figcaption span { color:var(--t3); }
     @media (max-width:680px) { .video-grid { grid-template-columns:1fr; } }
+    .guest-video { margin:0.4rem 0 1.4rem; }
+    .video-card figcaption em { font-style:italic; }
     @media (max-width:1024px) {
       .poster-grid { grid-template-columns:1fr; gap:2.4rem; }
       .poster-frame { max-width:620px; margin:0 auto; }
@@ -518,6 +520,13 @@
           <div class="ic-label"><i class="fas fa-film"></i> Documentary in support</div>
           <h3><em>It Was the Quinolones</em></h3>
           <p>Hélène Mastrodicasa shared her story at the Problem Clinic. Her documentary shows how a single antibiotic prescription can upend a person's work, family and plans, and is meant to help others avoid the harm she lived through. It is funded by donations.</p>
+          <figure class="video-card guest-video">
+            <video controls preload="metadata" playsinline poster="images/bmj-2026-helene-documentary.jpg">
+              <source src="downloads/Mastrodicasa_How-Big-Is-the-Problem_V2.mp4" type="video/mp4">
+              Your browser cannot play this video. <a href="downloads/Mastrodicasa_How-Big-Is-the-Problem_V2.mp4">Download the video</a>.
+            </video>
+            <figcaption><div>How big is the problem? A preview from <em>It Was the Quinolones</em>, English subtitles</div> <span>4:16</span></figcaption>
+          </figure>
           <div class="guest-actions">
             <a href="https://whydonate.com/fundraising/documentary-it-was-the-quinolones" class="btn-primary" target="_blank" rel="noopener"><i class="fas fa-hand-holding-heart"></i> Support the documentary</a>
             <a href="https://www.facebook.com/profile.php?id=61593918764703" class="btn-outline" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Follow on Facebook</a>
