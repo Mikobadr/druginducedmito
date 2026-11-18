@@ -366,6 +366,83 @@
     .mobile-nav .mobile-nav-cta { color:var(--e1); font-weight:600; }
     @media (max-width:680px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } }
       @media (max-width:930px) { .hamburger { display:flex; } .nav-links { display:none !important; } nav { position:sticky; } } /* nav collapse: room for BMJ 2026 link */
+    /* ══ ON-THIS-PAGE + BACK TO TOP (site pattern) ══ */
+    .page-nav {
+      position:fixed; top:0; left:0; right:0; width:100vw; z-index:900;
+      background:rgba(8,20,14,0.97); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--e3-border);
+      transform:translateY(-120%); opacity:0;
+      transition:transform 0.3s ease, opacity 0.3s ease;
+    }
+    .page-nav.visible { transform:translateY(0); opacity:1; }
+    .page-nav-inner { max-width:none; width:100%; margin:0; padding-left:16px; padding-right:16px; }
+    .page-nav-toggle {
+      display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+      background:none; border:none; cursor:pointer; padding:12px 0;
+      font-family:'DM Sans',sans-serif; font-size:0.86rem; color:var(--t2);
+    }
+    .page-nav-toggle:hover { color:var(--t1); }
+    .page-nav-toggle:focus-visible { outline:2px solid var(--e1); outline-offset:3px; border-radius:6px; }
+    .page-nav-label strong { color:var(--t1); font-weight:500; }
+    .page-nav-chevron { font-size:0.68rem; color:var(--e2); transition:transform 0.25s; margin-left:1px; }
+    .page-nav-toggle[aria-expanded="true"] .page-nav-chevron { transform:rotate(180deg); }
+    .page-nav-menu {
+      position:fixed; top:50px; left:16px; right:auto;
+      width:min(320px, calc(100vw - 32px)); transform:none; margin:0;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 20px 44px rgba(0,0,0,0.55); padding:0.5rem;
+      display:flex; flex-direction:column; gap:2px; max-height:70vh; overflow-y:auto;
+      z-index:900;
+    }
+    .page-nav-menu[hidden] { display:none; }
+    .page-nav-link {
+      display:block; padding:10px 14px; border-radius:8px;
+      font-size:0.85rem; color:var(--t2); text-decoration:none;
+      transition:background 0.2s, color 0.2s;
+    }
+    .page-nav-link:hover { background:rgba(42,122,86,0.10); color:var(--t1); }
+    .page-nav-link:focus-visible { outline:2px solid var(--e1); outline-offset:-2px; }
+    .page-nav-link.active { background:rgba(61,158,114,0.14); color:var(--e1); font-weight:500; }
+
+    .page-toc-wrap { max-width:1060px; margin:2.4rem auto 0; padding:0; position:relative; z-index:2; }
+    .page-toc {
+      max-width:400px;
+      background:rgba(19,52,36,0.99);
+      border:1px solid rgba(61,158,114,0.32); border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.30); padding:1.1rem 1.3rem;
+    }
+    .page-toc-header {
+      display:flex; align-items:center; gap:8px;
+      font-size:0.70rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase;
+      color:var(--e2-text); margin-bottom:0.6rem;
+    }
+    .page-toc-links { display:flex; flex-direction:column; gap:2px; }
+
+    /* Desktop left-rail placement — wide screens only; below this, panel stays in its current stacked position */
+    @media (min-width:1800px) {
+      .page-hero { overflow:visible; }
+      .page-toc-wrap {
+        position:absolute; top:5rem; left:calc(50% - 870px);
+        width:300px; max-width:none; margin:0; padding:0; z-index:3;
+      }
+    }
+
+    main section[id], main div[id], main h3[id] { scroll-margin-top:96px; }
+    @media (max-width:860px) {
+      main section[id], main div[id], main h3[id] { scroll-margin-top:84px; }
+      .page-nav-toggle { padding:13px 0; font-size:0.83rem; }
+      .page-nav-menu { left:8px; right:8px; width:auto; top:48px; }
+      .page-nav-link { padding:12px 14px; font-size:0.86rem; }
+      .page-toc-wrap { position:absolute; width:1px; height:1px; padding:0; margin:0; border:0; overflow:hidden; clip:rect(0,0,0,0); clip-path:inset(50%); white-space:nowrap; }
+      .page-toc { max-width:none; width:100%; padding:1rem 1.1rem; }
+    }
+    .back-to-top { position:fixed; bottom:28px; right:28px; z-index:900; width:46px; height:46px; border-radius:50%; background:rgba(16,46,30,0.92); border:1px solid var(--e3-border); color:var(--t2); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; pointer-events:none; transform:translateY(10px); transition:opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s; backdrop-filter:blur(10px); font-size:0.95rem; }
+    .back-to-top.visible { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .back-to-top:hover { border-color:var(--e3-border-lift); color:var(--t1); }
+    .back-to-top:focus-visible { outline:2px solid var(--e1); outline-offset:3px; }
+
+    @media (max-width:640px) { .back-to-top { bottom:18px; right:18px; width:44px; height:44px; } }
 </style>
 </head>
 <body>
@@ -405,6 +482,21 @@
     </div>
   </nav>
 
+  <!-- ON-THIS-PAGE STICKY NAV -->
+  <div class="page-nav" id="pageNav">
+    <div class="page-nav-inner">
+      <button class="page-nav-toggle" id="pageNavToggle" type="button" aria-expanded="false" aria-controls="pageNavMenu">
+        <span class="page-nav-label">On this page: <strong id="pageNavCurrent"></strong></span>
+        <i class="fas fa-chevron-down page-nav-chevron" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="page-nav-menu" id="pageNavMenu" hidden></div>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <main>
 
     <!-- PAGE HERO -->
@@ -434,10 +526,16 @@
         </div>
         <img src="images/fqad-logo.png" alt="FQAD — Fluoroquinolone-Associated Disability" class="hero-fqad-logo" width="920" height="390">
       </div>
+      <div class="page-toc-wrap">
+        <div class="page-toc" id="pageToc">
+          <div class="page-toc-header"><i class="fas fa-list-ul"></i> On this page</div>
+          <div class="page-toc-links" id="pageTocLinks"></div>
+        </div>
+      </div>
     </div>
 
     <!-- PETITION FEATURED -->
-    <section class="petition-featured">
+    <section class="petition-featured" id="petition">
       <div class="section-inner">
         <div class="section-label">Primary Action</div>
         <h2 class="section-title">The FDA Citizen Petition</h2>
@@ -542,7 +640,7 @@
           </div>
         </details>
 
-        <div class="section-label" style="margin-top:0.5rem;">What the Petition Requests</div>
+        <div class="section-label" id="requests" style="margin-top:0.5rem;">What the Petition Requests</div>
         <div class="petition-requests">
           <div class="request-card">
             <div class="request-num">1</div>
@@ -567,7 +665,7 @@
           </div>
         </div>
 
-        <div class="section-label" style="margin-top:2.5rem;">Also on the Record</div>
+        <div class="section-label" id="icd-code" style="margin-top:2.5rem;">Also on the Record</div>
         <div class="petition-card">
           <div class="petition-card-header">
             <div class="petition-card-icon">🏷️</div>
@@ -591,7 +689,7 @@
           </div>
         </div>
 
-        <div class="section-label">Across the Atlantic</div>
+        <div class="section-label" id="eu-petition">Across the Atlantic</div>
         <div class="petition-card" style="margin-bottom:0;">
           <div class="petition-card-header">
             <div class="petition-card-icon">🇪🇺</div>
@@ -632,7 +730,7 @@
     </section>
 
     <!-- HOW TO SUBMIT A PUBLIC COMMENT -->
-    <section class="public-comment">
+    <section class="public-comment" id="comment">
       <div class="section-inner">
         <div class="comment-grid">
           <div>
@@ -700,7 +798,7 @@
     </section>
 
     <!-- AUDIENCES -->
-    <section class="audiences">
+    <section class="audiences" id="audiences">
       <div class="section-inner">
         <div class="section-label">Who Can Help</div>
         <h2 class="section-title">There Is a Role for Every Audience</h2>
@@ -762,7 +860,7 @@
     </section>
 
     <!-- WHAT WE'RE ASKING FOR -->
-    <section class="asks-section">
+    <section class="asks-section" id="asks">
       <div class="section-inner">
         <div class="asks-grid">
           <div>
@@ -837,7 +935,7 @@
     </section>
 
     <!-- EVOLUTION NOT BLAME -->
-    <section class="not-blame">
+    <section class="not-blame" id="not-blame">
       <div class="section-inner">
         <div class="not-blame-inner">
           <div class="section-label" style="text-align:center;">Core Framing</div>
@@ -1006,5 +1104,133 @@
   });
   </script>
 <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+  (function(){
+    var SECTIONS = [{"id": "petition", "label": "FDA Citizen Petition"}, {"id": "requests", "label": "What the Petition Requests"}, {"id": "icd-code", "label": "ICD-10-CM Code Proposal"}, {"id": "eu-petition", "label": "EU Petition 1043/2026"}, {"id": "comment", "label": "Submit a Public Comment"}, {"id": "audiences", "label": "A Role for Every Audience"}, {"id": "asks", "label": "What Needs to Change"}, {"id": "not-blame", "label": "Evolution, Not Blame"}];
+
+    var pageNav = document.getElementById('pageNav');
+    var toggle = document.getElementById('pageNavToggle');
+    var menu = document.getElementById('pageNavMenu');
+    var currentLabel = document.getElementById('pageNavCurrent');
+    var backToTop = document.getElementById('backToTop');
+    var toc = document.getElementById('pageToc');
+    var tocLinks = document.getElementById('pageTocLinks');
+    if (!pageNav || !toggle || !menu) return;
+
+    function buildLinks(container){
+      if (!container) return;
+      SECTIONS.forEach(function(s){
+        var el = document.getElementById(s.id);
+        if (!el) return;
+        var a = document.createElement('a');
+        a.href = '#' + s.id;
+        a.className = 'page-nav-link';
+        a.textContent = s.label;
+        a.dataset.target = s.id;
+        container.appendChild(a);
+      });
+    }
+    function makeTopLink(){
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'page-nav-link';
+      a.textContent = 'Top of Page';
+      a.dataset.target = '__top';
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        window.scrollTo({ top:0, behavior:'smooth' });
+        closeMenu(false);
+      });
+      return a;
+    }
+    if (menu) menu.appendChild(makeTopLink());
+    buildLinks(menu);
+    if (tocLinks) tocLinks.appendChild(makeTopLink());
+    buildLinks(tocLinks);
+
+    var links = document.querySelectorAll('.page-nav-link');
+    if (currentLabel && SECTIONS.length) currentLabel.textContent = SECTIONS[0].label;
+    var firstSectionLink = SECTIONS.length ? document.querySelector('.page-nav-link[data-target="' + SECTIONS[0].id + '"]') : null;
+    if (firstSectionLink) firstSectionLink.classList.add('active');
+
+    function openMenu(){
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded','true');
+      document.addEventListener('click', onDocClick);
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeMenu(focusToggle){
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded','false');
+      document.removeEventListener('click', onDocClick);
+      document.removeEventListener('keydown', onKeydown);
+      if (focusToggle) toggle.focus();
+    }
+    function onDocClick(e){
+      if (!pageNav.contains(e.target) && !menu.contains(e.target)) closeMenu(false);
+    }
+    function onKeydown(e){
+      if (e.key === 'Escape') closeMenu(true);
+    }
+    toggle.addEventListener('click', function(){
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(false); else openMenu();
+    });
+    links.forEach(function(link){
+      link.addEventListener('click', function(){ closeMenu(false); });
+    });
+
+    function onBackToTopScroll(){
+      if (backToTop) {
+        if (window.scrollY > 900) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+      }
+    }
+    window.addEventListener('scroll', onBackToTopScroll, { passive:true });
+    onBackToTopScroll();
+
+    if (backToTop) {
+      backToTop.addEventListener('click', function(){
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    function setActive(id){
+      var match = null;
+      for (var i=0;i<SECTIONS.length;i++){ if (SECTIONS[i].id === id){ match = SECTIONS[i]; break; } }
+      if (!match) return;
+      if (currentLabel) currentLabel.textContent = match.label;
+      links.forEach(function(link){
+        link.classList.toggle('active', link.dataset.target === id);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var sectionEls = SECTIONS.map(function(s){ return document.getElementById(s.id); }).filter(Boolean);
+      var sectionObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-140px 0px -70% 0px', threshold: 0 });
+      sectionEls.forEach(function(el){ sectionObserver.observe(el); });
+
+      if (toc) {
+        var tocObserver = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (entry.isIntersecting) { pageNav.classList.remove('visible'); closeMenu(false); }
+            else { pageNav.classList.add('visible'); }
+          });
+        }, { rootMargin: '-70px 0px 0px 0px', threshold: 0 });
+        tocObserver.observe(toc);
+      }
+    } else if (toc) {
+      var tocFallbackThreshold = Math.max(toc.offsetTop + toc.offsetHeight - 40, 260);
+      window.addEventListener('scroll', function(){
+        if (window.scrollY > tocFallbackThreshold) pageNav.classList.add('visible');
+        else { pageNav.classList.remove('visible'); closeMenu(false); }
+      }, { passive:true });
+    }
+  })();
+  </script>
 </body>
 </html>
